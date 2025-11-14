@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://growthexperts.com.au/sitemap-index.xml
+
+# Disallow admin/internal pages (adjust as needed)
+# Disallow: /admin/
+# Disallow: /api/

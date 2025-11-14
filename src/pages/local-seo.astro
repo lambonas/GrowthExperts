@@ -1,0 +1,536 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import HeroHome from '../components/sections/HeroHome.astro';
+import ClientLogoCarousel from '../components/sections/ClientLogoCarousel.astro';
+import CaseStudiesSection from '../components/sections/CaseStudiesSection.astro';
+import CTASection from '../components/sections/CTASection.astro';
+import SchemaOrg from '../components/seo/SchemaOrg.astro';
+import AccordionItem from '../components/ui/AccordionItem.astro';
+
+// ===================================
+// PAGE FRONTMATTER CONFIGURATION
+// Edit these values to customize the page content
+// ===================================
+
+// SEO Meta Data
+const seo = {
+  title: 'Local SEO Services | Dominate Local Search in 2025',
+  description: 'Expert local SEO services to boost your Google Business Profile rankings and attract more local customers. Get found on Google Maps with our proven local SEO strategies.',
+  keywords: [
+    'local seo',
+    'local seo services',
+    'seo local',
+    'local seo agency',
+    'local seo company',
+    'google business profile',
+    'local search results',
+    'google my business',
+    'local ranking',
+    'local pack'
+  ],
+  canonical: 'https://growthexperts.com.au/local-seo',
+  ogImage: '/images/team-hero.png',
+  ogType: 'website',
+};
+
+// Hero Section
+const hero = {
+  title: 'Local SEO Services That Put You on the Map',
+  subtitle: 'Dominate local search results and attract more customers in your area. Our proven local SEO strategies help Australian businesses get found by customers who are ready to buy.',
+  primaryCTA: {
+    text: 'Free Strategy Session',
+    href: '/contact'
+  },
+};
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Services', href: '/services' },
+  { label: 'Local SEO', href: '/local-seo' },
+];
+
+// Section Visibility (show/hide sections)
+const sections = {
+  showClientLogos: true,
+  showCaseStudies: true,
+  showWhatsIncluded: true,
+  showProcess: true,
+  showFinalCTA: true,
+};
+
+// Final CTA Section
+const finalCTA = {
+  title: 'Ready to Dominate Local Search in Your Area?',
+  subtitle: 'Get your free local SEO audit and discover the exact strategies we\'ll use to get you ranking at the top of Google Maps and local search results. No obligations, just actionable insights.',
+  primaryCTA: {
+    text: 'Free Strategy Session',
+    href: '/contact'
+  },
+};
+---
+
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  keywords={seo.keywords}
+  canonical={seo.canonical}
+  ogImage={seo.ogImage}
+  ogType={seo.ogType}
+  schema={{
+    type: 'Service',
+    data: {
+      '@type': 'Service',
+      name: 'Local SEO Services',
+      description: seo.description,
+      provider: {
+        '@type': 'Organization',
+        name: 'Digital Growth Experts',
+      },
+      areaServed: {
+        '@type': 'Country',
+        name: 'Australia',
+      },
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Local SEO Services',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Google Business Profile Optimization',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Local Citation Building',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Local Content Strategy',
+            },
+          },
+        ],
+      },
+    },
+  }}
+>
+  <!-- Add LocalBusiness schema for better local SEO -->
+  <SchemaOrg
+    slot="head"
+    type="LocalBusiness"
+    data={{
+      name: 'Digital Growth Experts',
+      description: 'Expert local SEO and digital marketing services in Sydney, helping businesses dominate local search results',
+      image: `${Astro.site}images/logo.png`,
+    }}
+  />
+
+  <Header />
+
+  <main id="main-content">
+    <!-- Hero Section - Conversion-focused with clear value proposition -->
+    <HeroHome
+      title={hero.title}
+      subtitle={hero.subtitle}
+      primaryCTA={hero.primaryCTA}
+      secondaryCTA={hero.secondaryCTA}
+    />
+
+    <!-- Social Proof - Client Logos -->
+    {sections.showClientLogos && <ClientLogoCarousel />}
+
+    <!-- Proven Results Section - Case Studies with Real Data -->
+    {sections.showCaseStudies && <CaseStudiesSection />}
+
+    <!-- What's Included Section - Service Details -->
+    {sections.showWhatsIncluded && (
+    <section class="section-padding bg-gray-50">
+      <div class="container-custom">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+            What's Included in Our Local SEO Service
+          </h2>
+          <p class="text-lg md:text-xl text-gray-600">
+            Everything you need to dominate local search and attract more customers.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <!-- Service 1 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-primary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Google Business Profile Optimization</h3>
+            <p class="text-gray-600 mb-4">
+              Complete optimization of your Google Business Profile with keyword-rich descriptions, categories, attributes, and
+              regular posts to maximize visibility in Google Maps and local search.
+            </p>
+          </div>
+
+          <!-- Service 2 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-secondary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-secondary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Local Citation Building</h3>
+            <p class="text-gray-600 mb-4">
+              Build and optimize citations across 50+ high-authority directories and platforms. Ensure NAP consistency across
+              the web to boost local rankings and customer trust.
+            </p>
+          </div>
+
+          <!-- Service 3 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-accent-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Review Generation & Management</h3>
+            <p class="text-gray-600 mb-4">
+              Implement proven review generation strategies to build your online reputation. Monitor and respond to reviews to
+              improve ratings and increase conversion rates.
+            </p>
+          </div>
+
+          <!-- Service 4 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-primary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Local Content Strategy</h3>
+            <p class="text-gray-600 mb-4">
+              Create location-specific landing pages and content that targets local search queries and establishes your
+              authority in your service area.
+            </p>
+          </div>
+
+          <!-- Service 5 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-secondary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-secondary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Local Link Building</h3>
+            <p class="text-gray-600 mb-4">
+              Earn high-quality backlinks from local businesses, industry associations, and community organizations to boost
+              your local authority and rankings.
+            </p>
+          </div>
+
+          <!-- Service 6 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-accent-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Technical Local SEO</h3>
+            <p class="text-gray-600 mb-4">
+              Implement structured data markup, optimize site speed, ensure mobile-friendliness, and fix technical issues that
+              prevent you from ranking in local search.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    )}
+
+    <!-- Long-form Content Section - Educational/Authority Building -->
+    <!-- Main Content Section - SEO-Optimized for Local SEO -->
+    <section class="section-padding bg-white">
+      <div class="container-custom">
+        <div class="max-w-4xl mx-auto">
+          <!-- H1 Header -->
+          <div class="text-center mb-12">
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+              Local SEO Services to Dominate Your Local Market in 2025
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 leading-relaxed">
+              Transform your local business visibility with proven strategies that drive real customers through your door.
+            </p>
+          </div>
+
+          <!-- Introduction with Priority Keywords -->
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              <strong>Local SEO</strong> is no longer optional for businesses that want to thrive in their <strong>local area</strong>. When potential <strong>local customers</strong> search for <strong>products and services</strong> near them, your <strong>local business</strong> needs to appear at the top of <strong>local search results</strong>. With 46% of all <strong>Google searches</strong> having local intent, and 88% of <strong>local searches</strong> on mobile devices resulting in a call or visit within 24 hours, mastering <strong>local SEO</strong> is critical for business growth in <strong>2025</strong>.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Our comprehensive <strong>local SEO services</strong> help Australian businesses dominate their <strong>local search rankings</strong> by optimising every crucial <strong>ranking factor</strong>. From perfecting your <strong>Google Business Profile</strong> (formerly <strong>Google My Business</strong>) to building powerful <strong>citations</strong> and earning valuable <strong>local links</strong>, we implement proven <strong>SEO strategies</strong> that deliver measurable results.
+            </p>
+          </div>
+
+          <!-- H2: Local SEO Services That Deliver Results -->
+          <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+            Local SEO Services That Deliver Real Results
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              As a leading <strong>local SEO agency</strong>, we understand that effective <strong>optimization</strong> requires more than just updating your <strong>business listing</strong>. Our data-driven approach focuses on the key <strong>local ranking factors</strong> that actually move the needle. We start by ensuring your <strong>business name</strong>, address, and phone number are consistent across all <strong>local listings</strong>, then build a comprehensive strategy that includes <strong>on-page SEO</strong>, content creation, and <strong>local link building</strong>.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              The <strong>local pack</strong> positions on <strong>Google Maps</strong> are incredibly valuable real estate for any <strong>local business</strong>. Our proven tactics help you secure these coveted spots, ensuring customers <strong>find your business</strong> first when searching for services in your <strong>local area</strong>. Through strategic <strong>local keyword</strong> targeting and technical <strong>search engine optimization</strong>, we help your <strong>business online</strong> presence outperform competitors and attract your ideal <strong>local audience</strong>.
+            </p>
+          </div>
+
+          <!-- H2: Why SEO Local Strategies Matter -->
+          <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+            Why SEO Local Strategies Matter More Than Ever
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              The landscape of <strong>local search engine optimization</strong> has evolved dramatically. Today's consumers rely heavily on <strong>Google search</strong> to find <strong>local service providers</strong>, making it essential to <strong>optimize for local</strong> discovery. Your <strong>Google Business Profile</strong> acts as your digital storefront, and optimising it properly can significantly <strong>boost your local SEO</strong> performance and <strong>influence local search</strong> visibility.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              <strong>Reviews on your Google Business</strong> Profile play a crucial role in both <strong>ranking well in local search results</strong> and converting searchers into customers. Our <strong>local SEO strategy</strong> includes reputation management to help generate authentic reviews that build trust and improve your <strong>local search visibility</strong>. Combined with strategic <strong>local landing pages</strong> and consistent NAP <strong>citations for your business</strong>, we create a comprehensive approach that positions your <strong>business as legitimate and trustworthy</strong> to both search engines and customers.
+            </p>
+          </div>
+
+          <!-- H2: Comprehensive Local SEO Agency Solutions -->
+          <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+            Comprehensive Local SEO Agency Solutions for Australian Businesses
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Our <strong>local SEO company</strong> specialises in delivering results that matter. We don't just focus on vanity metrics; we track the KPIs that directly impact your bottom line. From increasing calls and direction requests to driving foot traffic and online conversions, our <strong>local SEO campaign</strong> strategies are designed to deliver tangible business growth.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Understanding <strong>local ranking factors</strong> is essential for success. <strong>Google understands where your business</strong> operates through various signals, including your website content, <strong>business listing in Google</strong>, and local citations. We leverage advanced <strong>SEO tools</strong> and proven <strong>SEO best practices</strong> to ensure every aspect of your online presence reinforces your local relevance. This includes creating content for <strong>different local keywords</strong>, building a <strong>list of local</strong> directories for citation building, and implementing structured data to help search engines better understand your <strong>business information</strong>.
+            </p>
+          </div>
+
+          <!-- H2: Building Your Local SEO Success -->
+          <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+            Building Your Local SEO Success: Our Proven Process
+          </h2>
+
+          <div class="grid md:grid-cols-2 gap-8 mb-12">
+            <div class="bg-gray-50 p-6 rounded-lg">
+              <h3 class="text-xl font-bold text-gray-900 mb-3">Foundation: Local SEO Audit</h3>
+              <p class="text-gray-700">
+                Every successful <strong>local SEO campaign</strong> starts with understanding your current position. Our comprehensive audit examines your <strong>local SEO rankings</strong>, analyses competitors, and identifies opportunities to improve your <strong>local search rankings</strong>. This data-driven approach ensures we focus <strong>SEO efforts</strong> where they'll have the maximum impact.
+              </p>
+            </div>
+            <div class="bg-gray-50 p-6 rounded-lg">
+              <h3 class="text-xl font-bold text-gray-900 mb-3">Optimisation: Google Business Profile</h3>
+              <p class="text-gray-700">
+                Your <strong>Google My Business</strong> listing is often the first thing <strong>local customers</strong> see. We optimise every element, from your business description and categories to photos and posts, ensuring you appear in <strong>relevant local</strong> searches and the coveted <strong>local pack results</strong>.
+              </p>
+            </div>
+            <div class="bg-gray-50 p-6 rounded-lg">
+              <h3 class="text-xl font-bold text-gray-900 mb-3">Authority: Citation & Link Building</h3>
+              <p class="text-gray-700">
+                <strong>Building your local</strong> authority requires consistent NAP information across the web. We create and optimise <strong>local business listings</strong> on authoritative platforms and pursue strategic <strong>local link building</strong> opportunities, such as partnerships with local organisations or opportunities to <strong>sponsor a local event</strong>.
+              </p>
+            </div>
+            <div class="bg-gray-50 p-6 rounded-lg">
+              <h3 class="text-xl font-bold text-gray-900 mb-3">Content: Local Landing Pages</h3>
+              <p class="text-gray-700">
+                Creating targeted <strong>local landing pages</strong> for each service area helps capture <strong>search results for local</strong> queries. We develop content that speaks directly to your <strong>local audience</strong>, incorporating <strong>local keywords</strong> naturally while providing genuine value to potential customers.
+              </p>
+            </div>
+          </div>
+
+          <!-- H2: Local SEO Company Expertise -->
+          <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+            Local SEO Company Expertise That Makes a Difference
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              What sets our <strong>local SEO services</strong> apart is our deep understanding of the Australian market and how <strong>local SEO works</strong> in different industries. Whether you're a tradie looking to dominate suburban searches or a professional service firm targeting CBD clients, we tailor our approach to your specific needs. Our <strong>guide to local SEO</strong> success includes industry-specific strategies that <strong>help your local</strong> business stand out.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              <strong>Good local SEO</strong> requires ongoing attention and refinement. Search algorithms evolve, competitors adjust their strategies, and customer behaviour changes. That's why our <strong>local SEO efforts</strong> include continuous monitoring and optimisation. We track your performance in <strong>local SERPs</strong>, analyse what's working, and adjust our tactics to maintain and improve your <strong>ranking in local search</strong>. Our monthly reporting keeps you informed about your <strong>local SEO important</strong> metrics and the return on your investment.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              For businesses serving multiple locations, we develop strategies to <strong>optimize your site for local</strong> searches across all service areas. This might include creating location-specific pages, building citations for each location, and ensuring your <strong>website for local search</strong> is properly structured with schema markup. We understand that <strong>many local</strong> businesses face unique challenges, and our customised approach addresses these specific needs.
+            </p>
+          </div>
+
+          <!-- H3: Local SEO Tips and Best Practices -->
+          <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-4">
+            Essential Local SEO Tips for 2025 Success
+          </h3>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <ul class="space-y-3 text-gray-700">
+              <li><strong>List your business</strong> on all major directories with consistent NAP information</li>
+              <li>Encourage and respond to <strong>reviews on your Google</strong> Business Profile regularly</li>
+              <li>Create content targeting <strong>different local keywords</strong> for each service area</li>
+              <li>Build relationships with other <strong>local businesses</strong> for link opportunities</li>
+              <li>Optimise your website's technical SEO for mobile users searching locally</li>
+              <li>Use schema markup to provide <strong>information about your business</strong> to search engines</li>
+              <li>Monitor and improve your <strong>local search visibility</strong> with regular audits</li>
+              <li>Develop a content strategy that addresses local customer pain points</li>
+            </ul>
+          </div>
+
+          <!-- FAQ Section -->
+          <div class="mb-12">
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-8">
+              Frequently Asked Questions About Local SEO Services
+            </h2>
+
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+              <AccordionItem
+                question="What exactly is local SEO and how does it differ from regular SEO?"
+                answer="<p class='text-gray-700'><strong>Local SEO is the practice</strong> of optimising your online presence to attract more customers from relevant local searches. While traditional SEO focuses on ranking nationally or globally, <strong>local SEO</strong> targets customers in your specific geographic area. It involves optimising your <strong>Google Business Profile</strong>, building <strong>local citations</strong>, earning reviews, and creating location-specific content to help you rank in the <strong>local pack</strong> and <strong>Google Maps</strong> results.</p>"
+                id="faq-local-seo-1"
+                isFirst={true}
+              />
+              <AccordionItem
+                question="How long does it take to see results from local SEO efforts?"
+                answer="<p class='text-gray-700'>Most businesses start seeing improvements in their <strong>local search rankings</strong> within 3-6 months of implementing a comprehensive <strong>local SEO strategy</strong>. However, the timeline can vary based on competition, current online presence, and the consistency of <strong>SEO efforts</strong>. Quick wins like <strong>Google My Business</strong> optimisation can show results within weeks, while building domain authority through <strong>local link building</strong> takes longer but provides lasting benefits.</p>"
+                id="faq-local-seo-2"
+              />
+              <AccordionItem
+                question="What are the most important local ranking factors in 2025?"
+                answer="<p class='text-gray-700'>The top <strong>local ranking factors</strong> include your <strong>Google Business Profile</strong> signals (proximity, categories, keywords in business title), link signals (<strong>local links</strong>, domain authority), review signals (quantity, velocity, diversity), <strong>on-page SEO</strong> signals (NAP presence, keywords in titles, domain authority), and citation signals (consistency and quality of <strong>business listings</strong>). Behavioural signals like click-through rate and mobile clicks-to-call also play an increasingly important <strong>role in local</strong> search rankings.</p>"
+                id="faq-local-seo-3"
+              />
+              <AccordionItem
+                question="How do you help businesses rank in the Google local pack?"
+                answer="<p class='text-gray-700'>Ranking in the <strong>local pack results</strong> requires a multi-faceted approach. We start by fully optimising your <strong>Google Business Profile</strong> with accurate information, relevant categories, and regular posts. We then build high-quality <strong>citations for your business</strong> across authoritative directories, generate authentic customer reviews, and create location-specific content. Our <strong>local SEO tools</strong> help track performance and identify opportunities to <strong>improve your local search rankings</strong> continuously.</p>"
+                id="faq-local-seo-4"
+              />
+              <AccordionItem
+                question="Can you guarantee first-page local search rankings?"
+                answer="<p class='text-gray-700'>While no ethical <strong>SEO agency</strong> can guarantee specific rankings due to the constantly evolving nature of search algorithms, our proven <strong>local SEO strategies</strong> consistently deliver significant improvements in <strong>local search visibility</strong>. We focus on implementing <strong>best local</strong> SEO practices that align with Google's guidelines, which historically leads to improved rankings. Our track record shows that clients who follow our recommendations and maintain consistent <strong>local SEO efforts</strong> typically achieve first-page rankings for their target <strong>local keywords</strong> within 6-12 months.</p>"
+                id="faq-local-seo-5"
+                isLast={true}
+              />
+            </div>
+          </div>
+
+          <!-- Conclusion Section -->
+          <div class="prose prose-lg max-w-none">
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+              Ready to Transform Your Local Search Presence?
+            </h2>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Don't let your competitors dominate <strong>local search results</strong> while potential customers can't <strong>find your business</strong> online. Our expert <strong>local SEO services</strong> provide everything you need to <strong>boost your local</strong> visibility and attract more customers from your <strong>local area</strong>. From comprehensive audits to ongoing optimisation, we handle every aspect of your <strong>local SEO campaign</strong> so you can focus on running your business.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Whether you want to <strong>learn more about local SEO</strong> or you're ready to start dominating <strong>search results for local</strong> queries, our team is here to help. We'll create a customised strategy that addresses your specific business goals, target market, and competitive landscape. With our proven approach to <strong>local search engine optimization</strong> and commitment to delivering measurable results, you'll see why businesses across Australia trust us to <strong>improve their local search rankings</strong> and grow their customer base.
+            </p>
+            <p class="text-gray-700 leading-relaxed">
+              Take the first step towards local search dominance. Contact our <strong>local SEO company</strong> today for a free consultation and discover how we can help you <strong>benefit from local</strong> SEO and transform your <strong>products and services to local</strong> market leaders. Let's work together to ensure your <strong>business for local</strong> success in <strong>2025</strong> and beyond.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    {sections.showFinalCTA && (
+      <CTASection
+        title={finalCTA.title}
+        subtitle={finalCTA.subtitle}
+        primaryCTA={finalCTA.primaryCTA}
+        secondaryCTA={finalCTA.secondaryCTA}
+      />
+    )}
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .section-padding {
+    padding: 5rem 0;
+  }
+
+  @media (min-width: 768px) {
+    .section-padding {
+      padding: 7rem 0;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .section-padding {
+      padding: 8rem 0;
+    }
+  }
+</style>

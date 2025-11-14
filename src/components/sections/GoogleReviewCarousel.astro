@@ -1,0 +1,328 @@
+---
+// Google-Style Review Carousel Component
+// Placeholder review data - realistic Australian businesses
+const reviews = [
+  {
+    id: 1,
+    rating: 5,
+    text: "We run a landscaping company and have had periods where we've worried about getting work. This is where we employed Digital Growth Experts to do our SEO and website and now we have a waitlist. We couldn't be happier with the work DGE has been doing for us. We highly recommend working with this business, it's been an absolute pleasure to work with these guys!",
+    author: "Michael Chen",
+    business: "GreenScape Landscapes",
+    avatar: "https://i.pravatar.cc/150?img=12"
+  },
+  {
+    id: 2,
+    rating: 5,
+    text: "Before speaking with the team from Digital Growth Experts, I'd tried all manner of ways to get extra clients. From personal approaches to networking groups. I'd even spent $18,000 with another agency that just didn't get who I was or how my industry functioned. Since joining the DGE family, the results have been amazing. My turnover is the highest it's ever been.",
+    author: "Sarah Williams",
+    business: "Sydney Property Group",
+    avatar: "https://i.pravatar.cc/150?img=5"
+  },
+  {
+    id: 3,
+    rating: 5,
+    text: "I have been working with Digital Growth Experts since March, and the results have been outstanding. My website has gone from a frustrating 28-second load time to just 1.8 seconds — a true improvement! After being left in poor shape by a previous SEO company, the team at DGE have worked tirelessly to turn things around.",
+    author: "James Morrison",
+    business: "Morrison & Co Accountants",
+    avatar: "https://i.pravatar.cc/150?img=33"
+  },
+  {
+    id: 4,
+    rating: 5,
+    text: "Working with Digital Growth Experts has completely transformed our online presence. We've seen a 340% increase in organic traffic within 6 months. The team took time to understand our business goals and delivered a strategy that actually works. Highly recommend!",
+    author: "Emma Thompson",
+    business: "Thompson Legal Services",
+    avatar: "https://i.pravatar.cc/150?img=9"
+  },
+  {
+    id: 5,
+    rating: 5,
+    text: "After struggling for years with inconsistent leads, DGE helped us dominate our local market. Our phones are ringing daily with qualified prospects. The ROI has been incredible - we've more than tripled our investment in the first year alone.",
+    author: "David Nguyen",
+    business: "Elite Plumbing Solutions",
+    avatar: "https://i.pravatar.cc/150?img=68"
+  },
+  {
+    id: 6,
+    rating: 5,
+    text: "The best decision we made for our business! Digital Growth Experts didn't just improve our rankings - they helped us understand our customers better. We've gone from page 3 to consistently ranking in the top 3 for our main keywords. The increase in revenue speaks for itself.",
+    author: "Rachel Kim",
+    business: "Kim's Dental Practice",
+    avatar: "https://i.pravatar.cc/150?img=16"
+  },
+  {
+    id: 7,
+    rating: 5,
+    text: "Outstanding service from start to finish. The team at DGE rebuilt our website from the ground up, and the difference is night and day. We've seen a 250% increase in contact form submissions and our bounce rate has dropped dramatically. Couldn't be happier!",
+    author: "Tom Anderson",
+    business: "Anderson Electrical",
+    avatar: "https://i.pravatar.cc/150?img=52"
+  },
+  {
+    id: 8,
+    rating: 5,
+    text: "I was skeptical about SEO after being burned by other agencies, but Digital Growth Experts proved me wrong. They're transparent, knowledgeable, and most importantly - they deliver results. Our business has grown 180% year-over-year since working with them.",
+    author: "Lisa Patel",
+    business: "Patel Financial Advisors",
+    avatar: "https://i.pravatar.cc/150?img=20"
+  }
+];
+---
+
+<section class="relative py-16 md:py-24 lg:py-32 overflow-hidden bg-gradient-to-br from-[#0A1628] via-[#0F2847] to-[#1a3a5c]">
+  <!-- Background decoration -->
+  <div class="absolute inset-0 opacity-10">
+    <div class="absolute top-0 right-0 w-96 h-96 bg-primary-400 rounded-full filter blur-3xl"></div>
+    <div class="absolute bottom-0 left-0 w-96 h-96 bg-secondary-400 rounded-full filter blur-3xl"></div>
+  </div>
+
+  <div class="container-custom relative z-10">
+    <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+
+      <!-- Left Sidebar: Heading, Stats, and CTA -->
+      <div class="lg:col-span-5 text-white space-y-8">
+        <!-- Eyebrow -->
+        <div class="inline-block">
+          <span class="text-xs md:text-sm font-semibold tracking-wider uppercase text-secondary-400">
+            Client Success Stories
+          </span>
+        </div>
+
+        <!-- Heading -->
+        <div>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4">
+            Don't Take Our Word For It
+          </h2>
+          <p class="text-2xl md:text-3xl lg:text-4xl font-bold text-secondary-400 leading-tight">
+            See What Our Clients Say
+          </p>
+        </div>
+
+        <!-- Stats -->
+        <div class="flex items-center gap-6">
+          <div>
+            <div class="text-6xl md:text-7xl font-bold text-white mb-2">200+</div>
+            <div class="flex items-center gap-1 mb-1">
+              {[...Array(5)].map(() => (
+                <svg class="w-6 h-6 text-[#FBBC04]" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+              ))}
+            </div>
+            <p class="text-sm text-gray-300">Verified Reviews</p>
+          </div>
+        </div>
+
+        <!-- CTA Button and Navigation -->
+        <div class="flex items-center gap-4">
+          <a
+            href="/contact"
+            class="inline-flex items-center px-6 py-3 bg-[#FFA708] text-gray-900 font-bold rounded-lg hover:bg-[#ff9500] hover:shadow-xl transform hover:scale-105 transition-all duration-200"
+          >
+            Get In Touch
+          </a>
+
+          <!-- Navigation Arrows -->
+          <div class="flex items-center gap-2">
+            <button
+              id="prevReview"
+              class="w-10 h-10 rounded-full bg-secondary-500 hover:bg-secondary-600 flex items-center justify-center transition-all duration-200 group"
+              aria-label="Previous review"
+            >
+              <svg class="w-5 h-5 text-white group-hover:-translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button
+              id="nextReview"
+              class="w-10 h-10 rounded-full bg-secondary-500 hover:bg-secondary-600 flex items-center justify-center transition-all duration-200 group"
+              aria-label="Next review"
+            >
+              <svg class="w-5 h-5 text-white group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Side: Review Carousel -->
+      <div class="lg:col-span-7">
+        <div class="relative overflow-hidden">
+          <!-- Carousel Container -->
+          <div id="reviewCarousel" class="flex gap-4 transition-transform duration-500 ease-in-out">
+            {reviews.map((review) => (
+              <div class="carousel-slide min-w-full md:min-w-[calc(50%-0.5rem)] lg:min-w-[calc(33.333%-0.67rem)]">
+                <!-- Review Card - Google Style -->
+                <div class="bg-gradient-to-br from-white to-gray-50 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 h-full min-h-[320px] flex flex-col border-2 border-transparent hover:border-primary-200">
+                  <!-- Stars -->
+                  <div class="flex items-center gap-1 mb-4">
+                    {[...Array(review.rating)].map(() => (
+                      <svg class="w-5 h-5 text-[#FBBC04]" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                    ))}
+                  </div>
+
+                  <!-- Review Text -->
+                  <p class="text-gray-700 leading-relaxed mb-6 flex-grow text-sm md:text-base">
+                    {review.text}
+                  </p>
+
+                  <!-- Author Info -->
+                  <div class="flex items-center gap-3 pt-4 border-t border-gray-200">
+                    <img
+                      src={review.avatar}
+                      alt={review.author}
+                      class="w-12 h-12 rounded-full object-cover border-2 border-primary-200"
+                      loading="lazy"
+                    />
+                    <div>
+                      <div class="font-bold text-gray-900 text-sm">{review.author}</div>
+                      <div class="text-xs text-gray-600">{review.business}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  // Carousel functionality
+  const carousel = document.getElementById('reviewCarousel');
+  const prevBtn = document.getElementById('prevReview');
+  const nextBtn = document.getElementById('nextReview');
+  const slides = carousel?.querySelectorAll('.carousel-slide');
+
+  if (carousel && prevBtn && nextBtn && slides) {
+    let currentIndex = 0;
+    let autoScrollInterval: number;
+    let isTransitioning = false;
+
+    // Determine slides per view based on screen size
+    const getSlidesPerView = () => {
+      if (window.innerWidth >= 1024) return 3; // lg
+      if (window.innerWidth >= 768) return 2;  // md
+      return 1; // mobile
+    };
+
+    const updateCarousel = (index: number) => {
+      if (isTransitioning) return;
+      isTransitioning = true;
+
+      const slidesPerView = getSlidesPerView();
+      const maxIndex = slides.length - slidesPerView;
+
+      // Wrap around
+      if (index > maxIndex) {
+        currentIndex = 0;
+      } else if (index < 0) {
+        currentIndex = maxIndex;
+      } else {
+        currentIndex = index;
+      }
+
+      // Calculate offset accounting for gap (1rem = 16px gap)
+      const gapSize = 16; // 1rem in pixels
+      const slideWidth = carousel.offsetWidth / slidesPerView;
+      const offset = -(currentIndex * (slideWidth + gapSize));
+      carousel.style.transform = `translateX(${offset}px)`;
+
+      setTimeout(() => {
+        isTransitioning = false;
+      }, 500);
+    };
+
+    const nextSlide = () => {
+      updateCarousel(currentIndex + 1);
+    };
+
+    const prevSlide = () => {
+      updateCarousel(currentIndex - 1);
+    };
+
+    // Auto-scroll every 5 seconds
+    const startAutoScroll = () => {
+      autoScrollInterval = window.setInterval(nextSlide, 5000);
+    };
+
+    const stopAutoScroll = () => {
+      clearInterval(autoScrollInterval);
+    };
+
+    // Event listeners
+    nextBtn.addEventListener('click', () => {
+      nextSlide();
+      stopAutoScroll();
+      startAutoScroll(); // Restart auto-scroll after manual interaction
+    });
+
+    prevBtn.addEventListener('click', () => {
+      prevSlide();
+      stopAutoScroll();
+      startAutoScroll();
+    });
+
+    // Pause on hover
+    carousel.addEventListener('mouseenter', stopAutoScroll);
+    carousel.addEventListener('mouseleave', startAutoScroll);
+
+    // Handle window resize
+    let resizeTimeout: number;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = window.setTimeout(() => {
+        updateCarousel(currentIndex);
+      }, 250);
+    });
+
+    // Touch support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    carousel.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+      stopAutoScroll();
+    });
+
+    carousel.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+      startAutoScroll();
+    });
+
+    const handleSwipe = () => {
+      const swipeThreshold = 50;
+      const diff = touchStartX - touchEndX;
+
+      if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+          nextSlide(); // Swipe left
+        } else {
+          prevSlide(); // Swipe right
+        }
+      }
+    };
+
+    // Initialize
+    updateCarousel(0);
+    startAutoScroll();
+  }
+</script>
+
+<style>
+  .carousel-slide {
+    flex-shrink: 0;
+  }
+
+  /* Smooth scrolling for carousel */
+  #reviewCarousel {
+    will-change: transform;
+  }
+</style>

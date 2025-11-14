@@ -1,0 +1,343 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import HeroHome from '../../components/sections/HeroHome.astro';
+import CTASection from '../../components/sections/CTASection.astro';
+
+const seo = {
+  title: 'SEO Services Australia | Expert Digital Marketing Solutions',
+  description: 'Comprehensive SEO services to grow your business online. From local SEO to enterprise solutions, technical audits to content marketing, we deliver results that matter.',
+  keywords: [
+    'seo services',
+    'digital marketing',
+    'seo agency',
+    'local seo',
+    'technical seo',
+    'content marketing',
+    'link building',
+    'seo audit'
+  ],
+  canonical: 'https://growthexperts.com.au/services',
+  ogImage: '/images/team-hero.png',
+  ogType: 'website',
+};
+
+const hero = {
+  title: 'SEO Services That Drive Real Business Growth',
+  subtitle: 'From local businesses to enterprise organizations, we provide comprehensive SEO solutions tailored to your unique needs and goals.',
+  primaryCTA: {
+    text: 'Get Free Consultation',
+    href: '/contact'
+  },
+};
+
+const services = [
+  {
+    title: 'Local SEO',
+    description: 'Dominate local search results and attract customers in your area. Perfect for businesses serving specific geographic locations.',
+    href: '/local-seo',
+    icon: 'location',
+    features: ['Google Business Profile', 'Local Citations', 'Review Management', 'Local Pack Rankings']
+  },
+  {
+    title: 'Small Business SEO',
+    description: 'Affordable, high-impact SEO strategies designed specifically for small businesses to compete with larger competitors.',
+    href: '/small-business-seo',
+    icon: 'business',
+    features: ['Keyword Research', 'On-Page Optimization', 'Content Strategy', 'Competitive Analysis']
+  },
+  {
+    title: 'Enterprise SEO',
+    description: 'Scalable SEO solutions for large organizations with complex websites and multiple stakeholders.',
+    href: '/enterprise-seo',
+    icon: 'enterprise',
+    features: ['Technical Architecture', 'Global SEO', 'Team Training', 'Advanced Analytics']
+  },
+  {
+    title: 'E-Commerce SEO',
+    description: 'Increase online sales with SEO strategies designed specifically for e-commerce platforms and product pages.',
+    href: '/ecommerce-seo',
+    icon: 'cart',
+    features: ['Product Optimization', 'Category Pages', 'Schema Markup', 'Conversion Focus']
+  },
+  {
+    title: 'Technical SEO',
+    description: 'Fix technical issues, improve site speed, and ensure search engines can properly crawl and index your website.',
+    href: '/technical-seo',
+    icon: 'code',
+    features: ['Site Audits', 'Core Web Vitals', 'Crawl Optimization', 'Schema Implementation']
+  },
+  {
+    title: 'Content Marketing',
+    description: 'Create compelling content that attracts, engages, and converts your target audience while building authority.',
+    href: '/content-marketing',
+    icon: 'content',
+    features: ['Content Strategy', 'Blog Writing', 'Topic Clusters', 'Authority Building']
+  },
+  {
+    title: 'Link Building',
+    description: 'Earn high-quality backlinks from authoritative websites to boost your domain authority and rankings.',
+    href: '/link-building',
+    icon: 'link',
+    features: ['White-Hat Links', 'Guest Posting', 'Digital PR', 'Broken Link Building']
+  },
+  {
+    title: 'SEO Audit',
+    description: 'Comprehensive analysis of your website\'s SEO performance with actionable recommendations for improvement.',
+    href: '/seo-audit',
+    icon: 'audit',
+    features: ['Technical Analysis', 'Content Review', 'Competitor Research', 'Action Plan']
+  }
+];
+
+const locationServices = [
+  {
+    title: 'SEO Sydney',
+    description: 'Local SEO services for businesses in Sydney looking to dominate their local market.',
+    href: '/seo-sydney'
+  },
+  {
+    title: 'SEO Melbourne',
+    description: 'Expert SEO services helping Melbourne businesses rank higher and attract more customers.',
+    href: '/seo-melbourne'
+  },
+  {
+    title: 'SEO Brisbane',
+    description: 'Comprehensive SEO solutions for Brisbane businesses of all sizes.',
+    href: '/seo-brisbane'
+  },
+  {
+    title: 'SEO Perth',
+    description: 'Drive more traffic and leads for your Perth business with our proven SEO strategies.',
+    href: '/seo-perth'
+  },
+  {
+    title: 'SEO Adelaide',
+    description: 'Adelaide SEO services that deliver measurable results and sustainable growth.',
+    href: '/seo-adelaide'
+  }
+];
+
+const finalCTA = {
+  title: 'Ready to Transform Your Online Presence?',
+  subtitle: 'Get a free consultation and discover how our SEO services can help you attract more customers and grow your business.',
+  primaryCTA: {
+    text: 'Get Free Consultation',
+    href: '/contact'
+  },
+};
+
+const getIcon = (iconName: string) => {
+  const icons: Record<string, string> = {
+    location: 'M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z',
+    business: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4',
+    enterprise: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4',
+    cart: 'M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z',
+    code: 'M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4',
+    content: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z',
+    link: 'M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1',
+    audit: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4'
+  };
+  return icons[iconName] || icons.business;
+};
+---
+
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  keywords={seo.keywords}
+  canonical={seo.canonical}
+  ogImage={seo.ogImage}
+  ogType={seo.ogType}
+>
+  <Header />
+
+  <main id="main-content">
+    <!-- Hero Section -->
+    <HeroHome
+      title={hero.title}
+      subtitle={hero.subtitle}
+      primaryCTA={hero.primaryCTA}
+    />
+
+    <!-- Services Overview -->
+    <section class="py-16 md:py-24 bg-white">
+      <div class="container mx-auto px-4 max-w-7xl">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+            Our SEO Services
+          </h2>
+          <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+            Comprehensive SEO solutions designed to increase your visibility, drive qualified traffic, and grow your business online.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {services.map((service) => (
+            <a
+              href={service.href}
+              class="group bg-white border-2 border-gray-200 rounded-xl p-8 hover:border-primary-500 hover:shadow-xl transition-all duration-300"
+            >
+              <div class="w-14 h-14 bg-primary-100 rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary-600 transition-colors">
+                <svg
+                  class="w-7 h-7 text-primary-600 group-hover:text-white transition-colors"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d={getIcon(service.icon)}
+                  />
+                </svg>
+              </div>
+
+              <h3 class="text-2xl font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors">
+                {service.title}
+              </h3>
+
+              <p class="text-gray-600 mb-6 leading-relaxed">
+                {service.description}
+              </p>
+
+              <ul class="space-y-2 mb-6">
+                {service.features.map((feature) => (
+                  <li class="flex items-center text-sm text-gray-700">
+                    <svg class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+
+              <div class="flex items-center text-primary-600 font-semibold group-hover:text-primary-700">
+                Learn More
+                <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Location-Based Services -->
+    <section class="py-16 md:py-24 bg-gray-50">
+      <div class="container mx-auto px-4 max-w-7xl">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+            SEO Services by Location
+          </h2>
+          <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+            Local SEO expertise across Australia's major cities
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          {locationServices.map((location) => (
+            <a
+              href={location.href}
+              class="group bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 border-2 border-transparent hover:border-primary-500"
+            >
+              <div class="flex items-start justify-between mb-3">
+                <h3 class="text-xl font-bold text-gray-900 group-hover:text-primary-600 transition-colors">
+                  {location.title}
+                </h3>
+                <svg class="w-5 h-5 text-gray-400 group-hover:text-primary-600 group-hover:translate-x-1 transition-all flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </div>
+              <p class="text-gray-600 text-sm leading-relaxed">
+                {location.description}
+              </p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="py-16 md:py-24 bg-white">
+      <div class="container mx-auto px-4 max-w-7xl">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+            Why Choose Our SEO Services?
+          </h2>
+          <p class="text-lg md:text-xl text-gray-600">
+            We combine technical expertise, creative content strategies, and data-driven insights to deliver measurable results.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div class="text-center">
+            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Proven Results</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Track record of delivering first-page rankings and increased organic traffic for clients across all industries.
+            </p>
+          </div>
+
+          <div class="text-center">
+            <div class="w-16 h-16 bg-secondary-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg class="w-8 h-8 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">White-Hat Strategies</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Ethical SEO practices that comply with search engine guidelines and deliver sustainable long-term growth.
+            </p>
+          </div>
+
+          <div class="text-center">
+            <div class="w-16 h-16 bg-accent-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg class="w-8 h-8 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Transparent Reporting</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Clear, detailed monthly reports showing rankings, traffic, conversions, and ROI from our SEO efforts.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <CTASection
+      title={finalCTA.title}
+      subtitle={finalCTA.subtitle}
+      primaryCTA={finalCTA.primaryCTA}
+    />
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .section-padding {
+    padding: 5rem 0;
+  }
+
+  @media (min-width: 768px) {
+    .section-padding {
+      padding: 7rem 0;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .section-padding {
+      padding: 8rem 0;
+    }
+  }
+</style>

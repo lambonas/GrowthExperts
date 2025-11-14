@@ -1,0 +1,798 @@
+---
+/**
+ * TechnologyBadges Component - Pyramid/Triangle Layout
+ *
+ * Displays technology partner logos in a visually striking diamond pyramid formation
+ * Optimized for conversion with unique visual hierarchy and clear credibility signals
+ *
+ * CRO benefits:
+ * - Eye-catching pyramid layout draws attention to technology stack
+ * - Visual hierarchy: Featured partners at top, expanding to full ecosystem
+ * - Clean, modern design without category clutter
+ * - Professional polish: Smooth interactions and animations
+ * - Mobile-optimized: Responsive pyramid adapts to all devices
+ */
+
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  className?: string;
+  showTitle?: boolean;
+}
+
+const {
+  title = "Powered by 15+ Industry-Leading Technologies",
+  subtitle = "Certified partnerships and professional-grade tools that drive measurable SEO results",
+  className = '',
+  showTitle = true
+} = Astro.props;
+
+// Technology data organized in pyramid rows for diamond layout
+// Row structure: 1 → 3 → 5 → 3 → 3 (diamond shape)
+const technologies = [
+  // ROW 1: Featured Partner (1 logo - apex)
+  {
+    name: 'Google Partner',
+    logo: '/images/tech/google partner.svg',
+    description: 'Certified Google Partner',
+    row: 1,
+    size: 'large'
+  },
+
+  // ROW 2: Core Certifications (3 logos)
+  {
+    name: 'SEM Agency Partner',
+    logo: '/images/tech/Sem Agency partner.svg',
+    description: 'Certified SEM Partner',
+    row: 2,
+    size: 'large'
+  },
+  {
+    name: 'Google Analytics',
+    logo: '/images/tech/analytics.svg',
+    description: 'Analytics & Insights',
+    row: 2,
+    size: 'medium'
+  },
+  {
+    name: 'SEMrush',
+    logo: '/images/tech/SEMRush-Icon.svg',
+    description: 'SEO Research Platform',
+    row: 2,
+    size: 'medium'
+  },
+
+  // ROW 3: Primary Tools (5 logos - widest point)
+  {
+    name: 'Google',
+    logo: '/images/tech/google.svg',
+    description: 'Search Engine Leader',
+    row: 3,
+    size: 'medium'
+  },
+  {
+    name: 'Google Search Console',
+    logo: '/images/tech/google-search-console.svg',
+    description: 'Search Performance',
+    row: 3,
+    size: 'medium'
+  },
+  {
+    name: 'Google My Business',
+    logo: '/images/tech/google-my-business-logo.svg',
+    description: 'Local SEO Platform',
+    row: 3,
+    size: 'medium'
+  },
+  {
+    name: 'Google Tag Manager',
+    logo: '/images/tech/tag-manager.svg',
+    description: 'Tag Management',
+    row: 3,
+    size: 'medium'
+  },
+  {
+    name: 'WordPress',
+    logo: '/images/tech/wordpress.svg',
+    description: 'CMS Platform',
+    row: 3,
+    size: 'medium'
+  },
+
+  // ROW 4: E-commerce Platforms (3 logos)
+  {
+    name: 'Shopify',
+    logo: '/images/tech/shopify.svg',
+    description: 'E-commerce Platform',
+    row: 4,
+    size: 'medium'
+  },
+  {
+    name: 'WooCommerce',
+    logo: '/images/tech/woo.svg',
+    description: 'E-commerce Solution',
+    row: 4,
+    size: 'medium'
+  },
+  {
+    name: 'Webflow',
+    logo: '/images/tech/webflow.svg',
+    description: 'Website Builder',
+    row: 4,
+    size: 'medium'
+  },
+
+  // ROW 5: Additional Search Engines (3 logos - base)
+  {
+    name: 'Bing',
+    logo: '/images/tech/bing.svg',
+    description: 'Search Engine',
+    row: 5,
+    size: 'small'
+  },
+  {
+    name: 'DuckDuckGo',
+    logo: '/images/tech/duckduckgo-icon.svg',
+    description: 'Privacy-Focused Search',
+    row: 5,
+    size: 'small'
+  },
+  {
+    name: 'Yandex',
+    logo: '/images/tech/yandex-light.svg',
+    description: 'Global Search Engine',
+    row: 5,
+    size: 'small'
+  },
+];
+
+// Group technologies by row for pyramid layout
+const pyramidRows = [1, 2, 3, 4, 5].map(rowNum =>
+  technologies.filter(tech => tech.row === rowNum)
+);
+---
+
+<section class={`technology-badges-section ${className}`}>
+  {showTitle && (
+    <div class="container-custom">
+      <div class="text-center mb-16">
+        <h3 class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-3">
+          {title}
+        </h3>
+        <p class="text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
+          {subtitle}
+        </p>
+      </div>
+    </div>
+  )}
+
+  <!-- Pyramid Layout -->
+  <div class="container-custom">
+    <div class="pyramid-container" role="list" aria-label="Technology partners and tools">
+      {pyramidRows.map((row, rowIndex) => (
+        <div class={`pyramid-row pyramid-row-${rowIndex + 1}`} data-row={rowIndex + 1}>
+          {row.map((tech, techIndex) => {
+            const globalIndex = technologies.findIndex(t => t.name === tech.name);
+            return (
+              <article
+                class={`tech-card tech-size-${tech.size}`}
+                role="listitem"
+                style={`--animation-order: ${globalIndex}`}
+                tabindex="0"
+              >
+                <!-- Logo Container -->
+                <div class="logo-wrapper">
+                  <img
+                    src={tech.logo}
+                    alt={`${tech.name} - ${tech.description}`}
+                    class="tech-logo"
+                    loading="lazy"
+                    width={tech.size === 'large' ? "160" : tech.size === 'medium' ? "120" : "100"}
+                    height={tech.size === 'large' ? "80" : tech.size === 'medium' ? "60" : "50"}
+                  />
+                </div>
+
+                <!-- Hover Info -->
+                <div class="tech-info">
+                  <p class="tech-name">{tech.name}</p>
+                  <p class="tech-description">{tech.description}</p>
+                </div>
+
+                <!-- Focus ring for accessibility -->
+                <div class="focus-ring" aria-hidden="true"></div>
+              </article>
+            );
+          })}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .technology-badges-section {
+    padding: 5rem 0;
+    background: linear-gradient(180deg, #f9fafb 0%, #ffffff 100%);
+    border-top: 1px solid rgba(60, 139, 218, 0.08);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Pyramid Container */
+  .pyramid-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  /* Pyramid Row - Centered flex layout */
+  .pyramid-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    width: 100%;
+    flex-wrap: nowrap;
+  }
+
+  /* Row-specific spacing adjustments */
+  .pyramid-row-1 {
+    gap: 0; /* Single item - no gap needed */
+  }
+
+  .pyramid-row-2 {
+    gap: 2.5rem;
+  }
+
+  .pyramid-row-3 {
+    gap: 2rem; /* Widest row - tighter spacing */
+  }
+
+  .pyramid-row-4 {
+    gap: 2.5rem;
+  }
+
+  .pyramid-row-5 {
+    gap: 3rem;
+  }
+
+  /* Technology Card - Base Styles */
+  .tech-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
+    border: 1.5px solid rgba(60, 139, 218, 0.12);
+    border-radius: 20px;
+    padding: 2rem 1.5rem;
+    transition: all 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+    box-shadow:
+      0 4px 12px rgba(0, 0, 0, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+
+    /* Staggered entrance animation */
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    animation: pyramidFadeIn 0.7s ease-out forwards;
+    animation-delay: calc(var(--animation-order) * 0.08s);
+  }
+
+  /* Size-based card dimensions */
+  .tech-size-large {
+    min-width: 180px;
+    padding: 2.5rem 2rem;
+  }
+
+  .tech-size-medium {
+    min-width: 150px;
+    padding: 2rem 1.5rem;
+  }
+
+  .tech-size-small {
+    min-width: 130px;
+    padding: 1.75rem 1.25rem;
+  }
+
+  /* Hover State - Enhanced with lift effect */
+  .tech-card:hover {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.98) 100%);
+    border-color: rgba(60, 139, 218, 0.3);
+    box-shadow:
+      0 20px 40px rgba(60, 139, 218, 0.2),
+      0 8px 16px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 1);
+    transform: translateY(-12px) scale(1.05);
+  }
+
+  /* Show info on hover */
+  .tech-card:hover .tech-info {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  /* Logo Wrapper */
+  .logo-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 90px;
+    position: relative;
+    z-index: 5;
+  }
+
+  .tech-size-large .logo-wrapper {
+    min-height: 100px;
+  }
+
+  .tech-size-small .logo-wrapper {
+    min-height: 70px;
+  }
+
+  .tech-logo {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+    filter: grayscale(0.15) opacity(0.92);
+    transition: filter 0.35s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .tech-card:hover .tech-logo {
+    filter: grayscale(0) opacity(1);
+    transform: scale(1.1) rotate(2deg);
+  }
+
+  /* Tech Info - Hidden by default, shown on hover */
+  .tech-info {
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(60, 139, 218, 0.15);
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  .tech-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+  }
+
+  .tech-description {
+    font-size: 12px;
+    color: #64748b;
+    line-height: 1.5;
+  }
+
+  /* Focus Ring for Accessibility */
+  .focus-ring {
+    position: absolute;
+    inset: -4px;
+    border-radius: 24px;
+    border: 3px solid transparent;
+    transition: border-color 0.3s ease;
+    pointer-events: none;
+  }
+
+  .tech-card:focus .focus-ring,
+  .tech-card:focus-visible .focus-ring {
+    border-color: #3c8bda;
+    box-shadow: 0 0 0 4px rgba(60, 139, 218, 0.1);
+  }
+
+  /* Remove default outline */
+  .tech-card:focus {
+    outline: none;
+  }
+
+  /* Entrance Animation */
+  @keyframes pyramidFadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 640px) {
+    .technology-badges-section {
+      padding: 3rem 0;
+    }
+
+    .pyramid-container {
+      gap: 1.5rem;
+    }
+
+    /* Stack pyramid rows more compactly on mobile */
+    .pyramid-row {
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 100%;
+    }
+
+    .pyramid-row-1,
+    .pyramid-row-2,
+    .pyramid-row-3,
+    .pyramid-row-4,
+    .pyramid-row-5 {
+      gap: 1rem;
+    }
+
+    /* Adjust card sizes for mobile */
+    .tech-size-large,
+    .tech-size-medium,
+    .tech-size-small {
+      min-width: 110px;
+      max-width: 140px;
+      padding: 1.5rem 1rem;
+      flex: 0 0 calc(50% - 0.5rem); /* 2 columns on mobile */
+    }
+
+    .logo-wrapper,
+    .tech-size-large .logo-wrapper,
+    .tech-size-small .logo-wrapper {
+      min-height: 60px;
+    }
+
+    /* Show tech info on mobile without hover */
+    .tech-info {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .tech-name {
+      font-size: 13px;
+    }
+
+    .tech-description {
+      font-size: 11px;
+    }
+  }
+
+  @media (min-width: 641px) and (max-width: 1023px) {
+    .pyramid-container {
+      gap: 1.75rem;
+    }
+
+    .pyramid-row {
+      gap: 1.5rem;
+    }
+
+    .tech-size-large {
+      min-width: 160px;
+    }
+
+    .tech-size-medium {
+      min-width: 135px;
+    }
+
+    .tech-size-small {
+      min-width: 120px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .pyramid-container {
+      gap: 2.5rem;
+    }
+
+    /* Enhanced spacing for larger screens */
+    .pyramid-row-1 {
+      margin-bottom: 0.5rem;
+    }
+
+    .pyramid-row-3 {
+      gap: 2.25rem; /* Optimal spacing for 5 items */
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .pyramid-container {
+      gap: 3rem;
+    }
+
+    .pyramid-row-3 {
+      gap: 2.5rem;
+    }
+  }
+
+  /* Reduced Motion - Disable animations */
+  @media (prefers-reduced-motion: reduce) {
+    .tech-card {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+
+    .tech-card,
+    .tech-logo,
+    .tech-info {
+      transition: none;
+    }
+
+    .tech-card:hover {
+      transform: translateY(-4px);
+    }
+  }
+
+  /* High Contrast Mode Support */
+  @media (prefers-contrast: high) {
+    .tech-card {
+      border: 3px solid currentColor;
+      background: white;
+    }
+
+    .tech-logo {
+      filter: none;
+    }
+
+    .tech-info {
+      border-top-width: 2px;
+    }
+  }
+
+  /* Print Styles */
+  @media print {
+    .technology-badges-section {
+      background: white;
+      border: none;
+      padding: 2rem 0;
+    }
+
+    .pyramid-container {
+      gap: 1.5rem;
+    }
+
+    .pyramid-row {
+      gap: 1rem;
+    }
+
+    .tech-card {
+      break-inside: avoid;
+      box-shadow: none;
+      border: 1px solid #ccc;
+      padding: 1rem;
+    }
+
+    .tech-info {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .tech-name {
+      font-size: 12px;
+    }
+
+    .tech-description {
+      font-size: 10px;
+    }
+  }
+
+  /* Dark mode support */
+  @media (prefers-color-scheme: dark) {
+    .technology-badges-section {
+      background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+      border-top-color: rgba(60, 139, 218, 0.15);
+    }
+
+    .tech-card {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.85) 100%);
+      border-color: rgba(60, 139, 218, 0.2);
+    }
+
+    .tech-card:hover {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 1) 0%, rgba(15, 23, 42, 0.98) 100%);
+      border-color: rgba(60, 139, 218, 0.45);
+      box-shadow:
+        0 20px 40px rgba(60, 139, 218, 0.25),
+        0 8px 16px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .tech-name {
+      color: #f1f5f9;
+    }
+
+    .tech-description {
+      color: #94a3b8;
+    }
+
+    .tech-logo {
+      filter: grayscale(0.2) opacity(0.88) brightness(1.1);
+    }
+
+    .tech-card:hover .tech-logo {
+      filter: grayscale(0) opacity(1) brightness(1.15);
+    }
+  }
+</style>
+
+<script>
+  /**
+   * Progressive Enhancement: Intersection Observer for pyramid scroll animations
+   * Falls back gracefully if JS disabled (CSS animation runs immediately)
+   */
+
+  // Only run if browser supports IntersectionObserver
+  if ('IntersectionObserver' in window) {
+    const cards = document.querySelectorAll('.tech-card');
+    const rows = document.querySelectorAll('.pyramid-row');
+
+    // Animate entire rows for more dramatic pyramid reveal
+    const rowObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('row-in-view');
+            rowObserver.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.2,
+        rootMargin: '50px'
+      }
+    );
+
+    rows.forEach((row) => {
+      rowObserver.observe(row);
+    });
+
+    // Individual card observer for fine-grained control
+    const cardObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('card-in-view');
+            cardObserver.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '75px'
+      }
+    );
+
+    cards.forEach((card) => {
+      cardObserver.observe(card);
+    });
+  }
+
+  /**
+   * Accessibility: Enhanced keyboard navigation and interaction
+   */
+  document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('.tech-card');
+
+    cards.forEach((card, index) => {
+      // Add keyboard interaction for tech info toggle
+      card.addEventListener('keydown', (e: KeyboardEvent) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+
+          // Toggle persistent hover state for keyboard users
+          card.classList.toggle('keyboard-active');
+
+          // Announce to screen readers
+          const techName = card.querySelector('.tech-name')?.textContent;
+          const techDesc = card.querySelector('.tech-description')?.textContent;
+
+          if (card.classList.contains('keyboard-active')) {
+            card.setAttribute('aria-expanded', 'true');
+            // Optional: Add live region announcement
+            const announcement = document.createElement('div');
+            announcement.className = 'sr-only';
+            announcement.setAttribute('role', 'status');
+            announcement.setAttribute('aria-live', 'polite');
+            announcement.textContent = `${techName}: ${techDesc}`;
+            document.body.appendChild(announcement);
+            setTimeout(() => announcement.remove(), 1000);
+          } else {
+            card.setAttribute('aria-expanded', 'false');
+          }
+        }
+      });
+
+      // Remove keyboard-active class on blur
+      card.addEventListener('blur', () => {
+        card.classList.remove('keyboard-active');
+        card.setAttribute('aria-expanded', 'false');
+      });
+
+      // Initialize aria-expanded attribute
+      card.setAttribute('aria-expanded', 'false');
+    });
+
+    /**
+     * Add subtle parallax effect on scroll (optional enhancement)
+     */
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const pyramidContainer = document.querySelector('.pyramid-container');
+          if (pyramidContainer) {
+            const rect = pyramidContainer.getBoundingClientRect();
+            const viewportHeight = window.innerHeight;
+
+            // Only apply parallax when pyramid is in viewport
+            if (rect.top < viewportHeight && rect.bottom > 0) {
+              const scrollProgress = (viewportHeight - rect.top) / (viewportHeight + rect.height);
+              const parallaxRows = document.querySelectorAll('.pyramid-row');
+
+              parallaxRows.forEach((row, index) => {
+                const offset = (index - 2) * 10 * scrollProgress; // Center row (index 2) has no offset
+                (row as HTMLElement).style.transform = `translateY(${offset}px)`;
+              });
+            }
+          }
+
+          ticking = false;
+        });
+
+        ticking = true;
+      }
+    };
+
+    // Enable parallax only on larger screens and if user hasn't requested reduced motion
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isLargeScreen = window.matchMedia('(min-width: 1024px)').matches;
+
+    if (!prefersReducedMotion && isLargeScreen) {
+      window.addEventListener('scroll', handleScroll, { passive: true });
+    }
+  });
+
+  /**
+   * Add CSS class for keyboard-active state styling
+   */
+  const style = document.createElement('style');
+  style.textContent = `
+    .tech-card.keyboard-active .tech-info {
+      opacity: 1 !important;
+      visibility: visible !important;
+      transform: translateY(0) !important;
+    }
+
+    .tech-card.keyboard-active {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.98) 100%);
+      border-color: rgba(60, 139, 218, 0.3);
+      box-shadow: 0 20px 40px rgba(60, 139, 218, 0.2), 0 8px 16px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 1);
+    }
+
+    /* Screen reader only class */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+  `;
+  document.head.appendChild(style);
+</script>

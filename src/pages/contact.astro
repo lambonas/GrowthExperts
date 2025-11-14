@@ -1,0 +1,323 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import Button from '../components/ui/Button.astro';
+import ReviewsMarquee from '../components/ui/ReviewsMarquee.astro';
+
+const pageTitle = 'Contact Us | Get Your Free SEO Audit Today';
+const pageDescription =
+  'Ready to grow your business? Contact Digital Growth Experts for a free SEO audit. No obligation, just honest insights. Response within 24 hours.';
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  schema={{
+    type: 'LocalBusiness',
+    data: {
+      '@type': 'LocalBusiness',
+      name: 'Digital Growth Experts',
+      description: pageDescription,
+      url: 'https://youragency.com/contact',
+      telephone: '+61-2-8112-8010',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Your Street Address',
+        addressLocality: 'Sydney',
+        addressRegion: 'NSW',
+        postalCode: 'XXXX',
+        addressCountry: 'AU',
+      },
+    },
+  }}
+>
+  <Header />
+
+  <main id="main-content">
+    <!-- Hero Section with Form -->
+    <section class="relative overflow-hidden bg-gradient-hero pt-20 pb-16 md:pt-28 md:pb-24">
+      <!-- Background decoration -->
+      <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute -top-40 -right-40 w-96 h-96 bg-primary-300 rounded-full opacity-20 blur-3xl"></div>
+        <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-secondary-300 rounded-full opacity-20 blur-3xl"></div>
+      </div>
+
+      <div class="container-custom relative z-10">
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+          <!-- Left Column: Form (Mobile First) -->
+          <div class="order-1 lg:order-1">
+            <div class="mb-6">
+              <!-- Breadcrumb -->
+              <nav class="text-sm text-gray-600 mb-4">
+                <a href="/" class="hover:text-primary-600">Home</a>
+                <span class="mx-2">/</span>
+                <span class="text-gray-900 font-semibold">Contact</span>
+              </nav>
+
+              <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 leading-tight">
+                Let's Grow Your Business <span class="text-gradient-trust">Together</span>
+              </h1>
+            </div>
+
+            <!-- Contact Form - Simplified -->
+            <div class="bg-white p-8 rounded-2xl shadow-xl border-2 border-primary-100">
+              <h2 class="text-2xl font-bold text-gray-900 mb-2">Get Started Today</h2>
+              <p class="text-gray-600 mb-6">Fill out the form and we'll get back to you within 24 hours</p>
+
+              <form action="YOUR_FORMSPREE_ID" method="POST" class="space-y-4">
+                <!-- Name -->
+                <div>
+                  <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">
+                    Full Name <span class="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition-colors"
+                    placeholder="John Smith"
+                  />
+                </div>
+
+                <!-- Phone -->
+                <div>
+                  <label for="phone" class="block text-sm font-semibold text-gray-700 mb-2">
+                    Phone Number <span class="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    required
+                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition-colors"
+                    placeholder="+61 XXX XXX XXX"
+                  />
+                </div>
+
+                <!-- Website -->
+                <div>
+                  <label for="website" class="block text-sm font-semibold text-gray-700 mb-2">
+                    Website URL <span class="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="url"
+                    id="website"
+                    name="website"
+                    required
+                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition-colors"
+                    placeholder="https://yourwebsite.com.au"
+                  />
+                </div>
+
+                <!-- Submit Button -->
+                <button
+                  type="submit"
+                  class="w-full bg-accent-500 hover:bg-accent-600 text-white font-bold py-4 px-6 rounded-lg transition-all duration-200 hover:shadow-xl hover:scale-105"
+                >
+                  Get My Free Audit →
+                </button>
+
+                <p class="text-xs text-gray-500 text-center">
+                  We'll respond within 24 hours. Privacy guaranteed.
+                  <a href="/privacy-policy" class="underline hover:text-primary-600">Privacy Policy</a>
+                </p>
+              </form>
+            </div>
+          </div>
+
+          <!-- Right Column: Reviews & Contact Details -->
+          <div class="order-2 lg:order-2 space-y-8">
+            <!-- Auto-scrolling Google Reviews -->
+            <ReviewsMarquee />
+
+            <!-- Contact Details -->
+            <div class="bg-white p-8 rounded-2xl shadow-xl border-2 border-primary-100">
+              <h3 class="text-2xl font-bold text-gray-900 mb-6">Get In Touch</h3>
+
+              <div class="space-y-4">
+                <!-- Phone -->
+                <div class="flex items-start space-x-4">
+                  <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <svg class="w-6 h-6 text-primary-600" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="font-semibold text-gray-900">Phone</div>
+                    <a href="tel:+61281128010" class="text-primary-600 hover:text-primary-700 font-medium">
+                      (02) 8112 8010
+                    </a>
+                    <p class="text-sm text-gray-600">Mon-Fri 9AM-6PM AEST</p>
+                  </div>
+                </div>
+
+                <!-- Email -->
+                <div class="flex items-start space-x-4">
+                  <div class="w-12 h-12 bg-secondary-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <svg class="w-6 h-6 text-secondary-600" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                      <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="font-semibold text-gray-900">Email</div>
+                    <a href="mailto:Info@growthexperts.com.au" class="text-secondary-600 hover:text-secondary-700 font-medium break-all">
+                      Info@growthexperts.com.au
+                    </a>
+                    <p class="text-sm text-gray-600">We respond within 24 hours</p>
+                  </div>
+                </div>
+
+                <!-- Location -->
+                <div class="flex items-start space-x-4">
+                  <div class="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <svg class="w-6 h-6 text-accent-600" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="font-semibold text-gray-900">Location</div>
+                    <p class="text-accent-600 font-medium">Sydney, NSW</p>
+                    <p class="text-sm text-gray-600">Australian-Based Team</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Quick Hits -->
+    <section class="section-padding bg-gray-50">
+      <div class="container-custom">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Common Questions Before You Reach Out
+          </h2>
+        </div>
+
+        <div class="max-w-3xl mx-auto space-y-4">
+          <!-- FAQ Item 1 -->
+          <details class="group bg-white rounded-lg shadow-md border-2 border-gray-100 hover:border-primary-200 transition-colors">
+            <summary class="flex items-center justify-between p-6 cursor-pointer">
+              <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600">
+                Is the audit really free?
+              </h3>
+              <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-6 text-gray-600 leading-relaxed">
+              <p>Yes, absolutely! Our SEO audit is completely free with no strings attached. We provide genuine value upfront because we're confident in our ability to help you grow.</p>
+            </div>
+          </details>
+
+          <!-- FAQ Item 2 -->
+          <details class="group bg-white rounded-lg shadow-md border-2 border-gray-100 hover:border-primary-200 transition-colors">
+            <summary class="flex items-center justify-between p-6 cursor-pointer">
+              <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600">
+                Do I need to commit to anything?
+              </h3>
+              <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-6 text-gray-600 leading-relaxed">
+              <p>Not at all. The audit is no-obligation. We'll provide you with actionable insights, and if you'd like our help implementing them, we can discuss that. No pressure, no long-term contracts.</p>
+            </div>
+          </details>
+
+          <!-- FAQ Item 3 -->
+          <details class="group bg-white rounded-lg shadow-md border-2 border-gray-100 hover:border-primary-200 transition-colors">
+            <summary class="flex items-center justify-between p-6 cursor-pointer">
+              <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600">
+                How long does it take?
+              </h3>
+              <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-6 text-gray-600 leading-relaxed">
+              <p>We'll respond within 24 hours and deliver your comprehensive audit within 48 hours. We believe in moving fast so you can start improving your SEO sooner.</p>
+            </div>
+          </details>
+
+          <!-- FAQ Item 4 -->
+          <details class="group bg-white rounded-lg shadow-md border-2 border-gray-100 hover:border-primary-200 transition-colors">
+            <summary class="flex items-center justify-between p-6 cursor-pointer">
+              <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600">
+                What if I'm already working with another agency?
+              </h3>
+              <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-6 text-gray-600 leading-relaxed">
+              <p>That's fine! Our audit can provide a second opinion and show you if you're getting the results you deserve. Many of our clients came to us from other agencies.</p>
+            </div>
+          </details>
+
+          <!-- Link to full FAQ -->
+          <div class="text-center pt-8">
+            <a href="/faq" class="inline-flex items-center text-primary-600 hover:text-primary-700 font-semibold text-lg">
+              View all FAQs
+              <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="section-padding bg-gradient-to-br from-primary-600 to-primary-700">
+      <div class="container-custom text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+          Still Have Questions?
+        </h2>
+        <p class="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
+          We're here to help. No pressure, no obligation.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <Button variant="accent" size="lg" href="#contact-form-enhanced">
+            Send Us a Message
+          </Button>
+          <a
+            href="tel:+61281128010"
+            class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-lg bg-white text-primary-600 hover:bg-primary-50 transition-all duration-200 hover:shadow-xl"
+          >
+            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+            </svg>
+            Call Us Now
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<script>
+  // Smooth scroll to form when "Send Us a Message" is clicked
+  document.addEventListener('DOMContentLoaded', () => {
+    const ctaButton = document.querySelector('[href="#contact-form-enhanced"]');
+    if (ctaButton) {
+      ctaButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        const form = document.getElementById('contact-form-enhanced');
+        if (form) {
+          form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          // Focus on first input
+          const firstInput = form.querySelector('input');
+          setTimeout(() => firstInput?.focus(), 500);
+        }
+      });
+    }
+  });
+</script>

@@ -1,0 +1,230 @@
+---
+/**
+ * AboutSection - High-Converting "About Us" Component
+ *
+ * Conversion Strategy:
+ * 1. Builds trust immediately after hero with transparent messaging
+ * 2. Technology badges create credibility through partner associations
+ * 3. Animated badge carousel keeps attention without cluttering
+ * 4. Clear hierarchy guides eye from heading → body → badges → CTA
+ * 5. Micro-interactions reward engagement without distraction
+ *
+ * Positioning: Hero → AboutSection → Client Logos → SEO Truth
+ */
+
+import Button from '../ui/Button.astro';
+
+export interface Props {
+  variant?: 'default' | 'split' | 'centered';
+}
+
+const { variant = 'default' } = Astro.props;
+
+// Technology Partner Badges - SVG data URIs for performance
+const techBadges = [
+  {
+    name: 'Google Partner',
+    logo: '/images/badges/google-partner.svg',
+    alt: 'Certified Google Partner',
+    color: 'from-blue-500 to-blue-600'
+  },
+  {
+    name: 'Semrush Agency Partner',
+    logo: '/images/badges/semrush-partner.svg',
+    alt: 'Semrush Agency Partner',
+    color: 'from-orange-500 to-red-500'
+  },
+  {
+    name: 'Google Analytics',
+    logo: '/images/badges/google-analytics.svg',
+    alt: 'Google Analytics Certified',
+    color: 'from-yellow-500 to-orange-500'
+  },
+  {
+    name: 'Google Search Console',
+    logo: '/images/badges/google-search-console.svg',
+    alt: 'Google Search Console Expert',
+    color: 'from-green-500 to-teal-500'
+  },
+  {
+    name: 'Google Tag Manager',
+    logo: '/images/badges/google-tag-manager.svg',
+    alt: 'Google Tag Manager Certified',
+    color: 'from-blue-600 to-indigo-600'
+  },
+  {
+    name: 'WordPress',
+    logo: '/images/badges/wordpress.svg',
+    alt: 'WordPress SEO Experts',
+    color: 'from-blue-700 to-blue-800'
+  },
+];
+---
+
+<section class="relative bg-white pt-24 md:pt-32 lg:pt-40 pb-20 md:pb-28 lg:pb-32 overflow-hidden">
+  <!-- Subtle background decoration -->
+  <div class="absolute inset-0 opacity-5 pointer-events-none">
+    <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%239C92AC\" fill-opacity=\"0.4\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+  </div>
+
+  <div class="container-custom relative z-10">
+    <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+
+      <!-- Left Column: Content (7 columns) -->
+      <div class="lg:col-span-7">
+
+        <!-- Section Label - Trust Signal -->
+        <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary-50 border border-primary-200 rounded-full mb-6">
+          <svg class="w-4 h-4 text-primary-600" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+          </svg>
+          <span class="text-sm font-semibold text-primary-900 uppercase tracking-wide">No BS, Just Results</span>
+        </div>
+
+        <!-- Main Heading - Clear Value Prop -->
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+          About <span class="text-gradient-trust">Digital Growth Experts</span>: Your Honest Partner in SEO & Business Growth
+        </h2>
+
+        <!-- Body Copy - 3 Paragraphs with Visual Hierarchy -->
+        <div class="prose prose-lg max-w-none space-y-7 text-gray-700">
+          <p class="text-lg md:text-xl leading-relaxed">
+            <strong class="text-gray-900">Let's be honest</strong>—most <strong>SEO agencies</strong> make big promises, deliver mediocre results, and disappear when you ask the hard questions. We're not that agency.
+          </p>
+
+          <!-- Callout Box - Our Science-Backed Approach -->
+          <div class="bg-primary-50 border-l-4 border-primary-500 p-5 rounded-lg my-6">
+            <div class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-primary-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+              </svg>
+              <div>
+                <h3 class="text-lg font-bold text-gray-900 mb-2">Our Science-Backed Approach</h3>
+                <p class="text-sm text-gray-700 leading-relaxed">
+                  We combine <strong>technical SEO expertise</strong>, <strong>data-driven strategy</strong>, and radical transparency. Every decision is backed by <strong>search engine optimization research</strong>, advanced analytics tools, and real-world testing to deliver <strong>measurable business growth</strong>.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <p class="leading-relaxed">
+            We're your <span class="font-semibold text-primary-600">business growth partner</span>—invested in your success because your wins are our wins. Our team works exclusively with <strong>Australian businesses</strong> who are tired of empty promises and want a partner who treats their budget like it's our own. Whether you're a local service provider or a national e-commerce brand, we bring the same commitment: transparent reporting, scientific methodology, and relentless focus on <strong>ROI-driven SEO strategies</strong>.
+          </p>
+        </div>
+
+        <!-- Desktop CTA - Only shows on desktop, positioned for natural reading flow -->
+        <div class="hidden lg:block mt-8">
+          <Button variant="primary" size="lg" href="/contact" class="group">
+            See Our Transparent Approach in Action
+            <svg class="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+            </svg>
+          </Button>
+        </div>
+      </div>
+
+      <!-- Right Column: Technology Badges (5 columns) -->
+      <div class="lg:col-span-5">
+        <div class="sticky top-8">
+
+          <!-- Badge Section Header -->
+          <div class="mb-6">
+            <h3 class="text-lg font-bold text-gray-900 mb-2">The Tools Behind Our Science-Backed SEO Approach</h3>
+          </div>
+
+          <!-- Badge Grid with Stagger Animation -->
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-8">
+            {techBadges.map((badge, index) => (
+              <div
+                class="badge-card group"
+                style={`animation-delay: ${index * 100}ms`}
+              >
+                <div class="relative aspect-square bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl border-2 border-gray-200 p-4 transition-all duration-300 group-hover:border-primary-300 group-hover:shadow-lg group-hover:-translate-y-1">
+
+                  <!-- Badge Logo -->
+                  <div class="absolute inset-0 flex items-center justify-center p-6">
+                    <div class="w-full h-full flex items-center justify-center">
+                      <img
+                        src={badge.logo}
+                        alt={badge.alt}
+                        class="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110"
+                        loading="lazy"
+                      />
+                    </div>
+                  </div>
+
+                  <!-- Hover Overlay with Badge Name -->
+                  <div class="absolute inset-0 flex items-end p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span class="text-xs font-semibold text-gray-900 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-md shadow-sm">
+                      {badge.name}
+                    </span>
+                  </div>
+
+                  <!-- Checkmark Badge -->
+                  <div class="absolute -top-2 -right-2 w-6 h-6 bg-secondary-500 rounded-full flex items-center justify-center shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <!-- Trust Statement -->
+          <div class="bg-gradient-to-br from-primary-50 to-secondary-50 rounded-xl p-4 border border-primary-100">
+            <div class="flex items-start gap-3">
+              <div class="flex-shrink-0 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-sm">
+                <svg class="w-4 h-4 text-secondary-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <div class="flex-1">
+                <p class="text-sm font-semibold text-gray-900 mb-1">8+ Years of Expertise</p>
+                <p class="text-xs text-gray-600">Working with Australia's leading SEO platforms</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile CTA - Shows only on mobile, after all content -->
+      <div class="lg:hidden lg:col-span-12">
+        <Button variant="primary" size="lg" href="/contact" class="w-full group">
+          See Our Transparent Approach in Action
+          <svg class="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+          </svg>
+        </Button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Stagger fade-in animation for badge cards */
+  @keyframes badge-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px) scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .badge-card {
+    animation: badge-fade-in 0.6s ease-out forwards;
+    opacity: 0;
+  }
+
+  /* Ensure animations respect reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .badge-card {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>

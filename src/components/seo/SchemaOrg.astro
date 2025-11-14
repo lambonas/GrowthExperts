@@ -1,0 +1,114 @@
+---
+export interface Props {
+  type: 'Organization' | 'Service' | 'LocalBusiness' | 'Article' | 'FAQPage' | 'BreadcrumbList';
+  data: Record<string, any>;
+}
+
+const { type, data } = Astro.props;
+const site = Astro.site || 'https://growthexperts.com.au';
+
+// Base organization schema (always included)
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Digital Growth Experts',
+  url: site,
+  logo: `${site}/images/logo.png`,
+  description: 'Leading SEO and digital marketing agency helping businesses grow online',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '443 Chapel Rd',
+    addressLocality: 'Bankstown',
+    addressRegion: 'NSW',
+    postalCode: '2200',
+    addressCountry: 'AU',
+  },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    telephone: '+61-02-8112-8010',
+    contactType: 'customer service',
+    availableLanguage: 'English',
+  },
+  sameAs: [
+    'https://www.facebook.com/SEOGrowthExperts',
+    'https://www.linkedin.com/company/seocompanysydney/',
+    'https://www.instagram.com/digitalgrowthexperts/',
+    'https://www.youtube.com/@digital-growth-experts',
+    'https://x.com/GrowthExpertsAu',
+  ],
+};
+
+// Generate schema based on type
+let schemaData;
+
+switch (type) {
+  case 'Organization':
+    schemaData = organizationSchema;
+    break;
+
+  case 'Service':
+    schemaData = {
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      serviceType: data.serviceType || 'SEO Services',
+      provider: organizationSchema,
+      areaServed: {
+        '@type': 'Country',
+        name: 'Australia',
+      },
+      ...data,
+    };
+    break;
+
+  case 'LocalBusiness':
+    schemaData = {
+      '@context': 'https://schema.org',
+      '@type': 'ProfessionalService',
+      ...organizationSchema,
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: -33.917290,
+        longitude: 151.035889,
+      },
+      openingHoursSpecification: {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        opens: '09:00',
+        closes: '17:00',
+      },
+      priceRange: '$$',
+      ...data,
+    };
+    break;
+
+  case 'Article':
+    schemaData = {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      publisher: organizationSchema,
+      ...data,
+    };
+    break;
+
+  case 'FAQPage':
+    schemaData = {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: data.questions || [],
+    };
+    break;
+
+  case 'BreadcrumbList':
+    schemaData = {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: data.items || [],
+    };
+    break;
+
+  default:
+    schemaData = data;
+}
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schemaData)} />

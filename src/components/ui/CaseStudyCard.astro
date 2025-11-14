@@ -1,0 +1,239 @@
+---
+import IndustryIcon from './IndustryIcon.astro';
+import PlatformLogos from './PlatformLogos.astro';
+
+export interface Metric {
+  label: string;
+  value: string;
+  trend?: 'up' | 'down' | 'neutral';
+  icon?: string;
+}
+
+export interface Props {
+  clientLogo?: string;
+  clientLogoAlt?: string;
+  largeLogo?: boolean;
+  industry?: string;
+  clientType?: string;
+  primaryMetric: {
+    value: string;
+    label: string;
+  };
+  secondaryMetrics: Metric[];
+  quote?: string;
+  role?: string;
+  timeframe: string;
+  resultPeriod?: string; // e.g., "Q3 2024"
+  verified?: boolean;
+  caseStudyUrl?: string;
+}
+
+const {
+  clientLogo,
+  clientLogoAlt,
+  largeLogo = false,
+  industry,
+  clientType,
+  primaryMetric,
+  secondaryMetrics,
+  quote,
+  role,
+  timeframe,
+  resultPeriod,
+  verified = true,
+  caseStudyUrl,
+} = Astro.props;
+---
+
+<article class="case-study-card group relative bg-white rounded-lg border border-gray-200 p-8 transition-all duration-200 hover:border-primary-400 hover:shadow-lg flex flex-col h-full">
+
+  <!-- Header with Client Logo or Industry Info -->
+  {clientLogo ? (
+    <div class="flex flex-col items-center mb-6">
+      <img
+        src={clientLogo}
+        alt={clientLogoAlt || 'Client case study'}
+        class={`client-logo h-12 w-auto max-w-[180px] object-contain mb-2 ${largeLogo ? 'large-logo' : ''}`}
+        loading="lazy"
+      />
+      {industry && (
+        <p class="text-xs uppercase tracking-wider text-gray-500 font-medium">{industry}</p>
+      )}
+    </div>
+  ) : industry && clientType ? (
+    <div class="flex items-start justify-between mb-6">
+      <div class="flex items-center gap-3">
+        <div class="text-gray-400">
+          <IndustryIcon industry={industry} size="md" />
+        </div>
+        <div>
+          <p class="text-xs uppercase tracking-wider text-gray-500 font-medium">{industry}</p>
+          <p class="text-sm text-gray-700 font-medium">{clientType}</p>
+        </div>
+      </div>
+      {verified && (
+        <div class="flex items-center gap-1 text-xs text-gray-500">
+          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span>Verified</span>
+        </div>
+      )}
+    </div>
+  ) : null}
+
+  <!-- Primary Metric with Platform Logos -->
+  <div class="mb-6">
+    <div class="flex items-end justify-between mb-2">
+      <span class="text-4xl lg:text-5xl font-bold text-gray-900 tabular-nums">
+        {primaryMetric.value}
+      </span>
+      <!-- Platform verification badges -->
+      <PlatformLogos size="md" />
+    </div>
+    <p class="text-base font-medium text-gray-700">{primaryMetric.label}</p>
+    <p class="text-sm text-gray-500 mt-1">Achieved in {timeframe}</p>
+  </div>
+
+  <!-- Secondary Metrics Grid -->
+  <div class="grid grid-cols-1 gap-3 mb-6 pb-6 border-b border-gray-100">
+    {secondaryMetrics.map((metric) => (
+      <div class="flex items-center justify-between gap-3">
+        <div class="flex items-center gap-2 flex-1">
+          {metric.icon && (
+            <span class="text-primary-600 flex-shrink-0">
+              {metric.icon === 'search' && (
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              )}
+              {metric.icon === 'users' && (
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              )}
+              {metric.icon === 'trending-up' && (
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                </svg>
+              )}
+            </span>
+          )}
+          <span class="text-sm text-gray-600">{metric.label}</span>
+        </div>
+        <span class="text-sm font-semibold text-gray-900 tabular-nums flex-shrink-0">
+          {metric.value}
+        </span>
+      </div>
+    ))}
+  </div>
+
+  <!-- Quote Section (Optional) -->
+  {quote && (
+    <blockquote class="flex-grow">
+      <svg class="w-8 h-8 text-primary-500 mb-2" fill="currentColor" viewBox="0 0 32 32">
+        <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
+      </svg>
+      <p class="text-sm text-gray-600 leading-relaxed italic">{quote}</p>
+      {role && (
+        <cite class="text-xs text-gray-500 mt-3 block not-italic font-medium">
+          — {role}
+        </cite>
+      )}
+    </blockquote>
+  )}
+</article>
+
+<style>
+  .case-study-card {
+    background: #ffffff;
+  }
+
+  .case-study-card:hover {
+    background: #ffffff;
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Client logo styling */
+  .client-logo {
+    filter: grayscale(0%);
+    opacity: 0.95;
+    transition: all 0.3s ease;
+  }
+
+  .case-study-card:hover .client-logo {
+    filter: grayscale(0%);
+    opacity: 1;
+  }
+
+  /* Responsive logo sizing */
+  @media (max-width: 768px) {
+    .client-logo {
+      max-width: 140px;
+      height: 45px;
+    }
+  }
+
+  @media (min-width: 769px) and (max-width: 1023px) {
+    .client-logo {
+      max-width: 160px;
+      height: 50px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .client-logo {
+      max-width: 180px;
+      height: 60px;
+    }
+  }
+
+  /* Larger logo variant for specific case studies */
+  .client-logo.large-logo {
+    height: 112px;
+    max-width: 350px;
+  }
+
+  @media (max-width: 768px) {
+    .client-logo.large-logo {
+      max-width: 240px;
+      height: 80px;
+    }
+  }
+
+  @media (min-width: 769px) and (max-width: 1023px) {
+    .client-logo.large-logo {
+      max-width: 300px;
+      height: 100px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .client-logo.large-logo {
+      max-width: 350px;
+      height: 112px;
+    }
+  }
+
+  /* Tabular numbers for better alignment */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .case-study-card {
+      transition: none;
+    }
+    .client-logo {
+      transition: none;
+    }
+  }
+
+  /* Professional focus states for accessibility */
+  .case-study-card a:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+</style>

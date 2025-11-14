@@ -1,0 +1,699 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import HeroHome from '../components/sections/HeroHome.astro';
+import ClientLogoCarousel from '../components/sections/ClientLogoCarousel.astro';
+import CaseStudiesSection from '../components/sections/CaseStudiesSection.astro';
+import CTASection from '../components/sections/CTASection.astro';
+import SchemaOrg from '../components/seo/SchemaOrg.astro';
+
+// ===================================
+// PAGE FRONTMATTER CONFIGURATION
+// Edit these values to customize the page content
+// ===================================
+
+// SEO Meta Data
+const seo = {
+  title: 'SEO Adelaide | Leading SEO Agency & Services in Adelaide',
+  description: 'Expert SEO Adelaide services that drive real results. Our Adelaide SEO specialists deliver customised search engine optimisation strategies to boost rankings and grow your business.',
+  keywords: [
+    'seo adelaide',
+    'SEO Agency Adelaide',
+    'SEO company Adelaide',
+    'seo services adelaide',
+    'local seo adelaide',
+    'local seo services adelaide',
+    'adelaide seo',
+    'search engine optimisation adelaide',
+    'seo specialist adelaide',
+    'seo expert adelaide'
+  ],
+  canonical: 'https://growthexperts.com.au/seo-adelaide',
+  ogImage: '/images/team-hero.png',
+  ogType: 'website',
+};
+
+// Hero Section
+const hero = {
+  title: 'SEO Adelaide',
+  subtitle: 'Partner with Adelaide\'s leading SEO agency to dominate search rankings and drive qualified traffic to your business. Our proven search engine optimisation strategies deliver measurable results for Adelaide businesses.',
+  primaryCTA: {
+    text: 'Free SEO Strategy Session',
+    href: '/contact'
+  },
+};
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Services', href: '/services' },
+  { label: 'SEO Adelaide', href: '/seo-adelaide' },
+];
+
+// Section Visibility (show/hide sections)
+const sections = {
+  showClientLogos: true,
+  showCaseStudies: true,
+  showWhatsIncluded: true,
+  showProcess: true,
+  showFinalCTA: true,
+};
+
+// Final CTA Section
+const finalCTA = {
+  title: 'Ready to Dominate Search Rankings in Adelaide?',
+  subtitle: 'Get your free SEO audit and discover the exact strategies we\'ll use to boost your rankings, increase traffic, and grow your Adelaide business. No obligations, just actionable insights from our expert SEO team.',
+  primaryCTA: {
+    text: 'Get Your Free SEO Audit',
+    href: '/contact'
+  },
+};
+---
+
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  keywords={seo.keywords}
+  canonical={seo.canonical}
+  ogImage={seo.ogImage}
+  ogType={seo.ogType}
+  schema={{
+    type: 'Service',
+    data: {
+      '@type': 'Service',
+      name: 'SEO Adelaide Services',
+      description: seo.description,
+      provider: {
+        '@type': 'Organization',
+        name: 'Digital Growth Engine',
+      },
+      areaServed: {
+        '@type': 'City',
+        name: 'Adelaide',
+        containedIn: {
+          '@type': 'State',
+          name: 'South Australia',
+        },
+      },
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'SEO Services Adelaide',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Local SEO Adelaide',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Technical SEO Services',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'On-Page SEO Optimisation',
+            },
+          },
+        ],
+      },
+    },
+  }}
+>
+  <!-- Add LocalBusiness schema for better local SEO -->
+  <SchemaOrg
+    slot="head"
+    type="LocalBusiness"
+    data={{
+      name: 'Digital Growth Engine',
+      description: 'Expert SEO and digital marketing services in Adelaide, helping businesses dominate search rankings and grow online',
+      image: `${Astro.site}images/logo.png`,
+    }}
+  />
+
+  <Header />
+
+  <main id="main-content">
+    <!-- Hero Section - Conversion-focused with clear value proposition -->
+    <HeroHome
+      title={hero.title}
+      subtitle={hero.subtitle}
+      primaryCTA={hero.primaryCTA}
+      secondaryCTA={hero.secondaryCTA}
+    />
+
+    <!-- Social Proof - Client Logos -->
+    {sections.showClientLogos && <ClientLogoCarousel />}
+
+    <!-- Main Content Section - Introduction to SEO Adelaide -->
+    <section class="section-padding bg-white">
+      <div class="container-custom">
+        <div class="max-w-4xl mx-auto">
+          <!-- Section Header -->
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+              Why Choose Our SEO Agency Adelaide for Your Business Growth
+            </h2>
+            <p class="text-lg md:text-xl text-gray-600 leading-relaxed">
+              Adelaide businesses need more than basic SEO. You need strategic search engine optimisation that delivers real results.
+            </p>
+          </div>
+
+          <!-- Introductory Content -->
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              When **Adelaide businesses** search for an **SEO company Adelaide** can trust, they're looking for more than empty promises. They need proven **search engine optimisation** strategies that drive qualified traffic, increase conversions, and deliver measurable ROI. That's exactly what our **SEO Adelaide** specialists deliver.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              As a leading **SEO Agency Adelaide**, we understand the unique challenges facing **Adelaide businesses** in today's competitive **digital marketing** landscape. Whether you're competing in local Adelaide markets or targeting national customers, our customised **SEO services Adelaide** are designed to boost your **search engine rankings** and connect you with customers actively searching for your products or services.
+            </p>
+            <p class="text-gray-700 leading-relaxed">
+              Our **Adelaide SEO** approach combines **technical SEO**, strategic **on-page SEO**, authoritative link building, and **local SEO Adelaide** expertise. We don't believe in cookie-cutter solutions. Every **SEO campaign** is tailored to your business goals, industry, and competitive landscape. The result? Higher **rankings** in **search engines like Google**, increased organic traffic, and genuine business growth.
+            </p>
+          </div>
+
+          <!-- Key Benefits Grid -->
+          <div class="grid md:grid-cols-2 gap-8">
+            <div class="flex gap-4">
+              <div class="flex-shrink-0">
+                <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                  <svg
+                    class="w-6 h-6 text-primary-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Dominate Search Results</h3>
+                <p class="text-gray-600">
+                  Our **best SEO** strategies position Adelaide businesses at the top of **Google search** results, capturing high-intent customers ready to convert.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0">
+                <div class="w-12 h-12 bg-secondary-100 rounded-lg flex items-center justify-center">
+                  <svg
+                    class="w-6 h-6 text-secondary-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                    />
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Local SEO Adelaide Expertise</h3>
+                <p class="text-gray-600">
+                  Specialised **local SEO services Adelaide** businesses need to dominate **local search** and attract **customers in Adelaide** actively searching for your services.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0">
+                <div class="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center">
+                  <svg
+                    class="w-6 h-6 text-accent-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Proven SEO Results</h3>
+                <p class="text-gray-600">
+                  Our **SEO Adelaide team** delivers **successful SEO campaigns** backed by data, transparency, and measurable business outcomes.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0">
+                <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                  <svg
+                    class="w-6 h-6 text-primary-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">White Hat SEO Techniques</h3>
+                <p class="text-gray-600">
+                  We only use ethical **white hat SEO techniques** and follow **best practices** that ensure long-term **SEO success** without risk to your business.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Proven Results Section - Case Studies with Real Data -->
+    {sections.showCaseStudies && <CaseStudiesSection />}
+
+    <!-- What's Included Section - Service Details -->
+    {sections.showWhatsIncluded && (
+    <section class="section-padding bg-gray-50">
+      <div class="container-custom">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+            Comprehensive SEO Services Adelaide Businesses Trust
+          </h2>
+          <p class="text-lg md:text-xl text-gray-600">
+            Everything your business needs to dominate search rankings and drive sustainable growth.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <!-- Service 1 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-primary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">SEO Strategy & Audit</h3>
+            <p class="text-gray-600 mb-4">
+              Comprehensive **SEO** analysis identifying opportunities, competitor gaps, and creating a customised **marketing strategy** tailored to your Adelaide business goals and target audience.
+            </p>
+          </div>
+
+          <!-- Service 2 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-secondary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-secondary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Technical SEO</h3>
+            <p class="text-gray-600 mb-4">
+              Advanced **technical SEO** optimisations including site speed improvements, mobile responsiveness, structured data implementation, and fixing critical issues impacting **search engine rankings**.
+            </p>
+          </div>
+
+          <!-- Service 3 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-accent-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">On-Page SEO Optimisation</h3>
+            <p class="text-gray-600 mb-4">
+              Strategic **on-page SEO** including keyword research, content optimisation, meta tags, header structures, and internal linking to maximise **organic search** visibility.
+            </p>
+          </div>
+
+          <!-- Service 4 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-primary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Local SEO Services Adelaide</h3>
+            <p class="text-gray-600 mb-4">
+              Specialised **local SEO Adelaide** strategies including Google Business Profile optimisation, local citations, and **local SEO** tactics to dominate Adelaide market searches.
+            </p>
+          </div>
+
+          <!-- Service 5 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-secondary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-secondary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Link Building & Off-Page SEO</h3>
+            <p class="text-gray-600 mb-4">
+              Strategic **off-page SEO** and authoritative link building campaigns that boost domain authority and strengthen your position in **search results** through quality backlinks.
+            </p>
+          </div>
+
+          <!-- Service 6 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-accent-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Content Marketing for SEO</h3>
+            <p class="text-gray-600 mb-4">
+              Expert **content for SEO** creation that attracts, engages, and converts. Our **SEO team** creates valuable content targeting strategic keywords and user intent.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    )}
+
+    <!-- Process & Long-form Content Section -->
+    {sections.showProcess && (
+    <section class="section-padding bg-white">
+      <div class="container-custom">
+        <div class="max-w-4xl mx-auto">
+          <!-- Section Header -->
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+              Our Proven SEO Company Adelaide Process
+            </h2>
+            <p class="text-lg md:text-xl text-gray-600 leading-relaxed">
+              A data-driven approach that delivers sustainable rankings and business growth.
+            </p>
+          </div>
+
+          <!-- Process Steps -->
+          <div class="space-y-8 mb-12">
+            <!-- Step 1 -->
+            <div class="flex gap-6">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+                >
+                  1
+                </div>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Comprehensive SEO Audit & Research</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  Our **SEO specialist** team conducts an in-depth analysis of your website, competitors, and market opportunities. We identify **technical SEO** issues, content gaps, and quick-win opportunities. This foundation ensures our **customised SEO strategy** targets the right keywords and delivers maximum impact for your Adelaide business.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="flex gap-6">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+                >
+                  2
+                </div>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Tailored SEO Strategy Development</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  We develop **tailored SEO strategies** based on your business goals, target audience, and competitive landscape. Whether you need **local SEO Adelaide** dominance or national visibility, our **SEO consultant** creates a roadmap with clear milestones. **Investing in SEO** with us means getting a transparent plan that aligns with your business objectives.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="flex gap-6">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+                >
+                  3
+                </div>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Technical SEO Foundation</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  Our **SEO expert** team fixes critical **technical SEO** issues that prevent **search engines like Google** from properly crawling and indexing your site. We optimise site speed, mobile responsiveness, URL structures, and implement schema markup. This ensures your **web design** supports, rather than hinders, your **SEO ranking** potential.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="flex gap-6">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+                >
+                  4
+                </div>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">On-Page SEO & Content Optimisation</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  We optimise every page for target keywords and user intent. Our **on-page SEO** work includes meta tags, header optimisation, content enhancement, and internal linking strategies. We ensure your website provides **the best possible results** for users while signalling relevance to **search engines**. Quality **content for SEO** that ranks and converts is our speciality.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="flex gap-6">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+                >
+                  5
+                </div>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Strategic Link Building & Authority Development</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  Our **off-page SEO** strategies focus on earning high-quality backlinks from authoritative sources. We use **white hat SEO** techniques to build your domain authority naturally. Unlike **SEO agencies** that cut corners, we focus on sustainable growth through ethical link building that delivers lasting **SEO results**.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 6 -->
+            <div class="flex gap-6">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+                >
+                  6
+                </div>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Continuous Monitoring & Optimisation</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  **SEO is a long-term** investment that requires ongoing refinement. Our **Adelaide team** continuously monitors rankings, traffic, and conversions. We provide transparent reporting showing exactly how your **SEO campaign** performs. Regular optimisations ensure you maintain and improve positions as **search engines** evolve their algorithms.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Additional Long-form Content -->
+          <div class="prose prose-lg max-w-none space-y-6">
+            <h3 class="text-2xl font-bold text-gray-900">What Makes Our SEO Agency Adelaide Different</h3>
+            <p class="text-gray-700 leading-relaxed">
+              When searching for **SEO companies in Australia**, Adelaide businesses deserve more than generic promises. Our **local Adelaide** presence means we understand your market intimately. We're not just an **SEO service provider** offering cookie-cutter **SEO packages**. Every strategy is customised to your industry, competitive landscape, and business goals.
+            </p>
+
+            <p class="text-gray-700 leading-relaxed">
+              Our **SEO Adelaide specialists** have extensive **SEO experience** across diverse industries. From retail and hospitality to professional services and e-commerce, we've delivered **successful SEO campaigns** that generate measurable ROI. When it **comes to SEO**, we focus on metrics that matter: qualified traffic, lead generation, and revenue growth.
+            </p>
+
+            <p class="text-gray-700 leading-relaxed">
+              We believe transparency builds trust. That's why we provide detailed reporting showing exactly how our **SEO work** drives results. You'll see ranking improvements, traffic growth, and conversion metrics. Our **approach to SEO** combines strategic thinking with technical excellence, ensuring your **digital marketing and SEO** investment delivers sustainable returns.
+            </p>
+
+            <h3 class="text-2xl font-bold text-gray-900">Why Adelaide Businesses Choose Our SEO Services</h3>
+            <p class="text-gray-700 leading-relaxed">
+              **Adelaide businesses** choose our **SEO company Adelaide** because we deliver results, not excuses. Our **SEO specialists in Adelaide** understand that every business is unique. Whether you operate **based in Adelaide** or serve customers nationally, we create **customised SEO** solutions targeting your specific audience.
+            </p>
+
+            <p class="text-gray-700 leading-relaxed">
+              We're **good at SEO** because we stay ahead of **SEO industry** changes. **Search engines like Google** constantly evolve their algorithms. Our **SEO team** stays current with the latest **SEO techniques** and **best practices**, ensuring your website maintains and improves rankings over time.
+            </p>
+
+            <h3 class="text-2xl font-bold text-gray-900">Industries We Serve in Adelaide</h3>
+            <p class="text-gray-700 leading-relaxed">
+              Our **comprehensive SEO** services work across all industries. Whether you're a law firm, healthcare provider, restaurant, retailer, or professional service firm, we have the expertise to boost your online visibility. We understand the unique challenges facing different sectors and tailor our **SEO strategies** accordingly.
+            </p>
+
+            <p class="text-gray-700 leading-relaxed">
+              From **local Adelaide** businesses targeting nearby customers to organisations competing nationally, our **effective SEO** strategies adapt to your market scope. We've helped Adelaide companies across sectors achieve **top SEO** positions for competitive keywords, driving qualified traffic and business growth.
+            </p>
+
+            <!-- FAQ Section -->
+            <div class="mt-12">
+              <h3 class="text-2xl font-bold text-gray-900 mb-6">Frequently Asked Questions About SEO Adelaide</h3>
+
+              <div class="space-y-6">
+                <div class="bg-gray-50 border-l-4 border-primary-600 p-6">
+                  <h4 class="text-lg font-bold text-gray-900 mb-2">How long does SEO take to show results in Adelaide?</h4>
+                  <p class="text-gray-700">
+                    **SEO is a long-term** strategy. Most Adelaide businesses see initial improvements within 3-4 months, with significant **SEO results** appearing between 6-12 months. Unlike paid advertising, **investing in SEO services** builds sustainable visibility that compounds over time. Our **successful SEO** campaigns focus on steady, lasting growth rather than quick fixes that don't last.
+                  </p>
+                </div>
+
+                <div class="bg-gray-50 border-l-4 border-primary-600 p-6">
+                  <h4 class="text-lg font-bold text-gray-900 mb-2">What makes a good SEO strategy for Adelaide businesses?</h4>
+                  <p class="text-gray-700">
+                    A **good SEO strategy** combines **technical SEO**, **on-page SEO**, quality **content for SEO**, and strategic link building. For Adelaide businesses, incorporating **local SEO services Adelaide** tactics is crucial. This includes optimising for **local search**, building local citations, and creating content targeting **customers in Adelaide**. Our **customised SEO strategy** approach ensures all elements work together to **deliver the best** results for your specific business goals.
+                  </p>
+                </div>
+
+                <div class="bg-gray-50 border-l-4 border-primary-600 p-6">
+                  <h4 class="text-lg font-bold text-gray-900 mb-2">How much do SEO services in Adelaide cost?</h4>
+                  <p class="text-gray-700">
+                    Professional **SEO services Adelaide** pricing varies based on competition, business size, and goals. Our **SEO packages** are customised to your needs, not one-size-fits-all solutions. **Investing in SEO** delivers higher ROI than most **digital marketing** channels because it targets users actively searching for your **products or services**. We provide transparent pricing and demonstrate clear value from your **SEO** investment.
+                  </p>
+                </div>
+
+                <div class="bg-gray-50 border-l-4 border-primary-600 p-6">
+                  <h4 class="text-lg font-bold text-gray-900 mb-2">What's the difference between local SEO and regular SEO?</h4>
+                  <p class="text-gray-700">
+                    **Local SEO Adelaide** specifically targets customers in your geographic area through Google Business Profile optimisation, local citations, and location-specific content. Regular **search engine optimisation** focuses on broader keyword rankings. Most Adelaide businesses benefit from combining both approaches. Our **local SEO agency** expertise ensures you dominate **local search** while also capturing broader market opportunities relevant to your business.
+                  </p>
+                </div>
+
+                <div class="bg-gray-50 border-l-4 border-primary-600 p-6">
+                  <h4 class="text-lg font-bold text-gray-900 mb-2">Why should I choose Digital Growth Engine over other SEO companies in Adelaide?</h4>
+                  <p class="text-gray-700">
+                    Our **Adelaide SEO** team delivers **the best SEO** service through transparent reporting, ethical **white hat SEO techniques**, and proven results. We're not like other **SEO agencies** that overpromise and underdeliver. Every **SEO campaign** includes dedicated support from our **SEO experts**, customised strategies, and clear communication. Our track record of **successful SEO campaigns** for Adelaide businesses speaks for itself. We're genuinely **good at SEO** because we stay current with **SEO industry** changes and focus on sustainable, long-term growth.
+                </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-primary-50 border-l-4 border-primary-600 p-6 my-8">
+              <p class="text-lg font-semibold text-gray-900 mb-2">Ready to Dominate Search Rankings?</p>
+              <p class="text-gray-700">
+                Partner with Adelaide's leading **SEO agency** and start attracting more qualified customers through strategic **search engine optimisation**. Get your free **SEO** audit today.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    )}
+
+    <!-- Final CTA Section -->
+    {sections.showFinalCTA && (
+      <CTASection
+        title={finalCTA.title}
+        subtitle={finalCTA.subtitle}
+        primaryCTA={finalCTA.primaryCTA}
+        secondaryCTA={finalCTA.secondaryCTA}
+      />
+    )}
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .section-padding {
+    padding: 5rem 0;
+  }
+
+  @media (min-width: 768px) {
+    .section-padding {
+      padding: 7rem 0;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .section-padding {
+      padding: 8rem 0;
+    }
+  }
+</style>

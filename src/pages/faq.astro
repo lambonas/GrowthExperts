@@ -1,0 +1,457 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import Button from '../components/ui/Button.astro';
+import AccordionItem from '../components/ui/AccordionItem.astro';
+
+const pageTitle = 'SEO FAQs | Common Questions About Our Services';
+const pageDescription =
+  'Get answers to common questions about SEO services, pricing, results, and our process. Honest, transparent answers from experts.';
+
+// FAQ Data
+const faqCategories = [
+  {
+    id: 'getting-started',
+    name: 'Getting Started',
+    faqs: [
+      {
+        question: 'How do I know if my business needs SEO?',
+        answer: 'If you have a website and want more customers finding you online, you need SEO. Signs you need SEO include: low website traffic, competitors ranking above you, not appearing on Google\'s first page, or wanting to reduce your paid advertising costs. Our free audit will show you exactly where you stand and what opportunities exist.',
+      },
+      {
+        question: 'What information do you need to get started?',
+        answer: 'We just need your website URL, business details, and goals. The process is simple: you fill out our contact form, we analyze your site, and then we discuss the opportunities. No complex paperwork or long onboarding processes.',
+      },
+      {
+        question: 'How long does it take to see results?',
+        answer: 'Most clients see initial improvements within 90 days, with significant results by 6 months. SEO is a long-term strategy, not a quick fix. However, we focus on early wins to show progress quickly, such as improving technical issues, optimizing high-potential pages, and targeting quick-win keywords.',
+      },
+      {
+        question: 'Do you work with businesses in my industry?',
+        answer: 'We\'ve worked with 50+ industries including healthcare, legal, construction, e-commerce, hospitality, and professional services. Our strategies adapt to your specific industry, competitors, and target audience. Every business is unique, so we never use a one-size-fits-all approach.',
+      },
+    ],
+  },
+  {
+    id: 'services-process',
+    name: 'Services & Process',
+    faqs: [
+      {
+        question: 'What\'s included in your SEO services?',
+        answer: 'Our comprehensive SEO includes: technical SEO audits and fixes, keyword research and strategy, on-page optimization, content creation and optimization, link building, local SEO (if applicable), competitor analysis, and monthly reporting. We customize the mix based on your needs and goals.',
+      },
+      {
+        question: 'How is your approach different from other agencies?',
+        answer: 'Three key differences: 1) We offer month-to-month agreements (no long-term contracts), 2) We provide transparent reporting showing exactly what we do and the results, and 3) We focus on your business metrics (leads, revenue) not just rankings and traffic.',
+      },
+      {
+        question: 'Will I have a dedicated account manager?',
+        answer: 'Yes! Every client gets a dedicated SEO specialist who knows your business inside and out. You\'ll have direct access to them via email or phone, and we schedule regular check-ins to review progress and strategy.',
+      },
+      {
+        question: 'What happens in the first 30 days?',
+        answer: 'First 30 days include: comprehensive site audit, competitor analysis, keyword research, strategy development, technical issue identification and fixes, on-page optimization of priority pages, and your first monthly report. We focus on quick wins while building the foundation for long-term success.',
+      },
+    ],
+  },
+  {
+    id: 'pricing-contracts',
+    name: 'Pricing & Contracts',
+    faqs: [
+      {
+        question: 'How much do your SEO services cost?',
+        answer: 'Our services typically range from $1,500 to $10,000+ per month, depending on your business size, competition level, and goals. We provide custom quotes after understanding your needs. During your free audit, we\'ll recommend a budget that makes sense for your situation.',
+      },
+      {
+        question: 'Are there any long-term contracts?',
+        answer: 'No! We offer month-to-month agreements. You can cancel anytime with 30 days notice. We believe in earning your business every month through results, not locking you into lengthy contracts. Our 95% retention rate shows clients stay because it works.',
+      },
+      {
+        question: 'What\'s included in the price?',
+        answer: 'Everything we do for your SEO is included - no hidden fees. This includes strategy, implementation, content, reporting, and ongoing support. The only potential additional costs are for premium tools (if needed) or third-party services, which we always discuss with you first.',
+      },
+      {
+        question: 'Do you offer payment plans?',
+        answer: 'Yes, we offer flexible payment options including monthly billing and quarterly packages with savings. We want to work with businesses at all stages of growth, so we\'re happy to discuss payment arrangements that work for your budget.',
+      },
+    ],
+  },
+  {
+    id: 'results-reporting',
+    name: 'Results & Reporting',
+    faqs: [
+      {
+        question: 'How do you measure success?',
+        answer: 'We track multiple metrics: keyword rankings, organic traffic growth, conversion rates, leads generated, and ultimately revenue impact. We focus on business outcomes, not vanity metrics. Your success is measured by how SEO contributes to your bottom line.',
+      },
+      {
+        question: 'How often will I receive reports?',
+        answer: 'You receive detailed monthly reports showing: work completed, keyword rankings, traffic analytics, conversion data, and next month\'s priorities. You also get 24/7 access to your analytics dashboard to check progress anytime.',
+      },
+      {
+        question: 'What if I\'m not seeing results?',
+        answer: 'We\'re transparent about timelines and realistic about expectations. If you\'re not seeing the progress we projected, we investigate why, adjust the strategy, and keep you informed. Our month-to-month structure means you\'re never stuck in a contract if you\'re unhappy.',
+      },
+      {
+        question: 'Can I see examples of your past results?',
+        answer: 'Absolutely! Check our case studies page for detailed examples including a dental practice with 250% traffic increase, an e-commerce store with 15+ page-1 rankings, and a local service business with 180% more leads. We\'re happy to share relevant examples for your industry.',
+      },
+    ],
+  },
+  {
+    id: 'technical',
+    name: 'Technical Questions',
+    faqs: [
+      {
+        question: 'Will SEO affect my website\'s performance?',
+        answer: 'Good SEO actually improves your website performance! We optimize page speed, mobile responsiveness, and user experience - all factors that both Google and your visitors care about. We never make changes that negatively impact your site.',
+      },
+      {
+        question: 'Do you need access to my website?',
+        answer: 'Yes, we need admin access to implement technical improvements, optimize content, and install tracking. We use secure methods and never make changes without your approval. If you prefer, we can provide recommendations for your team to implement.',
+      },
+      {
+        question: 'What if I\'ve been penalized by Google?',
+        answer: 'We specialize in penalty recovery. We\'ll audit your backlink profile, identify toxic links, create a disavow file, and implement a recovery strategy. We\'ve successfully recovered dozens of websites from manual and algorithmic penalties.',
+      },
+      {
+        question: 'Do you use white-hat or black-hat techniques?',
+        answer: 'We exclusively use white-hat, Google-approved techniques. We focus on long-term, sustainable growth - not risky shortcuts that can get your site penalized. Our methods are ethical, transparent, and designed to build lasting results.',
+      },
+    ],
+  },
+  {
+    id: 'about-company',
+    name: 'About Our Company',
+    faqs: [
+      {
+        question: 'How long have you been in business?',
+        answer: 'We\'ve been helping businesses grow through SEO since 2016 - that\'s 8+ years of proven experience. We\'ve seen Google algorithm updates come and go, and we\'ve adapted our strategies to consistently deliver results.',
+      },
+      {
+        question: 'Are you Google-certified?',
+        answer: 'Yes! We\'re a Google Partner with certified team members. We also hold certifications from HubSpot, Semrush, and other industry-leading platforms. Our team stays current with ongoing training and industry developments.',
+      },
+      {
+        question: 'Where are you located?',
+        answer: 'We\'re based in Sydney, Australia, with team members across the country. We work with businesses throughout Australia and understand the unique aspects of the Australian market, search behavior, and business landscape.',
+      },
+      {
+        question: 'What\'s your client retention rate?',
+        answer: '95%! This is our proudest metric because it shows clients see real value and choose to continue working with us month after month. The average client relationship lasts 3+ years.',
+      },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  schema={{
+    type: 'FAQPage',
+    data: {
+      '@type': 'FAQPage',
+      mainEntity: faqCategories.flatMap((category) =>
+        category.faqs.map((faq) => ({
+          '@type': 'Question',
+          name: faq.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: faq.answer,
+          },
+        }))
+      ),
+    },
+  }}
+>
+  <Header />
+
+  <main id="main-content">
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden bg-gradient-hero pt-20 pb-16 md:pt-28 md:pb-24">
+      <!-- Animated background decoration -->
+      <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute -top-40 -right-40 w-96 h-96 bg-primary-300 rounded-full opacity-20 blur-3xl animate-pulse"></div>
+        <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-secondary-300 rounded-full opacity-20 blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+      </div>
+
+      <div class="container-custom relative z-10">
+        <div class="max-w-4xl mx-auto text-center">
+          <!-- Breadcrumb -->
+          <nav class="text-sm text-gray-600 mb-6 font-medium" aria-label="Breadcrumb">
+            <a href="/" class="hover:text-primary-600 transition-colors">Home</a>
+            <span class="mx-2 text-gray-400">/</span>
+            <span class="text-gray-900 font-semibold">FAQs</span>
+          </nav>
+
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold font-display text-gray-900 mb-6 leading-tight">
+            Got Questions? <span class="text-gradient-trust">We've Got Answers.</span>
+          </h1>
+
+          <p class="text-xl md:text-2xl text-gray-700 leading-relaxed max-w-3xl mx-auto mb-8">
+            Everything you need to know about our SEO services, process, and results.
+          </p>
+
+          <!-- CTA Button -->
+          <div class="flex justify-center mb-8">
+            <Button variant="primary" size="lg" href="/contact">
+              Schedule a Call
+            </Button>
+          </div>
+
+          <!-- Google Review Badge -->
+          <div class="flex justify-center">
+            <a
+              href="https://g.page/r/YOUR_GOOGLE_BUSINESS_ID/review"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-block group"
+              aria-label="Read our Google reviews - 5.0 stars"
+            >
+              <div class="bg-white rounded-full shadow-md hover:shadow-lg transition-all duration-300 px-5 py-3 border border-gray-200 inline-flex items-center gap-3 transform hover:scale-105">
+                <!-- Google "G" Logo -->
+                <svg class="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                  <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                  <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                  <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                </svg>
+
+                <!-- Rating Display -->
+                <div class="flex items-center gap-2">
+                  <span class="text-lg font-bold text-gray-900">5.0</span>
+                  <div class="flex items-center gap-0.5">
+                    <svg class="w-4 h-4 text-[#FBBC05]" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                    </svg>
+                    <svg class="w-4 h-4 text-[#FBBC05]" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                    </svg>
+                    <svg class="w-4 h-4 text-[#FBBC05]" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                    </svg>
+                    <svg class="w-4 h-4 text-[#FBBC05]" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                    </svg>
+                    <svg class="w-4 h-4 text-[#FBBC05]" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                    </svg>
+                  </div>
+                </div>
+
+                <!-- Divider -->
+                <div class="w-px h-6 bg-gray-300"></div>
+
+                <!-- Review Count -->
+                <span class="text-sm text-gray-600 font-medium">47 reviews</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Navigation -->
+    <section class="py-8 bg-gray-50 border-b border-gray-200">
+      <div class="container-custom">
+        <div class="max-w-4xl mx-auto">
+          <p class="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-4 text-center">Jump to Section</p>
+          <nav aria-label="FAQ categories navigation" class="flex flex-wrap gap-3 justify-center">
+            {faqCategories.map((category) => (
+              <a
+                href={`#${category.id}`}
+                class="inline-flex items-center px-4 py-2 bg-white border-2 border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:border-primary-500 hover:text-primary-600 hover:bg-primary-50 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
+              >
+                {category.name}
+                <span class="ml-2 inline-flex items-center justify-center w-6 h-6 text-xs font-semibold text-primary-600 bg-primary-100 rounded-full">
+                  {category.faqs.length}
+                </span>
+              </a>
+            ))}
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Content -->
+    <section class="section-padding bg-white">
+      <div class="container-custom">
+        <div class="max-w-4xl mx-auto">
+          {faqCategories.map((category, categoryIndex) => (
+            <div id={category.id} class="accordion-category mb-16 scroll-mt-24 last:mb-0">
+              <!-- Category Header -->
+              <div class="mb-8">
+                <h2 class="text-3xl md:text-4xl font-bold font-display text-gray-900 mb-3">
+                  {category.name}
+                </h2>
+                <div class="w-20 h-1.5 bg-gradient-to-r from-primary-500 via-primary-400 to-secondary-500 rounded-full shadow-sm shadow-primary-200"></div>
+              </div>
+
+              <!-- FAQ Accordion Items -->
+              <div class="bg-white rounded-xl border-2 border-gray-100 shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
+                {category.faqs.map((faq, faqIndex) => {
+                  const faqId = `faq-${categoryIndex}-${faqIndex}`;
+                  return (
+                    <AccordionItem
+                      id={faqId}
+                      question={faq.question}
+                      answer={faq.answer}
+                      isFirst={faqIndex === 0}
+                      isLast={faqIndex === category.faqs.length - 1}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Still Have Questions CTA -->
+    <section class="py-16 bg-gradient-to-br from-gray-50 to-gray-100 border-y border-gray-200">
+      <div class="container-custom">
+        <div class="max-w-3xl mx-auto text-center">
+          <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary-100 mb-6">
+            <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h2 class="text-3xl md:text-4xl font-bold font-display text-gray-900 mb-4">
+            Still Have Questions?
+          </h2>
+          <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+            We're here to help! Schedule a free consultation and get personalized answers about your SEO needs.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button variant="primary" size="lg" href="/contact">
+              Schedule a Free Consultation
+            </Button>
+            <a
+              href="tel:+61-XXX-XXX-XXX"
+              class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-lg border-2 border-gray-300 text-gray-700 hover:border-primary-500 hover:text-primary-600 hover:bg-white transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
+            >
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+              Call Us Now
+            </a>
+          </div>
+          <!-- Trust reinforcement -->
+          <div class="mt-8 pt-6 border-t border-gray-200">
+            <p class="text-sm text-gray-500 mb-3">Trusted by 500+ Australian businesses</p>
+            <div class="flex justify-center items-center gap-6 flex-wrap">
+              <div class="flex items-center gap-2 text-gray-600">
+                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                <span class="text-sm font-medium">Free audit included</span>
+              </div>
+              <div class="flex items-center gap-2 text-gray-600">
+                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                <span class="text-sm font-medium">No commitment required</span>
+              </div>
+              <div class="flex items-center gap-2 text-gray-600">
+                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                <span class="text-sm font-medium">Same-day response</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="section-padding bg-gradient-to-br from-primary-600 to-primary-700 relative overflow-hidden">
+      <!-- Decorative elements -->
+      <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-10">
+        <div class="absolute top-0 left-1/4 w-72 h-72 bg-white rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary-300 rounded-full blur-3xl"></div>
+      </div>
+
+      <div class="container-custom text-center relative z-10">
+        <div class="inline-flex items-center justify-center px-4 py-2 bg-primary-800/50 rounded-full border border-primary-400/30 mb-6">
+          <span class="text-sm font-semibold text-primary-100">Limited Spots Available This Month</span>
+        </div>
+
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold font-display text-white mb-6">
+          Your Questions Answered. Now Let's Grow Your Business.
+        </h2>
+        <p class="text-xl md:text-2xl text-primary-100 mb-10 max-w-3xl mx-auto leading-relaxed">
+          Join 500+ businesses already seeing real results. Get your free audit and custom SEO strategy - no commitment required.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <Button variant="accent" size="lg" href="/contact">
+            Get Your Free SEO Audit
+          </Button>
+          <a
+            href="/case-studies"
+            class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-lg border-2 border-white text-white hover:bg-white hover:text-primary-600 transition-all duration-200 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary-600"
+          >
+            View Success Stories
+          </a>
+        </div>
+
+        <!-- Trust indicator -->
+        <div class="mt-10 pt-8 border-t border-primary-400/30">
+          <p class="text-sm text-primary-200 uppercase tracking-wide font-semibold mb-4">Why Choose Us</p>
+          <div class="flex flex-wrap justify-center items-center gap-8 text-primary-100">
+            <div class="flex items-center space-x-2">
+              <svg class="w-5 h-5 text-accent-300" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-sm font-medium">No long-term contracts</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <svg class="w-5 h-5 text-accent-300" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-sm font-medium">95% client retention</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <svg class="w-5 h-5 text-accent-300" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-sm font-medium">8+ years proven results</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <svg class="w-5 h-5 text-accent-300" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-sm font-medium">White-hat methods only</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<script>
+  // Smooth scroll with offset for fixed header
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener('click', function (e) {
+      const href = this.getAttribute('href');
+      if (href && href !== '#') {
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          const offset = 100; // Adjust based on your header height
+          const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth',
+          });
+        }
+      }
+    });
+  });
+</script>

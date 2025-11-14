@@ -1,0 +1,300 @@
+---
+export interface Props {
+  question: string;
+  answer: string;
+  id: string;
+  isFirst?: boolean;
+  isLast?: boolean;
+}
+
+const { question, answer, id, isFirst = false, isLast = false } = Astro.props;
+---
+
+<div
+  class="accordion-item group"
+  class:list={[
+    !isFirst && 'border-t border-gray-200',
+  ]}
+  data-accordion-item
+>
+  <h3 class="mb-0">
+    <button
+      type="button"
+      class="accordion-trigger w-full flex items-center justify-between py-6 px-4 md:px-6 text-left transition-all duration-200 hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-0 focus-visible:ring-inset rounded-lg"
+      aria-expanded="false"
+      aria-controls={`accordion-content-${id}`}
+      id={`accordion-trigger-${id}`}
+    >
+      <span class="text-lg md:text-xl font-semibold text-gray-900 pr-4 flex-grow transition-colors duration-200 group-hover:text-primary-600">
+        {question}
+      </span>
+      <div class="accordion-icon flex-shrink-0 w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-primary-50 group-hover:bg-primary-100 transition-colors duration-200">
+        <!-- Plus Icon -->
+        <svg
+          class="accordion-icon-plus w-5 h-5 md:w-6 md:h-6 text-primary-600 transition-all duration-300 opacity-100 scale-100"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 6v12m6-6H6" />
+        </svg>
+        <!-- Minus Icon -->
+        <svg
+          class="accordion-icon-minus w-5 h-5 md:w-6 md:h-6 text-primary-600 transition-all duration-300 opacity-0 scale-90 absolute"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M18 12H6" />
+        </svg>
+      </div>
+    </button>
+  </h3>
+
+  <div
+    id={`accordion-content-${id}`}
+    class="accordion-content overflow-hidden transition-all duration-300 ease-in-out"
+    style="max-height: 0; opacity: 0;"
+    aria-labelledby={`accordion-trigger-${id}`}
+    aria-hidden="true"
+    role="region"
+  >
+    <div class="px-4 md:px-6 pb-6 pt-2">
+      <div class="text-gray-700 leading-relaxed text-base md:text-lg prose prose-gray max-w-none" set:html={answer}>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Enhanced states for accordion */
+  .accordion-item[data-state="open"] .accordion-trigger {
+    @apply bg-gray-50;
+  }
+
+  .accordion-item[data-state="open"] .accordion-icon {
+    @apply bg-primary-100;
+  }
+
+  .accordion-item[data-state="open"] .accordion-icon-plus {
+    @apply opacity-0 scale-90 rotate-90;
+  }
+
+  .accordion-item[data-state="open"] .accordion-icon-minus {
+    @apply opacity-100 scale-100;
+  }
+
+  /* Smooth content reveal animation with opacity fade */
+  .accordion-content {
+    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                padding 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Improve prose styling for answer content */
+  .prose {
+    @apply text-gray-700;
+  }
+
+  .prose p:not(:last-child) {
+    @apply mb-4;
+  }
+
+  .prose strong {
+    @apply text-gray-900 font-semibold;
+  }
+
+  .prose ul, .prose ol {
+    @apply my-4 space-y-2;
+  }
+
+  .prose li {
+    @apply ml-6;
+  }
+</style>
+
+<script>
+  // Client-side accordion behavior with enhanced accessibility
+  function initAccordion() {
+    const items = document.querySelectorAll('[data-accordion-item]');
+
+    items.forEach((item, index) => {
+      const trigger = item.querySelector('.accordion-trigger') as HTMLButtonElement;
+      const content = item.querySelector('.accordion-content') as HTMLElement;
+
+      if (!trigger || !content) return;
+
+      // Handle click events
+      trigger.addEventListener('click', () => {
+        toggleAccordion(item, trigger, content);
+      });
+
+      // Enhanced keyboard navigation
+      trigger.addEventListener('keydown', (e) => {
+        const key = e.key;
+        const items = Array.from(document.querySelectorAll('[data-accordion-item]'));
+        const currentIndex = items.indexOf(item);
+
+        switch (key) {
+          case 'Enter':
+          case ' ':
+            e.preventDefault();
+            toggleAccordion(item, trigger, content);
+            break;
+
+          case 'ArrowDown':
+            e.preventDefault();
+            focusNextItem(items, currentIndex);
+            break;
+
+          case 'ArrowUp':
+            e.preventDefault();
+            focusPreviousItem(items, currentIndex);
+            break;
+
+          case 'Home':
+            e.preventDefault();
+            focusFirstItem(items);
+            break;
+
+          case 'End':
+            e.preventDefault();
+            focusLastItem(items);
+            break;
+        }
+      });
+
+      // Initialize state
+      item.setAttribute('data-state', 'closed');
+    });
+  }
+
+  // Toggle accordion with proper ARIA attributes and smooth animation
+  function toggleAccordion(item: Element, trigger: HTMLButtonElement, content: HTMLElement) {
+    const isOpen = item.getAttribute('data-state') === 'open';
+
+    // Close all other accordions in the same category
+    const parent = item.closest('.accordion-category');
+    if (parent) {
+      parent.querySelectorAll('[data-accordion-item]').forEach((otherItem) => {
+        if (otherItem !== item && otherItem.getAttribute('data-state') === 'open') {
+          const otherTrigger = otherItem.querySelector('.accordion-trigger') as HTMLButtonElement;
+          const otherContent = otherItem.querySelector('.accordion-content') as HTMLElement;
+
+          if (otherTrigger && otherContent) {
+            closeAccordionItem(otherItem, otherTrigger, otherContent);
+          }
+        }
+      });
+    }
+
+    // Toggle current accordion
+    if (isOpen) {
+      closeAccordionItem(item, trigger, content);
+    } else {
+      openAccordionItem(item, trigger, content);
+    }
+  }
+
+  function openAccordionItem(item: Element, trigger: HTMLButtonElement, content: HTMLElement) {
+    item.setAttribute('data-state', 'open');
+    trigger.setAttribute('aria-expanded', 'true');
+    content.setAttribute('aria-hidden', 'false');
+
+    // Calculate and set max-height for smooth animation
+    const contentHeight = content.scrollHeight;
+    content.style.maxHeight = `${contentHeight}px`;
+    content.style.opacity = '1';
+
+    // Smooth scroll to keep opened item visible
+    setTimeout(() => {
+      const rect = trigger.getBoundingClientRect();
+      const isAboveViewport = rect.top < 100;
+
+      if (isAboveViewport) {
+        trigger.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }, 100);
+  }
+
+  function closeAccordionItem(item: Element, trigger: HTMLButtonElement, content: HTMLElement) {
+    item.setAttribute('data-state', 'closed');
+    trigger.setAttribute('aria-expanded', 'false');
+    content.setAttribute('aria-hidden', 'true');
+    content.style.maxHeight = '0';
+    content.style.opacity = '0';
+  }
+
+  // Keyboard navigation helpers
+  function focusNextItem(items: Element[], currentIndex: number) {
+    const nextIndex = (currentIndex + 1) % items.length;
+    const nextTrigger = items[nextIndex]?.querySelector('.accordion-trigger') as HTMLElement;
+    nextTrigger?.focus();
+  }
+
+  function focusPreviousItem(items: Element[], currentIndex: number) {
+    const prevIndex = currentIndex === 0 ? items.length - 1 : currentIndex - 1;
+    const prevTrigger = items[prevIndex]?.querySelector('.accordion-trigger') as HTMLElement;
+    prevTrigger?.focus();
+  }
+
+  function focusFirstItem(items: Element[]) {
+    const firstTrigger = items[0]?.querySelector('.accordion-trigger') as HTMLElement;
+    firstTrigger?.focus();
+  }
+
+  function focusLastItem(items: Element[]) {
+    const lastTrigger = items[items.length - 1]?.querySelector('.accordion-trigger') as HTMLElement;
+    lastTrigger?.focus();
+  }
+
+  // Initialize on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAccordion);
+  } else {
+    initAccordion();
+  }
+
+  // Auto-open from URL hash with improved focus management
+  document.addEventListener('DOMContentLoaded', () => {
+    const hash = window.location.hash;
+    if (hash) {
+      const targetId = hash.substring(1);
+
+      // Check if hash targets a specific FAQ
+      const faqMatch = targetId.match(/^faq-(\d+)-(\d+)$/);
+      if (faqMatch) {
+        const targetItem = document.querySelector(`[data-accordion-item] #accordion-trigger-${targetId}`);
+        if (targetItem) {
+          setTimeout(() => {
+            const accordionItem = targetItem.closest('[data-accordion-item]');
+            if (accordionItem) {
+              const trigger = accordionItem.querySelector('.accordion-trigger') as HTMLElement;
+              const content = accordionItem.querySelector('.accordion-content') as HTMLElement;
+
+              if (trigger && content) {
+                openAccordionItem(accordionItem, trigger as HTMLButtonElement, content);
+
+                // Scroll to the opened accordion
+                setTimeout(() => {
+                  trigger.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                  trigger.focus();
+                }, 400);
+              }
+            }
+          }, 100);
+        }
+      } else {
+        // Handle category hash
+        const target = document.querySelector(hash);
+        if (target) {
+          setTimeout(() => {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 100);
+        }
+      }
+    }
+  });
+</script>

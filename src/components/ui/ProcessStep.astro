@@ -1,0 +1,40 @@
+---
+export interface Props {
+  step: number;
+  title: string;
+  description: string;
+  timeframe?: string;
+  isLast?: boolean;
+}
+
+const {
+  step,
+  title,
+  description,
+  timeframe,
+  isLast = false,
+} = Astro.props;
+---
+
+<div class="relative flex items-start space-x-4">
+  <!-- Step Number Circle -->
+  <div class="flex-shrink-0 relative z-10">
+    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary-500 to-primary-600 text-white flex items-center justify-center font-bold text-lg shadow-lg">
+      {step}
+    </div>
+    {!isLast && (
+      <div class="absolute top-12 left-1/2 -translate-x-1/2 w-0.5 h-full bg-gradient-to-b from-primary-300 to-transparent"></div>
+    )}
+  </div>
+
+  <!-- Content -->
+  <div class="flex-grow pb-8">
+    <h4 class="text-xl font-bold text-gray-900 mb-2">{title}</h4>
+    <p class="text-gray-600 leading-relaxed mb-2">{description}</p>
+    {timeframe && (
+      <span class="inline-block px-3 py-1 bg-secondary-100 text-secondary-700 text-sm font-semibold rounded-full">
+        {timeframe}
+      </span>
+    )}
+  </div>
+</div>

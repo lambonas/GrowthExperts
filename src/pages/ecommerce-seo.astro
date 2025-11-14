@@ -1,0 +1,624 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import Hero from '../components/sections/Hero.astro';
+import ClientLogoCarousel from '../components/sections/ClientLogoCarousel.astro';
+import CaseStudiesSection from '../components/sections/CaseStudiesSection.astro';
+import CTASection from '../components/sections/CTASection.astro';
+
+const seo = {
+  title: 'E-commerce SEO Services | Drive More Online Sales',
+  description: 'Specialist e-commerce SEO services that increase product visibility and drive sales. Expert optimization for product pages, category pages, and technical e-commerce challenges.',
+  keywords: [
+    'ecommerce seo services',
+    'ecommerce seo agency',
+    'online store seo',
+    'product page optimization',
+    'shopify seo',
+    'woocommerce seo',
+    'ecommerce seo specialist',
+    'product seo',
+    'ecommerce seo australia',
+    'online retail seo',
+  ],
+  canonical: 'https://growthexperts.com.au/ecommerce-seo',
+  ogImage: '/images/team-hero.png',
+  ogType: 'website',
+};
+
+const hero = {
+  title: 'E-commerce SEO That Drives Revenue, Not Just Traffic',
+  subtitle: 'Specialized SEO strategies for online stores. We optimize product pages, category pages, and technical infrastructure to increase visibility and drive more qualified buyers to your site.',
+  primaryCTA: {
+    text: 'Free Strategy Session',
+    href: '/contact',
+  },
+  image: '/images/team-hero.png',
+  imageAlt: 'E-commerce SEO services for online stores',
+};
+
+const schema = {
+  type: 'Service' as const,
+  data: {
+    '@type': 'Service',
+    name: 'E-commerce SEO Services',
+    description:
+      'Specialist e-commerce SEO services including product page optimization, technical e-commerce SEO, category page strategy, and conversion-focused optimization.',
+    provider: {
+      '@type': 'Organization',
+      name: 'Digital Growth Experts',
+    },
+    areaServed: {
+      '@type': 'Country',
+      name: 'Australia',
+    },
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'E-commerce SEO Services',
+      itemListElement: [
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Product Page SEO',
+            description:
+              'Comprehensive optimization of product pages including titles, descriptions, images, schema markup, and user-generated content for maximum visibility.',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Technical E-commerce SEO',
+            description:
+              'Resolve complex technical challenges including duplicate content, faceted navigation, site speed, mobile optimization, and crawl budget management.',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Category Page Optimization',
+            description:
+              'Strategic optimization of category and collection pages to rank for broader commercial keywords and drive high-intent traffic.',
+          },
+        },
+      ],
+    },
+  },
+};
+---
+
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  canonical={seo.canonical}
+  ogImage={seo.ogImage}
+  ogType={seo.ogType}
+  keywords={seo.keywords}
+  schema={schema}
+>
+  <Header />
+
+  <main id="main-content">
+    <!-- Hero Section -->
+    <Hero
+      title={hero.title}
+      subtitle={hero.subtitle}
+      primaryCTA={hero.primaryCTA}
+      secondaryCTA={hero.secondaryCTA}
+      image={hero.image}
+      imageAlt={hero.imageAlt}
+    />
+
+    <!-- Social Proof - Client Logos -->
+    <ClientLogoCarousel />
+
+    <!-- Proven Results - Case Studies -->
+    <CaseStudiesSection />
+
+    <!-- Introduction Section -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-4 max-w-7xl">
+        <div class="max-w-3xl mx-auto text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+            E-commerce SEO Built for Revenue Growth
+          </h2>
+          <p class="text-xl text-gray-700 leading-relaxed">
+            E-commerce SEO requires specialized expertise. We understand product page optimization, faceted
+            navigation challenges, and the technical complexities that make or break online store visibility.
+          </p>
+        </div>
+
+        <!-- Benefits Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
+          <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl">
+            <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold mb-2 text-gray-900">Revenue-Focused</h3>
+            <p class="text-gray-700">
+              Our strategies prioritize high-intent commercial keywords that drive buyers, not just browsers. Focus
+              on ROI, not vanity metrics.
+            </p>
+          </div>
+
+          <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-xl">
+            <div class="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold mb-2 text-gray-900">Product Expertise</h3>
+            <p class="text-gray-700">
+              Deep experience optimizing thousands of product pages across diverse e-commerce platforms including
+              Shopify, WooCommerce, and custom builds.
+            </p>
+          </div>
+
+          <div class="bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-xl">
+            <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 10V3L4 14h7v7l9-11h-7z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold mb-2 text-gray-900">Technical Solutions</h3>
+            <p class="text-gray-700">
+              Resolve complex e-commerce technical challenges: duplicate content, faceted navigation, pagination,
+              crawl budget optimization, and site speed.
+            </p>
+          </div>
+
+          <div class="bg-gradient-to-br from-orange-50 to-red-50 p-6 rounded-xl">
+            <div class="w-12 h-12 bg-orange-600 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold mb-2 text-gray-900">Scalable Processes</h3>
+            <p class="text-gray-700">
+              Efficient workflows for optimizing large product catalogs. We create templates and processes that
+              scale as your inventory grows.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What's Included Section -->
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4 max-w-7xl">
+        <div class="max-w-3xl mx-auto text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+            What's Included in Our E-commerce SEO Services
+          </h2>
+          <p class="text-xl text-gray-700">
+            Comprehensive optimization strategies designed specifically for online stores and product catalogs.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Service Card 1 -->
+          <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+            <div class="flex items-start mb-4">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center"
+                >
+                  <svg
+                    class="w-6 h-6 text-blue-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-semibold mb-2 text-gray-900">Product Page Optimization</h3>
+                <p class="text-gray-700">
+                  Comprehensive optimization of product titles, descriptions, images, schema markup, reviews, and
+                  conversion elements. Target high-intent keywords that drive sales.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Service Card 2 -->
+          <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+            <div class="flex items-start mb-4">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center"
+                >
+                  <svg
+                    class="w-6 h-6 text-green-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-semibold mb-2 text-gray-900">Category Page Strategy</h3>
+                <p class="text-gray-700">
+                  Optimize category and collection pages to rank for broader commercial keywords. Strategic content
+                  that drives traffic while maintaining conversion focus.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Service Card 3 -->
+          <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+            <div class="flex items-start mb-4">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center"
+                >
+                  <svg
+                    class="w-6 h-6 text-purple-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-semibold mb-2 text-gray-900">Technical E-commerce SEO</h3>
+                <p class="text-gray-700">
+                  Resolve duplicate content issues, optimize faceted navigation, implement proper canonicalization,
+                  manage pagination, and optimize crawl budget for large catalogs.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Service Card 4 -->
+          <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+            <div class="flex items-start mb-4">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center"
+                >
+                  <svg
+                    class="w-6 h-6 text-indigo-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-semibold mb-2 text-gray-900">Site Structure & Architecture</h3>
+                <p class="text-gray-700">
+                  Design optimal site architecture with logical category hierarchies, effective internal linking,
+                  breadcrumb navigation, and user-friendly URL structures.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Service Card 5 -->
+          <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+            <div class="flex items-start mb-4">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center"
+                >
+                  <svg
+                    class="w-6 h-6 text-yellow-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-semibold mb-2 text-gray-900">User-Generated Content Strategy</h3>
+                <p class="text-gray-700">
+                  Implement and optimize review systems, Q&A sections, and user photos. Leverage UGC for fresh
+                  content, long-tail keywords, and social proof that drives conversions.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Service Card 6 -->
+          <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+            <div class="flex items-start mb-4">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center"
+                >
+                  <svg
+                    class="w-6 h-6 text-red-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M13 10V3L4 14h7v7l9-11h-7z"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-semibold mb-2 text-gray-900">Conversion Rate Optimization</h3>
+                <p class="text-gray-700">
+                  SEO-driven CRO to turn organic traffic into revenue. Optimize product descriptions, images,
+                  trust signals, and CTAs for maximum conversion rates.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-4 max-w-7xl">
+        <div class="max-w-3xl mx-auto text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+            Our E-commerce SEO Process
+          </h2>
+          <p class="text-xl text-gray-700">
+            A proven methodology designed specifically for online stores and product catalogs.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+          <!-- Step 1 -->
+          <div class="relative">
+            <div class="flex items-start">
+              <div
+                class="flex-shrink-0 w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+              >
+                1
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-semibold mb-2 text-gray-900">
+                  E-commerce SEO Audit
+                </h3>
+                <p class="text-gray-700">
+                  Comprehensive audit of your online store including technical issues, product page optimization,
+                  category strategy, site architecture, and competitive analysis specific to e-commerce.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="relative">
+            <div class="flex items-start">
+              <div
+                class="flex-shrink-0 w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+              >
+                2
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-semibold mb-2 text-gray-900">Keyword Research</h3>
+                <p class="text-gray-700">
+                  Product-specific keyword research identifying high-intent commercial keywords. Map keywords to
+                  products and categories based on search volume, competition, and buyer intent.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="relative">
+            <div class="flex items-start">
+              <div
+                class="flex-shrink-0 w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+              >
+                3
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-semibold mb-2 text-gray-900">Technical Implementation</h3>
+                <p class="text-gray-700">
+                  Resolve technical issues including duplicate content, faceted navigation problems, site speed
+                  optimization, mobile experience, and structured data implementation.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="relative">
+            <div class="flex items-start">
+              <div
+                class="flex-shrink-0 w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+              >
+                4
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-semibold mb-2 text-gray-900">Product Page Optimization</h3>
+                <p class="text-gray-700">
+                  Optimize product titles, descriptions, images, and schema markup. Create scalable templates
+                  for consistent optimization across large catalogs.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 5 -->
+          <div class="relative">
+            <div class="flex items-start">
+              <div
+                class="flex-shrink-0 w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+              >
+                5
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-semibold mb-2 text-gray-900">Content Strategy</h3>
+                <p class="text-gray-700">
+                  Develop content for category pages, buying guides, comparison pages, and blog content that
+                  targets broader keywords and supports product rankings.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 6 -->
+          <div class="relative">
+            <div class="flex items-start">
+              <div
+                class="flex-shrink-0 w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+              >
+                6
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-semibold mb-2 text-gray-900">
+                  Monitoring & Scaling
+                </h3>
+                <p class="text-gray-700">
+                  Track rankings, traffic, and most importantlyrevenue from organic search. Continuously optimize
+                  and scale strategies based on performance data.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="py-16 bg-gradient-to-br from-blue-50 to-indigo-50">
+      <div class="container mx-auto px-4 max-w-7xl">
+        <div class="max-w-3xl mx-auto text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+            Why Choose Our E-commerce SEO Services?
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <div class="bg-white p-8 rounded-xl shadow-sm">
+            <h3 class="text-xl font-semibold mb-3 text-gray-900">E-commerce Specialists</h3>
+            <p class="text-gray-700">
+              We specialize exclusively in e-commerce SEO. We understand the unique challenges of product
+              optimization, technical complexities, and conversion-focused strategies that online stores require.
+            </p>
+          </div>
+
+          <div class="bg-white p-8 rounded-xl shadow-sm">
+            <h3 class="text-xl font-semibold mb-3 text-gray-900">Platform Expertise</h3>
+            <p class="text-gray-700">
+              Deep experience across major platforms including Shopify, WooCommerce, BigCommerce, Magento, and
+              custom builds. We know the technical quirks and optimization opportunities of each.
+            </p>
+          </div>
+
+          <div class="bg-white p-8 rounded-xl shadow-sm">
+            <h3 class="text-xl font-semibold mb-3 text-gray-900">Revenue-Driven Approach</h3>
+            <p class="text-gray-700">
+              We optimize for revenue, not just traffic. Our strategies focus on high-intent keywords, conversion
+              optimization, and ROI tracking to ensure SEO drives actual business growth.
+            </p>
+          </div>
+
+          <div class="bg-white p-8 rounded-xl shadow-sm">
+            <h3 class="text-xl font-semibold mb-3 text-gray-900">Scalable Systems</h3>
+            <p class="text-gray-700">
+              Efficient processes and templates that scale. Whether you have 100 or 10,000 products, we implement
+              systems that grow with your catalog without sacrificing quality.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <CTASection
+      title="Ready to Drive More E-commerce Revenue?"
+      description="Let's discuss how our specialized e-commerce SEO strategies can increase your product visibility and drive more qualified buyers to your store."
+      primaryCTA={{
+        text: 'Free Strategy Session',
+        href: '/contact',
+      }}
+    />
+  </main>
+
+  <Footer />
+</BaseLayout>

@@ -1,0 +1,104 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import Button from '../components/ui/Button.astro';
+
+const title = '404 - Page Not Found | Digital Growth Experts';
+const description = 'The page you are looking for could not be found. Explore our SEO services and solutions or contact us for assistance.';
+---
+
+<BaseLayout title={title} description={description} noindex={true}>
+  <Header />
+
+  <main id="main-content" class="min-h-screen flex items-center justify-center bg-gradient-hero">
+    <div class="container-custom py-24 text-center">
+      <div class="max-w-2xl mx-auto">
+        <!-- 404 Number with gradient -->
+        <div class="mb-8">
+          <h1 class="text-9xl font-bold text-gradient-brand animate-pulse">
+            404
+          </h1>
+        </div>
+
+        <!-- Heading -->
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          Page Not Found
+        </h2>
+
+        <!-- Description -->
+        <p class="text-lg text-gray-600 mb-8 max-w-lg mx-auto">
+          Oops! The page you're looking for doesn't exist. It might have been moved or deleted.
+        </p>
+
+        <!-- Search suggestion -->
+        <div class="mb-12 p-6 bg-white rounded-xl shadow-md border border-gray-100">
+          <p class="text-gray-700 mb-4 font-medium">
+            Looking for something specific? Here are some helpful links:
+          </p>
+          <div class="flex flex-wrap gap-3 justify-center">
+            <a href="/" class="text-primary-600 hover:text-primary-700 font-medium hover:underline">
+              Home
+            </a>
+            <span class="text-gray-300">•</span>
+            <a href="/local-seo" class="text-primary-600 hover:text-primary-700 font-medium hover:underline">
+              Local SEO
+            </a>
+            <span class="text-gray-300">•</span>
+            <a href="/about" class="text-primary-600 hover:text-primary-700 font-medium hover:underline">
+              About Us
+            </a>
+            <span class="text-gray-300">•</span>
+            <a href="/contact" class="text-primary-600 hover:text-primary-700 font-medium hover:underline">
+              Contact
+            </a>
+            <span class="text-gray-300">•</span>
+            <a href="/faq" class="text-primary-600 hover:text-primary-700 font-medium hover:underline">
+              FAQ
+            </a>
+          </div>
+        </div>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <Button href="/" variant="primary" size="lg">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+            Back to Home
+          </Button>
+          <Button href="/contact" variant="secondary" size="lg">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            Contact Support
+          </Button>
+        </div>
+
+        <!-- Decorative illustration (optional) -->
+        <div class="mt-16 opacity-50">
+          <svg class="w-64 h-64 mx-auto text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+
+  .animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+</style>

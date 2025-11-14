@@ -1,0 +1,614 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import HeroHome from '../components/sections/HeroHome.astro';
+import ClientLogoCarousel from '../components/sections/ClientLogoCarousel.astro';
+import CaseStudiesSection from '../components/sections/CaseStudiesSection.astro';
+import CTASection from '../components/sections/CTASection.astro';
+import SchemaOrg from '../components/seo/SchemaOrg.astro';
+
+// ===================================
+// PAGE FRONTMATTER CONFIGURATION
+// Edit these values to customize the page content
+// ===================================
+
+// SEO Meta Data
+const seo = {
+  title: 'Enterprise SEO Services | Scale Your Multi-Location Business',
+  description: 'Enterprise-grade SEO solutions for large organizations, multi-location businesses, and global brands. Manage complex SEO at scale with our proven enterprise strategies and dedicated support.',
+  keywords: [
+    'enterprise seo services',
+    'enterprise seo agency',
+    'multi-location seo',
+    'global seo strategy',
+    'enterprise search optimization',
+    'large-scale seo',
+    'corporate seo services',
+    'enterprise seo management',
+    'seo for large organizations',
+    'enterprise seo solutions'
+  ],
+  canonical: 'https://growthexperts.com.au/enterprise-seo',
+  ogImage: '/images/team-hero.png',
+  ogType: 'website',
+};
+
+// Hero Section
+const hero = {
+  title: 'Enterprise SEO Solutions for Large-Scale Success',
+  subtitle: 'Scale your organic search presence across multiple locations, languages, and markets. Our enterprise SEO strategies deliver measurable growth for complex organizations with sophisticated needs.',
+  primaryCTA: {
+    text: 'Free Strategy Session',
+    href: '/contact'
+  },
+};
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Services', href: '/services' },
+  { label: 'Enterprise SEO', href: '/enterprise-seo' },
+];
+
+// Section Visibility (show/hide sections)
+const sections = {
+  showClientLogos: true,
+  showCaseStudies: true,
+  showWhatsIncluded: true,
+  showProcess: true,
+  showFinalCTA: true,
+};
+
+// Final CTA Section
+const finalCTA = {
+  title: 'Ready to Scale Your Enterprise SEO?',
+  subtitle: 'Get a comprehensive enterprise SEO strategy session with our team. We\'ll analyze your multi-location presence, identify growth opportunities, and create a roadmap for dominating search across all your markets.',
+  primaryCTA: {
+    text: 'Schedule Enterprise Consultation',
+    href: '/contact'
+  },
+  secondaryCTA: {
+    text: 'Download Enterprise SEO Guide',
+    href: '#case-studies'
+  },
+};
+---
+
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  keywords={seo.keywords}
+  canonical={seo.canonical}
+  ogImage={seo.ogImage}
+  ogType={seo.ogType}
+  schema={{
+    type: 'Service',
+    data: {
+      '@type': 'Service',
+      name: 'Enterprise SEO Services',
+      description: seo.description,
+      provider: {
+        '@type': 'Organization',
+        name: 'Digital Growth Experts',
+      },
+      areaServed: {
+        '@type': 'Country',
+        name: 'Australia',
+      },
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Enterprise SEO Services',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Multi-Location SEO Management',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Enterprise Technical SEO Audit',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'International SEO Strategy',
+            },
+          },
+        ],
+      },
+    },
+  }}
+>
+  <Header />
+
+  <main id="main-content">
+    <!-- Hero Section - Conversion-focused with clear value proposition -->
+    <HeroHome
+      title={hero.title}
+      subtitle={hero.subtitle}
+      primaryCTA={hero.primaryCTA}
+      secondaryCTA={hero.secondaryCTA}
+    />
+
+    <!-- Social Proof - Client Logos -->
+    {sections.showClientLogos && <ClientLogoCarousel />}
+
+    <!-- Initial Content Section - Introduction to Enterprise SEO -->
+    <section class="section-padding bg-white">
+      <div class="container-custom">
+        <div class="max-w-4xl mx-auto">
+          <!-- Section Header -->
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+              Why Enterprise SEO Matters for Large Organizations
+            </h2>
+            <p class="text-lg md:text-xl text-gray-600 leading-relaxed">
+              Managing SEO at scale requires specialized expertise, sophisticated tools, and strategic coordination across teams and locations.
+            </p>
+          </div>
+
+          <!-- Key Benefits Grid -->
+          <div class="grid md:grid-cols-2 gap-8 mb-12">
+            <div class="flex gap-4">
+              <div class="flex-shrink-0">
+                <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                  <svg
+                    class="w-6 h-6 text-primary-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Multi-Location Coordination</h3>
+                <p class="text-gray-600">
+                  Manage SEO across hundreds of locations with centralized strategy and localized execution. Maintain brand consistency while optimizing for local markets.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0">
+                <div class="w-12 h-12 bg-secondary-100 rounded-lg flex items-center justify-center">
+                  <svg
+                    class="w-6 h-6 text-secondary-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M13 10V3L4 14h7v7l9-11h-7z"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Enterprise-Scale Performance</h3>
+                <p class="text-gray-600">
+                  Handle complex site architectures, millions of pages, and high-traffic volumes without compromising on speed or user experience.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0">
+                <div class="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center">
+                  <svg
+                    class="w-6 h-6 text-accent-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Governance & Compliance</h3>
+                <p class="text-gray-600">
+                  Implement SEO best practices with enterprise governance, ensuring compliance with brand guidelines and regulatory requirements across all properties.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0">
+                <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                  <svg
+                    class="w-6 h-6 text-primary-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Advanced Analytics & Reporting</h3>
+                <p class="text-gray-600">
+                  Track performance across all locations and markets with custom dashboards, executive reporting, and actionable insights that drive strategic decisions.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Introductory Content -->
+          <div class="prose prose-lg max-w-none">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              <strong>Enterprise SEO requires a fundamentally different approach than traditional SEO.</strong> Managing search visibility across multiple locations, markets, and languages demands specialized expertise, sophisticated technology, and seamless coordination between teams.
+            </p>
+            <p class="text-gray-700 leading-relaxed">
+              Our enterprise SEO solutions are built for complex organizations with sophisticated needs. Whether you're managing 10 locations or 1,000, operating in a single market or globally, we provide the strategic oversight, technical excellence, and dedicated support needed to dominate search at scale. From multi-location coordination to international expansion, our enterprise strategies deliver measurable growth while maintaining brand consistency and operational efficiency.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Proven Results Section - Case Studies with Real Data -->
+    {sections.showCaseStudies && <CaseStudiesSection />}
+
+    <!-- What's Included Section - Service Details -->
+    {sections.showWhatsIncluded && (
+    <section class="section-padding bg-gray-50">
+      <div class="container-custom">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+            What's Included in Our Enterprise SEO Service
+          </h2>
+          <p class="text-lg md:text-xl text-gray-600">
+            Comprehensive SEO management designed for large organizations and complex requirements.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <!-- Service 1 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-primary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Multi-Location SEO Management</h3>
+            <p class="text-gray-600 mb-4">
+              Centralized strategy with localized execution across all locations. Manage location pages, local listings, and market-specific content at scale with consistent brand messaging.
+            </p>
+          </div>
+
+          <!-- Service 2 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-secondary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-secondary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Enterprise Technical SEO</h3>
+            <p class="text-gray-600 mb-4">
+              Advanced technical audits and optimization for complex site architectures. Handle large-scale migrations, crawl optimization, and performance tuning for high-traffic enterprise sites.
+            </p>
+          </div>
+
+          <!-- Service 3 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-accent-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">International SEO Strategy</h3>
+            <p class="text-gray-600 mb-4">
+              Expand globally with hreflang implementation, international keyword research, and market-specific content strategies. Navigate the complexities of multi-language and multi-region SEO.
+            </p>
+          </div>
+
+          <!-- Service 4 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-primary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Enterprise Content Strategy</h3>
+            <p class="text-gray-600 mb-4">
+              Scale content production with templates, workflows, and governance. Create consistent, high-quality content across all locations while maintaining brand voice and SEO best practices.
+            </p>
+          </div>
+
+          <!-- Service 5 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-secondary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-secondary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Advanced Analytics & Reporting</h3>
+            <p class="text-gray-600 mb-4">
+              Custom dashboards tracking KPIs across all locations and markets. Executive-level reporting with actionable insights, competitive intelligence, and ROI measurement.
+            </p>
+          </div>
+
+          <!-- Service 6 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-accent-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Dedicated Account Management</h3>
+            <p class="text-gray-600 mb-4">
+              Senior-level strategic guidance with a dedicated team managing your enterprise SEO. Regular strategy sessions, stakeholder training, and priority support for urgent needs.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    )}
+
+    <!-- Long-form Content Section - Educational/Authority Building -->
+    {sections.showProcess && (
+    <section class="section-padding bg-white">
+      <div class="container-custom">
+        <div class="max-w-4xl mx-auto">
+          <!-- Section Header -->
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+              Our Enterprise SEO Process
+            </h2>
+            <p class="text-lg md:text-xl text-gray-600 leading-relaxed">
+              A proven methodology for managing SEO at enterprise scale with measurable results.
+            </p>
+          </div>
+
+          <!-- Process Steps -->
+          <div class="space-y-8 mb-12">
+            <!-- Step 1 -->
+            <div class="flex gap-6">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+                >
+                  1
+                </div>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Enterprise SEO Audit & Assessment</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  We begin with a comprehensive audit of your entire digital ecosystem. This includes analyzing all locations, domains, and properties, evaluating current SEO performance across markets, identifying technical issues at scale, and assessing governance and workflow processes. You'll receive a detailed roadmap with prioritized recommendations and a realistic timeline for implementation across your organization.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="flex gap-6">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+                >
+                  2
+                </div>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Strategic Planning & Roadmap</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  Based on audit findings, we develop a comprehensive enterprise SEO strategy aligned with your business objectives. This includes creating location and market-specific strategies, defining governance frameworks and approval processes, establishing KPIs and success metrics, and developing content and technical architecture plans. We work with stakeholders across your organization to ensure buy-in and alignment.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="flex gap-6">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+                >
+                  3
+                </div>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Technical Foundation & Architecture</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  We implement enterprise-grade technical optimizations that scale across your entire organization. This includes optimizing site architecture for crawl efficiency, implementing advanced schema markup at scale, ensuring mobile-first indexing compliance, configuring CDN and caching strategies, and establishing monitoring and alerting systems. All technical changes follow your governance protocols and include comprehensive documentation.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="flex gap-6">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+                >
+                  4
+                </div>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Content & On-Page Optimization</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  We scale content optimization across all locations and markets using templates, workflows, and governance frameworks. This includes developing content templates and guidelines, optimizing existing pages at scale, creating location-specific content strategies, implementing consistent internal linking, and training your teams on SEO best practices. Every piece of content maintains brand consistency while optimizing for local search intent.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="flex gap-6">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+                >
+                  5
+                </div>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Authority Building & Link Acquisition</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  Enterprise link building requires sophisticated strategies that work at scale. We develop location-specific link acquisition campaigns, secure high-authority industry partnerships, create linkable assets and resources, manage PR and digital outreach at scale, and monitor and protect brand mentions. Our approach builds domain authority while supporting local rankings across all locations.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 6 -->
+            <div class="flex gap-6">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+                >
+                  6
+                </div>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Continuous Optimization & Reporting</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  Enterprise SEO is never "done" – it requires constant monitoring, testing, and optimization. We provide ongoing performance tracking across all locations, regular stakeholder reporting with executive dashboards, continuous A/B testing and optimization, competitive intelligence and market analysis, and priority support for urgent issues. You'll have full visibility into performance with custom dashboards showing the metrics that matter to your business.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Additional Long-form Content -->
+          <div class="prose prose-lg max-w-none space-y-6">
+            <h3 class="text-2xl font-bold text-gray-900">Why Choose Our Enterprise SEO Services?</h3>
+            <p class="text-gray-700 leading-relaxed">
+              <strong>Not all SEO agencies can handle enterprise complexity.</strong> Managing search visibility at scale requires specialized expertise in enterprise technology stacks, multi-location coordination, international SEO, and stakeholder management. Our team has proven experience working with large organizations, managing complex migrations, and delivering results across hundreds of locations.
+            </p>
+
+            <p class="text-gray-700 leading-relaxed">
+              We understand that enterprise SEO isn't just about rankings – it's about driving measurable business outcomes across your entire organization. Whether you're looking to improve organic revenue, expand into new markets, or consolidate multiple domains, we provide the strategic guidance and hands-on execution needed to achieve your goals. Our enterprise clients typically see 40-60% increases in organic traffic and significant improvements in conversion rates within the first 12 months.
+            </p>
+
+            <h3 class="text-2xl font-bold text-gray-900">Industries We Serve</h3>
+            <p class="text-gray-700 leading-relaxed">
+              Our enterprise SEO strategies work across all industries and organizational structures. We've delivered results for multi-location retail chains, franchise organizations, financial services companies, healthcare systems, hospitality groups, real estate enterprises, and global e-commerce brands. Whatever your industry, we have the expertise to navigate its unique challenges and competitive landscape.
+            </p>
+
+            <div class="bg-gray-50 border-l-4 border-primary-600 p-6 my-8">
+              <p class="text-lg font-semibold text-gray-900 mb-2">Ready to Scale Your SEO?</p>
+              <p class="text-gray-700">
+                Schedule a consultation with our enterprise SEO team. We'll analyze your multi-location presence, identify growth opportunities, and create a customized roadmap for dominating search across all your markets.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    )}
+
+    <!-- Final CTA Section -->
+    {sections.showFinalCTA && (
+      <CTASection
+        title={finalCTA.title}
+        subtitle={finalCTA.subtitle}
+        primaryCTA={finalCTA.primaryCTA}
+        secondaryCTA={finalCTA.secondaryCTA}
+      />
+    )}
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .section-padding {
+    padding: 5rem 0;
+  }
+
+  @media (min-width: 768px) {
+    .section-padding {
+      padding: 7rem 0;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .section-padding {
+      padding: 8rem 0;
+    }
+  }
+</style>

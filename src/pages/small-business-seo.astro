@@ -1,0 +1,546 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import HeroHome from '../components/sections/HeroHome.astro';
+import ClientLogoCarousel from '../components/sections/ClientLogoCarousel.astro';
+import CaseStudiesSection from '../components/sections/CaseStudiesSection.astro';
+import CTASection from '../components/sections/CTASection.astro';
+import SchemaOrg from '../components/seo/SchemaOrg.astro';
+import AccordionItem from '../components/ui/AccordionItem.astro';
+
+// ===================================
+// PAGE FRONTMATTER CONFIGURATION
+// Edit these values to customize the page content
+// ===================================
+
+// SEO Meta Data
+const seo = {
+  title: 'Small Business SEO Services | Affordable SEO Packages for Growth',
+  description: 'Expert small business SEO services that deliver real results. Get affordable SEO packages designed to help small businesses rank higher, attract more customers, and grow revenue.',
+  keywords: [
+    'seo for small business',
+    'small business seo',
+    'affordable seo services for small business',
+    'small business seo packages',
+    'seo marketing for small business',
+    'small business seo services',
+    'local seo',
+    'seo strategies',
+    'google business profile'
+  ],
+  canonical: 'https://growthexperts.com.au/small-business-seo',
+  ogImage: '/images/team-hero.png',
+  ogType: 'website',
+};
+
+// Hero Section
+const hero = {
+  title: 'Small Business SEO That Actually Gets Results',
+  subtitle: 'Transform your online presence with SEO strategies designed specifically for small businesses. Get found on Google, attract more customers, and compete with the big players in your industry.',
+  primaryCTA: {
+    text: 'Get Your Free SEO Audit',
+    href: '/contact'
+  },
+};
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Services', href: '/services' },
+  { label: 'Small Business SEO', href: '/small-business-seo' },
+];
+
+// Section Visibility (show/hide sections)
+const sections = {
+  showClientLogos: true,
+  showCaseStudies: true,
+  showWhatsIncluded: true,
+  showProcess: true,
+  showFinalCTA: true,
+};
+
+// Final CTA Section
+const finalCTA = {
+  title: 'Ready to Grow Your Small Business with SEO?',
+  subtitle: 'Join hundreds of Australian small businesses that have transformed their online presence. Get your free SEO audit and discover how we can help you outrank competitors and attract more customers.',
+  primaryCTA: {
+    text: 'Start Your SEO Journey',
+    href: '/contact'
+  },
+};
+---
+
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  keywords={seo.keywords}
+  canonical={seo.canonical}
+  ogImage={seo.ogImage}
+  ogType={seo.ogType}
+  schema={{
+    type: 'Service',
+    data: {
+      '@type': 'Service',
+      name: 'Small Business SEO Services',
+      description: seo.description,
+      provider: {
+        '@type': 'Organization',
+        name: 'Digital Growth Engine',
+      },
+      areaServed: {
+        '@type': 'Country',
+        name: 'Australia',
+      },
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Small Business SEO Services',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Keyword Research & Strategy',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'On-Page SEO Optimization',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Local SEO & Google Business Profile',
+            },
+          },
+        ],
+      },
+    },
+  }}
+>
+  <!-- Add LocalBusiness schema for better local SEO -->
+  <SchemaOrg
+    slot="head"
+    type="LocalBusiness"
+    data={{
+      name: 'Digital Growth Engine',
+      description: 'Expert small business SEO and digital marketing services in Australia, helping businesses achieve first page rankings and sustainable growth',
+      image: `${Astro.site}images/logo.png`,
+    }}
+  />
+
+  <Header />
+
+  <main id="main-content">
+    <!-- Hero Section - Conversion-focused with clear value proposition -->
+    <HeroHome
+      title={hero.title}
+      subtitle={hero.subtitle}
+      primaryCTA={hero.primaryCTA}
+      secondaryCTA={hero.secondaryCTA}
+    />
+
+    <!-- Social Proof - Client Logos -->
+    {sections.showClientLogos && <ClientLogoCarousel />}
+
+    <!-- Why SEO for Small Business Is Essential Section -->
+    <section class="section-padding bg-white">
+      <div class="container-custom">
+        <div class="max-w-4xl mx-auto">
+          <!-- Key Benefits Section -->
+          <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-8 text-center">
+            Why SEO for Small Business Is Essential
+          </h2>
+
+          <div class="grid md:grid-cols-2 gap-8 mb-12">
+            <div class="flex gap-4">
+              <div class="flex-shrink-0">
+                <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                  <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Increase Organic Traffic</h3>
+                <p class="text-gray-600">
+                  <strong>Organic search</strong> drives 53% of all website traffic. With effective <strong>SEO for small</strong> businesses, you'll attract qualified visitors actively searching for your <strong>product or service</strong>.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0">
+                <div class="w-12 h-12 bg-secondary-100 rounded-lg flex items-center justify-center">
+                  <svg class="w-6 h-6 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Cost-Effective Marketing</h3>
+                <p class="text-gray-600">
+                  Unlike paid ads, <strong>organic traffic</strong> from SEO provides long-term value. <strong>Investing in SEO</strong> delivers the highest ROI among <strong>digital marketing</strong> channels for <strong>small businesses</strong>.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0">
+                <div class="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center">
+                  <svg class="w-6 h-6 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Build Trust & Authority</h3>
+                <p class="text-gray-600">
+                  Appearing on the <strong>first page</strong> of <strong>Google search</strong> establishes credibility. <strong>Many small businesses</strong> find that strong <strong>search engine results</strong> dramatically improve <strong>conversion</strong> rates.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0">
+                <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                  <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Dominate Local Markets</h3>
+                <p class="text-gray-600">
+                  <strong>Local SEO</strong> helps your <strong>local business</strong> appear in <strong>local search</strong> results. <strong>Google Business Profile</strong> optimization ensures customers find you when searching nearby.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Proven Results Section - Case Studies with Real Data -->
+    {sections.showCaseStudies && <CaseStudiesSection />}
+
+    <!-- Small Business SEO Packages Section -->
+    {sections.showWhatsIncluded && (
+    <section class="section-padding bg-gray-50">
+      <div class="container-custom">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+            Small Business SEO Packages That Deliver Results
+          </h2>
+          <p class="text-lg md:text-xl text-gray-600">
+            Our <strong>affordable SEO services for small business</strong> are designed to maximise your ROI and drive sustainable growth.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <!-- Service 1 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-7 h-7 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Comprehensive Keyword Research</h3>
+            <p class="text-gray-600 mb-4">
+              In-depth <strong>keyword research</strong> to identify opportunities where your <strong>small business</strong> can compete and win. We focus on <strong>target keyword</strong> selections that drive qualified <strong>traffic to your website</strong>.
+            </p>
+          </div>
+
+          <!-- Service 2 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-secondary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-7 h-7 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">On-Page & Technical SEO</h3>
+            <p class="text-gray-600 mb-4">
+              Complete <strong>technical SEO</strong> audit and optimization. We enhance <strong>user experience</strong>, improve site speed, and ensure your <strong>business website</strong> meets all <strong>search engine</strong> requirements for optimal <strong>ranking</strong>.
+            </p>
+          </div>
+
+          <!-- Service 3 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-7 h-7 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Google Business Profile Setup</h3>
+            <p class="text-gray-600 mb-4">
+              Complete <strong>Google Business Profile</strong> optimization to enhance <strong>local SEO</strong>. We'll <strong>add your business</strong> to relevant directories and ensure consistent <strong>business information</strong> across the web.
+            </p>
+          </div>
+
+          <!-- Service 4 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-7 h-7 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Strategic Link Building</h3>
+            <p class="text-gray-600 mb-4">
+              Build <strong>high-quality backlinks</strong> from reputable sources. Every <strong>link to your website</strong> is carefully vetted to ensure it enhances your <strong>online visibility</strong> and <strong>search engine results pages</strong> rankings.
+            </p>
+          </div>
+
+          <!-- Service 5 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-secondary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-7 h-7 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Content Marketing & SEO Content</h3>
+            <p class="text-gray-600 mb-4">
+              Create <strong>relevant content</strong> that attracts and engages your audience. Our <strong>SEO content</strong> strategies provide <strong>ideas for new</strong> blog posts and pages that target valuable keywords.
+            </p>
+          </div>
+
+          <!-- Service 6 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-7 h-7 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Review Management</h3>
+            <p class="text-gray-600 mb-4">
+              <strong>Getting online reviews</strong> and learning to <strong>respond to reviews</strong> professionally. <strong>Online reviews</strong> are crucial for <strong>local business</strong> success and significantly impact <strong>conversion</strong> rates.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    )}
+
+    <!-- Process and Implementation Section -->
+    {sections.showProcess && (
+    <section class="section-padding bg-white">
+      <div class="container-custom">
+        <div class="max-w-4xl mx-auto">
+          <!-- Section Header -->
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+              How Small Business SEO Works: Our Proven Process
+            </h2>
+            <p class="text-lg md:text-xl text-gray-600 leading-relaxed">
+              A systematic approach that delivers measurable results within <strong>at least six months</strong>.
+            </p>
+          </div>
+
+          <!-- Process Content -->
+          <div class="prose prose-lg max-w-none space-y-8">
+            <h3 class="text-2xl font-bold text-gray-900">Understanding Small Business SEO Services</h3>
+
+            <p class="text-gray-700 leading-relaxed">
+              <strong>Business SEO is the process</strong> of improving your website's visibility in <strong>organic search results</strong>. For <strong>many small businesses</strong>, this means competing against both local competitors and larger companies. Our <strong>SEO services</strong> level the playing field by focusing on strategies that <strong>help small businesses</strong> succeed without massive budgets.
+            </p>
+
+            <p class="text-gray-700 leading-relaxed">
+              We start with <strong>Google Search Console</strong> setup and verification, giving you valuable insights into how <strong>Google and other search engines</strong> view your site. This powerful tool helps track your <strong>SEO efforts</strong> and measure <strong>traffic to your site</strong> improvements over time.
+            </p>
+
+            <h3 class="text-2xl font-bold text-gray-900">SEO Tips for Small Businesses</h3>
+
+            <div class="bg-gray-50 p-6 rounded-lg my-8">
+              <h4 class="text-xl font-bold text-gray-900 mb-4">Essential SEO Strategies That Work</h4>
+              <ul class="space-y-3 text-gray-700">
+                <li class="flex items-start">
+                  <span class="text-primary-600 mr-2">✓</span>
+                  <span>Focus on <strong>local SEO</strong> if you serve a specific area. <strong>SEO focuses</strong> on location-based keywords can dramatically improve visibility for <strong>small local</strong> businesses.</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-primary-600 mr-2">✓</span>
+                  <span>Create a <strong>business directory</strong> presence. <strong>Add your business</strong> to relevant online directories to build citations and <strong>backlinks</strong>.</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-primary-600 mr-2">✓</span>
+                  <span>Optimise your <strong>Google Business Profile</strong> completely. Include all <strong>services you offer</strong>, photos, and accurate <strong>business name</strong> and contact details.</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-primary-600 mr-2">✓</span>
+                  <span>Use tools like <strong>Ahrefs</strong> or similar platforms to track competitors and find <strong>keyword</strong> opportunities.</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-primary-600 mr-2">✓</span>
+                  <span>Integrate <strong>social media marketing</strong> with SEO. Social signals can indirectly boost your <strong>search results</strong> performance.</span>
+                </li>
+              </ul>
+            </div>
+
+            <h3 class="text-2xl font-bold text-gray-900">Benefits of SEO for Small Businesses</h3>
+
+            <p class="text-gray-700 leading-relaxed">
+              The <strong>benefits of SEO for small</strong> businesses extend far beyond just <strong>ranking</strong> higher. <strong>Effective SEO</strong> transforms your entire <strong>online marketing</strong> strategy. When you <strong>improve your SEO</strong>, you're not just increasing <strong>visibility</strong> – you're building a sustainable source of qualified leads.
+            </p>
+
+            <p class="text-gray-700 leading-relaxed">
+              <strong>Best SEO</strong> practices for <strong>small businesses often</strong> differ from enterprise approaches. While large companies might focus on thousands of keywords, <strong>small business looking</strong> to succeed should concentrate on highly targeted, conversion-focused terms. These <strong>tips will help</strong> you compete effectively without overspending.
+            </p>
+
+            <h3 class="text-2xl font-bold text-gray-900">Common Misconceptions: SEO vs Traditional Marketing</h3>
+
+            <p class="text-gray-700 leading-relaxed">
+              Many believe <strong>SEO doesn't</strong> work for small businesses, but this couldn't be further from the truth. Unlike traditional advertising, <strong>SEO is a technique</strong> that builds compound value over time. While <strong>SEO vs</strong> paid advertising might seem like a choice, the most successful <strong>small and large</strong> businesses use both strategically.
+            </p>
+
+            <p class="text-gray-700 leading-relaxed">
+              <strong>SEO work</strong> takes time – typically <strong>at least six months</strong> to see significant results. However, once established, your <strong>organic search</strong> presence continues delivering value without ongoing ad spend. This makes SEO particularly valuable for <strong>business owners</strong> with limited marketing budgets.
+            </p>
+
+            <div class="bg-primary-50 border-l-4 border-primary-600 p-6 my-8">
+              <p class="text-lg font-semibold text-gray-900 mb-2">Ready to Transform Your Business?</p>
+              <p class="text-gray-700">
+                <strong>SEO agencies</strong> often promise overnight results, but we believe in transparency. Our <strong>small business SEO services</strong> focus on sustainable growth. If you need <strong>help with your SEO</strong>, we provide the expertise and support to make it <strong>relevant to your business</strong> goals.
+              </p>
+            </div>
+
+            <h3 class="text-2xl font-bold text-gray-900">Why Choose Professional SEO Services?</h3>
+
+            <p class="text-gray-700 leading-relaxed">
+              While there are many <strong>SEO tools</strong> available, knowing how to use them effectively requires expertise. Professional <strong>SEO services</strong> bring together <strong>technical SEO</strong> knowledge, content strategy, and link building expertise that <strong>help your small business</strong> achieve sustainable growth.
+            </p>
+
+            <p class="text-gray-700 leading-relaxed">
+              Our team understands that every <strong>aspect of SEO</strong> matters, from your <strong>business information</strong> consistency across the web to the quality of <strong>products and services</strong> descriptions on your site. We ensure every element works together to boost your <strong>online presence</strong> and drive <strong>conversion</strong> rates higher.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    )}
+
+    <!-- Initial Content Section - Introduction to Small Business SEO -->
+    <section class="section-padding bg-white">
+      <div class="container-custom">
+        <div class="max-w-4xl mx-auto">
+          <!-- Main H1 and Introduction -->
+          <div class="text-center mb-12">
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+              Small Business SEO: Your Path to Online Success
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 leading-relaxed">
+              Discover how <strong>small business SEO</strong> can transform your <strong>online presence</strong> and help you compete with larger competitors.
+            </p>
+          </div>
+
+          <!-- Introduction Content -->
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-6">
+              <strong>Small business SEO</strong> is no longer optional in today's digital landscape. As a <strong>small business owner</strong>, you need to ensure your <strong>products and services</strong> appear on the <strong>first page of Google</strong> when <strong>potential customers</strong> search for solutions you provide. Our <strong>affordable SEO services for small business</strong> are designed to deliver measurable results without breaking the bank.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-6">
+              <strong>SEO for small business</strong> focuses on strategic <strong>keyword research</strong>, <strong>search engine optimisation</strong>, and building <strong>high-quality backlinks</strong> to improve your <strong>ranking</strong> in <strong>search results</strong>. Whether you're a <strong>local business</strong> looking to dominate <strong>local search</strong> or aiming for broader <strong>visibility</strong>, our proven <strong>SEO strategies</strong> will help <strong>traffic to your website</strong> grow consistently.
+            </p>
+          </div>
+
+          <!-- SEO Marketing for Small Business Section -->
+          <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+            SEO Marketing for Small Business: Core Strategies
+          </h2>
+
+          <div class="prose prose-lg max-w-none">
+            <p class="text-gray-700 leading-relaxed mb-6">
+              <strong>SEO marketing for small business</strong> requires a tailored approach that considers your budget, resources, and specific goals. Unlike <strong>enterprise SEO</strong>, which often involves complex strategies and large teams, <strong>small business SEO services</strong> focus on high-impact tactics that deliver quick wins while building long-term success.
+            </p>
+
+            <h3 class="text-xl font-bold text-gray-900 mb-4">Essential Components of Effective SEO</h3>
+
+            <p class="text-gray-700 leading-relaxed mb-6">
+              <strong>Keyword research</strong> forms the foundation of any successful SEO campaign. Understanding what your <strong>potential customers</strong> type into <strong>Google and other search engines</strong> helps you <strong>optimize</strong> content to match their <strong>query</strong> intent. We identify <strong>target keyword</strong> opportunities that balance search volume with competition, ensuring your <strong>small business</strong> can realistically rank.
+            </p>
+
+            <p class="text-gray-700 leading-relaxed mb-6">
+              On-page <strong>search engine optimisation</strong> involves optimizing your <strong>website's</strong> content, <strong>meta descriptions</strong>, and structure to help <strong>search engines</strong> understand your <strong>relevant content</strong>. This <strong>aspect of SEO</strong> is crucial for <strong>small business SEO</strong> because it directly impacts how <strong>Google search</strong> interprets and ranks your pages.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section-padding bg-gray-50">
+      <div class="container-custom">
+        <div class="max-w-4xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+              Frequently Asked Questions About Small Business SEO
+            </h2>
+          </div>
+
+          <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+            <AccordionItem
+              question="How much do small business SEO packages typically cost?"
+              answer="<p>Our <strong>affordable SEO services for small business</strong> typically range from $1,000 to $3,000 per month, depending on your needs and competition level. Unlike <strong>enterprise SEO</strong> which can cost tens of thousands monthly, our <strong>small business SEO packages</strong> are designed to deliver maximum ROI within realistic budgets. The investment in <strong>SEO for small business</strong> typically pays for itself within 6-12 months through increased <strong>organic traffic</strong> and conversions.</p>"
+              id="faq-small-business-seo-1"
+              isFirst={true}
+            />
+            <AccordionItem
+              question="How long before I see results from SEO marketing for small business?"
+              answer="<p>Most <strong>small businesses</strong> start seeing initial improvements within 3-4 months, with significant results typically appearing after <strong>at least six months</strong>. <strong>SEO is a technique</strong> that builds momentum over time. Quick wins like <strong>Google Business Profile</strong> optimization and fixing <strong>technical SEO</strong> issues can show results sooner, while competitive <strong>keyword</strong> rankings and substantial <strong>organic search</strong> traffic growth take longer to achieve.</p>"
+              id="faq-small-business-seo-2"
+            />
+            <AccordionItem
+              question="What's the difference between local SEO and small business SEO?"
+              answer="<p>While <strong>local SEO</strong> focuses specifically on ranking for location-based searches and <strong>Google Business</strong> visibility, <strong>small business SEO</strong> encompasses broader strategies including national keywords, e-commerce optimization, and industry-specific targeting. Many <strong>small local</strong> businesses benefit from both approaches. <strong>SEO and small business SEO</strong> work together to capture both local and broader market opportunities.</p>"
+              id="faq-small-business-seo-3"
+            />
+            <AccordionItem
+              question="Can I do SEO myself or should I hire SEO agencies?"
+              answer="<p>While <strong>business owners</strong> can learn basic <strong>SEO tips for small businesses</strong> and implement some strategies themselves using <strong>Google Search Console</strong> and free <strong>SEO tools</strong>, professional <strong>SEO agencies</strong> bring expertise, tools like <strong>Ahrefs</strong>, and dedicated resources that <strong>help small businesses</strong> achieve faster, more sustainable results. <strong>Many small businesses</strong> find that outsourcing to <strong>SEO services</strong> provides better ROI than trying to manage <strong>SEO efforts</strong> internally.</p>"
+              id="faq-small-business-seo-4"
+            />
+            <AccordionItem
+              question="How do I know if SEO doesn't work for my type of business?"
+              answer="<p><strong>SEO doesn't</strong> work only in very rare cases where there's absolutely no search demand for your <strong>products and services</strong>. However, <strong>effective SEO</strong> can benefit virtually any <strong>business online</strong>. Even highly specialised <strong>small businesses often</strong> find that targeted <strong>SEO content</strong> and <strong>local search</strong> optimization drives valuable leads. The key is finding the right <strong>SEO strategies</strong> that are <strong>relevant to your business</strong> model and target audience.</p>"
+              id="faq-small-business-seo-5"
+              isLast={true}
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    {sections.showFinalCTA && (
+      <CTASection
+        title={finalCTA.title}
+        subtitle={finalCTA.subtitle}
+        primaryCTA={finalCTA.primaryCTA}
+        secondaryCTA={finalCTA.secondaryCTA}
+      />
+    )}
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .section-padding {
+    padding: 5rem 0;
+  }
+
+  @media (min-width: 768px) {
+    .section-padding {
+      padding: 7rem 0;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .section-padding {
+      padding: 8rem 0;
+    }
+  }
+</style>

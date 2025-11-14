@@ -1,0 +1,199 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import Hero from '../components/sections/Hero.astro';
+import ClientLogoCarousel from '../components/sections/ClientLogoCarousel.astro';
+import CaseStudiesSection from '../components/sections/CaseStudiesSection.astro';
+import CTASection from '../components/sections/CTASection.astro';
+
+const seo = {
+  title: 'Podiatry SEO Services | Get More Patient Appointments',
+  description: 'Specialized SEO for podiatrists and foot clinics. Attract more patients searching for foot care, sports podiatry, and treatment services. Fill your appointment book with qualified patients.',
+  keywords: [
+    'podiatry seo',
+    'podiatrist seo',
+    'foot clinic seo',
+    'seo for podiatrists',
+    'podiatry marketing',
+    'sports podiatry seo',
+    'foot care clinic marketing',
+  ],
+  canonical: 'https://growthexperts.com.au/podiatry-seo',
+  ogImage: '/images/team-hero.png',
+  ogType: 'website',
+};
+
+const hero = {
+  title: 'Podiatry SEO That Fills Your Appointment Book',
+  subtitle: 'Attract more patients searching for foot care, orthotics, sports podiatry, and specialized treatments. Dominate local search and build a thriving practice.',
+  primaryCTA: {
+    text: 'Get Free SEO Audit',
+    href: '/contact',
+  },
+  secondaryCTA: {
+    text: 'View Results',
+    href: '#results',
+  },
+  image: '/images/team-hero.png',
+  imageAlt: 'SEO services for podiatrists and foot clinics',
+};
+
+const schema = {
+  type: 'Service' as const,
+  data: {
+    '@type': 'Service',
+    name: 'Podiatry SEO Services',
+    description: 'Specialized SEO services for podiatrists and foot clinics to attract more patients and fill appointment schedules.',
+    provider: {
+      '@type': 'Organization',
+      name: 'Digital Growth Experts',
+    },
+    areaServed: {
+      '@type': 'Country',
+      name: 'Australia',
+    },
+  },
+};
+---
+
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  canonical={seo.canonical}
+  ogImage={seo.ogImage}
+  ogType={seo.ogType}
+  keywords={seo.keywords}
+  schema={schema}
+>
+  <Header />
+
+  <main id="main-content">
+    <Hero
+      title={hero.title}
+      subtitle={hero.subtitle}
+      primaryCTA={hero.primaryCTA}
+      secondaryCTA={hero.secondaryCTA}
+      image={hero.image}
+      imageAlt={hero.imageAlt}
+    />
+
+    <!-- Social Proof - Client Logos -->
+    <ClientLogoCarousel />
+
+    <!-- Proven Results - Case Studies -->
+    <CaseStudiesSection />
+
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-4 max-w-7xl">
+        <div class="max-w-3xl mx-auto text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+            Why Podiatrists Need SEO
+          </h2>
+          <p class="text-xl text-gray-700">
+            Patients search for "podiatrist near me" when they need foot care. Rank at the top and capture patients actively seeking treatment.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl">
+            <h3 class="text-xl font-semibold mb-2 text-gray-900">Attract Local Patients</h3>
+            <p class="text-gray-700">
+              86% of patients search for healthcare providers online. Dominate local searches and fill your appointment book.
+            </p>
+          </div>
+
+          <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-xl">
+            <h3 class="text-xl font-semibold mb-2 text-gray-900">Build Patient Trust</h3>
+            <p class="text-gray-700">
+              Top rankings signal credibility. Patients trust Google's judgment when choosing healthcare providers.
+            </p>
+          </div>
+
+          <div class="bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-xl">
+            <h3 class="text-xl font-semibold mb-2 text-gray-900">Reduce Acquisition Costs</h3>
+            <p class="text-gray-700">
+              SEO generates patient leads at a fraction of the cost of paid advertising or healthcare directories.
+            </p>
+          </div>
+
+          <div class="bg-gradient-to-br from-orange-50 to-red-50 p-6 rounded-xl">
+            <h3 class="text-xl font-semibold mb-2 text-gray-900">Educate & Convert</h3>
+            <p class="text-gray-700">
+              Create educational content that answers patient questions and positions you as the local foot care expert.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4 max-w-7xl">
+        <div class="max-w-3xl mx-auto text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+            What's Included in Our Podiatry SEO Services
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="bg-white p-8 rounded-xl shadow-sm">
+            <h3 class="text-xl font-semibold mb-3 text-gray-900">Local SEO for Podiatrists</h3>
+            <p class="text-gray-700">
+              Optimize Google Business Profile, build local citations, and dominate "podiatrist near me" searches in your area.
+            </p>
+          </div>
+
+          <div class="bg-white p-8 rounded-xl shadow-sm">
+            <h3 class="text-xl font-semibold mb-3 text-gray-900">Service Page Optimization</h3>
+            <p class="text-gray-700">
+              Create SEO-optimized pages for every service—orthotics, sports podiatry, diabetic foot care, nail surgery, biomechanics.
+            </p>
+          </div>
+
+          <div class="bg-white p-8 rounded-xl shadow-sm">
+            <h3 class="text-xl font-semibold mb-3 text-gray-900">Patient Education Content</h3>
+            <p class="text-gray-700">
+              Develop blog content answering common questions about foot pain, treatment options, and preventive care.
+            </p>
+          </div>
+
+          <div class="bg-white p-8 rounded-xl shadow-sm">
+            <h3 class="text-xl font-semibold mb-3 text-gray-900">Review Management</h3>
+            <p class="text-gray-700">
+              Generate 5-star patient reviews on Google and healthcare directories. Reviews are critical for healthcare conversions.
+            </p>
+          </div>
+
+          <div class="bg-white p-8 rounded-xl shadow-sm">
+            <h3 class="text-xl font-semibold mb-3 text-gray-900">Online Booking Optimization</h3>
+            <p class="text-gray-700">
+              Optimize appointment booking flows to make it easy for patients to schedule consultations directly from search.
+            </p>
+          </div>
+
+          <div class="bg-white p-8 rounded-xl shadow-sm">
+            <h3 class="text-xl font-semibold mb-3 text-gray-900">Healthcare Schema Markup</h3>
+            <p class="text-gray-700">
+              Implement medical practice schema, physician profiles, and service markup for enhanced search visibility.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <CTASection
+      title="Ready to Attract More Podiatry Patients?"
+      description="Get a free SEO audit showing how we'll fill your appointment book with qualified patients seeking foot care."
+      primaryCTA={{
+        text: 'Get Free SEO Audit',
+        href: '/contact',
+      }}
+      secondaryCTA={{
+        text: 'Call Us',
+        href: 'tel:+61281128010',
+      }}
+    />
+  </main>
+
+  <Footer />
+</BaseLayout>

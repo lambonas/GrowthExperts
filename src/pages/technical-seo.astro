@@ -1,0 +1,610 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import HeroHome from '../components/sections/HeroHome.astro';
+import ClientLogoCarousel from '../components/sections/ClientLogoCarousel.astro';
+import CaseStudiesSection from '../components/sections/CaseStudiesSection.astro';
+import CTASection from '../components/sections/CTASection.astro';
+import SchemaOrg from '../components/seo/SchemaOrg.astro';
+
+// ===================================
+// PAGE FRONTMATTER CONFIGURATION
+// Edit these values to customize the page content
+// ===================================
+
+// SEO Meta Data
+const seo = {
+  title: 'Technical SEO Services | Fix What\'s Holding You Back',
+  description: 'Expert technical SEO services that eliminate barriers preventing your site from ranking. Comprehensive audits, Core Web Vitals optimization, and technical implementations that drive search visibility.',
+  keywords: [
+    'technical seo services',
+    'technical seo audit',
+    'website technical optimization',
+    'core web vitals optimization',
+    'site speed optimization',
+    'mobile-first seo',
+    'structured data implementation',
+    'technical seo agency',
+    'crawl budget optimization',
+    'schema markup services'
+  ],
+  canonical: 'https://growthexperts.com.au/technical-seo',
+  ogImage: '/images/team-hero.png',
+  ogType: 'website',
+};
+
+// Hero Section
+const hero = {
+  title: 'Technical SEO Services That Fix What\'s Holding You Back',
+  subtitle: 'Eliminate technical barriers preventing your site from ranking. Our comprehensive technical SEO audits and implementations ensure search engines can properly crawl, index, and rank your website.',
+  primaryCTA: {
+    text: 'Free Strategy Session',
+    href: '/contact'
+  },
+};
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Services', href: '/services' },
+  { label: 'Technical SEO', href: '/technical-seo' },
+];
+
+// Section Visibility (show/hide sections)
+const sections = {
+  showClientLogos: true,
+  showCaseStudies: true,
+  showWhatsIncluded: true,
+  showProcess: true,
+  showFinalCTA: true,
+};
+
+// Final CTA Section
+const finalCTA = {
+  title: 'Ready to Fix Your Technical SEO Issues?',
+  subtitle: 'Get a comprehensive technical SEO audit that reveals every issue preventing your site from ranking. We\'ll identify critical problems and provide a prioritized roadmap for technical excellence.',
+  primaryCTA: {
+    text: 'Free Strategy Session',
+    href: '/contact'
+  },
+};
+---
+
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  keywords={seo.keywords}
+  canonical={seo.canonical}
+  ogImage={seo.ogImage}
+  ogType={seo.ogType}
+  schema={{
+    type: 'Service',
+    data: {
+      '@type': 'Service',
+      name: 'Technical SEO Services',
+      description: seo.description,
+      provider: {
+        '@type': 'Organization',
+        name: 'Digital Growth Experts',
+      },
+      areaServed: {
+        '@type': 'Country',
+        name: 'Australia',
+      },
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Technical SEO Services',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Site Speed Optimization',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Core Web Vitals Optimization',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Structured Data Implementation',
+            },
+          },
+        ],
+      },
+    },
+  }}
+>
+  <Header />
+
+  <main id="main-content">
+    <!-- Hero Section - Conversion-focused with clear value proposition -->
+    <HeroHome
+      title={hero.title}
+      subtitle={hero.subtitle}
+      primaryCTA={hero.primaryCTA}
+      secondaryCTA={hero.secondaryCTA}
+    />
+
+    <!-- Social Proof - Client Logos -->
+    {sections.showClientLogos && <ClientLogoCarousel />}
+
+    <!-- Initial Content Section - Introduction to Technical SEO -->
+    <section class="section-padding bg-white">
+      <div class="container-custom">
+        <div class="max-w-4xl mx-auto">
+          <!-- Section Header -->
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+              Why Technical SEO Is Your Foundation
+            </h2>
+            <p class="text-lg md:text-xl text-gray-600 leading-relaxed">
+              Without proper technical optimization, your content marketing and link building efforts won't reach their full potential.
+            </p>
+          </div>
+
+          <!-- Key Benefits Grid -->
+          <div class="grid md:grid-cols-2 gap-8 mb-12">
+            <div class="flex gap-4">
+              <div class="flex-shrink-0">
+                <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                  <svg
+                    class="w-6 h-6 text-primary-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Crawl & Index Efficiency</h3>
+                <p class="text-gray-600">
+                  90% of websites have critical crawl errors that prevent proper indexing. We identify and fix these issues to ensure search engines can find and understand your content.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0">
+                <div class="w-12 h-12 bg-secondary-100 rounded-lg flex items-center justify-center">
+                  <svg
+                    class="w-6 h-6 text-secondary-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M13 10V3L4 14h7v7l9-11h-7z"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Speed & Performance</h3>
+                <p class="text-gray-600">
+                  Site speed is a confirmed ranking factor and conversion driver. We optimize Core Web Vitals to achieve sub-2-second load times that Google and users love.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0">
+                <div class="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center">
+                  <svg
+                    class="w-6 h-6 text-accent-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Mobile-First Compliance</h3>
+                <p class="text-gray-600">
+                  Google uses mobile-first indexing for all websites. We ensure your mobile experience is flawless with responsive design fixes and mobile optimization.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0">
+                <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                  <svg
+                    class="w-6 h-6 text-primary-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Competitive Advantage</h3>
+                <p class="text-gray-600">
+                  Fix technical issues your competitors are overlooking. Many businesses ignore technical SEO, giving you an opportunity to gain significant ranking advantages.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Introductory Content -->
+          <div class="prose prose-lg max-w-none">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              <strong>Technical SEO is the foundation that all other SEO efforts are built upon.</strong> Without proper technical optimization, your content marketing and link building efforts won't reach their full potential. Search engines need to efficiently crawl, understand, and index your website before they can rank it.
+            </p>
+            <p class="text-gray-700 leading-relaxed">
+              Our technical SEO services identify and fix critical issues including crawl errors, site speed problems, mobile usability issues, structured data implementation, XML sitemap optimization, robots.txt configuration, canonical tag management, and Core Web Vitals optimization. We ensure your website meets Google's technical requirements and provides an exceptional user experience that drives conversions.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Proven Results Section - Case Studies with Real Data -->
+    {sections.showCaseStudies && <CaseStudiesSection />}
+
+    <!-- What's Included Section - Service Details -->
+    {sections.showWhatsIncluded && (
+    <section class="section-padding bg-gray-50">
+      <div class="container-custom">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+            What's Included in Our Technical SEO Service
+          </h2>
+          <p class="text-lg md:text-xl text-gray-600">
+            Comprehensive technical optimization that ensures search engines can crawl, index, and rank your site effectively.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <!-- Service 1 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-primary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Comprehensive Technical Audit</h3>
+            <p class="text-gray-600 mb-4">
+              Deep crawl analysis identifying 50+ technical factors affecting rankings. Receive a prioritized action plan with quick wins and long-term improvements based on impact vs. effort.
+            </p>
+          </div>
+
+          <!-- Service 2 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-secondary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-secondary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 10V3L4 14h7v7l9-11h-7z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Site Speed Optimization</h3>
+            <p class="text-gray-600 mb-4">
+              Core Web Vitals optimization, image compression, code minification, lazy loading implementation, and CDN setup to achieve sub-2-second load times that boost rankings and conversions.
+            </p>
+          </div>
+
+          <!-- Service 3 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-accent-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Mobile-First Optimization</h3>
+            <p class="text-gray-600 mb-4">
+              Complete mobile UX audit, responsive design fixes, touch target optimization, and mobile speed improvements for perfect mobile-first indexing compliance.
+            </p>
+          </div>
+
+          <!-- Service 4 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-primary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Structured Data Implementation</h3>
+            <p class="text-gray-600 mb-4">
+              Schema.org markup for products, reviews, FAQs, breadcrumbs, and local business data to enhance search result visibility with rich snippets and featured results.
+            </p>
+          </div>
+
+          <!-- Service 5 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-secondary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-secondary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Crawl Budget Optimization</h3>
+            <p class="text-gray-600 mb-4">
+              XML sitemap optimization, robots.txt configuration, canonical tag implementation, redirect chains elimination, and duplicate content resolution for efficient crawling.
+            </p>
+          </div>
+
+          <!-- Service 6 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-accent-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Security & Accessibility</h3>
+            <p class="text-gray-600 mb-4">
+              HTTPS implementation, security headers setup, WCAG 2.1 AA compliance audit, and accessibility improvements for better rankings, trust, and user experience.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    )}
+
+    <!-- Long-form Content Section - Educational/Authority Building -->
+    {sections.showProcess && (
+    <section class="section-padding bg-white">
+      <div class="container-custom">
+        <div class="max-w-4xl mx-auto">
+          <!-- Section Header -->
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+              Our Technical SEO Process
+            </h2>
+            <p class="text-lg md:text-xl text-gray-600 leading-relaxed">
+              A systematic approach to identifying and fixing technical issues that impact your search visibility.
+            </p>
+          </div>
+
+          <!-- Process Steps -->
+          <div class="space-y-8 mb-12">
+            <!-- Step 1 -->
+            <div class="flex gap-6">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+                >
+                  1
+                </div>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Deep Technical Audit</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  We conduct a comprehensive crawl of your website using enterprise tools like Screaming Frog, Google Search Console, and PageSpeed Insights. This identifies critical technical issues including crawl errors, redirect chains, duplicate content, broken links, missing meta tags, structured data errors, and Core Web Vitals problems. You'll receive a detailed report prioritizing issues by impact.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="flex gap-6">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+                >
+                  2
+                </div>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Prioritized Action Plan</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  Not all technical issues are equal. We prioritize fixes based on impact vs. effort, creating a roadmap that targets quick-win optimizations first, followed by more complex implementations. You'll receive a detailed report showing exactly what needs to be fixed, why it matters, and the expected impact on your rankings and traffic.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="flex gap-6">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+                >
+                  3
+                </div>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Core Web Vitals Optimization</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  We optimize your site's Largest Contentful Paint (LCP), First Input Delay (FID), and Cumulative Layout Shift (CLS) to meet Google's thresholds. This includes image optimization, code splitting, render-blocking resource elimination, and server response time improvements. These optimizations improve both rankings and user experience, leading to higher conversion rates.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="flex gap-6">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+                >
+                  4
+                </div>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Mobile-First Implementation</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  With Google's mobile-first indexing, your mobile site IS your site. We ensure perfect mobile functionality with responsive design fixes, touch-friendly navigation, mobile speed optimization, and viewport configuration. Your mobile UX becomes a competitive advantage that drives both rankings and conversions from mobile users.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="flex gap-6">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+                >
+                  5
+                </div>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Schema & Structured Data</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  We implement comprehensive structured data markup that helps search engines understand your content better and qualify for rich results. This includes product schema, review schema, FAQ schema, breadcrumb markup, local business schema, and article markup. Rich results increase click-through rates and visibility in search results.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 6 -->
+            <div class="flex gap-6">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+                >
+                  6
+                </div>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Ongoing Technical Monitoring</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  Technical SEO isn't set-it-and-forget-it. We continuously monitor your site for new technical issues, track Core Web Vitals performance, monitor crawl errors in Search Console, and ensure your technical foundation remains solid as your site grows. Monthly reports show technical health metrics and any issues requiring attention.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Additional Long-form Content -->
+          <div class="prose prose-lg max-w-none space-y-6">
+            <h3 class="text-2xl font-bold text-gray-900">Why Choose Our Technical SEO Services?</h3>
+            <p class="text-gray-700 leading-relaxed">
+              <strong>Technical SEO requires specialized expertise that most agencies lack.</strong> We stay current with Google's evolving technical requirements, from Core Web Vitals to mobile-first indexing to structured data updates. Our team has proven experience fixing complex technical issues for websites of all sizes and platforms.
+            </p>
+
+            <p class="text-gray-700 leading-relaxed">
+              We understand that technical SEO isn't just about fixing errors—it's about creating a technical foundation that supports your growth. Whether you're launching a new site, recovering from a migration, or optimizing an existing site, we provide the technical expertise needed to achieve your goals. Our clients typically see 40-60% increases in organic traffic within 3-6 months of implementing our technical recommendations.
+            </p>
+
+            <h3 class="text-2xl font-bold text-gray-900">Industries We Serve</h3>
+            <p class="text-gray-700 leading-relaxed">
+              Our technical SEO strategies work across all industries and platforms. We've delivered results for e-commerce stores, SaaS companies, professional services firms, healthcare providers, financial services, real estate agencies, and media companies. Whatever your industry or platform (WordPress, Shopify, custom-built), we have the expertise to optimize your technical SEO.
+            </p>
+
+            <div class="bg-gray-50 border-l-4 border-primary-600 p-6 my-8">
+              <p class="text-lg font-semibold text-gray-900 mb-2">Ready to Fix Your Technical SEO?</p>
+              <p class="text-gray-700">
+                Get a comprehensive technical SEO audit that reveals every issue preventing your site from ranking. We'll provide a prioritized roadmap for technical excellence.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    )}
+
+    <!-- Final CTA Section -->
+    {sections.showFinalCTA && (
+      <CTASection
+        title={finalCTA.title}
+        subtitle={finalCTA.subtitle}
+        primaryCTA={finalCTA.primaryCTA}
+        secondaryCTA={finalCTA.secondaryCTA}
+      />
+    )}
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .section-padding {
+    padding: 5rem 0;
+  }
+
+  @media (min-width: 768px) {
+    .section-padding {
+      padding: 7rem 0;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .section-padding {
+      padding: 8rem 0;
+    }
+  }
+</style>

@@ -1,0 +1,625 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import Hero from '../components/sections/Hero.astro';
+import ClientLogoCarousel from '../components/sections/ClientLogoCarousel.astro';
+import CaseStudiesSection from '../components/sections/CaseStudiesSection.astro';
+import CTASection from '../components/sections/CTASection.astro';
+
+const seo = {
+  title: 'Link Building Services | White-Hat SEO Backlinks',
+  description: 'Professional white-hat link building services that build authority and drive rankings. Digital PR, guest posting, and ethical backlink strategies for sustainable SEO growth.',
+  keywords: [
+    'link building services',
+    'white hat link building',
+    'digital pr services',
+    'guest posting service',
+    'backlink building',
+    'authority link building',
+    'ethical seo links',
+    'content outreach',
+    'link building agency australia',
+    'seo backlinks',
+  ],
+  canonical: 'https://growthexperts.com.au/link-building',
+  ogImage: '/images/team-hero.png',
+  ogType: 'website',
+};
+
+const hero = {
+  title: 'White-Hat Link Building That Drives Real Results',
+  subtitle: 'Build authority and earn high-quality backlinks through ethical, sustainable strategies. Our proven link building services focus on relationships, not shortcuts.',
+  primaryCTA: {
+    text: 'Free Strategy Session',
+    href: '/contact',
+  },
+  image: '/images/team-hero.png',
+  imageAlt: 'Link building and digital PR services',
+};
+
+const schema = {
+  type: 'Service' as const,
+  data: {
+    '@type': 'Service',
+    name: 'Link Building Services',
+    description:
+      'Professional white-hat link building services including digital PR, guest posting, and authority backlink strategies for sustainable SEO growth.',
+    provider: {
+      '@type': 'Organization',
+      name: 'Digital Growth Experts',
+    },
+    areaServed: {
+      '@type': 'Country',
+      name: 'Australia',
+    },
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Link Building Services',
+      itemListElement: [
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Digital PR Link Building',
+            description:
+              'Earn high-authority backlinks through strategic digital PR campaigns, journalist outreach, and newsworthy content placement.',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Guest Posting Services',
+            description:
+              'Strategic guest post placements on relevant, high-authority websites in your industry with natural, contextual backlinks.',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Broken Link Building',
+            description:
+              'Identify broken links on authoritative sites and provide replacement content, earning quality backlinks through value.',
+          },
+        },
+      ],
+    },
+  },
+};
+---
+
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  canonical={seo.canonical}
+  ogImage={seo.ogImage}
+  ogType={seo.ogType}
+  keywords={seo.keywords}
+  schema={schema}
+>
+  <Header />
+
+  <main id="main-content">
+    <!-- Hero Section -->
+    <Hero
+      title={hero.title}
+      subtitle={hero.subtitle}
+      primaryCTA={hero.primaryCTA}
+      secondaryCTA={hero.secondaryCTA}
+      image={hero.image}
+      imageAlt={hero.imageAlt}
+    />
+
+    <!-- Social Proof - Client Logos -->
+    <ClientLogoCarousel />
+
+    <!-- Proven Results - Case Studies -->
+    <CaseStudiesSection />
+
+    <!-- Introduction Section -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-4 max-w-7xl">
+        <div class="max-w-3xl mx-auto text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+            Build Authority Through Ethical Link Building
+          </h2>
+          <p class="text-xl text-gray-700 leading-relaxed">
+            Quality backlinks remain one of Google's top ranking factors. Our white-hat link building
+            services focus on earning links through value, relationships, and content excellence—not
+            manipulative tactics that put your site at risk.
+          </p>
+        </div>
+
+        <!-- Benefits Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
+          <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl">
+            <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold mb-2 text-gray-900">100% White-Hat</h3>
+            <p class="text-gray-700">
+              Every link earned through ethical methods that comply with Google's guidelines and protect
+              your site from penalties.
+            </p>
+          </div>
+
+          <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-xl">
+            <div class="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 10V3L4 14h7v7l9-11h-7z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold mb-2 text-gray-900">High Authority Links</h3>
+            <p class="text-gray-700">
+              We target high-DR sites with genuine traffic and authority, not spam networks or low-quality
+              directories.
+            </p>
+          </div>
+
+          <div class="bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-xl">
+            <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold mb-2 text-gray-900">Relationship-Driven</h3>
+            <p class="text-gray-700">
+              We build genuine relationships with editors, journalists, and webmasters for sustainable,
+              long-term link opportunities.
+            </p>
+          </div>
+
+          <div class="bg-gradient-to-br from-orange-50 to-red-50 p-6 rounded-xl">
+            <div class="w-12 h-12 bg-orange-600 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold mb-2 text-gray-900">Measurable Results</h3>
+            <p class="text-gray-700">
+              Full transparency with detailed reporting on every link acquired, including DR, traffic, and
+              relevance metrics.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What's Included Section -->
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4 max-w-7xl">
+        <div class="max-w-3xl mx-auto text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+            What's Included in Our Link Building Services
+          </h2>
+          <p class="text-xl text-gray-700">
+            Comprehensive white-hat strategies designed to build your site's authority and trustworthiness.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Service Card 1 -->
+          <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+            <div class="flex items-start mb-4">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center"
+                >
+                  <svg
+                    class="w-6 h-6 text-blue-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-semibold mb-2 text-gray-900">Digital PR Campaigns</h3>
+                <p class="text-gray-700">
+                  Strategic campaigns targeting journalists and publications in your industry. We create
+                  newsworthy angles and compelling pitches that earn high-authority media coverage and backlinks.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Service Card 2 -->
+          <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+            <div class="flex items-start mb-4">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center"
+                >
+                  <svg
+                    class="w-6 h-6 text-green-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-semibold mb-2 text-gray-900">Guest Posting</h3>
+                <p class="text-gray-700">
+                  Strategic content placements on relevant, high-authority websites. We write compelling
+                  articles that provide genuine value to readers while including natural, contextual backlinks.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Service Card 3 -->
+          <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+            <div class="flex items-start mb-4">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center"
+                >
+                  <svg
+                    class="w-6 h-6 text-purple-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-semibold mb-2 text-gray-900">Broken Link Building</h3>
+                <p class="text-gray-700">
+                  Identify broken links on authoritative sites in your niche, then reach out with superior
+                  replacement content. A win-win that earns quality backlinks through genuine value.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Service Card 4 -->
+          <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+            <div class="flex items-start mb-4">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center"
+                >
+                  <svg
+                    class="w-6 h-6 text-indigo-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-semibold mb-2 text-gray-900">Resource Page Links</h3>
+                <p class="text-gray-700">
+                  Target curated resource pages and link roundups in your industry. We identify opportunities
+                  and pitch your best content for inclusion on these high-value pages.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Service Card 5 -->
+          <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+            <div class="flex items-start mb-4">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center"
+                >
+                  <svg
+                    class="w-6 h-6 text-yellow-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-semibold mb-2 text-gray-900">Content Promotion</h3>
+                <p class="text-gray-700">
+                  Strategic outreach to promote your best content to relevant audiences, influencers, and
+                  websites. Earn natural links by putting exceptional content in front of the right people.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Service Card 6 -->
+          <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+            <div class="flex items-start mb-4">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center"
+                >
+                  <svg
+                    class="w-6 h-6 text-red-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-semibold mb-2 text-gray-900">Link Monitoring & Reporting</h3>
+                <p class="text-gray-700">
+                  Complete transparency with detailed monthly reports showing every link acquired, including
+                  metrics like DR, traffic, and relevance. Monitor link health and track ranking improvements.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-4 max-w-7xl">
+        <div class="max-w-3xl mx-auto text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+            Our White-Hat Link Building Process
+          </h2>
+          <p class="text-xl text-gray-700">
+            A systematic, ethical approach to earning high-quality backlinks that drive sustainable rankings.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+          <!-- Step 1 -->
+          <div class="relative">
+            <div class="flex items-start">
+              <div
+                class="flex-shrink-0 w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+              >
+                1
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-semibold mb-2 text-gray-900">
+                  Link Profile Analysis
+                </h3>
+                <p class="text-gray-700">
+                  Comprehensive audit of your current backlink profile. We identify toxic links, assess
+                  competitors' link strategies, and find gaps in your link profile that represent opportunities.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="relative">
+            <div class="flex items-start">
+              <div
+                class="flex-shrink-0 w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+              >
+                2
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-semibold mb-2 text-gray-900">Target Identification</h3>
+                <p class="text-gray-700">
+                  Research and identify high-authority targets in your industry. We analyze domain authority,
+                  traffic, relevance, and linking patterns to build a qualified prospect list.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="relative">
+            <div class="flex items-start">
+              <div
+                class="flex-shrink-0 w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+              >
+                3
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-semibold mb-2 text-gray-900">Content Creation</h3>
+                <p class="text-gray-700">
+                  Develop linkable assets including data studies, industry reports, infographics, and expert
+                  guides. Create guest post content that provides genuine value to target audiences.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="relative">
+            <div class="flex items-start">
+              <div
+                class="flex-shrink-0 w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+              >
+                4
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-semibold mb-2 text-gray-900">Strategic Outreach</h3>
+                <p class="text-gray-700">
+                  Personalized outreach to editors, journalists, and webmasters. We build relationships and
+                  pitch compelling angles that earn genuine interest and coverage.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 5 -->
+          <div class="relative">
+            <div class="flex items-start">
+              <div
+                class="flex-shrink-0 w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+              >
+                5
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-semibold mb-2 text-gray-900">Link Acquisition</h3>
+                <p class="text-gray-700">
+                  Secure placements through ethical methods only. Every link earned through value,
+                  relationships, or content excellence—never through manipulation or paid schemes.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 6 -->
+          <div class="relative">
+            <div class="flex items-start">
+              <div
+                class="flex-shrink-0 w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+              >
+                6
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-semibold mb-2 text-gray-900">
+                  Monitoring & Reporting
+                </h3>
+                <p class="text-gray-700">
+                  Track every link acquired with detailed metrics. Monitor link health, measure impact on
+                  rankings, and provide transparent monthly reports showing ROI and progress.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="py-16 bg-gradient-to-br from-blue-50 to-indigo-50">
+      <div class="container mx-auto px-4 max-w-7xl">
+        <div class="max-w-3xl mx-auto text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+            Why Choose Our Link Building Services?
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <div class="bg-white p-8 rounded-xl shadow-sm">
+            <h3 class="text-xl font-semibold mb-3 text-gray-900">Zero Spam Tactics</h3>
+            <p class="text-gray-700">
+              We never use PBNs, link farms, or spammy directories. Every link is earned through ethical
+              methods that comply with Google's guidelines and protect your site from penalties.
+            </p>
+          </div>
+
+          <div class="bg-white p-8 rounded-xl shadow-sm">
+            <h3 class="text-xl font-semibold mb-3 text-gray-900">Proven Track Record</h3>
+            <p class="text-gray-700">
+              Years of experience building links for Australian businesses across diverse industries. We've
+              secured placements on major publications and earned thousands of high-quality backlinks.
+            </p>
+          </div>
+
+          <div class="bg-white p-8 rounded-xl shadow-sm">
+            <h3 class="text-xl font-semibold mb-3 text-gray-900">Complete Transparency</h3>
+            <p class="text-gray-700">
+              Full visibility into every link acquired. We provide detailed reports showing target sites,
+              anchor text, DR metrics, and the strategy used to secure each placement.
+            </p>
+          </div>
+
+          <div class="bg-white p-8 rounded-xl shadow-sm">
+            <h3 class="text-xl font-semibold mb-3 text-gray-900">Sustainable Growth</h3>
+            <p class="text-gray-700">
+              Focus on long-term authority building, not quick wins. Our strategies are designed for
+              sustainable growth that compounds over time as your link profile strengthens.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <CTASection
+      title="Ready to Build Your Site's Authority?"
+      description="Let's discuss a white-hat link building strategy tailored to your business goals."
+      primaryCTA={{
+        text: 'Free Strategy Session',
+        href: '/contact',
+      }}
+    />
+  </main>
+
+  <Footer />
+</BaseLayout>

@@ -1,0 +1,610 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import HeroHome from '../components/sections/HeroHome.astro';
+import ClientLogoCarousel from '../components/sections/ClientLogoCarousel.astro';
+import CaseStudiesSection from '../components/sections/CaseStudiesSection.astro';
+import CTASection from '../components/sections/CTASection.astro';
+import SchemaOrg from '../components/seo/SchemaOrg.astro';
+
+// ===================================
+// PAGE FRONTMATTER CONFIGURATION
+// Edit these values to customize the page content
+// ===================================
+
+// SEO Meta Data
+const seo = {
+  title: 'Content Marketing Services | Rank, Engage, and Convert',
+  description: 'Strategic content marketing that ranks on Google and resonates with your audience. Data-driven content strategies that turn search traffic into qualified leads and revenue.',
+  keywords: [
+    'content marketing services',
+    'seo content writing',
+    'content strategy development',
+    'blog content writing',
+    'content marketing agency',
+    'seo copywriting services',
+    'content marketing sydney',
+    'b2b content marketing',
+    'content optimization services',
+    'strategic content creation'
+  ],
+  canonical: 'https://growthexperts.com.au/content-marketing',
+  ogImage: '/images/team-hero.png',
+  ogType: 'website',
+};
+
+// Hero Section
+const hero = {
+  title: 'Content Marketing That Ranks, Engages, and Converts',
+  subtitle: 'Attract qualified leads with strategic content that ranks on Google and resonates with your audience. Our data-driven content marketing strategies turn search traffic into revenue.',
+  primaryCTA: {
+    text: 'Free Strategy Session',
+    href: '/contact'
+  },
+};
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Services', href: '/services' },
+  { label: 'Content Marketing', href: '/content-marketing' },
+];
+
+// Section Visibility (show/hide sections)
+const sections = {
+  showClientLogos: true,
+  showCaseStudies: true,
+  showWhatsIncluded: true,
+  showProcess: true,
+  showFinalCTA: true,
+};
+
+// Final CTA Section
+const finalCTA = {
+  title: 'Ready to Build Your Content Engine?',
+  subtitle: 'Get a custom content strategy that attracts qualified leads and drives revenue. We\'ll analyze your audience, identify content opportunities, and create a roadmap for sustainable growth.',
+  primaryCTA: {
+    text: 'Free Strategy Session',
+    href: '/contact'
+  },
+};
+---
+
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  keywords={seo.keywords}
+  canonical={seo.canonical}
+  ogImage={seo.ogImage}
+  ogType={seo.ogType}
+  schema={{
+    type: 'Service',
+    data: {
+      '@type': 'Service',
+      name: 'Content Marketing Services',
+      description: seo.description,
+      provider: {
+        '@type': 'Organization',
+        name: 'Digital Growth Experts',
+      },
+      areaServed: {
+        '@type': 'Country',
+        name: 'Australia',
+      },
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Content Marketing Services',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'SEO-Optimized Blog Content',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Content Strategy Development',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Industry-Leading Guides & Resources',
+            },
+          },
+        ],
+      },
+    },
+  }}
+>
+  <Header />
+
+  <main id="main-content">
+    <!-- Hero Section - Conversion-focused with clear value proposition -->
+    <HeroHome
+      title={hero.title}
+      subtitle={hero.subtitle}
+      primaryCTA={hero.primaryCTA}
+      secondaryCTA={hero.secondaryCTA}
+    />
+
+    <!-- Social Proof - Client Logos -->
+    {sections.showClientLogos && <ClientLogoCarousel />}
+
+    <!-- Initial Content Section - Introduction to Content Marketing -->
+    <section class="section-padding bg-white">
+      <div class="container-custom">
+        <div class="max-w-4xl mx-auto">
+          <!-- Section Header -->
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+              Why Content Marketing Powers Growth
+            </h2>
+            <p class="text-lg md:text-xl text-gray-600 leading-relaxed">
+              Strategic content attracts qualified leads, builds authority, and drives sustainable business growth.
+            </p>
+          </div>
+
+          <!-- Key Benefits Grid -->
+          <div class="grid md:grid-cols-2 gap-8 mb-12">
+            <div class="flex gap-4">
+              <div class="flex-shrink-0">
+                <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                  <svg
+                    class="w-6 h-6 text-primary-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Attract Qualified Traffic</h3>
+                <p class="text-gray-600">
+                  Content marketing generates 3x more leads than traditional marketing at 62% lower cost. Attract visitors actively searching for solutions you provide.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0">
+                <div class="w-12 h-12 bg-secondary-100 rounded-lg flex items-center justify-center">
+                  <svg
+                    class="w-6 h-6 text-secondary-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Build Authority & Trust</h3>
+                <p class="text-gray-600">
+                  Establish thought leadership in your industry with authoritative content that demonstrates expertise and builds credibility with prospects and customers.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0">
+                <div class="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center">
+                  <svg
+                    class="w-6 h-6 text-accent-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Long-Term ROI</h3>
+                <p class="text-gray-600">
+                  Content continues driving traffic and leads for years. A single well-optimized article can generate thousands of monthly visitors and leads on autopilot.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0">
+                <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                  <svg
+                    class="w-6 h-6 text-primary-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Support Sales Cycle</h3>
+                <p class="text-gray-600">
+                  Guide prospects from awareness to decision with strategic content at each stage. Answer questions, overcome objections, and accelerate buying decisions.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Introductory Content -->
+          <div class="prose prose-lg max-w-none">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              <strong>Content marketing is the most effective way to attract, engage, and convert your ideal customers.</strong> By creating valuable content optimized for search engines and aligned with your audience's needs, you build a sustainable pipeline of organic traffic and qualified leads.
+            </p>
+            <p class="text-gray-700 leading-relaxed">
+              Our content marketing strategies combine SEO research, audience insights, and conversion optimization to create content that actually drives business results. We don't create content for content's sake—every piece is strategically designed to rank for valuable keywords, answer customer questions, and move prospects closer to becoming customers. From blog posts to comprehensive guides, we create content that establishes authority and drives revenue.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Proven Results Section - Case Studies with Real Data -->
+    {sections.showCaseStudies && <CaseStudiesSection />}
+
+    <!-- What's Included Section - Service Details -->
+    {sections.showWhatsIncluded && (
+    <section class="section-padding bg-gray-50">
+      <div class="container-custom">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+            What's Included in Our Content Marketing Service
+          </h2>
+          <p class="text-lg md:text-xl text-gray-600">
+            Strategic content creation and optimization that ranks, engages, and drives qualified leads.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <!-- Service 1 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-primary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Content Strategy Development</h3>
+            <p class="text-gray-600 mb-4">
+              Comprehensive keyword research, competitor content gap analysis, audience persona development, and content topic clusters aligned with search intent and business goals.
+            </p>
+          </div>
+
+          <!-- Service 2 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-secondary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-secondary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">SEO-Optimized Blog Content</h3>
+            <p class="text-gray-600 mb-4">
+              High-quality, long-form blog posts (1,500-3,000 words) targeting high-value keywords, optimized for featured snippets, with internal linking strategy and conversion CTAs.
+            </p>
+          </div>
+
+          <!-- Service 3 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-accent-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Industry-Leading Guides & Resources</h3>
+            <p class="text-gray-600 mb-4">
+              Ultimate guides, how-to articles, comparison posts, and comprehensive resources that establish authority and attract backlinks from industry publications.
+            </p>
+          </div>
+
+          <!-- Service 4 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-primary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Content Optimization & Refresh</h3>
+            <p class="text-gray-600 mb-4">
+              Audit existing content for optimization opportunities, update outdated posts with fresh data, improve on-page SEO, and enhance user engagement metrics.
+            </p>
+          </div>
+
+          <!-- Service 5 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-secondary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-secondary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Content Distribution & Promotion</h3>
+            <p class="text-gray-600 mb-4">
+              Multi-channel content promotion including email marketing, social media distribution, outreach to industry websites, and strategic internal linking to maximize reach.
+            </p>
+          </div>
+
+          <!-- Service 6 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-accent-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Performance Tracking & Reporting</h3>
+            <p class="text-gray-600 mb-4">
+              Detailed analytics showing organic traffic growth, keyword rankings, engagement metrics, conversion rates, and ROI from content marketing efforts.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    )}
+
+    <!-- Long-form Content Section - Educational/Authority Building -->
+    {sections.showProcess && (
+    <section class="section-padding bg-white">
+      <div class="container-custom">
+        <div class="max-w-4xl mx-auto">
+          <!-- Section Header -->
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+              Our Content Marketing Process
+            </h2>
+            <p class="text-lg md:text-xl text-gray-600 leading-relaxed">
+              A strategic approach to creating content that ranks, engages, and converts.
+            </p>
+          </div>
+
+          <!-- Process Steps -->
+          <div class="space-y-8 mb-12">
+            <!-- Step 1 -->
+            <div class="flex gap-6">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+                >
+                  1
+                </div>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Keyword & Audience Research</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  We start by understanding your audience's search behavior and pain points. Using enterprise tools and search data, we identify high-value keywords with strong commercial intent, analyze competitor content strategies, and map keywords to each stage of your customer journey. This foundation ensures every piece of content targets the right audience.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="flex gap-6">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+                >
+                  2
+                </div>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Strategic Content Calendar</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  We develop a comprehensive content calendar targeting your most valuable keywords and topics. Each piece is strategically planned with clear goals: build authority, capture bottom-funnel traffic, or support specific service offerings. You'll always know what content is being created, why it matters, and how it supports your business objectives.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="flex gap-6">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+                >
+                  3
+                </div>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Expert Content Creation</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  Our team creates in-depth, authoritative content that ranks and converts. Every article includes original research, data-driven insights, expert perspectives, and practical takeaways your audience can implement. We write for humans first, optimizing for search engines second, ensuring content that engages readers and drives action.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="flex gap-6">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+                >
+                  4
+                </div>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">On-Page SEO Optimization</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  Each piece is fully optimized with keyword-rich titles, meta descriptions, header tags, strategic internal linking, optimized images with alt text, schema markup, and conversion-focused CTAs. Your content is built to rank from day one and drive qualified traffic that converts into leads and customers.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="flex gap-6">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+                >
+                  5
+                </div>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Content Promotion & Distribution</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  Great content needs amplification. We promote your content through email outreach, social media channels, industry publications, strategic partnerships, and influencer collaboration. We also implement internal linking strategies to boost SEO value across your site and guide visitors to conversion points.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 6 -->
+            <div class="flex gap-6">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+                >
+                  6
+                </div>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Performance Analysis & Iteration</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  We track every metric that matters: organic traffic, keyword rankings, time on page, conversion rates, and backlinks earned. Monthly reports show exactly how content marketing drives business growth, and we continuously optimize based on performance data. Top-performing content gets refreshed and expanded, while underperforming content is improved.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Additional Long-form Content -->
+          <div class="prose prose-lg max-w-none space-y-6">
+            <h3 class="text-2xl font-bold text-gray-900">Why Choose Our Content Marketing Services?</h3>
+            <p class="text-gray-700 leading-relaxed">
+              <strong>Unlike content mills that churn out generic articles, we create strategic content that drives business results.</strong> Every piece is researched, written by subject matter experts, and optimized for both search engines and human readers. We focus on quality over quantity, creating comprehensive resources that establish your authority and attract qualified leads.
+            </p>
+
+            <p class="text-gray-700 leading-relaxed">
+              We understand that content marketing isn't just about traffic—it's about attracting the right traffic that converts into customers. Our content strategies are built around your business goals, target audience, and competitive landscape. Whether you need to generate leads, support sales, or establish thought leadership, we create content that delivers measurable results.
+            </p>
+
+            <h3 class="text-2xl font-bold text-gray-900">Industries We Serve</h3>
+            <p class="text-gray-700 leading-relaxed">
+              Our content marketing strategies work across all industries and business models. We've created winning content strategies for SaaS companies, professional services firms, e-commerce brands, healthcare providers, financial services, real estate agencies, and B2B technology companies. Whatever your industry, we have the expertise to create content that resonates with your audience.
+            </p>
+
+            <div class="bg-gray-50 border-l-4 border-primary-600 p-6 my-8">
+              <p class="text-lg font-semibold text-gray-900 mb-2">Ready to Build Your Content Engine?</p>
+              <p class="text-gray-700">
+                Get a custom content strategy that attracts qualified leads and drives revenue. We'll analyze your audience and create a roadmap for sustainable growth.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    )}
+
+    <!-- Final CTA Section -->
+    {sections.showFinalCTA && (
+      <CTASection
+        title={finalCTA.title}
+        subtitle={finalCTA.subtitle}
+        primaryCTA={finalCTA.primaryCTA}
+        secondaryCTA={finalCTA.secondaryCTA}
+      />
+    )}
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .section-padding {
+    padding: 5rem 0;
+  }
+
+  @media (min-width: 768px) {
+    .section-padding {
+      padding: 7rem 0;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .section-padding {
+      padding: 8rem 0;
+    }
+  }
+</style>

@@ -1,0 +1,248 @@
+---
+import { Image } from 'astro:assets';
+
+// Import client logos from assets for optimization
+import client1 from '../../assets/images/clients/client1-logo.webp';
+import client2 from '../../assets/images/clients/clientlogo2.png';
+import client3 from '../../assets/images/clients/clientlogo3.png';
+import client4 from '../../assets/images/clients/clientlogo4.avif';
+import client5 from '../../assets/images/clients/clientlogo5.webp';
+import client6 from '../../assets/images/clients/clientlogo6.png';
+import client7 from '../../assets/images/clients/clientlogo7.png';
+import client8 from '../../assets/images/clients/clientlogo8.webp';
+import client9 from '../../assets/images/clients/clientlogo9.png';
+import client10 from '../../assets/images/clients/clientlogo10.png';
+
+// Real client logos from the client logos folder
+const clients = [
+  { name: 'Australian Tech Solutions', logo: client1 },
+  { name: 'Sydney Financial Group', logo: client2 },
+  { name: 'Melbourne Innovations', logo: client3 },
+  { name: 'Brisbane Digital Partners', logo: client4 },
+  { name: 'Perth Business Systems', logo: client5 },
+  { name: 'Adelaide Marketing Co', logo: client6 },
+  { name: 'Gold Coast Enterprises', logo: client7 },
+  { name: 'Canberra Tech Hub', logo: client8 },
+  { name: 'Darwin Solutions Ltd', logo: client9 },
+  { name: 'Hobart Digital Services', logo: client10 },
+];
+
+// Create two different orders for visual variety - triple for truly seamless infinite scrolling
+const row1Clients = [...clients, ...clients, ...clients]; // Triple for seamless loop
+const row2Clients = [...clients.slice(5), ...clients.slice(0, 5), ...clients.slice(5), ...clients.slice(0, 5), ...clients.slice(5), ...clients.slice(0, 5)]; // Shuffled order and tripled
+---
+
+<section class="py-12 bg-gray-50 border-y border-gray-200 overflow-hidden">
+  <div class="container-custom">
+    <p class="text-center text-sm font-semibold text-gray-600 uppercase tracking-wide mb-8">
+      Trusted by 200+ businesses across Australia
+    </p>
+  </div>
+
+  <!-- Dual Row Infinite Scrolling Carousel - Full Width -->
+  <div class="dual-carousel-wrapper">
+      <!-- First Row - Scrolling Right (content moves left) -->
+      <div class="logo-carousel-container">
+        <div class="logo-track logo-track-1">
+          {
+            row1Clients.map((client, index) => (
+              <div class="logo-item">
+                <div class="logo-container">
+                  <Image
+                    src={client.logo}
+                    alt={`${client.name} - Trusted DGE client`}
+                    class="logo-image"
+                    loading="lazy"
+                    width={200}
+                    height={100}
+                    format="webp"
+                    quality={90}
+                  />
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Second Row - Scrolling Left (content moves right) -->
+      <div class="logo-carousel-container mt-6">
+        <div class="logo-track logo-track-2">
+          {
+            row2Clients.map((client, index) => (
+              <div class="logo-item">
+                <div class="logo-container">
+                  <Image
+                    src={client.logo}
+                    alt={`${client.name} - Trusted DGE client`}
+                    class="logo-image"
+                    loading="lazy"
+                    width={200}
+                    height={100}
+                    format="webp"
+                    quality={90}
+                  />
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+</section>
+
+<style>
+  .dual-carousel-wrapper {
+    position: relative;
+  }
+
+  .logo-carousel-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .logo-track {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    width: max-content;
+    position: relative;
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+
+  /* First row: scrolls right (content moves left) - slowed to 20s for better logo readability */
+  .logo-track-1 {
+    animation: scroll-to-left 20s linear infinite;
+  }
+
+  /* Second row: scrolls left (content moves right) - slowed to 20s for better logo readability */
+  .logo-track-2 {
+    animation: scroll-to-right 20s linear infinite;
+  }
+
+  .logo-item {
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  /* Fixed container for consistent sizing */
+  .logo-container {
+    width: 120px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(60, 139, 218, 0.025) 0%, #ffffff 100%);
+    border: 1px solid rgba(60, 139, 218, 0.08);
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.04),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+  }
+
+  /* Hover state for interactive feedback */
+  .logo-item:hover .logo-container {
+    background: linear-gradient(135deg, rgba(60, 139, 218, 0.04) 0%, #ffffff 100%);
+    border-color: rgba(60, 139, 218, 0.12);
+    box-shadow:
+      0 4px 12px rgba(60, 139, 218, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.7);
+    transform: translateY(-2px);
+  }
+
+  /* Logo images - full vibrant color at all times */
+  .logo-image {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain;
+    object-position: center;
+    filter: none;
+    opacity: 1;
+    transition: all 0.3s ease;
+    display: block;
+  }
+
+  /* First row animation: moves content leftward for rightward scroll effect */
+  @keyframes scroll-to-left {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-33.33%);
+    }
+  }
+
+  /* Second row animation: moves content rightward for leftward scroll effect */
+  @keyframes scroll-to-right {
+    0% {
+      transform: translateX(-33.33%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .logo-track {
+      gap: 1.5rem;
+    }
+
+    .logo-track-1 {
+      animation-duration: 25s;
+    }
+
+    .logo-track-2 {
+      animation-duration: 25s;
+    }
+
+    .logo-container {
+      width: 100px;
+      height: 50px;
+      padding: 8px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .logo-track {
+      gap: 2.5rem;
+    }
+
+    .logo-track-1 {
+      animation-duration: 20s;
+    }
+
+    .logo-track-2 {
+      animation-duration: 20s;
+    }
+
+    .logo-container {
+      width: 140px;
+      height: 70px;
+      padding: 14px;
+    }
+  }
+
+
+  /* Accessibility: Respect user's motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .logo-track-1,
+    .logo-track-2 {
+      animation: none;
+    }
+
+    .logo-container {
+      transition: none;
+    }
+
+    .logo-image {
+      transition: none;
+    }
+  }
+</style>

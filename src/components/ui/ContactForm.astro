@@ -1,0 +1,165 @@
+---
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  buttonText?: string;
+  compact?: boolean;
+}
+
+const {
+  title = 'Get Your Free SEO Audit',
+  subtitle = "Let's discuss how we can help grow your business",
+  buttonText = 'Get Free Audit',
+  compact = false,
+} = Astro.props;
+---
+
+<div class={compact ? 'bg-white p-6 rounded-xl shadow-lg' : 'bg-white p-8 rounded-xl shadow-xl'}>
+  {!compact && (
+    <div class="mb-6">
+      <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">{title}</h3>
+      <p class="text-gray-600">{subtitle}</p>
+    </div>
+  )}
+
+  <form id="contact-form" class="space-y-4">
+    <!-- Name Field -->
+    <div>
+      <label for="name" class="block text-sm font-medium text-gray-700 mb-1">
+        Full Name <span class="text-red-500">*</span>
+      </label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        required
+        class="input"
+        placeholder="John Doe"
+      />
+    </div>
+
+    <!-- Email Field -->
+    <div>
+      <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
+        Email Address <span class="text-red-500">*</span>
+      </label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        required
+        class="input"
+        placeholder="john@example.com"
+      />
+    </div>
+
+    <!-- Phone Field -->
+    <div>
+      <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">
+        Phone Number
+      </label>
+      <input
+        type="tel"
+        id="phone"
+        name="phone"
+        class="input"
+        placeholder="+61 XXX XXX XXX"
+      />
+    </div>
+
+    {!compact && (
+      <div>
+        <label for="service" class="block text-sm font-medium text-gray-700 mb-1">
+          Service Interest
+        </label>
+        <select id="service" name="service" class="input">
+          <option value="">Select a service...</option>
+          <option value="local-seo">Local SEO</option>
+          <option value="enterprise-seo">Enterprise SEO</option>
+          <option value="ecommerce-seo">E-commerce SEO</option>
+          <option value="shopify-seo">Shopify SEO</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+    )}
+
+    {!compact && (
+      <div>
+        <label for="message" class="block text-sm font-medium text-gray-700 mb-1">
+          Message
+        </label>
+        <textarea
+          id="message"
+          name="message"
+          rows="4"
+          class="input"
+          placeholder="Tell us about your business and goals..."
+        ></textarea>
+      </div>
+    )}
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn-accent w-full">
+      {buttonText}
+    </button>
+
+    <!-- Privacy Notice -->
+    <p class="text-xs text-gray-500 text-center">
+      By submitting this form, you agree to our <a href="/privacy-policy" class="text-primary-600 hover:underline">Privacy Policy</a>.
+      We'll never share your information.
+    </p>
+  </form>
+
+  <!-- Success/Error Messages -->
+  <div id="form-message" class="hidden mt-4 p-4 rounded-lg"></div>
+</div>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const messageDiv = document.getElementById('form-message');
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
+
+    // Show loading state
+    const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const originalText = submitButton.textContent;
+    submitButton.disabled = true;
+    submitButton.textContent = 'Sending...';
+
+    try {
+      // TODO: Replace with your actual form submission endpoint
+      // For now, simulate a successful submission
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      // Show success message
+      if (messageDiv) {
+        messageDiv.className = 'mt-4 p-4 rounded-lg bg-green-50 border border-green-200 text-green-800';
+        messageDiv.textContent = 'Thank you! We\'ll be in touch within 24 hours.';
+        messageDiv.classList.remove('hidden');
+      }
+
+      // Reset form
+      form.reset();
+
+      // Hide success message after 5 seconds
+      setTimeout(() => {
+        messageDiv?.classList.add('hidden');
+      }, 5000);
+    } catch (error) {
+      // Show error message
+      if (messageDiv) {
+        messageDiv.className = 'mt-4 p-4 rounded-lg bg-red-50 border border-red-200 text-red-800';
+        messageDiv.textContent = 'Something went wrong. Please try again or call us directly.';
+        messageDiv.classList.remove('hidden');
+      }
+    } finally {
+      // Reset button state
+      submitButton.disabled = false;
+      submitButton.textContent = originalText;
+    }
+  });
+</script>

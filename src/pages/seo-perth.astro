@@ -1,0 +1,735 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import HeroHome from '../components/sections/HeroHome.astro';
+import ClientLogoCarousel from '../components/sections/ClientLogoCarousel.astro';
+import CaseStudiesSection from '../components/sections/CaseStudiesSection.astro';
+import CTASection from '../components/sections/CTASection.astro';
+import SchemaOrg from '../components/seo/SchemaOrg.astro';
+
+// ===================================
+// PAGE FRONTMATTER CONFIGURATION
+// Edit these values to customize the page content
+// ===================================
+
+// SEO Meta Data
+const seo = {
+  title: 'SEO Perth | Leading SEO Agency Perth | Digital Growth Engine',
+  description: 'Looking for the best SEO company Perth? Digital Growth Engine delivers proven SEO services Perth businesses trust. Get top Google rankings with our expert Perth SEO team.',
+  keywords: [
+    'seo company perth',
+    'seo agency perth',
+    'seo services perth',
+    'perth seo',
+    'seo perth',
+    'local seo perth',
+    'seo marketing perth',
+    'perth seo company'
+  ],
+  canonical: 'https://growthexperts.com.au/seo-perth',
+  ogImage: '/images/team-hero.png',
+  ogType: 'website',
+};
+
+// Hero Section
+const hero = {
+  title: 'SEO Perth: Drive More Traffic & Revenue',
+  subtitle: 'Partner with Perth\'s leading SEO agency to dominate search rankings and grow your business. Our proven SEO strategies deliver measurable results for Perth businesses across all industries.',
+  primaryCTA: {
+    text: 'Get Your Free SEO Audit',
+    href: '/contact'
+  },
+};
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Services', href: '/services' },
+  { label: 'SEO Perth', href: '/seo-perth' },
+];
+
+// Section Visibility (show/hide sections)
+const sections = {
+  showClientLogos: true,
+  showCaseStudies: true,
+  showMainContent: true,
+  showServicesIncluded: true,
+  showProcess: true,
+  showFAQ: true,
+  showFinalCTA: true,
+};
+
+// Final CTA Section
+const finalCTA = {
+  title: 'Ready to Dominate Perth Search Rankings?',
+  subtitle: 'Get your free SEO audit and discover the exact strategies we\'ll use to get your Perth business ranking at the top of Google. No lock-in contracts, just transparent results.',
+  primaryCTA: {
+    text: 'Get Your Free SEO Audit',
+    href: '/contact'
+  },
+};
+---
+
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  keywords={seo.keywords}
+  canonical={seo.canonical}
+  ogImage={seo.ogImage}
+  ogType={seo.ogType}
+  schema={{
+    type: 'Service',
+    data: {
+      '@type': 'Service',
+      name: 'SEO Services Perth',
+      description: seo.description,
+      provider: {
+        '@type': 'Organization',
+        name: 'Digital Growth Engine',
+      },
+      areaServed: {
+        '@type': 'City',
+        name: 'Perth',
+        '@id': 'https://en.wikipedia.org/wiki/Perth',
+      },
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'SEO Services Perth',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Technical SEO',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Local SEO Perth',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'On-Page SEO',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Off-Page SEO',
+            },
+          },
+        ],
+      },
+    },
+  }}
+>
+  <!-- Add LocalBusiness schema for better local SEO -->
+  <SchemaOrg
+    slot="head"
+    type="LocalBusiness"
+    data={{
+      name: 'Digital Growth Engine',
+      description: 'Leading SEO agency in Perth delivering proven search engine optimisation strategies for Perth businesses',
+      image: `${Astro.site}images/logo.png`,
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Perth',
+        addressRegion: 'WA',
+        addressCountry: 'AU',
+      },
+    }}
+  />
+
+  <Header />
+
+  <main id="main-content">
+    <!-- Hero Section - Conversion-focused with clear value proposition -->
+    <HeroHome
+      title={hero.title}
+      subtitle={hero.subtitle}
+      primaryCTA={hero.primaryCTA}
+      secondaryCTA={hero.secondaryCTA}
+    />
+
+    <!-- Social Proof - Client Logos -->
+    {sections.showClientLogos && <ClientLogoCarousel />}
+
+    <!-- Main Content Section - Introduction to SEO Perth -->
+    {sections.showMainContent && (
+    <section class="section-padding bg-white">
+      <div class="container-custom">
+        <div class="max-w-4xl mx-auto">
+          <!-- Section Header -->
+          <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+              SEO Perth: Your Partner for Search Success
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 leading-relaxed">
+              When <strong>Perth</strong> businesses need real <strong>SEO results</strong>, they turn to Digital Growth Engine. Our <strong>Perth SEO</strong> specialists deliver strategies that work.
+            </p>
+          </div>
+
+          <!-- Introductory Content -->
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-6">
+              <strong>SEO Perth</strong> businesses can trust starts with understanding your unique market challenges. As a <strong>leading SEO agency in Perth</strong>, we know what it takes to compete in the local market while reaching customers across Australia and beyond. Our <strong>SEO service</strong> is built on data, transparency, and proven results.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-6">
+              Whether you're a <strong>local Perth</strong> business looking to dominate your suburb or an enterprise targeting national markets, our <strong>Perth SEO team</strong> combines <strong>technical SEO</strong> excellence with strategic content optimisation. We're not just another <strong>SEO company Perth</strong> businesses hire and forget. We're your growth partner, committed to delivering <strong>SEO results</strong> that impact your bottom line.
+            </p>
+            <p class="text-gray-700 leading-relaxed">
+              Our <strong>SEO strategies</strong> are designed for the Perth market. We understand local search behaviour, competitive landscapes across industries, and what it takes to achieve sustainable rankings. With our <strong>best SEO</strong> practices and transparent <strong>SEO process</strong>, you'll always know exactly what we're doing and why it matters for your business growth.
+            </p>
+          </div>
+
+          <!-- Key Benefits Grid -->
+          <div class="grid md:grid-cols-2 gap-8">
+            <div class="flex gap-4">
+              <div class="flex-shrink-0">
+                <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                  <svg
+                    class="w-6 h-6 text-primary-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Proven Track Record</h3>
+                <p class="text-gray-600">
+                  Our <strong>SEO specialist</strong> team has delivered successful <strong>SEO campaigns</strong> for <strong>Perth businesses</strong> across industries, from retail to professional services.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0">
+                <div class="w-12 h-12 bg-secondary-100 rounded-lg flex items-center justify-center">
+                  <svg
+                    class="w-6 h-6 text-secondary-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Transparent Reporting</h3>
+                <p class="text-gray-600">
+                  Unlike <strong>SEO agencies</strong> with complex jargon, we provide clear, understandable <strong>SEO reporting</strong> that shows exactly how your investment drives business growth.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0">
+                <div class="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center">
+                  <svg
+                    class="w-6 h-6 text-accent-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Local Perth Expertise</h3>
+                <p class="text-gray-600">
+                  Our <strong>local Perth SEO company</strong> understanding means we know your market, competitors, and exactly what it takes to rank for valuable <strong>local SEO</strong> terms.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0">
+                <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                  <svg
+                    class="w-6 h-6 text-primary-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">No Lock-In Contracts</h3>
+                <p class="text-gray-600">
+                  We earn your business every month. No <strong>lock-in SEO contracts</strong> means we're motivated to deliver <strong>effective SEO</strong> results that keep you coming back.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    )}
+
+    <!-- Proven Results Section - Case Studies with Real Data -->
+    {sections.showCaseStudies && <CaseStudiesSection />}
+
+    <!-- What's Included Section - Service Details -->
+    {sections.showServicesIncluded && (
+    <section class="section-padding bg-gray-50">
+      <div class="container-custom">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+            Our SEO Services Perth Businesses Trust
+          </h2>
+          <p class="text-lg md:text-xl text-gray-600">
+            Comprehensive <strong>SEO marketing Perth</strong> solutions designed to drive rankings, traffic, and revenue.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <!-- Service 1 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-primary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Technical SEO Perth</h3>
+            <p class="text-gray-600 mb-4">
+              Our <strong>technical SEO</strong> specialists conduct comprehensive <strong>SEO audits</strong> to identify and fix issues preventing your site from ranking. We optimise site speed, mobile responsiveness, crawlability, and structured data to ensure search engines can properly index and understand your content.
+            </p>
+          </div>
+
+          <!-- Service 2 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-secondary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-secondary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">On-Page SEO Optimisation</h3>
+            <p class="text-gray-600 mb-4">
+              Strategic <strong>on-page SEO</strong> that targets the keywords your customers actually search for. We optimise title tags, meta descriptions, heading structures, and content to align with search intent while incorporating <strong>SEO best practices</strong> that satisfy both users and search algorithms.
+            </p>
+          </div>
+
+          <!-- Service 3 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-accent-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Off-Page SEO & Link Building</h3>
+            <p class="text-gray-600 mb-4">
+              Quality <strong>off-page SEO</strong> strategies that build your domain authority through ethical link acquisition. We focus on earning high-quality backlinks from relevant Australian websites using <strong>white hat SEO</strong> techniques that provide long-term value and protect your online reputation.
+            </p>
+          </div>
+
+          <!-- Service 4 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-primary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Local SEO Perth Services</h3>
+            <p class="text-gray-600 mb-4">
+              Dominate <strong>local Perth</strong> search results with our <strong>dedicated local SEO</strong> strategies. We optimise your Google Business Profile, build local citations, manage reviews, and create location-specific content that helps <strong>local Perth SEO</strong> customers find your business when they're ready to buy.
+            </p>
+          </div>
+
+          <!-- Service 5 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-secondary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-secondary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">SEO Content Strategy</h3>
+            <p class="text-gray-600 mb-4">
+              Content that ranks and converts. Our <strong>SEO team</strong> creates strategic content based on keyword research, competitor analysis, and search intent. Every piece serves a purpose in your <strong>successful SEO campaign</strong>, whether it's targeting informational queries or high-intent commercial searches.
+            </p>
+          </div>
+
+          <!-- Service 6 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-accent-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">SEO Performance Tracking</h3>
+            <p class="text-gray-600 mb-4">
+              Transparent <strong>SEO reporting</strong> that demonstrates real business value. Track rankings, organic traffic, conversions, and revenue. Our <strong>Perth SEO agency</strong> provides detailed monthly reports showing the <strong>success of your SEO campaign</strong> and clear next steps for continued growth.
+            </p>
+          </div>
+        </div>
+
+        <div class="max-w-4xl mx-auto mt-16">
+          <div class="bg-white p-8 rounded-xl shadow-md">
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Integrated SEO and Digital Marketing</h3>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              As one of Perth's <strong>leading SEO companies</strong>, we understand that <strong>SEO and digital marketing</strong> work best when integrated. Our <strong>agency in Perth</strong> offers complementary services including <strong>web design</strong>, <strong>SEO and Google Ads</strong> management, and conversion rate optimisation. This holistic approach ensures your <strong>SEO work</strong> supports broader business objectives.
+            </p>
+            <p class="text-gray-700 leading-relaxed">
+              Whether you need <strong>local SEO service</strong>, <strong>national and international SEO</strong>, or a complete <strong>search marketing agency</strong> partner, our <strong>team of SEO experts</strong> has the experience and expertise to deliver results that matter for your business.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    )}
+
+    <!-- How Our Perth SEO Company Works -->
+    {sections.showProcess && (
+    <section class="section-padding bg-white">
+      <div class="container-custom">
+        <div class="max-w-4xl mx-auto">
+          <!-- Section Header -->
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+              How Our Perth SEO Agency Delivers Results
+            </h2>
+            <p class="text-lg md:text-xl text-gray-600 leading-relaxed">
+              A proven <strong>SEO process</strong> that combines strategy, execution, and continuous optimisation.
+            </p>
+          </div>
+
+          <!-- Process Steps -->
+          <div class="space-y-8 mb-12">
+            <!-- Step 1 -->
+            <div class="flex gap-6">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+                >
+                  1
+                </div>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Comprehensive SEO Audit</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  Every <strong>successful SEO</strong> strategy starts with understanding where you are. Our <strong>SEO expert</strong> team conducts a thorough <strong>SEO audit</strong> examining technical health, content quality, backlink profile, and competitive positioning. You'll receive a detailed report identifying opportunities and priorities for maximum impact.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="flex gap-6">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+                >
+                  2
+                </div>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Custom Perth SEO Strategy Development</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  There's no one-size-fits-all approach to <strong>SEO success</strong>. Our <strong>team in Perth</strong> develops customised <strong>Perth SEO strategies</strong> based on your business goals, competitive landscape, and target audience. Every <strong>SEO strategy</strong> is designed to deliver measurable ROI, whether you're focused on local customers or national expansion.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="flex gap-6">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+                >
+                  3
+                </div>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Technical SEO Implementation</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  Our <strong>team of SEO specialists</strong> tackles the technical foundation that's <strong>vital for SEO</strong> success. We optimise site architecture, improve page speed, implement schema markup, fix crawl errors, and ensure mobile-friendliness. These <strong>SEO techniques</strong> ensure search engines can properly discover, crawl, and index your content.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="flex gap-6">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+                >
+                  4
+                </div>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">On-Page SEO Optimisation</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  Strategic <strong>on-page SEO techniques</strong> transform your existing content into ranking powerhouses. We optimise every element from title tags and meta descriptions to heading structures and internal linking. Our <strong>approach to SEO</strong> ensures each page targets the right keywords while providing genuine value to visitors.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="flex gap-6">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+                >
+                  5
+                </div>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Content Creation & SEO Optimisation</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  Quality content is what separates <strong>best SEO company</strong> performers from the rest. Our <strong>Perth SEO experts</strong> create strategic content that targets valuable keywords while addressing customer questions and concerns. Whether it's service pages, blog posts, or resources, <strong>SEO can help</strong> your content rank and convert.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 6 -->
+            <div class="flex gap-6">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+                >
+                  6
+                </div>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Link Building & Authority Development</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  Building domain authority requires quality backlinks from relevant sources. Our <strong>leading SEO agency</strong> uses ethical <strong>white hat SEO</strong> strategies to earn links from industry publications, local directories, and authoritative websites. We never use risky tactics that could harm your long-term rankings.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 7 -->
+            <div class="flex gap-6">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold text-lg"
+                >
+                  7
+                </div>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Ongoing Monitoring & Optimisation</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  It's <strong>important to understand that SEO</strong> is a long-term investment requiring continuous optimisation. Our <strong>local SEO team</strong> monitors rankings, traffic, and conversions, making data-driven adjustments to improve performance. Regular <strong>SEO reviews</strong> ensure your strategy evolves with algorithm updates and market changes.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Additional Content -->
+          <div class="prose prose-lg max-w-none space-y-6">
+            <h3 class="text-2xl font-bold text-gray-900">Why Perth Businesses Choose Digital Growth Engine</h3>
+            <p class="text-gray-700 leading-relaxed">
+              When <strong>helping Perth businesses</strong> grow their online presence, we focus on what matters most: delivering measurable results that impact your bottom line. Unlike <strong>SEO companies in Perth</strong> that rely on generic tactics, our <strong>specialist Perth SEO</strong> approach is customised to your industry, competitive environment, and business goals.
+            </p>
+
+            <p class="text-gray-700 leading-relaxed">
+              We're not just another item on the list of <strong>SEO agencies</strong> or <strong>digital agencies</strong> in Perth. Our <strong>winning SEO</strong> methodology combines technical excellence with strategic thinking. We understand that when you <strong>invest in SEO</strong>, you're making a commitment to long-term growth, and we're committed to delivering value every step of the way.
+            </p>
+
+            <h3 class="text-2xl font-bold text-gray-900">SEO Packages Built for Perth Businesses</h3>
+            <p class="text-gray-700 leading-relaxed">
+              Our <strong>SEO packages</strong> are designed to meet diverse business needs and budgets. Whether you're a small <strong>local Perth</strong> business needing foundational <strong>local SEO service</strong> or an established enterprise requiring comprehensive <strong>national and international SEO</strong>, we have solutions that deliver results. Every package includes <strong>transparent SEO</strong> pricing with no hidden fees or surprises.
+            </p>
+
+            <div class="bg-gray-50 border-l-4 border-primary-600 p-6 my-8">
+              <p class="text-lg font-semibold text-gray-900 mb-2">Ready to Work with Perth's Best SEO Company?</p>
+              <p class="text-gray-700">
+                <strong>SEO is a long-term investment</strong> in your business growth. Get started with a free <strong>SEO audit</strong> and discover exactly how we can help your business rank higher, drive more traffic, and generate more revenue.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    )}
+
+    <!-- FAQ Section -->
+    {sections.showFAQ && (
+    <section class="section-padding bg-gray-50">
+      <div class="container-custom">
+        <div class="max-w-4xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+              Frequently Asked Questions About SEO Perth
+            </h2>
+            <p class="text-lg text-gray-600">
+              Common questions from Perth businesses about our <strong>SEO services Perth</strong> solutions.
+            </p>
+          </div>
+
+          <div class="space-y-6">
+            <!-- FAQ 1 -->
+            <div class="bg-white p-8 rounded-xl shadow-md">
+              <h3 class="text-xl font-bold text-gray-900 mb-3">What makes your SEO company Perth different from other SEO agencies?</h3>
+              <p class="text-gray-700 leading-relaxed">
+                Our <strong>Perth SEO company</strong> stands out through our commitment to transparency, proven results, and no lock-in contracts. We're a <strong>local Perth SEO</strong> team who understands the Perth market intimately. Unlike other <strong>SEO companies in Perth</strong> that use cookie-cutter approaches, we develop customised <strong>Perth SEO strategies</strong> based on your specific business goals, industry, and competitive landscape. Our <strong>transparent SEO reporting</strong> ensures you always understand what we're doing and why it matters for your business. We earn your business every month by delivering <strong>SEO results</strong> that drive real revenue growth.
+              </p>
+            </div>
+
+            <!-- FAQ 2 -->
+            <div class="bg-white p-8 rounded-xl shadow-md">
+              <h3 class="text-xl font-bold text-gray-900 mb-3">How long does it take to see results from SEO services Perth?</h3>
+              <p class="text-gray-700 leading-relaxed">
+                <strong>SEO is a long-term investment</strong>, and it's <strong>important to understand that SEO</strong> typically takes 3-6 months to show significant results. However, our <strong>best SEO company</strong> approach often delivers quick wins within the first month through <strong>technical SEO</strong> fixes and <strong>on-page SEO</strong> optimisations. The timeline for a <strong>successful SEO campaign</strong> depends on factors like your current website health, competitive landscape, and keyword difficulty. Our <strong>leading SEO company in Perth</strong> focuses on sustainable, long-term growth rather than risky shortcuts that could harm your online presence. <strong>SEO and Google</strong> algorithm updates mean we're constantly refining strategies to maintain and improve your rankings.
+              </p>
+            </div>
+
+            <!-- FAQ 3 -->
+            <div class="bg-white p-8 rounded-xl shadow-md">
+              <h3 class="text-xl font-bold text-gray-900 mb-3">What's included in your local SEO Perth services?</h3>
+              <p class="text-gray-700 leading-relaxed">
+                Our <strong>local SEO Perth</strong> services include comprehensive Google Business Profile optimisation, local citation building across 50+ directories, review generation and management, location-specific content creation, and local link building. We ensure your business appears in the local 3-pack, Google Maps, and local search results when Perth customers search for your <strong>product or service</strong>. Our <strong>dedicated local SEO</strong> strategies are perfect for <strong>Perth businesses</strong> with physical locations or service areas. We combine <strong>local seo</strong> tactics with broader <strong>SEO optimisation</strong> to help you dominate both local and organic search results.
+              </p>
+            </div>
+
+            <!-- FAQ 4 -->
+            <div class="bg-white p-8 rounded-xl shadow-md">
+              <h3 class="text-xl font-bold text-gray-900 mb-3">Do you offer SEO packages without lock-in contracts?</h3>
+              <p class="text-gray-700 leading-relaxed">
+                Yes! Unlike <strong>marketing agencies</strong> and <strong>digital marketing agencies</strong> that require <strong>lock-in SEO contracts</strong>, we offer flexible <strong>SEO packages</strong> with no long-term commitments. We're confident in our ability to deliver <strong>effective SEO</strong> results, so we don't need to lock you into lengthy contracts. Our <strong>top SEO company</strong> philosophy is simple: we earn your business every month through transparent communication and measurable results. If you're unhappy with our <strong>SEO services in Perth</strong>, you're free to leave. This approach keeps our <strong>team of SEO</strong> experts focused on delivering continuous value and maintaining the <strong>success of your SEO campaign</strong>.
+              </p>
+            </div>
+
+            <!-- FAQ 5 -->
+            <div class="bg-white p-8 rounded-xl shadow-md">
+              <h3 class="text-xl font-bold text-gray-900 mb-3">How do you measure the success of an SEO campaign in Perth?</h3>
+              <p class="text-gray-700 leading-relaxed">
+                Our <strong>SEO agency Perth</strong> measures success through multiple key performance indicators aligned with your business goals. We track keyword rankings for target terms, organic traffic growth, conversion rates, and ultimately, revenue generated from organic search. Our <strong>transparent SEO reporting</strong> includes detailed analytics showing exactly how <strong>SEO work</strong> is performing. We provide monthly reports that demonstrate ROI and explain <strong>every SEO strategy</strong> adjustment. Unlike <strong>top seo agency</strong> competitors who focus only on vanity metrics, we connect <strong>SEO results</strong> directly to business outcomes. Whether you need more phone calls, form submissions, or e-commerce sales, we measure what matters most to your business success.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    )}
+
+    <!-- Final CTA Section -->
+    {sections.showFinalCTA && (
+      <CTASection
+        title={finalCTA.title}
+        subtitle={finalCTA.subtitle}
+        primaryCTA={finalCTA.primaryCTA}
+        secondaryCTA={finalCTA.secondaryCTA}
+      />
+    )}
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .section-padding {
+    padding: 5rem 0;
+  }
+
+  @media (min-width: 768px) {
+    .section-padding {
+      padding: 7rem 0;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .section-padding {
+      padding: 8rem 0;
+    }
+  }
+</style>

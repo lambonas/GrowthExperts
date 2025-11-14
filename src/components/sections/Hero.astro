@@ -1,0 +1,230 @@
+---
+import Button from '../ui/Button.astro';
+import GoogleReviewBadge from '../ui/GoogleReviewBadge.astro';
+import { Image } from 'astro:assets';
+
+export interface Props {
+  title: string;
+  subtitle: string;
+  primaryCTA?: { text: string; href: string };
+  secondaryCTA?: { text: string; href: string };
+  image?: string;
+  imageAlt?: string;
+}
+
+const {
+  title,
+  subtitle,
+  primaryCTA,
+  secondaryCTA,
+  image,
+  imageAlt = 'Hero image',
+} = Astro.props;
+---
+
+<section class="relative overflow-hidden bg-gradient-hero pt-20 pb-16 md:pt-28 md:pb-24">
+  <!-- Background decoration -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <div class="absolute -top-40 -right-40 w-96 h-96 bg-primary-300 rounded-full opacity-30 blur-3xl"></div>
+    <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-secondary-300 rounded-full opacity-30 blur-3xl"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent-200 rounded-full opacity-10 blur-3xl"></div>
+  </div>
+
+  <div class="container-custom relative z-10">
+    <div class={`grid ${image ? 'lg:grid-cols-2' : 'lg:grid-cols-1'} gap-12 lg:gap-16 items-center`}>
+      <!-- Content Column -->
+      <div class={`${image ? 'text-center lg:text-left' : 'text-center max-w-4xl mx-auto'} animate-fade-in`}>
+        <!-- Main Headline -->
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+          {title}
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+          {subtitle}
+        </p>
+
+        <!-- CTA Buttons -->
+        {(primaryCTA || secondaryCTA) && (
+          <div class={`flex flex-col sm:flex-row gap-4 ${image ? 'justify-center lg:justify-start' : 'justify-center'}`}>
+            {primaryCTA && (
+              <Button variant="primary" size="lg" href={primaryCTA.href}>
+                {primaryCTA.text}
+                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </Button>
+            )}
+            {secondaryCTA && (
+              <Button variant="secondary" size="lg" href={secondaryCTA.href}>
+                {secondaryCTA.text}
+              </Button>
+            )}
+          </div>
+        )}
+      </div>
+
+      <!-- Image Column (optional) -->
+      {image && (
+        <div class="animate-slide-up relative">
+          <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+            <div class="hero-image-container">
+              <Image
+                src={image}
+                alt={imageAlt}
+                width={1200}
+                height={600}
+                class="w-full h-full object-cover"
+                loading="lazy"
+                format="webp"
+                quality={85}
+              />
+              <!-- Overlay gradient for depth -->
+              <div class="absolute inset-0 bg-gradient-to-br from-black/5 via-transparent to-black/10"></div>
+            </div>
+          </div>
+
+          <!-- Review Badge 1: Top-Left Position -->
+          <div class="review-badge-overlay review-badge-1">
+            <GoogleReviewBadge
+              reviewer="Sarah M."
+              reviewText="Digital Growth Experts significantly improved our SEO. Their strategies enhanced our search rankings and increased organic traffic. The team was professional and kept us informed throughout. Highly recommend their expertise."
+              minimal={true}
+            />
+          </div>
+
+          <!-- Review Badge 2: Bottom-Right Position -->
+          <div class="review-badge-overlay review-badge-2">
+            <GoogleReviewBadge
+              reviewer="James T."
+              reviewText="Been to a few SEO companies in sydney these guys have delivered results constantly. My business needed to go to the next step and evolve, digital growth experts helped me cater a bespoke marketing campaign which has seen my business exel beyond my expectation. I highly recommend these guys."
+              minimal={true}
+            />
+          </div>
+        </div>
+      )}
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.8s ease-out 0.2s forwards;
+    opacity: 0;
+  }
+
+  /* Hero Image Container */
+  .hero-image-container {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+  }
+
+  .hero-image-container img {
+    transition: transform 0.3s ease;
+  }
+
+  .hero-image-container:hover img {
+    transform: scale(1.02);
+  }
+
+  /* Review Badge Overlay - Floating badges with staggered animation */
+  .review-badge-overlay {
+    position: absolute;
+    z-index: 20;
+    animation: fadeIn 0.8s ease-out forwards;
+    opacity: 0;
+    max-width: 420px;
+  }
+
+  /* Badge 1: Top-Left Position - 75% from top (pushed lower) */
+  .review-badge-1 {
+    top: 75%;
+    left: 24px;
+    animation-delay: 0.2s;
+    transform-origin: top left;
+  }
+
+  /* Badge 2: Bottom-Right Position - 80px from bottom (pushed lower) */
+  .review-badge-2 {
+    bottom: 80px;
+    right: 24px;
+    animation-delay: 0.4s;
+    transform-origin: bottom right;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 1024px) {
+    .hero-image-container {
+      height: 500px;
+    }
+
+    /* Adjust badge positioning for tablets */
+    .review-badge-1 {
+      top: 72%;
+      left: 16px;
+    }
+
+    .review-badge-2 {
+      bottom: 60px;
+      right: 16px;
+    }
+
+    .review-badge-overlay {
+      max-width: 360px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero-image-container {
+      height: 450px;
+    }
+
+    /* Stack badges vertically on mobile for better readability */
+    .review-badge-1 {
+      top: auto;
+      bottom: 240px;
+      left: 12px;
+      right: 12px;
+      max-width: calc(100% - 24px);
+    }
+
+    .review-badge-2 {
+      bottom: 12px;
+      left: 12px;
+      right: 12px;
+      max-width: calc(100% - 24px);
+    }
+
+    .review-badge-overlay {
+      max-width: 100%;
+    }
+  }
+</style>

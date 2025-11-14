@@ -1,0 +1,119 @@
+---
+import CaseStudyCard from '../ui/CaseStudyCard.astro';
+
+// Professional case studies data with real client logos
+const caseStudies = [
+  {
+    clientLogo: '/images/clients/clientlogo4.avif',
+    clientLogoAlt: 'E-commerce client case study',
+    industry: 'E-Commerce',
+    primaryMetric: {
+      value: '+$20K',
+      label: 'Monthly Revenue Growth'
+    },
+    secondaryMetrics: [
+      { value: '40', label: 'High-Value Keywords on Page 1', icon: 'search', shimmer: true },
+      { value: '+2,000', label: 'New Monthly Visitors', icon: 'users', shimmer: true },
+      { value: '10x', label: 'Return on Investment', icon: 'trending-up', shimmer: true }
+    ],
+    quote: 'The revenue impact exceeded our projections. Within 6 months, we saw sustainable growth in both traffic and sales.',
+    role: 'Director of E-commerce',
+    timeframe: '6 months',
+    resultPeriod: 'Q4 2024',
+    caseStudyUrl: '#'
+  },
+  {
+    clientLogo: '/images/clients/clientlogo6.png',
+    clientLogoAlt: 'Cabinet maker client case study',
+    industry: 'Cabinet Maker',
+    primaryMetric: {
+      value: '150+',
+      label: 'Qualified Leads Monthly'
+    },
+    secondaryMetrics: [
+      { value: '#1', label: 'Ranking for Primary Keywords (hard keywords)', icon: 'search', shimmer: true },
+      { value: '89%', label: 'Consultation Increase', icon: 'trending-up', shimmer: true },
+      { value: '45+', label: 'Top 3 Rankings Achieved', icon: 'users', shimmer: true }
+    ],
+    quote: 'Our online visibility has completely changed our client acquisition strategy. The quality of inbound leads is exceptional.',
+    role: 'Owner',
+    timeframe: '4 months',
+    resultPeriod: 'Q3 2024',
+    caseStudyUrl: '#'
+  },
+  {
+    clientLogo: '/images/clients/clientlogo10.png',
+    clientLogoAlt: 'Home services client case study',
+    largeLogo: true,
+    industry: 'Home Services',
+    primaryMetric: {
+      value: '+520%',
+      label: 'Local Search Visibility'
+    },
+    secondaryMetrics: [
+      { value: 'Top 3', label: 'Google Maps Position', icon: 'search', shimmer: true },
+      { value: '156%', label: 'Call Volume Increase', icon: 'trending-up', shimmer: true },
+      { value: '44', label: 'Keywords on Page #1', icon: 'users', shimmer: true }
+    ],
+    quote: 'From struggling for leads to having a wait list. The local SEO strategy delivered results beyond our expectations.',
+    role: 'Business Owner',
+    timeframe: '90 days',
+    resultPeriod: 'Q3 2024',
+    caseStudyUrl: '#'
+  }
+];
+---
+
+<section class="py-20 md:py-28 lg:py-32 bg-gray-50 relative">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <!-- Section Header -->
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <p class="text-sm uppercase tracking-wider text-gray-500 font-medium mb-3">Case Studies</p>
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+        Proven Results, Verified Performance
+      </h2>
+      <p class="text-lg text-gray-600 leading-relaxed">
+        Data-driven SEO strategies that deliver measurable growth for Australian businesses.
+      </p>
+    </div>
+
+    <!-- Case Studies Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+      {caseStudies.map((study) => (
+        <CaseStudyCard {...study} />
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Subtle animation for professional appearance */
+  @media (prefers-reduced-motion: no-preference) {
+    .grid > :global(*) {
+      animation: fadeIn 0.5s ease-out backwards;
+    }
+
+    .grid > :global(*:nth-child(1)) {
+      animation-delay: 0.1s;
+    }
+
+    .grid > :global(*:nth-child(2)) {
+      animation-delay: 0.15s;
+    }
+
+    .grid > :global(*:nth-child(3)) {
+      animation-delay: 0.2s;
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

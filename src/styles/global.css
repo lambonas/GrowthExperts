@@ -1,0 +1,203 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Base styles */
+  * {
+    @apply border-gray-200;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-white text-gray-900 font-sans antialiased;
+  }
+
+  /* Focus styles for accessibility - Brand blue for trust */
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary-500 ring-2 ring-primary-500 ring-offset-2;
+  }
+
+  /* Selection styles - Brand colors for consistency */
+  ::selection {
+    @apply bg-primary-100 text-primary-900;
+  }
+
+  /* Alternative selection with accent color for emphasis */
+  .accent-selection::selection {
+    @apply bg-accent-100 text-accent-900;
+  }
+
+  /* Accessibility: Respect user's motion preferences globally */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* Container */
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Section padding */
+  .section-padding {
+    @apply py-16 md:py-24 lg:py-32;
+  }
+
+  /* Button base */
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 text-base font-semibold rounded-lg transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  /* Primary button - Trust-building blue with enhanced effects */
+  .btn-primary {
+    @apply btn bg-primary-500 text-white hover:bg-primary-600 hover:shadow-xl hover:shadow-primary-200 hover:-translate-y-1 active:translate-y-0 focus-visible:outline-primary-600 focus-visible:ring-4 focus-visible:ring-primary-200;
+  }
+
+  /* Secondary button - Professional outline with brand colors */
+  .btn-secondary {
+    @apply btn border-2 border-primary-500 text-primary-700 bg-white hover:bg-primary-500 hover:text-white hover:shadow-xl hover:shadow-primary-100 hover:border-primary-600 active:scale-95;
+  }
+
+  /* Accent button (CTA) - High-conversion orange gradient */
+  .btn-accent {
+    @apply btn bg-gradient-to-r from-accent-500 to-accent-600 text-white hover:from-accent-600 hover:to-accent-700 hover:shadow-2xl hover:shadow-accent-300 hover:scale-105 active:scale-100 focus-visible:outline-accent-600 focus-visible:ring-4 focus-visible:ring-accent-200;
+  }
+
+  /* Card styles - Enhanced with brand colors */
+  .card {
+    @apply bg-white rounded-xl shadow-md border border-primary-100 p-6 transition-all duration-300 hover:shadow-xl hover:border-primary-200 hover:-translate-y-1;
+  }
+
+  /* Form input - Trust-building focus states */
+  .input {
+    @apply w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 hover:border-primary-300 transition-all;
+  }
+
+  /* Heading gradient */
+  .heading-gradient {
+    @apply bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent;
+  }
+
+  /* === BRAND-SPECIFIC TRUST-BUILDING COMPONENTS === */
+
+  /* Brand gradient backgrounds for trust signals */
+  .bg-gradient-trust {
+    @apply bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-600;
+  }
+
+  .bg-gradient-innovation {
+    @apply bg-gradient-to-r from-accent-500 to-accent-600;
+  }
+
+  .bg-gradient-growth {
+    @apply bg-gradient-to-br from-secondary-500 to-secondary-600;
+  }
+
+  /* Brand text gradients for emphasis */
+  .text-gradient-brand {
+    @apply bg-gradient-to-r from-primary-600 via-accent-500 to-secondary-600 bg-clip-text text-transparent;
+  }
+
+  .text-gradient-trust {
+    @apply bg-gradient-to-r from-primary-600 to-primary-700 bg-clip-text text-transparent;
+  }
+
+  /* Trust badge component */
+  .trust-badge {
+    @apply inline-flex items-center space-x-2 px-4 py-2 bg-white border-2 border-secondary-200 rounded-full shadow-md text-sm font-semibold text-secondary-900 transition-all hover:shadow-lg hover:border-secondary-300;
+  }
+
+  /* Premium card with brand colors for high-value content */
+  .card-premium {
+    @apply bg-white rounded-xl shadow-lg border-2 border-primary-100 p-6 transition-all duration-300 hover:shadow-2xl hover:border-primary-300 hover:-translate-y-1;
+  }
+
+  /* Enhanced CTA button with brand orange gradient */
+  .btn-cta-enhanced {
+    @apply btn bg-gradient-to-r from-accent-500 to-accent-600 text-white hover:from-accent-600 hover:to-accent-700 hover:shadow-2xl hover:shadow-accent-300 hover:scale-105 active:scale-100 focus-visible:outline-accent-600 focus-visible:ring-4 focus-visible:ring-accent-200;
+  }
+
+  /* Enhanced primary button with trust-building effects */
+  .btn-primary-enhanced {
+    @apply btn bg-primary-500 text-white hover:bg-primary-600 hover:shadow-xl hover:shadow-primary-200 hover:-translate-y-1 active:translate-y-0 focus-visible:outline-primary-600 focus-visible:ring-4 focus-visible:ring-primary-200;
+  }
+
+  /* Secondary button with stronger brand presence */
+  .btn-secondary-enhanced {
+    @apply btn border-2 border-primary-500 text-primary-700 bg-white hover:bg-primary-500 hover:text-white hover:shadow-xl hover:shadow-primary-100 hover:border-primary-600 active:scale-95;
+  }
+}
+
+@layer utilities {
+  /* Text shadows */
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .text-shadow-lg {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Glassmorphism */
+  .glass {
+    @apply bg-white/80 backdrop-blur-lg border border-white/20;
+  }
+
+  /* Gradient backgrounds */
+  .bg-gradient-primary {
+    @apply bg-gradient-to-r from-primary-600 to-primary-700;
+  }
+
+  .bg-gradient-secondary {
+    @apply bg-gradient-to-r from-secondary-600 to-secondary-700;
+  }
+
+  .bg-gradient-accent {
+    @apply bg-gradient-to-r from-accent-500 to-accent-600;
+  }
+
+  .bg-gradient-hero {
+    @apply bg-gradient-to-br from-primary-50 via-white to-secondary-50;
+  }
+
+  /* === BRAND-SPECIFIC SHADOWS FOR TRUST & DEPTH === */
+
+  /* Primary (blue) shadow - Use for trust-focused elements */
+  .shadow-primary {
+    box-shadow: 0 10px 40px -10px rgba(60, 139, 218, 0.3);
+  }
+
+  .shadow-primary-lg {
+    box-shadow: 0 20px 60px -15px rgba(60, 139, 218, 0.4);
+  }
+
+  /* Secondary (green) shadow - Use for growth/success indicators */
+  .shadow-secondary {
+    box-shadow: 0 10px 40px -10px rgba(62, 184, 117, 0.3);
+  }
+
+  .shadow-secondary-lg {
+    box-shadow: 0 20px 60px -15px rgba(62, 184, 117, 0.4);
+  }
+
+  /* Accent (orange) shadow - Use for CTAs and action elements */
+  .shadow-accent {
+    box-shadow: 0 10px 40px -10px rgba(255, 167, 8, 0.4);
+  }
+
+  .shadow-accent-lg {
+    box-shadow: 0 20px 60px -15px rgba(255, 167, 8, 0.5);
+  }
+}
