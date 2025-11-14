@@ -36,7 +36,7 @@ export default defineConfig({
       },
     },
   },
-  // Image optimization configuration
+  // Enhanced image optimization configuration
   image: {
     // Use Sharp for optimal image processing
     service: {
@@ -45,10 +45,17 @@ export default defineConfig({
         limitInputPixels: false,
       },
     },
-    // Set default responsive image layout
-    layout: 'constrained',
-    // Enable responsive styles for better mobile performance
-    responsiveStyles: true,
+    // Supported formats in order of preference (browser picks first supported)
+    formats: ['avif', 'webp'],
+    // Optimized quality settings for different image types
+    // These can be overridden per-image with quality prop
+    quality: {
+      avif: 75,  // AVIF at 75 quality produces excellent results with small file sizes
+      webp: 80,  // WebP at 80 provides great balance of quality and compression
+      jpeg: 80,  // JPEG fallback quality
+      jpg: 80,   // JPG fallback quality
+      png: 80,   // PNG compression level
+    },
   },
   integrations: [
     react(),

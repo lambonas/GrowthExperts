@@ -1,4 +1,8 @@
 ---
+import { Image } from 'astro:assets';
+// Import logo from assets for build-time optimization
+import logo from '../../assets/logo.png';
+
 const navItems = [
   {
     label: 'Services',
@@ -40,11 +44,17 @@ const currentPath = Astro.url.pathname;
 <header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-primary-100 shadow-sm" transition:persist>
   <nav class="container-custom py-4">
     <div class="flex items-center justify-between">
-      <!-- Logo -->
+      <!-- Logo - Optimized for performance -->
       <a href="/" class="flex items-center group">
-        <img
-          src="/logo.png"
+        <Image
+          src={logo}
           alt="Digital Growth Experts"
+          width={231}
+          height={84}
+          format="webp"
+          quality={90}
+          loading="eager"
+          fetchpriority="high"
           class="h-12 w-auto transition-opacity group-hover:opacity-90"
         />
       </a>
