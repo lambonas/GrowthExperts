@@ -1,5 +1,6 @@
 ---
 import CaseStudyCard from '../ui/CaseStudyCard.astro';
+import HighlightText from '../ui/HighlightText.astro';
 
 // Professional case studies data with real client logos
 const caseStudies = [
@@ -69,11 +70,11 @@ const caseStudies = [
     <!-- Section Header -->
     <div class="text-center max-w-2xl mx-auto mb-16">
       <p class="text-sm uppercase tracking-wider text-gray-500 font-medium mb-3">Case Studies</p>
-      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold font-display text-gray-900 mb-4">
         Proven Results, Verified Performance
       </h2>
       <p class="text-lg text-gray-600 leading-relaxed">
-        Data-driven SEO strategies that deliver measurable growth for Australian businesses.
+        Most Agencies won't show you their results, probably <HighlightText color="primary" style="bold">because they've got none!</HighlightText>
       </p>
     </div>
 

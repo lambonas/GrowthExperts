@@ -12,7 +12,7 @@ export interface Props {
 const {
   title = 'Ready to Grow Your Business?',
   subtitle = "Let's discuss your SEO goals and create a custom strategy to help you succeed. Get your free consultation today.",
-  primaryCTA = { text: 'Get Your Free Audit', href: '/contact' },
+  primaryCTA = { text: 'Get Your Free Audit', href: '/contact/' },
   secondaryCTA,
   variant = 'gradient',
 } = Astro.props;
@@ -31,7 +31,7 @@ const bgClass = variant === 'gradient'
 
   <div class="container-custom relative z-10">
     <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold font-display text-white mb-6">
         {title}
       </h2>
       <p class="text-lg md:text-xl text-white/90 mb-8 max-w-2xl mx-auto">

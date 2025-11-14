@@ -6,18 +6,22 @@ import Hero from '../components/sections/Hero.astro';
 import ClientLogoCarousel from '../components/sections/ClientLogoCarousel.astro';
 import CaseStudiesSection from '../components/sections/CaseStudiesSection.astro';
 import CTASection from '../components/sections/CTASection.astro';
+import AccordionItem from '../components/ui/AccordionItem.astro';
 
 const seo = {
-  title: 'Podiatry SEO Services | Get More Patient Appointments',
-  description: 'Specialized SEO for podiatrists and foot clinics. Attract more patients searching for foot care, sports podiatry, and treatment services. Fill your appointment book with qualified patients.',
+  title: 'Podiatry SEO Services | Podiatry SEO Experts Australia',
+  description: 'Expert podiatry SEO services to help your podiatry practice rank higher on search engines. Attract more potential patients with proven SEO strategies for podiatrists across Australia.',
   keywords: [
     'podiatry seo',
-    'podiatrist seo',
-    'foot clinic seo',
+    'podiatry seo services',
+    'podiatry seo experts',
+    'seo for podiatrist',
     'seo for podiatrists',
-    'podiatry marketing',
-    'sports podiatry seo',
-    'foot care clinic marketing',
+    'podiatry practice',
+    'search engine optimization',
+    'local seo',
+    'podiatry clinic',
+    'seo for podiatry',
   ],
   canonical: 'https://growthexperts.com.au/podiatry-seo',
   ogImage: '/images/team-hero.png',
@@ -28,7 +32,7 @@ const hero = {
   title: 'Podiatry SEO That Fills Your Appointment Book',
   subtitle: 'Attract more patients searching for foot care, orthotics, sports podiatry, and specialized treatments. Dominate local search and build a thriving practice.',
   primaryCTA: {
-    text: 'Get Free SEO Audit',
+    text: 'Free Strategy Session',
     href: '/contact',
   },
   secondaryCTA: {
@@ -87,7 +91,7 @@ const schema = {
     <section class="py-16 bg-white">
       <div class="container mx-auto px-4 max-w-7xl">
         <div class="max-w-3xl mx-auto text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+          <h2 class="text-3xl md:text-4xl font-bold font-display mb-6 text-gray-900">
             Why Podiatrists Need SEO
           </h2>
           <p class="text-xl text-gray-700">
@@ -97,28 +101,28 @@ const schema = {
 
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl">
-            <h3 class="text-xl font-semibold mb-2 text-gray-900">Attract Local Patients</h3>
+            <h3 class="text-xl font-semibold font-display mb-2 text-gray-900">Attract Local Patients</h3>
             <p class="text-gray-700">
               86% of patients search for healthcare providers online. Dominate local searches and fill your appointment book.
             </p>
           </div>
 
           <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-xl">
-            <h3 class="text-xl font-semibold mb-2 text-gray-900">Build Patient Trust</h3>
+            <h3 class="text-xl font-semibold font-display mb-2 text-gray-900">Build Patient Trust</h3>
             <p class="text-gray-700">
               Top rankings signal credibility. Patients trust Google's judgment when choosing healthcare providers.
             </p>
           </div>
 
           <div class="bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-xl">
-            <h3 class="text-xl font-semibold mb-2 text-gray-900">Reduce Acquisition Costs</h3>
+            <h3 class="text-xl font-semibold font-display mb-2 text-gray-900">Reduce Acquisition Costs</h3>
             <p class="text-gray-700">
               SEO generates patient leads at a fraction of the cost of paid advertising or healthcare directories.
             </p>
           </div>
 
           <div class="bg-gradient-to-br from-orange-50 to-red-50 p-6 rounded-xl">
-            <h3 class="text-xl font-semibold mb-2 text-gray-900">Educate & Convert</h3>
+            <h3 class="text-xl font-semibold font-display mb-2 text-gray-900">Educate & Convert</h3>
             <p class="text-gray-700">
               Create educational content that answers patient questions and positions you as the local foot care expert.
             </p>
@@ -130,51 +134,251 @@ const schema = {
     <section class="py-16 bg-gray-50">
       <div class="container mx-auto px-4 max-w-7xl">
         <div class="max-w-3xl mx-auto text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+          <h2 class="text-3xl md:text-4xl font-bold font-display mb-6 text-gray-900">
             What's Included in Our Podiatry SEO Services
           </h2>
         </div>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           <div class="bg-white p-8 rounded-xl shadow-sm">
-            <h3 class="text-xl font-semibold mb-3 text-gray-900">Local SEO for Podiatrists</h3>
+            <h3 class="text-xl font-semibold font-display mb-3 text-gray-900">Local SEO for Podiatrists</h3>
             <p class="text-gray-700">
               Optimize Google Business Profile, build local citations, and dominate "podiatrist near me" searches in your area.
             </p>
           </div>
 
           <div class="bg-white p-8 rounded-xl shadow-sm">
-            <h3 class="text-xl font-semibold mb-3 text-gray-900">Service Page Optimization</h3>
+            <h3 class="text-xl font-semibold font-display mb-3 text-gray-900">Service Page Optimization</h3>
             <p class="text-gray-700">
               Create SEO-optimized pages for every service—orthotics, sports podiatry, diabetic foot care, nail surgery, biomechanics.
             </p>
           </div>
 
           <div class="bg-white p-8 rounded-xl shadow-sm">
-            <h3 class="text-xl font-semibold mb-3 text-gray-900">Patient Education Content</h3>
+            <h3 class="text-xl font-semibold font-display mb-3 text-gray-900">Patient Education Content</h3>
             <p class="text-gray-700">
               Develop blog content answering common questions about foot pain, treatment options, and preventive care.
             </p>
           </div>
 
           <div class="bg-white p-8 rounded-xl shadow-sm">
-            <h3 class="text-xl font-semibold mb-3 text-gray-900">Review Management</h3>
+            <h3 class="text-xl font-semibold font-display mb-3 text-gray-900">Review Management</h3>
             <p class="text-gray-700">
               Generate 5-star patient reviews on Google and healthcare directories. Reviews are critical for healthcare conversions.
             </p>
           </div>
 
           <div class="bg-white p-8 rounded-xl shadow-sm">
-            <h3 class="text-xl font-semibold mb-3 text-gray-900">Online Booking Optimization</h3>
+            <h3 class="text-xl font-semibold font-display mb-3 text-gray-900">Online Booking Optimization</h3>
             <p class="text-gray-700">
               Optimize appointment booking flows to make it easy for patients to schedule consultations directly from search.
             </p>
           </div>
 
           <div class="bg-white p-8 rounded-xl shadow-sm">
-            <h3 class="text-xl font-semibold mb-3 text-gray-900">Healthcare Schema Markup</h3>
+            <h3 class="text-xl font-semibold font-display mb-3 text-gray-900">Healthcare Schema Markup</h3>
             <p class="text-gray-700">
               Implement medical practice schema, physician profiles, and service markup for enhanced search visibility.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content Section - SEO-Optimized Podiatry Content -->
+    <section class="section-padding bg-white">
+      <div class="container-custom">
+        <div class="max-w-4xl mx-auto">
+          <!-- H1 Header -->
+          <div class="text-center mb-12">
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold font-display text-gray-900 mb-4">
+              Podiatry SEO
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 leading-relaxed">
+              Specialised SEO strategies that help Australian podiatry practices attract more local patients and dominate search results.
+            </p>
+          </div>
+
+          <!-- Introduction with Priority Keywords -->
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              When <strong>potential patients</strong> experience <strong>heel pain</strong> or require specialist <strong>foot care</strong>, they turn to <strong>search engines</strong> to find qualified <strong>podiatrists</strong>. Your <strong>podiatry practice</strong> needs to appear at the top of <strong>search results</strong> when these <strong>patients search</strong> for <strong>podiatry services</strong>. Our comprehensive <strong>podiatry SEO</strong> strategies help you <strong>rank higher</strong> in <strong>search engine results</strong>, attract more <strong>local patients</strong>, and grow your <strong>podiatry</strong> clinic with proven <strong>search engine optimization</strong> techniques designed specifically for healthcare professionals.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              As <strong>podiatry SEO experts</strong>, we understand that <strong>SEO for podiatrists</strong> requires a unique approach. <strong>Patients are searching</strong> for immediate solutions to foot problems, from diabetic foot care to sports injuries. Our <strong>SEO strategies</strong> ensure your <strong>podiatry website</strong> captures these high-intent searches, builds trust with <strong>potential patients search</strong>, and converts <strong>online visibility</strong> into booked appointments. Through strategic <strong>keyword research</strong>, <strong>on-page SEO</strong>, and <strong>local SEO</strong> <strong>optimisation</strong>, we help your practice establish dominance in <strong>local search results</strong>.
+            </p>
+          </div>
+
+          <!-- H2: Podiatry SEO Services That Drive Real Results -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            Podiatry SEO Services That Drive Real Patient Growth
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Our <strong>podiatry SEO services</strong> go beyond basic <strong>optimization</strong>. We implement comprehensive <strong>SEO</strong> campaigns tailored specifically for <strong>podiatry clinics</strong> and <strong>podiatry care</strong> providers. This includes optimising your <strong>Google Business Profile</strong> (formerly <strong>Google My Business</strong>) to ensure you appear when <strong>patients search for podiatry</strong> services in your area, conducting detailed <strong>keyword</strong> analysis to identify exactly what <strong>patients are searching</strong> for, and creating <strong>valuable content</strong> that answers their questions while demonstrating your expertise.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              <strong>Technical SEO</strong> forms the foundation of successful <strong>SEO for podiatry</strong> practices. We <strong>ensure your website is fast</strong>, mobile-friendly, and <strong>easy to navigate</strong>, allowing both <strong>search engines</strong> and patients to find information quickly. Our <strong>on-page SEO</strong> work <strong>helps search engines understand</strong> your services, specialisations, and location, ensuring you <strong>appear in search results</strong> for <strong>relevant keywords</strong>. By focusing on both <strong>technical SEO</strong> and <strong>content creation</strong>, we build a solid foundation that supports long-term <strong>visibility on search</strong> platforms.
+            </p>
+          </div>
+
+          <!-- H2: Why SEO for Podiatrists Is Essential -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            Why SEO for Podiatrist Practices Is Essential in 2025
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              The healthcare landscape has shifted dramatically. When people need a <strong>podiatrist</strong>, they don't check Yellow Pages anymore. They search "podiatrist near me" on their mobile devices, read reviews, and book appointments within hours. If your <strong>podiatry practice</strong> isn't <strong>ranking well in search results</strong>, you're losing <strong>potential patients</strong> to competitors who have invested in <strong>effective SEO</strong>. Our <strong>local SEO for podiatrists</strong> ensures you capture these high-intent searches when <strong>patients find</strong> your practice at exactly the right moment.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              <strong>SEO for podiatry clinics</strong> isn't just about <strong>website traffic</strong>. It's about attracting the <strong>right patients</strong> who need your specific services. Whether you specialise in sports <strong>podiatry</strong>, diabetic foot care, or biomechanical assessments, our <strong>keyword research</strong> identifies the exact terms <strong>patients search</strong> when looking for your expertise. We then optimise your <strong>website content</strong>, service pages, and <strong>Google My Business profile</strong> to <strong>rank higher</strong> for these critical searches, ensuring you <strong>attract more patients</strong> who are actively seeking your specialised care.
+            </p>
+          </div>
+
+          <!-- H2: Comprehensive SEO Strategy for Podiatry -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            Comprehensive SEO Strategy for Growing Your Podiatry Practice
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Our <strong>comprehensive SEO strategy</strong> for <strong>podiatry</strong> practices combines multiple tactics to deliver measurable results. We start with <strong>local SEO</strong>, optimising your <strong>Google Business Profile</strong> to capture <strong>local patients</strong> searching in your area. This includes managing <strong>customer reviews</strong>, adding professional photos of your <strong>clinic website</strong>, and ensuring your listing appears in the <strong>top of search</strong> results and <strong>local search results</strong>. Strong local presence drives immediate appointments while building long-term trust in your community.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              <strong>Off-page SEO</strong> and <strong>link building</strong> strategies <strong>boost your site's authority</strong> in the eyes of <strong>search engines</strong>. We pursue high-quality backlinks from reputable healthcare directories, medical associations, and local business partnerships. Combined with consistent <strong>content creation</strong> that addresses common patient concerns about <strong>foot care</strong>, biomechanics, and treatment options, we create a comprehensive approach that <strong>helps your podiatry</strong> practice establish topical authority. This signals to search engines that your practice is a trusted source for <strong>podiatry care</strong>, improving your rankings across all <strong>search engine results pages</strong>.
+            </p>
+          </div>
+
+          <!-- H2: Our Podiatry SEO Experts Process -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            Our Podiatry SEO Experts Process: From Audit to Results
+          </h2>
+
+          <div class="grid md:grid-cols-2 gap-8 mb-12">
+            <div class="bg-gray-50 p-6 rounded-lg">
+              <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Discovery & SEO Audit</h3>
+              <p class="text-gray-700">
+                We begin your <strong>podiatry SEO journey</strong> with a comprehensive audit of your current <strong>online presence</strong>. Our team analyses your <strong>website</strong> performance, identifies <strong>technical SEO</strong> issues, and evaluates how you compare to competitors in <strong>search engine results</strong>. This foundation allows us to develop <strong>tailored SEO</strong> strategies specific to your practice goals and local market conditions.
+              </p>
+            </div>
+            <div class="bg-gray-50 p-6 rounded-lg">
+              <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Keyword Strategy & Research</h3>
+              <p class="text-gray-700">
+                Using advanced <strong>SEO tools</strong> like Google Analytics, we identify exactly what <strong>keywords and phrases</strong> your ideal patients use when searching for <strong>podiatry services</strong>. We focus on <strong>relevant keywords</strong> that balance search volume with conversion potential, ensuring your <strong>SEO efforts</strong> target patients who are ready to book appointments, not just browsing for information.
+              </p>
+            </div>
+            <div class="bg-gray-50 p-6 rounded-lg">
+              <h3 class="text-xl font-bold font-display text-gray-900 mb-3">On-Page Optimisation</h3>
+              <p class="text-gray-700">
+                We optimise every page of your <strong>podiatry website</strong> to <strong>help your podiatry</strong> practice <strong>rank higher</strong>. This includes crafting compelling meta titles and descriptions, structuring content with proper headings, optimising images, and ensuring your site speed and mobile experience meet <strong>search engine</strong> standards. We also <strong>make sure your website</strong> clearly communicates your services, expertise, and unique value to both patients and search algorithms.
+              </p>
+            </div>
+            <div class="bg-gray-50 p-6 rounded-lg">
+              <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Local SEO & Google Business Profile</h3>
+              <p class="text-gray-700">
+                <strong>Local SEO</strong> is crucial for <strong>podiatry</strong> practices serving specific geographic areas. We fully optimise your <strong>Google Business Profile</strong>, build citations across healthcare directories, and implement location-specific content strategies. This comprehensive approach ensures <strong>visibility in local search results</strong> when <strong>potential patients</strong> in your area need <strong>foot care</strong> services.
+              </p>
+            </div>
+          </div>
+
+          <!-- H2: Healthcare SEO Excellence -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            Healthcare SEO Excellence for Podiatry Practices
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              <strong>Healthcare SEO</strong> requires specialised knowledge of medical regulations, patient privacy, and the unique search behaviour of people seeking healthcare services. Our experience with <strong>services for podiatrists</strong> means we understand the compliance requirements around patient testimonials, medical claims, and advertising standards for <strong>healthcare professionals</strong>. We create <strong>SEO</strong> campaigns that attract patients while maintaining the professional standards expected in the healthcare industry.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              <strong>Implementing SEO</strong> for healthcare practices also means understanding the patient journey. We <strong>use tools like Google Analytics</strong> to track how <strong>potential patients</strong> interact with your site, which pages convert best, and where improvements are needed. This data-driven approach allows us to continuously refine your <strong>SEO strategies</strong>, ensuring your <strong>online presence to attract</strong> <strong>new patients</strong> remains competitive. Whether patients need urgent care for <strong>heel pain</strong> or are researching preventative <strong>podiatry care</strong>, your practice appears when and where it matters most.
+            </p>
+          </div>
+
+          <!-- H3: Advanced SEO Tactics for Podiatry -->
+          <h3 class="text-xl md:text-2xl font-bold font-display text-gray-900 mb-4">
+            Advanced SEO Tactics to Help Your Podiatry Practice Thrive
+          </h3>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <ul class="space-y-3 text-gray-700">
+              <li>Optimise service pages for specific treatments like diabetic foot care, orthotics, and biomechanical assessments</li>
+              <li>Create location-specific pages to <strong>attract more local patients</strong> across multiple service areas</li>
+              <li>Build authoritative backlinks from healthcare directories and medical associations</li>
+              <li>Develop educational blog content that answers common patient questions about <strong>foot care</strong></li>
+              <li>Implement schema markup to enhance how your practice appears in <strong>search results</strong></li>
+              <li>Optimise for voice search queries like "find a podiatrist near me"</li>
+              <li>Monitor and respond to patient reviews to improve your <strong>online presence</strong> and conversion rates</li>
+              <li>Track competitor strategies to <strong>stay ahead of the competition</strong> in your local market</li>
+            </ul>
+          </div>
+
+          <!-- H2: Why Choose Our SEO Agencies -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            Why Our SEO Services Stand Out Among Podiatry SEO Agencies
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Unlike generic <strong>SEO agencies</strong>, we specialise in <strong>healthcare SEO</strong> with proven success helping <strong>podiatry</strong> practices <strong>grow your podiatry</strong> patient base. We understand the unique challenges facing <strong>podiatry clinics</strong>, from seasonal fluctuations in patient demand to the competitive landscape of healthcare <strong>digital marketing</strong>. Our <strong>podiatry SEO</strong> approach combines industry expertise with data-driven tactics that deliver measurable results: more appointment bookings, increased <strong>website traffic</strong>, and stronger <strong>online visibility</strong>.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              What truly sets our <strong>SEO services</strong> apart is our commitment to transparent reporting and ongoing optimisation. We don't believe <strong>SEO isn't</strong> a one-time project; it's an ongoing process that requires constant refinement. You'll receive detailed monthly reports showing exactly how your practice is performing in <strong>search engine results</strong>, which <strong>keywords</strong> are driving patient inquiries, and what <strong>SEO tactics</strong> are delivering the best return on investment. We <strong>want your practice</strong> to succeed, and our success is measured by your growth.
+            </p>
+          </div>
+
+          <!-- FAQ Section -->
+          <div class="mb-12">
+            <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-8">
+              Frequently Asked Questions About Podiatry SEO
+            </h2>
+
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+              <AccordionItem
+                question="How long does it take to see results from podiatry SEO?"
+                answer="<p class='text-gray-700'>Most <strong>podiatry practices</strong> begin seeing improvements in <strong>search rankings</strong> and <strong>website traffic</strong> within 3-6 months of <strong>implementing SEO</strong> strategies. However, <strong>SEO</strong> is a long-term investment. While some quick wins like <strong>Google Business Profile</strong> <strong>optimization</strong> can show results within weeks, building sustainable <strong>top of search engine results</strong> rankings requires consistent effort. Our <strong>comprehensive SEO</strong> approach delivers progressive improvements, with most practices experiencing significant patient growth within 6-12 months.</p>"
+                id="faq-podiatry-seo-1"
+                isFirst={true}
+              />
+              <AccordionItem
+                question="What makes SEO for podiatry practices different from general SEO?"
+                answer="<p class='text-gray-700'><strong>SEO for podiatry</strong> requires understanding healthcare-specific <strong>search engine</strong> behaviour, medical terminology, and patient intent. <strong>Patients search for podiatry</strong> services when experiencing pain or mobility issues, making intent-based <strong>keyword research</strong> critical. We also navigate healthcare advertising regulations, optimise for <strong>local search results</strong> since most patients seek nearby care, and create content that builds trust with <strong>healthcare professionals</strong>. Our <strong>healthcare SEO</strong> expertise ensures your practice attracts qualified <strong>potential patients</strong> while maintaining professional standards.</p>"
+                id="faq-podiatry-seo-2"
+              />
+              <AccordionItem
+                question="How do you help podiatrists rank higher on Google?"
+                answer="<p class='text-gray-700'>We <strong>improve your podiatry</strong> practice rankings through a multi-faceted approach: optimising your <strong>Google Business Profile</strong> for <strong>local SEO</strong>, conducting detailed <strong>keyword research</strong> to target <strong>relevant keywords</strong>, improving <strong>technical SEO</strong> to <strong>ensure your website</strong> meets <strong>search engine</strong> standards, creating <strong>valuable content</strong> that answers patient questions, building authoritative backlinks through <strong>link building</strong> strategies, and managing <strong>customer reviews</strong> to boost credibility. This <strong>comprehensive SEO strategy</strong> <strong>helps search engines understand</strong> your expertise and <strong>rank higher</strong> for searches where <strong>potential patients search</strong> for <strong>podiatry services</strong>.</p>"
+                id="faq-podiatry-seo-3"
+              />
+              <AccordionItem
+                question="What is the ROI of investing in podiatry SEO services?"
+                answer="<p class='text-gray-700'><strong>Podiatry SEO</strong> typically delivers exceptional ROI compared to traditional advertising. While paid ads stop generating patients when you stop paying, <strong>SEO</strong> builds lasting <strong>online visibility</strong> that continues attracting <strong>new patients</strong> long-term. Our clients typically see 3-5x return on their <strong>SEO</strong> investment within the first year, with ROI increasing over time as rankings strengthen. We track key metrics like organic <strong>website traffic</strong>, appointment bookings from <strong>search results</strong>, and cost per patient acquisition, providing transparent reporting so you can see exactly how <strong>SEO could</strong> transform your practice growth.</p>"
+                id="faq-podiatry-seo-4"
+              />
+              <AccordionItem
+                question="Can you guarantee my podiatry practice will rank #1 on Google?"
+                answer="<p class='text-gray-700'>No ethical <strong>SEO agency</strong> can guarantee #1 rankings, as <strong>search engine</strong> algorithms constantly evolve and rankings fluctuate based on hundreds of factors. However, our proven <strong>SEO strategies</strong> consistently deliver significant improvements in <strong>visibility in local search results</strong> and overall <strong>search engine results pages</strong>. We focus on sustainable, white-hat <strong>SEO tactics</strong> that <strong>attract the right patients</strong> and build long-term authority. Our track record shows that <strong>podiatrists can improve</strong> their rankings dramatically with consistent <strong>SEO efforts</strong>, often reaching <strong>top of search</strong> positions for their target <strong>keywords</strong> within 6-12 months.</p>"
+                id="faq-podiatry-seo-5"
+                isLast={true}
+              />
+            </div>
+          </div>
+
+          <!-- Conclusion Section -->
+          <div class="prose prose-lg max-w-none">
+            <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+              Ready to Grow Your Podiatry Practice with Expert SEO?
+            </h2>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Don't let <strong>potential patients</strong> choose your competitors because they couldn't find your practice in <strong>search results</strong>. Our specialised <strong>podiatry SEO services</strong> ensure your <strong>clinic website</strong> appears when <strong>local patients</strong> search for <strong>foot care</strong>, <strong>heel pain</strong> treatment, orthotics, and specialised <strong>podiatry care</strong>. We combine <strong>technical SEO</strong>, <strong>local SEO</strong>, <strong>content creation</strong>, and <strong>link building</strong> to create a <strong>comprehensive SEO strategy</strong> that delivers measurable results for your <strong>podiatry practice</strong>.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Whether you're looking to <strong>attract more patients</strong> in your existing location or expand to new service areas, our <strong>podiatry SEO experts</strong> have the experience and tools to <strong>help your podiatry</strong> practice thrive. We understand what makes <strong>effective SEO</strong> for <strong>healthcare professionals</strong>, and we're committed to helping you achieve <strong>top of search engine results</strong> positions that drive real business growth. Our approach ensures you <strong>attract more local patients</strong> who are actively seeking the specialised care you provide.
+            </p>
+            <p class="text-gray-700 leading-relaxed">
+              Take the first step toward dominating <strong>local search results</strong> in your area. Contact our <strong>SEO for podiatrists</strong> team today for a free consultation and comprehensive <strong>SEO</strong> audit. We'll show you exactly where your practice stands in <strong>search engine results</strong>, identify opportunities to <strong>improve your podiatry</strong> <strong>online presence</strong>, and create a customised roadmap to <strong>help your practice</strong> achieve sustainable growth through proven <strong>search engine optimization</strong> strategies. Let's work together to ensure your <strong>podiatry practice</strong> becomes the go-to choice for patients seeking expert <strong>foot care</strong> in your community.
             </p>
           </div>
         </div>
@@ -185,7 +389,7 @@ const schema = {
       title="Ready to Attract More Podiatry Patients?"
       description="Get a free SEO audit showing how we'll fill your appointment book with qualified patients seeking foot care."
       primaryCTA={{
-        text: 'Get Free SEO Audit',
+        text: 'Free Strategy Session',
         href: '/contact',
       }}
       secondaryCTA={{
@@ -197,3 +401,21 @@ const schema = {
 
   <Footer />
 </BaseLayout>
+
+<style>
+  .section-padding {
+    padding: 5rem 0;
+  }
+
+  @media (min-width: 768px) {
+    .section-padding {
+      padding: 7rem 0;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .section-padding {
+      padding: 8rem 0;
+    }
+  }
+</style>

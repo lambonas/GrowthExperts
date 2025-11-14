@@ -4,6 +4,7 @@ import Header from '../../components/layout/Header.astro';
 import Footer from '../../components/layout/Footer.astro';
 import HeroHome from '../../components/sections/HeroHome.astro';
 import CTASection from '../../components/sections/CTASection.astro';
+import HighlightText from '../../components/ui/HighlightText.astro';
 
 const seo = {
   title: 'SEO Services Australia | Expert Digital Marketing Solutions',
@@ -156,16 +157,19 @@ const getIcon = (iconName: string) => {
   <main id="main-content">
     <!-- Hero Section -->
     <HeroHome
-      title={hero.title}
       subtitle={hero.subtitle}
       primaryCTA={hero.primaryCTA}
-    />
+    >
+      <Fragment slot="title">
+        SEO Services That Drive <HighlightText color="primary" style="bold">Real Business Growth</HighlightText>
+      </Fragment>
+    </HeroHome>
 
     <!-- Services Overview -->
     <section class="py-16 md:py-24 bg-white">
       <div class="container mx-auto px-4 max-w-7xl">
         <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold font-display text-gray-900 mb-4">
             Our SEO Services
           </h2>
           <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
@@ -195,7 +199,7 @@ const getIcon = (iconName: string) => {
                 </svg>
               </div>
 
-              <h3 class="text-2xl font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors">
+              <h3 class="text-2xl font-bold font-display text-gray-900 mb-3 group-hover:text-primary-600 transition-colors">
                 {service.title}
               </h3>
 
@@ -230,7 +234,7 @@ const getIcon = (iconName: string) => {
     <section class="py-16 md:py-24 bg-gray-50">
       <div class="container mx-auto px-4 max-w-7xl">
         <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold font-display text-gray-900 mb-4">
             SEO Services by Location
           </h2>
           <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
@@ -245,7 +249,7 @@ const getIcon = (iconName: string) => {
               class="group bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 border-2 border-transparent hover:border-primary-500"
             >
               <div class="flex items-start justify-between mb-3">
-                <h3 class="text-xl font-bold text-gray-900 group-hover:text-primary-600 transition-colors">
+                <h3 class="text-xl font-bold font-display text-gray-900 group-hover:text-primary-600 transition-colors">
                   {location.title}
                 </h3>
                 <svg class="w-5 h-5 text-gray-400 group-hover:text-primary-600 group-hover:translate-x-1 transition-all flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -265,7 +269,7 @@ const getIcon = (iconName: string) => {
     <section class="py-16 md:py-24 bg-white">
       <div class="container mx-auto px-4 max-w-7xl">
         <div class="max-w-3xl mx-auto text-center mb-16">
-          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold font-display text-gray-900 mb-4">
             Why Choose Our SEO Services?
           </h2>
           <p class="text-lg md:text-xl text-gray-600">
@@ -280,7 +284,7 @@ const getIcon = (iconName: string) => {
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <h3 class="text-xl font-bold text-gray-900 mb-3">Proven Results</h3>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Proven Results</h3>
             <p class="text-gray-600 leading-relaxed">
               Track record of delivering first-page rankings and increased organic traffic for clients across all industries.
             </p>
@@ -292,7 +296,7 @@ const getIcon = (iconName: string) => {
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
             </div>
-            <h3 class="text-xl font-bold text-gray-900 mb-3">White-Hat Strategies</h3>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">White-Hat Strategies</h3>
             <p class="text-gray-600 leading-relaxed">
               Ethical SEO practices that comply with search engine guidelines and deliver sustainable long-term growth.
             </p>
@@ -304,7 +308,7 @@ const getIcon = (iconName: string) => {
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
               </svg>
             </div>
-            <h3 class="text-xl font-bold text-gray-900 mb-3">Transparent Reporting</h3>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Transparent Reporting</h3>
             <p class="text-gray-600 leading-relaxed">
               Clear, detailed monthly reports showing rankings, traffic, conversions, and ROI from our SEO efforts.
             </p>

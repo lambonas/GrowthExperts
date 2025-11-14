@@ -9,6 +9,7 @@ import react from '@astrojs/react';
 export default defineConfig({
   site: 'https://growthexperts.com.au', // Update this with your actual domain
   output: 'static',
+  trailingSlash: 'always',
   compressHTML: true,
   build: {
     inlineStylesheets: 'auto',

@@ -1,8 +1,31 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+  safelist: [
+    // HighlightText component classes - prevent Tailwind from purging
+    'text-highlight',
+    'text-highlight-primary',
+    'text-highlight-secondary',
+    'text-highlight-accent',
+    'text-highlight-yellow',
+    'text-highlight-bold',
+    'text-highlight-subtle',
+    'text-highlight-full',
+  ],
   theme: {
     extend: {
+      typography: {
+        DEFAULT: {
+          css: {
+            h1: { fontFamily: 'Poppins, Inter, system-ui, sans-serif' },
+            h2: { fontFamily: 'Poppins, Inter, system-ui, sans-serif' },
+            h3: { fontFamily: 'Poppins, Inter, system-ui, sans-serif' },
+            h4: { fontFamily: 'Poppins, Inter, system-ui, sans-serif' },
+            h5: { fontFamily: 'Poppins, Inter, system-ui, sans-serif' },
+            h6: { fontFamily: 'Poppins, Inter, system-ui, sans-serif' },
+          },
+        },
+      },
       colors: {
         // Brand Primary - Professional Blue (#3C8BDA)
         // Conveys: Trust, professionalism, reliability, competence

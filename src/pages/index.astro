@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 import HeroHome from '../components/sections/HeroHome.astro';
+import HighlightText from '../components/ui/HighlightText.astro';
 import ClientLogoCarousel from '../components/sections/ClientLogoCarousel.astro';
 import SeoTruthSection from '../components/sections/SeoTruthSection.astro';
 import CaseStudiesSection from '../components/sections/CaseStudiesSection.astro';
@@ -23,7 +24,7 @@ const pageDescription =
       '@type': 'Organization',
       name: 'Digital Growth Experts',
       description: pageDescription,
-      url: 'https://youragency.com',
+      url: 'https://growthexperts.com.au',
       aggregateRating: {
         '@type': 'AggregateRating',
         ratingValue: '5.0',
@@ -37,10 +38,14 @@ const pageDescription =
   <main id="main-content">
     <!-- Hero Section -->
     <HeroHome
-      title="SEO Services That Drive Real Results"
+      title={`SEO Services That Drive Real Results`}
       subtitle="We help Australian businesses dominate search rankings and attract qualified leads through data-driven SEO strategies. Get more traffic, more leads, and more revenue."
       primaryCTA={{ text: 'Free Strategy Session', href: '/contact' }}
-    />
+    >
+      <Fragment slot="title">
+        SEO Services That Drive <HighlightText color="primary" style="bold">Real Results</HighlightText>
+      </Fragment>
+    </HeroHome>
 
     <!-- Client Logos -->
     <ClientLogoCarousel />
@@ -58,7 +63,7 @@ const pageDescription =
     <section class="section-padding bg-gradient-hero">
       <div class="container-custom">
         <div class="max-w-3xl mx-auto text-center mb-16">
-          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold font-display text-gray-900 mb-4">
             Why Choose Digital Growth Experts?
           </h2>
           <p class="text-lg md:text-xl text-gray-600">
@@ -84,7 +89,7 @@ const pageDescription =
                 />
               </svg>
             </div>
-            <h3 class="text-xl font-bold text-gray-900 mb-3">Data-Driven Results</h3>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Data-Driven Results</h3>
             <p class="text-gray-600">
               Every strategy is backed by data and analytics. We don't guess—we know what works.
             </p>
@@ -107,7 +112,7 @@ const pageDescription =
                 />
               </svg>
             </div>
-            <h3 class="text-xl font-bold text-gray-900 mb-3">Dedicated Team</h3>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Dedicated Team</h3>
             <p class="text-gray-600">
               Your own dedicated SEO specialist and support team, always available when you need us.
             </p>
@@ -130,7 +135,7 @@ const pageDescription =
                 />
               </svg>
             </div>
-            <h3 class="text-xl font-bold text-gray-900 mb-3">Transparent Reporting</h3>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Transparent Reporting</h3>
             <p class="text-gray-600">
               Monthly reports showing exactly what we've done and the results we've achieved.
             </p>
@@ -153,7 +158,7 @@ const pageDescription =
                 />
               </svg>
             </div>
-            <h3 class="text-xl font-bold text-gray-900 mb-3">Fast Results</h3>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Fast Results</h3>
             <p class="text-gray-600">
               See improvements in rankings and traffic within the first 90 days.
             </p>
@@ -176,7 +181,7 @@ const pageDescription =
                 />
               </svg>
             </div>
-            <h3 class="text-xl font-bold text-gray-900 mb-3">No Long-Term Contracts</h3>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">No Long-Term Contracts</h3>
             <p class="text-gray-600">
               Month-to-month agreements. Stay because you love the results, not because you're locked in.
             </p>
@@ -199,7 +204,7 @@ const pageDescription =
                 />
               </svg>
             </div>
-            <h3 class="text-xl font-bold text-gray-900 mb-3">Australian Expertise</h3>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Australian Expertise</h3>
             <p class="text-gray-600">
               Deep understanding of the Australian market, search behavior, and local SEO best practices.
             </p>

@@ -1,0 +1,49 @@
+---
+/**
+ * HighlightText Component
+ *
+ * Creates a marker-style skewed highlight behind text for emphasis.
+ * Commonly used in hero sections and headings to draw attention.
+ *
+ * @example
+ * <HighlightText color="accent">boost your rankings</HighlightText>
+ * <HighlightText color="primary" style="bold">trusted experts</HighlightText>
+ * <HighlightText color="#FCC75B">custom color</HighlightText>
+ */
+
+export interface Props {
+  /** Predefined brand color variants or custom hex color */
+  color?: 'primary' | 'secondary' | 'accent' | 'yellow' | string;
+  /** Style intensity of the highlight */
+  style?: 'default' | 'bold' | 'subtle' | 'full';
+  /** Additional CSS classes */
+  class?: string;
+  /** HTML element to render (default: span) */
+  as?: 'span' | 'mark' | 'strong' | 'em';
+}
+
+const {
+  color = 'accent',
+  style = 'default',
+  class: className = '',
+  as: Element = 'span',
+} = Astro.props;
+
+// Build CSS classes based on props
+const baseClass = 'text-highlight';
+const colorClass = ['primary', 'secondary', 'accent', 'yellow'].includes(color)
+  ? `text-highlight-${color}`
+  : '';
+const styleClass = style !== 'default' ? `text-highlight-${style}` : '';
+
+// If custom color (hex), use inline style
+const customColorStyle = !['primary', 'secondary', 'accent', 'yellow'].includes(color)
+  ? `--hl-color: ${color};`
+  : '';
+
+const classes = [baseClass, colorClass, styleClass, className].filter(Boolean).join(' ');
+---
+
+<Element class={classes} style={customColorStyle}>
+  <slot />
+</Element>

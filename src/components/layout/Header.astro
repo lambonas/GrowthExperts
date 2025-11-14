@@ -6,36 +6,38 @@ import logo from '../../assets/logo.png';
 const navItems = [
   {
     label: 'Services',
-    href: '/seo-services',
+    href: '/services/',
     dropdown: [
-      { label: 'Local SEO', href: '/local-seo' },
-      { label: 'Small Business SEO', href: '/small-business-seo' },
-      { label: 'Enterprise SEO', href: '/enterprise-seo' },
-      { label: 'Technical SEO', href: '/technical-seo' },
-      { label: 'Content Marketing', href: '/content-marketing' },
-      { label: 'Link Building', href: '/link-building' },
-      { label: 'SEO Audit', href: '/seo-audit' },
-      { label: 'E-commerce SEO', href: '/ecommerce-seo' },
+      { label: 'Local SEO', href: '/local-seo/' },
+      { label: 'Small Business SEO', href: '/small-business-seo/' },
+      { label: 'Enterprise SEO', href: '/enterprise-seo/' },
+      { label: 'Technical SEO', href: '/technical-seo/' },
+      { label: 'Content Marketing', href: '/content-marketing/' },
+      { label: 'Link Building', href: '/link-building/' },
+      { label: 'SEO Audit', href: '/seo-audit/' },
+      { label: 'E-commerce SEO', href: '/ecommerce-seo/' },
     ],
   },
   {
     label: 'Industries',
-    href: '/industries',
+    href: '/industries/',
     dropdown: [
-      { label: 'Accountant SEO', href: '/accountant-seo' },
-      { label: 'Childcare SEO', href: '/childcare-seo' },
-      { label: 'Dental SEO', href: '/dental-seo' },
-      { label: 'Electrician SEO', href: '/electrician-seo' },
-      { label: 'Lawyer SEO', href: '/lawyer-seo' },
-      { label: 'Mortgage Broker SEO', href: '/mortgage-broker-seo' },
-      { label: 'Plumber SEO', href: '/plumber-seo' },
-      { label: 'Podiatry SEO', href: '/podiatry-seo' },
-      { label: 'Real Estate SEO', href: '/real-estate-seo' },
+      { label: 'Accountant SEO', href: '/accountant-seo/' },
+      { label: 'Childcare SEO', href: '/childcare-seo/' },
+      { label: 'Dental SEO', href: '/dental-seo/' },
+      { label: 'Electrician SEO', href: '/electrician-seo/' },
+      { label: 'Healthcare SEO', href: '/healthcare-seo/' },
+      { label: 'Lawyer SEO', href: '/lawyer-seo/' },
+      { label: 'Mortgage Broker SEO', href: '/mortgage-broker-seo/' },
+      { label: 'Physio SEO', href: '/physio-seo/' },
+      { label: 'Plumber SEO', href: '/plumber-seo/' },
+      { label: 'Podiatry SEO', href: '/podiatry-seo/' },
+      { label: 'Real Estate SEO', href: '/real-estate-seo/' },
     ],
   },
-  { label: 'About', href: '/about' },
-  { label: 'FAQ', href: '/faq' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'About', href: '/about/' },
+  { label: 'FAQ', href: '/faq/' },
+  { label: 'Contact', href: '/contact/' },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -91,7 +93,7 @@ const currentPath = Astro.url.pathname;
 
       <!-- CTA Button - Enhanced Brand Accent -->
       <div class="hidden lg:block">
-        <a href="/contact" class="inline-flex items-center px-6 py-2.5 bg-gradient-to-r from-accent-500 to-accent-600 text-white font-semibold rounded-lg hover:from-accent-600 hover:to-accent-700 hover:shadow-lg hover:shadow-accent-200 transform hover:-translate-y-0.5 transition-all duration-200">
+        <a href="/contact/" class="inline-flex items-center px-6 py-2.5 bg-gradient-to-r from-accent-500 to-accent-600 text-white font-semibold rounded-lg hover:from-accent-600 hover:to-accent-700 hover:shadow-lg hover:shadow-accent-200 transform hover:-translate-y-0.5 transition-all duration-200">
           Get Free Audit
           <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -141,7 +143,7 @@ const currentPath = Astro.url.pathname;
         ))
       }
       <div class="mt-4">
-        <a href="/contact" class="inline-flex items-center justify-center w-full px-6 py-3 bg-gradient-to-r from-accent-500 to-accent-600 text-white font-semibold rounded-lg hover:from-accent-600 hover:to-accent-700 hover:shadow-lg transition-all">
+        <a href="/contact/" class="inline-flex items-center justify-center w-full px-6 py-3 bg-gradient-to-r from-accent-500 to-accent-600 text-white font-semibold rounded-lg hover:from-accent-600 hover:to-accent-700 hover:shadow-lg transition-all">
           Get Free Audit
           <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />

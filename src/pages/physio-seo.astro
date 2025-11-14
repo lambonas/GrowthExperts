@@ -1,0 +1,510 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import HeroHome from '../components/sections/HeroHome.astro';
+import ClientLogoCarousel from '../components/sections/ClientLogoCarousel.astro';
+import CaseStudiesSection from '../components/sections/CaseStudiesSection.astro';
+import CTASection from '../components/sections/CTASection.astro';
+import SchemaOrg from '../components/seo/SchemaOrg.astro';
+import AccordionItem from '../components/ui/AccordionItem.astro';
+
+// ===================================
+// PAGE FRONTMATTER CONFIGURATION
+// Edit these values to customize the page content
+// ===================================
+
+// SEO Meta Data
+const seo = {
+  title: 'Physio SEO Services | Attract More Patients in 2025',
+  description: 'Expert SEO for physiotherapists and physio clinics. Dominate local search, attract new patients, and grow your physiotherapy practice with our proven SEO strategies.',
+  keywords: [
+    'physio seo',
+    'seo for physio',
+    'physio website seo',
+    'seo for physiotherapist',
+    'physiotherapy seo',
+    'seo for physiotherapists',
+    'physio clinic seo',
+    'physiotherapy practice seo',
+    'seo for physios'
+  ],
+  canonical: 'https://growthexperts.com.au/physio-seo',
+  ogImage: '/images/team-hero.png',
+  ogType: 'website',
+};
+
+// Hero Section
+const hero = {
+  title: 'Physio SEO That Fills Your Appointment Book',
+  subtitle: 'Attract more patients searching for physiotherapy services in your area. Our proven SEO strategies help Australian physio clinics dominate local search and grow their patient base.',
+  primaryCTA: {
+    text: 'Free Strategy Session',
+    href: '/contact'
+  },
+};
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Services', href: '/services' },
+  { label: 'Physio SEO', href: '/physio-seo' },
+];
+
+// Section Visibility (show/hide sections)
+const sections = {
+  showClientLogos: true,
+  showCaseStudies: true,
+  showWhatsIncluded: true,
+  showProcess: true,
+  showFinalCTA: true,
+};
+
+// Final CTA Section
+const finalCTA = {
+  title: 'Ready to Attract More Patients and Grow Your Physiotherapy Practice?',
+  subtitle: 'Get your free physio SEO audit and discover exactly how we\'ll help you dominate local search, attract new patients, and fill your appointment book. No obligations, just actionable insights.',
+  primaryCTA: {
+    text: 'Free Strategy Session',
+    href: '/contact'
+  },
+};
+---
+
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  keywords={seo.keywords}
+  canonical={seo.canonical}
+  ogImage={seo.ogImage}
+  ogType={seo.ogType}
+  schema={{
+    type: 'Service',
+    data: {
+      '@type': 'Service',
+      name: 'Physio SEO Services',
+      description: seo.description,
+      provider: {
+        '@type': 'Organization',
+        name: 'Digital Growth Experts',
+      },
+      areaServed: {
+        '@type': 'Country',
+        name: 'Australia',
+      },
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Physio SEO Services',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Physiotherapy Website Optimization',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Local SEO for Physio Clinics',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Physio Content Marketing',
+            },
+          },
+        ],
+      },
+    },
+  }}
+>
+  <!-- Add LocalBusiness schema for better local SEO -->
+  <SchemaOrg
+    slot="head"
+    type="LocalBusiness"
+    data={{
+      name: 'Digital Growth Experts',
+      description: 'Expert SEO services for physiotherapists and physio clinics across Australia',
+      image: `${Astro.site}images/logo.png`,
+    }}
+  />
+
+  <Header />
+
+  <main id="main-content">
+    <!-- Hero Section - Conversion-focused with clear value proposition -->
+    <HeroHome
+      title={hero.title}
+      subtitle={hero.subtitle}
+      primaryCTA={hero.primaryCTA}
+      secondaryCTA={hero.secondaryCTA}
+    />
+
+    <!-- Social Proof - Client Logos -->
+    {sections.showClientLogos && <ClientLogoCarousel />}
+
+    <!-- Proven Results Section - Case Studies with Real Data -->
+    {sections.showCaseStudies && <CaseStudiesSection />}
+
+    <!-- What's Included Section - Service Details -->
+    {sections.showWhatsIncluded && (
+    <section class="section-padding bg-gray-50">
+      <div class="container-custom">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold font-display text-gray-900 mb-4">
+            What's Included in Our Physio SEO Services
+          </h2>
+          <p class="text-lg md:text-xl text-gray-600">
+            Everything you need to dominate local search and attract more patients to your physiotherapy clinic.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <!-- Service 1 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-primary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Comprehensive SEO Audit</h3>
+            <p class="text-gray-600 mb-4">
+              In-depth analysis of your physiotherapy website's current SEO performance, technical issues, and opportunities to improve your search rankings and attract more patients.
+            </p>
+          </div>
+
+          <!-- Service 2 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-secondary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-secondary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Local SEO Optimization</h3>
+            <p class="text-gray-600 mb-4">
+              Complete local SEO strategy including Google Business Profile optimization, local citations, and review management to help potential patients find your physio clinic.
+            </p>
+          </div>
+
+          <!-- Service 3 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-accent-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Physio Content Strategy</h3>
+            <p class="text-gray-600 mb-4">
+              Expert content creation targeting relevant keywords for physiotherapy services, treatment types, and conditions to establish your practice as the go-to authority.
+            </p>
+          </div>
+
+          <!-- Service 4 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-primary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Technical SEO Enhancement</h3>
+            <p class="text-gray-600 mb-4">
+              Fix critical technical SEO issues affecting your physiotherapy website including site speed, mobile optimization, structured data, and crawlability improvements.
+            </p>
+          </div>
+
+          <!-- Service 5 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-secondary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-secondary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Strategic Link Building</h3>
+            <p class="text-gray-600 mb-4">
+              Build high-quality backlinks from health and wellness websites, local directories, and industry associations to boost your physiotherapy practice's authority.
+            </p>
+          </div>
+
+          <!-- Service 6 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-accent-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Performance Tracking & Reporting</h3>
+            <p class="text-gray-600 mb-4">
+              Monthly SEO campaign performance reports showing keyword rankings, organic traffic growth, and most importantly, how many new patients you're attracting.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    )}
+
+    <!-- Long-form Content Section - Educational/Authority Building -->
+    <!-- Main Content Section - SEO-Optimized for Physio SEO -->
+    <section class="section-padding bg-white">
+      <div class="container-custom">
+        <div class="max-w-4xl mx-auto">
+          <!-- H1 Header -->
+          <div class="text-center mb-12">
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold font-display text-gray-900 mb-4">
+              Physio SEO: Attract More Patients and Grow Your Physiotherapy Practice
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 leading-relaxed">
+              Proven SEO strategies that help Australian physiotherapy clinics dominate local search and fill appointment books.
+            </p>
+          </div>
+
+          <!-- Introduction with Priority Keywords -->
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              In today's digital landscape, <strong>physiotherapy</strong> practices can't rely solely on word-of-mouth referrals. When <strong>potential patients</strong> search for treatment, they turn to <strong>search engines</strong> to find qualified <strong>physiotherapists</strong> in their area. This is where <strong>SEO for physiotherapists</strong> becomes essential. Whether someone's searching for sports injury treatment, post-surgery rehabilitation, or chronic pain management, your <strong>physiotherapy clinic</strong> needs to appear at the top of <strong>search results</strong> to capture these high-intent patients.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Our specialist <strong>physio SEO</strong> services help <strong>physiotherapy practices</strong> across Australia <strong>rank higher</strong> in <strong>search engine results</strong> and attract more <strong>new patients</strong>. From comprehensive <strong>keyword research</strong> to <strong>technical SEO</strong> improvements and strategic content creation, we implement proven <strong>SEO strategies</strong> that deliver measurable results. Our <strong>SEO agency</strong> understands the unique challenges physiotherapists face when competing for <strong>online visibility</strong> in an increasingly crowded digital marketplace.
+            </p>
+          </div>
+
+          <!-- H2: Why SEO for Physio Matters -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            Why SEO for Physio Clinics Matters More Than Ever
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              The way patients find healthcare providers has fundamentally changed. Before booking an appointment, <strong>potential patients</strong> conduct extensive online research, comparing <strong>physiotherapy services</strong>, reading reviews, and evaluating expertise. If your <strong>physiotherapy website</strong> isn't showing up on the first page of Google, you're missing out on valuable patient enquiries every single day. Studies show that 75% of users never scroll past the first page of <strong>search engine results</strong>, making top rankings absolutely critical for patient acquisition.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              <strong>Local SEO</strong> is particularly crucial for <strong>physio</strong> clinics since most patients prefer treatment close to home or work. When someone searches for a <strong>physiotherapist</strong> near them, <strong>search engines</strong> prioritise businesses with strong <strong>local search</strong> signals. Our <strong>SEO for physios</strong> focuses heavily on <strong>local search results</strong>, ensuring your practice appears prominently when nearby patients are actively looking for <strong>physiotherapy services</strong>. This targeted approach attracts patients who are ready to book, not just browsing.
+            </p>
+          </div>
+
+          <!-- H2: Physio Website SEO Fundamentals -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            Physio Website SEO: Building a Strong Foundation
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Your <strong>physiotherapy website</strong> is your digital storefront, and it needs to be optimised for both <strong>search engines</strong> and <strong>user experience</strong>. Our <strong>physio website SEO</strong> services start with a comprehensive <strong>audit</strong> that identifies technical issues preventing you from <strong>ranking</strong> well. We analyse site speed, mobile responsiveness, URL structure, and internal linking to ensure your website meets current <strong>search engine optimisation</strong> standards. These technical foundations are essential before implementing any advanced <strong>SEO strategies</strong>.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Beyond technical fixes, we <strong>optimise your website</strong> structure to make it easy for both patients and search engines to navigate. This includes creating dedicated service pages for each <strong>physiotherapy service</strong> you offer, from sports <strong>physiotherapy</strong> to paediatric treatment. Each page targets <strong>relevant keywords</strong> that patients actually use when searching. We also implement schema markup to help <strong>search engines</strong> understand your content better, increasing your chances of appearing in rich snippets and featured positions on the <strong>search engine results page</strong>.
+            </p>
+          </div>
+
+          <!-- H2: SEO for Physiotherapist Content Strategy -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            SEO for Physiotherapist: Content That Converts Searchers into Patients
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Content is at the heart of any successful <strong>SEO campaign</strong>. Our <strong>SEO services</strong> include developing a comprehensive content strategy tailored to your <strong>physiotherapy practice</strong>. We create <strong>high-quality</strong> content that addresses the specific questions and concerns your <strong>target audience</strong> has. This might include blog posts about injury prevention, detailed guides on treatment approaches, or FAQs about specific conditions. By providing valuable information, you establish authority and build trust with <strong>potential patients</strong> before they even contact you.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Our <strong>keyword research</strong> identifies the exact <strong>search terms</strong> patients use when looking for <strong>physiotherapy</strong> help. Rather than targeting broad, competitive terms, we focus on specific, high-intent <strong>keywords</strong> that indicate someone is ready to book treatment. For example, searches like "physiotherapist for lower back pain near me" or "sports injury physio" signal immediate need. We <strong>tailor</strong> your content to capture these valuable searches, ensuring your <strong>online presence</strong> attracts patients at the right moment in their decision-making journey.
+            </p>
+          </div>
+
+          <!-- H2: Local SEO for Physiotherapy Practices -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            Local SEO Strategies to Dominate Your Service Area
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              <strong>Local SEO</strong> is the most powerful tool for attracting nearby patients to your <strong>physiotherapy clinic</strong>. We <strong>optimise</strong> your Google Business Profile (formerly Google My Business) to ensure you appear in the coveted local map pack when patients search for <strong>physio</strong> services in your area. This includes selecting the right categories, writing compelling descriptions with <strong>relevant keywords</strong>, adding photos of your clinic, and maintaining consistent business information across all platforms. These elements signal to <strong>search engines</strong> that your practice is legitimate, trustworthy, and relevant to local searches.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Citation building and <strong>link building</strong> form another critical component of our <strong>local SEO</strong> approach. We ensure your <strong>physiotherapy practice</strong> is listed accurately on health directories, local business listings, and industry-specific platforms. These citations reinforce your location and specialties to <strong>search engines</strong>. Additionally, we pursue strategic <strong>link building</strong> opportunities from health and wellness websites, local sports clubs, and medical associations. These <strong>high-quality</strong> backlinks boost your domain authority and improve your <strong>visibility</strong> in <strong>local search results</strong>.
+            </p>
+          </div>
+
+          <!-- H2: Comprehensive SEO Campaign Management -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            How Our Physio SEO Services Drive Practice Growth
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Our <strong>SEO services</strong> for <strong>physiotherapists</strong> go beyond basic optimisation. We develop comprehensive campaigns that integrate <strong>technical SEO</strong>, content <strong>marketing strategies</strong>, and <strong>digital marketing</strong> best practices. Every <strong>SEO campaign</strong> begins with thorough <strong>competitor analysis</strong> to understand what's working in your market. We examine what your successful competitors are doing, identify gaps in their strategies, and find opportunities for your practice to stand out. This competitive intelligence informs our entire approach and helps us create strategies that deliver superior results.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              We don't just implement strategies and walk away. Our <strong>SEO agency</strong> provides ongoing monitoring, testing, and refinement to ensure your <strong>online visibility</strong> continues improving. We track your <strong>ranking</strong> for target <strong>keywords</strong>, monitor traffic from <strong>search engines</strong>, and most importantly, measure how many <strong>new patients</strong> you're attracting through organic search. Regular reporting keeps you informed about what's working and where we're focusing our efforts to <strong>grow your physiotherapy practice</strong>. This data-driven approach ensures every dollar invested in <strong>SEO for physiotherapists</strong> delivers measurable return on investment.
+            </p>
+          </div>
+
+          <!-- H2: Digital Marketing Integration -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            Integrating SEO with Your Digital Marketing Strategy
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              While <strong>SEO for physios</strong> is powerful on its own, it works even better as part of a broader <strong>digital marketing</strong> strategy. We help integrate your <strong>search engine optimisation</strong> efforts with other <strong>online marketing</strong> channels to create a cohesive patient acquisition system. This might include aligning your content strategy with social media, ensuring consistency between paid search ads and organic results, or using SEO insights to inform your email marketing. This integrated approach amplifies results across all channels and creates multiple touchpoints with <strong>potential patients</strong>.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              The ultimate goal of our <strong>SEO strategies</strong> is to <strong>grow your physiotherapy practice</strong> by attracting more qualified patients who are genuinely interested in your services. By focusing on the right <strong>keywords</strong>, creating valuable content, and building strong <strong>local search</strong> presence, we ensure your practice appears in front of people actively seeking help. Combined with excellent patient care, this steady stream of <strong>new patients</strong> from organic search becomes the foundation for sustainable practice growth without relying on expensive advertising that stops working the moment you stop paying.
+            </p>
+          </div>
+
+          <!-- FAQ Section -->
+          <div class="mb-12">
+            <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-8">
+              Frequently Asked Questions About Physio SEO
+            </h2>
+
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+              <AccordionItem
+                question="How long does it take to see results from physio SEO?"
+                answer="<p class='text-gray-700'>Most <strong>physiotherapy practices</strong> begin seeing improvements in <strong>online visibility</strong> and <strong>search engine results</strong> within 3-6 months of starting an <strong>SEO campaign</strong>. However, the timeline varies based on your current website status, local competition, and the consistency of <strong>SEO strategies</strong> implemented. Quick wins from <strong>technical SEO</strong> fixes and Google Business Profile optimisation often appear within weeks, while building authority through <strong>link building</strong> and content creation takes longer but delivers lasting results. The investment in <strong>SEO for physiotherapists</strong> compounds over time, with most practices seeing significant patient growth within 6-12 months.</p>"
+                id="faq-physio-seo-1"
+                isFirst={true}
+              />
+              <AccordionItem
+                question="What makes physio website SEO different from general SEO?"
+                answer="<p class='text-gray-700'><strong>Physio website SEO</strong> requires specialised knowledge of the healthcare industry, patient search behaviour, and medical terminology. Our <strong>SEO agency</strong> understands the specific <strong>search terms</strong> <strong>potential patients</strong> use when looking for <strong>physiotherapy services</strong>, from condition-specific searches to treatment-type queries. We also navigate healthcare advertising regulations, ensure content maintains professional standards, and implement schema markup specific to medical practices. Additionally, <strong>local SEO</strong> is crucial since most patients seek nearby providers, requiring targeted <strong>marketing strategies</strong> that general SEO doesn't address as thoroughly.</p>"
+                id="faq-physio-seo-2"
+              />
+              <AccordionItem
+                question="How do you choose the right keywords for my physiotherapy practice?"
+                answer="<p class='text-gray-700'>Our <strong>keyword research</strong> process combines multiple data sources to identify <strong>relevant keywords</strong> that will attract <strong>new patients</strong>. We analyse what patients are actually searching for, examine <strong>competitor</strong> strategies, and identify gaps in the market. We focus on high-intent <strong>keywords</strong> that indicate someone is ready to book treatment, such as condition-specific searches and location-based queries. We also <strong>tailor</strong> keywords to your specific services and specialties, ensuring we target patients seeking exactly what your <strong>physiotherapy clinic</strong> offers. This strategic approach maximises the return from your <strong>SEO campaign</strong> by attracting qualified patients rather than just traffic.</p>"
+                id="faq-physio-seo-3"
+              />
+              <AccordionItem
+                question="Can SEO really help me compete with larger physiotherapy clinics?"
+                answer="<p class='text-gray-700'>Absolutely. Strategic <strong>SEO for physios</strong> levels the playing field by allowing smaller <strong>physiotherapy practices</strong> to compete effectively against larger chains. While big clinics might have bigger budgets, they often have generic websites that don't target specific local areas or specialties well. Our <strong>SEO strategies</strong> help you dominate niche areas and <strong>local search results</strong> where patients are actually looking. By creating <strong>high-quality</strong> content targeting specific conditions, building strong <strong>local SEO</strong> presence, and focusing on excellent <strong>user experience</strong>, smaller practices often outperform larger competitors in <strong>search engine results</strong> for their target areas and specialties.</p>"
+                id="faq-physio-seo-4"
+              />
+              <AccordionItem
+                question="What's included in your ongoing SEO services for physiotherapists?"
+                answer="<p class='text-gray-700'>Our ongoing <strong>SEO services</strong> include monthly <strong>technical SEO</strong> monitoring and fixes, fresh content creation targeting new <strong>keywords</strong>, continuous <strong>link building</strong>, Google Business Profile management, review monitoring, <strong>competitor analysis</strong>, and comprehensive performance reporting. We track your <strong>ranking</strong> for target <strong>keywords</strong>, monitor traffic from <strong>search engines</strong>, and measure patient acquisition from organic search. Regular strategy sessions ensure we're adapting to algorithm changes and market shifts. This ongoing approach is essential because <strong>SEO for physiotherapists</strong> isn't a one-time project but rather continuous work to maintain and improve your <strong>visibility</strong> in an ever-changing digital landscape.</p>"
+                id="faq-physio-seo-5"
+                isLast={true}
+              />
+            </div>
+          </div>
+
+          <!-- Conclusion Section -->
+          <div class="prose prose-lg max-w-none">
+            <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+              Start Attracting More Patients Today
+            </h2>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Don't let competing <strong>physiotherapy clinics</strong> capture patients who should be booking with you. Our proven <strong>physio SEO</strong> services help Australian <strong>physiotherapy practices</strong> dominate <strong>local search</strong> and attract a steady stream of <strong>new patients</strong> seeking treatment. From comprehensive <strong>audit</strong> and <strong>technical SEO</strong> fixes to strategic content creation and <strong>link building</strong>, we handle every aspect of your <strong>online presence</strong> so you can focus on what you do best: helping patients recover and thrive.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Whether you're a solo <strong>physiotherapist</strong> looking to <strong>grow your physiotherapy practice</strong> or a multi-location clinic wanting to improve <strong>online visibility</strong>, our <strong>SEO agency</strong> has the expertise to deliver results. We understand the unique challenges <strong>physiotherapists</strong> face in the digital landscape and create customised <strong>SEO strategies</strong> tailored to your specific goals, <strong>target audience</strong>, and competitive environment. Our data-driven approach ensures every element of your <strong>SEO campaign</strong> is working to attract more patients and increase bookings.
+            </p>
+            <p class="text-gray-700 leading-relaxed">
+              Ready to stop losing <strong>potential patients</strong> to competitors and start filling your appointment book with qualified enquiries? Contact our specialist <strong>SEO agency</strong> today for a free consultation and discover exactly how we'll help you dominate <strong>search results</strong> for <strong>physiotherapy services</strong> in your area. Let's work together to transform your <strong>online marketing</strong> and build the thriving practice you deserve.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    {sections.showFinalCTA && (
+      <CTASection
+        title={finalCTA.title}
+        subtitle={finalCTA.subtitle}
+        primaryCTA={finalCTA.primaryCTA}
+        secondaryCTA={finalCTA.secondaryCTA}
+      />
+    )}
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .section-padding {
+    padding: 5rem 0;
+  }
+
+  @media (min-width: 768px) {
+    .section-padding {
+      padding: 7rem 0;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .section-padding {
+      padding: 8rem 0;
+    }
+  }
+</style>

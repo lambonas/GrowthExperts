@@ -15,7 +15,7 @@ export interface Props {
 const {
   title = 'SEO Services That Drive Real Results',
   subtitle = 'We help Australian businesses dominate search rankings and attract qualified leads through data-driven SEO strategies. Get more traffic, more leads, and more revenue.',
-  primaryCTA = { text: 'Get Your Free SEO Audit', href: '/contact' },
+  primaryCTA = { text: 'Free Strategy Session', href: '/contact' },
   secondaryCTA,
 } = Astro.props;
 ---
@@ -33,8 +33,8 @@ const {
       <!-- Left Column: Content -->
       <div class="text-center lg:text-left animate-fade-in">
         <!-- Main Headline -->
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-          {title}
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold font-display text-gray-900 mb-6 leading-tight">
+          <slot name="title">{title}</slot>
         </h1>
 
         <!-- Subtitle -->
@@ -219,23 +219,28 @@ const {
 
   @media (max-width: 640px) {
     .team-image-container {
-      height: 450px;
+      height: 400px;
     }
 
-    /* Stack badges vertically on mobile for better readability */
+    /* Position badges BELOW image on mobile to prevent overlap */
     .review-badge-1 {
+      position: relative;
       top: auto;
-      bottom: 240px;
-      left: 12px;
-      right: 12px;
-      max-width: calc(100% - 24px);
+      bottom: auto;
+      left: auto;
+      right: auto;
+      max-width: 100%;
+      margin-top: 16px;
     }
 
     .review-badge-2 {
-      bottom: 12px;
-      left: 12px;
-      right: 12px;
-      max-width: calc(100% - 24px);
+      position: relative;
+      top: auto;
+      bottom: auto;
+      left: auto;
+      right: auto;
+      max-width: 100%;
+      margin-top: 12px;
     }
 
     .review-badge-overlay {

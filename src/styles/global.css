@@ -138,6 +138,59 @@
   .btn-secondary-enhanced {
     @apply btn border-2 border-primary-500 text-primary-700 bg-white hover:bg-primary-500 hover:text-white hover:shadow-xl hover:shadow-primary-100 hover:border-primary-600 active:scale-95;
   }
+
+  /* === TEXT HIGHLIGHT EFFECTS === */
+
+  /* Base highlight text - Creates marker-style highlight behind text */
+  .text-highlight {
+    @apply relative inline-block whitespace-nowrap bg-transparent;
+  }
+
+  /* The highlight shape using ::before pseudo-element */
+  .text-highlight::before {
+    content: "";
+    @apply absolute -z-10 rounded-sm;
+    left: -0.15em;
+    right: -0.1em;
+    bottom: 0em;
+    height: 0.6em;
+    background: var(--hl-color, #FFA708);
+    transform: skewX(-14deg);
+    transform-origin: left bottom;
+  }
+
+  /* Color variants - Use hardcoded hex values to prevent purging */
+  .text-highlight-primary {
+    --hl-color: #A3D0EB;
+  }
+
+  .text-highlight-secondary {
+    --hl-color: #A3E7C3;
+  }
+
+  .text-highlight-accent {
+    --hl-color: #FFD266;
+  }
+
+  .text-highlight-yellow {
+    --hl-color: #FCC75B;
+  }
+
+  /* Style variants */
+  .text-highlight-bold::before {
+    height: 0.75em;
+    bottom: -0.05em;
+  }
+
+  .text-highlight-subtle::before {
+    height: 0.4em;
+    opacity: 0.6;
+  }
+
+  .text-highlight-full::before {
+    height: 100%;
+    bottom: 0;
+  }
 }
 
 @layer utilities {
