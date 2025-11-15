@@ -28,7 +28,18 @@ const {
 } = Astro.props;
 
 const site = Astro.site || 'https://growthexperts.com.au';
-const currentUrl = canonical || new URL(Astro.url.pathname, site).href;
+
+// Ensure canonical URLs always have trailing slashes to match trailingSlash: 'always' config
+const normalizeUrl = (url: string): string => {
+  // If URL is provided and doesn't end with a trailing slash, add one
+  if (url && !url.endsWith('/') && !url.match(/\.[a-z]+$/i)) {
+    return url + '/';
+  }
+  return url;
+};
+
+const baseUrl = canonical || new URL(Astro.url.pathname, site).href;
+const currentUrl = normalizeUrl(baseUrl);
 const fullTitle = `${title} | Digital Growth Experts`;
 const ogImageUrl = new URL(ogImage, site).href;
 
