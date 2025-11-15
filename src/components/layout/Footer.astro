@@ -12,6 +12,13 @@ const footerLinks = {
     { label: 'Content Marketing', href: '/content-marketing/' },
     { label: 'Link Building', href: '/link-building/' },
   ],
+  industries: [
+    { label: 'Podiatry SEO', href: '/podiatry-seo/' },
+    { label: 'Childcare SEO', href: '/childcare-seo/' },
+    { label: 'Physio SEO', href: '/physio-seo/' },
+    { label: 'Dental SEO', href: '/dental-seo/' },
+    { label: 'Healthcare SEO', href: '/healthcare-seo/' },
+  ],
   company: [
     { label: 'About Us', href: '/about/' },
     { label: 'Contact', href: '/contact/' },
@@ -110,9 +117,9 @@ const contactInfo = {
       </div>
     </div>
 
-    <!-- Streamlined 3-Column Footer Links -->
+    <!-- Streamlined 4-Column Footer Links -->
     <div class="py-12 lg:py-16">
-      <div class="grid md:grid-cols-3 gap-8 mb-12">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
 
         <!-- Services Column -->
         <div>
@@ -120,6 +127,25 @@ const contactInfo = {
           <ul class="space-y-3">
             {
               footerLinks.services.map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    class="text-neutral-700 hover:text-primary-600 transition-colors font-medium"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <!-- Industries Column -->
+        <div>
+          <h3 class="font-bold font-display text-lg mb-4 text-primary-700">Industries</h3>
+          <ul class="space-y-3">
+            {
+              footerLinks.industries.map((link) => (
                 <li>
                   <a
                     href={link.href}

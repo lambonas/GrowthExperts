@@ -7,6 +7,7 @@ import ClientLogoCarousel from '../components/sections/ClientLogoCarousel.astro'
 import CaseStudiesSection from '../components/sections/CaseStudiesSection.astro';
 import CTASection from '../components/sections/CTASection.astro';
 import SchemaOrg from '../components/seo/SchemaOrg.astro';
+import AccordionItem from '../components/ui/AccordionItem.astro';
 
 // ===================================
 // PAGE FRONTMATTER CONFIGURATION
@@ -69,6 +70,66 @@ const finalCTA = {
     href: '/contact'
   },
 };
+
+// FAQ Data organized by category
+const faqCategories = [
+  {
+    id: 'seo-basics',
+    name: 'SEO Basics for Perth Businesses',
+    faqs: [
+      {
+        question: 'What makes your SEO company Perth different from other SEO agencies?',
+        answer: 'Our <strong>Perth SEO company</strong> stands out through our commitment to transparency, proven results, and no lock-in contracts. We\'re a <strong>local Perth SEO</strong> team who understands the Perth market intimately. Unlike other <strong>SEO companies in Perth</strong> that use cookie-cutter approaches, we develop customised <strong>Perth SEO strategies</strong> based on your specific business goals, industry, and competitive landscape. Our <strong>transparent SEO reporting</strong> ensures you always understand what we\'re doing and why it matters for your business. We earn your business every month by delivering <strong>SEO results</strong> that drive real revenue growth.',
+      },
+      {
+        question: 'How long does it take to see results from SEO services Perth?',
+        answer: '<strong>SEO is a long-term investment</strong>, and it\'s <strong>important to understand that SEO</strong> typically takes 3-6 months to show significant results. However, our <strong>best SEO company</strong> approach often delivers quick wins within the first month through <strong>technical SEO</strong> fixes and <strong>on-page SEO</strong> optimisations. The timeline for a <strong>successful SEO campaign</strong> depends on factors like your current website health, competitive landscape, and keyword difficulty. Our <strong>leading SEO company in Perth</strong> focuses on sustainable, long-term growth rather than risky shortcuts that could harm your online presence. <strong>SEO and Google</strong> algorithm updates mean we\'re constantly refining strategies to maintain and improve your rankings.',
+      },
+    ],
+  },
+  {
+    id: 'local-seo',
+    name: 'Local SEO Services',
+    faqs: [
+      {
+        question: 'What\'s included in your local SEO Perth services?',
+        answer: 'Our <strong>local SEO Perth</strong> services include comprehensive Google Business Profile optimisation, local citation building across 50+ directories, review generation and management, location-specific content creation, and local link building. We ensure your business appears in the local 3-pack, Google Maps, and local search results when Perth customers search for your <strong>product or service</strong>. Our <strong>dedicated local SEO</strong> strategies are perfect for <strong>Perth businesses</strong> with physical locations or service areas. We combine <strong>local seo</strong> tactics with broader <strong>SEO optimisation</strong> to help you dominate both local and organic search results.',
+      },
+      {
+        question: 'How do you optimise my Google Business Profile for Perth searches?',
+        answer: 'Our <strong>local SEO Perth</strong> team optimises every aspect of your Google Business Profile including business information accuracy, category selection, service area definition, photo optimisation, post creation, review management, and Q&A monitoring. We ensure your profile is fully optimised for <strong>Perth local searches</strong> and includes relevant keywords that help you rank in the local pack. This is a <strong>vital for SEO</strong> success in local markets where competition is fierce. Our strategies have helped dozens of <strong>Perth businesses</strong> achieve top 3 local pack rankings.',
+      },
+    ],
+  },
+  {
+    id: 'pricing-packages',
+    name: 'Pricing & Packages',
+    faqs: [
+      {
+        question: 'Do you offer SEO packages without lock-in contracts?',
+        answer: 'Yes! Unlike <strong>marketing agencies</strong> and <strong>digital marketing agencies</strong> that require <strong>lock-in SEO contracts</strong>, we offer flexible <strong>SEO packages</strong> with no long-term commitments. We\'re confident in our ability to deliver <strong>effective SEO</strong> results, so we don\'t need to lock you into lengthy contracts. Our <strong>top SEO company</strong> philosophy is simple: we earn your business every month through transparent communication and measurable results. If you\'re unhappy with our <strong>SEO services in Perth</strong>, you\'re free to leave. This approach keeps our <strong>team of SEO</strong> experts focused on delivering continuous value and maintaining the <strong>success of your SEO campaign</strong>.',
+      },
+      {
+        question: 'What do your SEO packages include?',
+        answer: 'Our <strong>SEO packages</strong> are comprehensive and include <strong>technical SEO audits</strong>, keyword research and strategy, <strong>on-page SEO</strong> optimisation, content creation, <strong>off-page SEO</strong> and link building, <strong>local SEO</strong> (if applicable), monthly reporting, and ongoing strategy refinement. Each package is customised based on your business size, competitive landscape, and goals. Whether you need foundational <strong>local SEO service</strong> or comprehensive <strong>national and international SEO</strong>, our <strong>SEO agency Perth</strong> delivers solutions that drive measurable results.',
+      },
+    ],
+  },
+  {
+    id: 'results-measurement',
+    name: 'Results & Reporting',
+    faqs: [
+      {
+        question: 'How do you measure the success of an SEO campaign in Perth?',
+        answer: 'Our <strong>SEO agency Perth</strong> measures success through multiple key performance indicators aligned with your business goals. We track keyword rankings for target terms, organic traffic growth, conversion rates, and ultimately, revenue generated from organic search. Our <strong>transparent SEO reporting</strong> includes detailed analytics showing exactly how <strong>SEO work</strong> is performing. We provide monthly reports that demonstrate ROI and explain <strong>every SEO strategy</strong> adjustment. Unlike <strong>top seo agency</strong> competitors who focus only on vanity metrics, we connect <strong>SEO results</strong> directly to business outcomes. Whether you need more phone calls, form submissions, or e-commerce sales, we measure what matters most to your business success.',
+      },
+      {
+        question: 'What kind of reporting do you provide?',
+        answer: 'Our <strong>SEO reporting</strong> is comprehensive yet easy to understand. You receive monthly reports showing keyword ranking movements, organic traffic trends, conversion data, backlink profile growth, technical health status, and completed work. We also provide 24/7 access to your analytics dashboard. Our <strong>transparent SEO</strong> approach means you\'ll never wonder what we\'re doing or why. Every report includes clear explanations of <strong>SEO strategies</strong>, what we accomplished, and what\'s planned for the next month. This level of transparency is what sets our <strong>Perth SEO agency</strong> apart from competitors.',
+      },
+    ],
+  },
+];
 ---
 
 <BaseLayout
@@ -79,54 +140,72 @@ const finalCTA = {
   ogImage={seo.ogImage}
   ogType={seo.ogType}
   schema={{
-    type: 'Service',
+    type: 'WebPage',
     data: {
-      '@type': 'Service',
-      name: 'SEO Services Perth',
-      description: seo.description,
-      provider: {
-        '@type': 'Organization',
-        name: 'Digital Growth Engine',
-      },
-      areaServed: {
-        '@type': 'City',
-        name: 'Perth',
-        '@id': 'https://en.wikipedia.org/wiki/Perth',
-      },
-      hasOfferCatalog: {
-        '@type': 'OfferCatalog',
-        name: 'SEO Services Perth',
-        itemListElement: [
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Technical SEO',
-            },
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'Service',
+          name: 'SEO Services Perth',
+          description: seo.description,
+          provider: {
+            '@type': 'Organization',
+            name: 'Digital Growth Engine',
           },
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Local SEO Perth',
-            },
+          areaServed: {
+            '@type': 'City',
+            name: 'Perth',
+            '@id': 'https://en.wikipedia.org/wiki/Perth',
           },
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'On-Page SEO',
-            },
+          hasOfferCatalog: {
+            '@type': 'OfferCatalog',
+            name: 'SEO Services Perth',
+            itemListElement: [
+              {
+                '@type': 'Offer',
+                itemOffered: {
+                  '@type': 'Service',
+                  name: 'Technical SEO',
+                },
+              },
+              {
+                '@type': 'Offer',
+                itemOffered: {
+                  '@type': 'Service',
+                  name: 'Local SEO Perth',
+                },
+              },
+              {
+                '@type': 'Offer',
+                itemOffered: {
+                  '@type': 'Service',
+                  name: 'On-Page SEO',
+                },
+              },
+              {
+                '@type': 'Offer',
+                itemOffered: {
+                  '@type': 'Service',
+                  name: 'Off-Page SEO',
+                },
+              },
+            ],
           },
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Off-Page SEO',
-            },
-          },
-        ],
-      },
+        },
+        {
+          '@type': 'FAQPage',
+          mainEntity: faqCategories.flatMap((category) =>
+            category.faqs.map((faq) => ({
+              '@type': 'Question',
+              name: faq.question,
+              acceptedAnswer: {
+                '@type': 'Answer',
+                text: faq.answer.replace(/<\/?strong>/g, ''),
+              },
+            }))
+          ),
+        },
+      ],
     },
   }}
 >
@@ -644,62 +723,73 @@ const finalCTA = {
 
     <!-- FAQ Section -->
     {sections.showFAQ && (
-    <section class="section-padding bg-gray-50">
-      <div class="container-custom">
-        <div class="max-w-4xl mx-auto">
-          <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold font-display text-gray-900 mb-4">
-              Frequently Asked Questions About SEO Perth
-            </h2>
-            <p class="text-lg text-gray-600">
-              Common questions from Perth businesses about our <strong>SEO services Perth</strong> solutions.
-            </p>
-          </div>
-
-          <div class="space-y-6">
-            <!-- FAQ 1 -->
-            <div class="bg-white p-8 rounded-xl shadow-md">
-              <h3 class="text-xl font-bold font-display text-gray-900 mb-3">What makes your SEO company Perth different from other SEO agencies?</h3>
-              <p class="text-gray-700 leading-relaxed">
-                Our <strong>Perth SEO company</strong> stands out through our commitment to transparency, proven results, and no lock-in contracts. We're a <strong>local Perth SEO</strong> team who understands the Perth market intimately. Unlike other <strong>SEO companies in Perth</strong> that use cookie-cutter approaches, we develop customised <strong>Perth SEO strategies</strong> based on your specific business goals, industry, and competitive landscape. Our <strong>transparent SEO reporting</strong> ensures you always understand what we're doing and why it matters for your business. We earn your business every month by delivering <strong>SEO results</strong> that drive real revenue growth.
-              </p>
-            </div>
-
-            <!-- FAQ 2 -->
-            <div class="bg-white p-8 rounded-xl shadow-md">
-              <h3 class="text-xl font-bold font-display text-gray-900 mb-3">How long does it take to see results from SEO services Perth?</h3>
-              <p class="text-gray-700 leading-relaxed">
-                <strong>SEO is a long-term investment</strong>, and it's <strong>important to understand that SEO</strong> typically takes 3-6 months to show significant results. However, our <strong>best SEO company</strong> approach often delivers quick wins within the first month through <strong>technical SEO</strong> fixes and <strong>on-page SEO</strong> optimisations. The timeline for a <strong>successful SEO campaign</strong> depends on factors like your current website health, competitive landscape, and keyword difficulty. Our <strong>leading SEO company in Perth</strong> focuses on sustainable, long-term growth rather than risky shortcuts that could harm your online presence. <strong>SEO and Google</strong> algorithm updates mean we're constantly refining strategies to maintain and improve your rankings.
-              </p>
-            </div>
-
-            <!-- FAQ 3 -->
-            <div class="bg-white p-8 rounded-xl shadow-md">
-              <h3 class="text-xl font-bold font-display text-gray-900 mb-3">What's included in your local SEO Perth services?</h3>
-              <p class="text-gray-700 leading-relaxed">
-                Our <strong>local SEO Perth</strong> services include comprehensive Google Business Profile optimisation, local citation building across 50+ directories, review generation and management, location-specific content creation, and local link building. We ensure your business appears in the local 3-pack, Google Maps, and local search results when Perth customers search for your <strong>product or service</strong>. Our <strong>dedicated local SEO</strong> strategies are perfect for <strong>Perth businesses</strong> with physical locations or service areas. We combine <strong>local seo</strong> tactics with broader <strong>SEO optimisation</strong> to help you dominate both local and organic search results.
-              </p>
-            </div>
-
-            <!-- FAQ 4 -->
-            <div class="bg-white p-8 rounded-xl shadow-md">
-              <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Do you offer SEO packages without lock-in contracts?</h3>
-              <p class="text-gray-700 leading-relaxed">
-                Yes! Unlike <strong>marketing agencies</strong> and <strong>digital marketing agencies</strong> that require <strong>lock-in SEO contracts</strong>, we offer flexible <strong>SEO packages</strong> with no long-term commitments. We're confident in our ability to deliver <strong>effective SEO</strong> results, so we don't need to lock you into lengthy contracts. Our <strong>top SEO company</strong> philosophy is simple: we earn your business every month through transparent communication and measurable results. If you're unhappy with our <strong>SEO services in Perth</strong>, you're free to leave. This approach keeps our <strong>team of SEO</strong> experts focused on delivering continuous value and maintaining the <strong>success of your SEO campaign</strong>.
-              </p>
-            </div>
-
-            <!-- FAQ 5 -->
-            <div class="bg-white p-8 rounded-xl shadow-md">
-              <h3 class="text-xl font-bold font-display text-gray-900 mb-3">How do you measure the success of an SEO campaign in Perth?</h3>
-              <p class="text-gray-700 leading-relaxed">
-                Our <strong>SEO agency Perth</strong> measures success through multiple key performance indicators aligned with your business goals. We track keyword rankings for target terms, organic traffic growth, conversion rates, and ultimately, revenue generated from organic search. Our <strong>transparent SEO reporting</strong> includes detailed analytics showing exactly how <strong>SEO work</strong> is performing. We provide monthly reports that demonstrate ROI and explain <strong>every SEO strategy</strong> adjustment. Unlike <strong>top seo agency</strong> competitors who focus only on vanity metrics, we connect <strong>SEO results</strong> directly to business outcomes. Whether you need more phone calls, form submissions, or e-commerce sales, we measure what matters most to your business success.
-              </p>
-            </div>
+    <>
+      <!-- Quick Navigation -->
+      <section class="py-8 bg-gray-50 border-b border-gray-200">
+        <div class="container-custom">
+          <div class="max-w-4xl mx-auto">
+            <p class="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-4 text-center">Jump to Section</p>
+            <nav aria-label="FAQ categories navigation" class="flex flex-wrap gap-3 justify-center">
+              {faqCategories.map((category) => (
+                <a
+                  href={`#${category.id}`}
+                  class="inline-flex items-center px-4 py-2 bg-white border-2 border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:border-primary-500 hover:text-primary-600 hover:bg-primary-50 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
+                >
+                  {category.name}
+                  <span class="ml-2 inline-flex items-center justify-center w-6 h-6 text-xs font-semibold text-primary-600 bg-primary-100 rounded-full">
+                    {category.faqs.length}
+                  </span>
+                </a>
+              ))}
+            </nav>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <!-- FAQ Content -->
+      <section class="section-padding bg-gray-50">
+        <div class="container-custom">
+          <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+              <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold font-display text-gray-900 mb-4">
+                Frequently Asked Questions About SEO Perth
+              </h2>
+              <p class="text-lg md:text-xl text-gray-600">
+                Common questions from Perth businesses about our <strong>SEO services Perth</strong> solutions.
+              </p>
+            </div>
+
+            {faqCategories.map((category, categoryIndex) => (
+              <div id={category.id} class="accordion-category mb-16 scroll-mt-24 last:mb-0">
+                <!-- Category Header -->
+                <div class="mb-8">
+                  <h2 class="text-3xl md:text-4xl font-bold font-display text-gray-900 mb-3">
+                    {category.name}
+                  </h2>
+                  <div class="w-20 h-1.5 bg-gradient-to-r from-primary-500 via-primary-400 to-secondary-500 rounded-full shadow-sm shadow-primary-200"></div>
+                </div>
+
+                <!-- FAQ Accordion Items -->
+                <div class="bg-white rounded-xl border-2 border-gray-100 shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
+                  {category.faqs.map((faq, faqIndex) => {
+                    const faqId = `faq-${categoryIndex}-${faqIndex}`;
+                    return (
+                      <AccordionItem
+                        id={faqId}
+                        question={faq.question}
+                        answer={faq.answer}
+                        isFirst={faqIndex === 0}
+                        isLast={faqIndex === category.faqs.length - 1}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
     )}
 
     <!-- Final CTA Section -->
@@ -733,3 +823,24 @@ const finalCTA = {
     }
   }
 </style>
+
+<script>
+  // Smooth scroll with offset for fixed header - FAQ category navigation
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener('click', function (e) {
+      const href = this.getAttribute('href');
+      if (href && href !== '#') {
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          const offset = 100; // Adjust based on your header height
+          const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth',
+          });
+        }
+      }
+    });
+  });
+</script>

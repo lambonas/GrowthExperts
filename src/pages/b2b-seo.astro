@@ -1,0 +1,513 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import HeroHome from '../components/sections/HeroHome.astro';
+import ClientLogoCarousel from '../components/sections/ClientLogoCarousel.astro';
+import CaseStudiesSection from '../components/sections/CaseStudiesSection.astro';
+import CTASection from '../components/sections/CTASection.astro';
+import SchemaOrg from '../components/seo/SchemaOrg.astro';
+import AccordionItem from '../components/ui/AccordionItem.astro';
+
+// ===================================
+// PAGE FRONTMATTER CONFIGURATION
+// Edit these values to customize the page content
+// ===================================
+
+// SEO Meta Data
+const seo = {
+  title: 'B2B SEO Services | Expert B2B SEO Company Sydney 2025',
+  description: 'Leading B2B SEO company specialising in B2B eCommerce SEO and B2B SaaS SEO strategies. Our B2B SEO consultant experts deliver results-driven B2B SEO services Sydney.',
+  keywords: [
+    'B2B SEO',
+    'b2b seo services',
+    'b2b seo company',
+    'b2b ecommerce seo',
+    'b2b saas seo',
+    'b2b seo consultant',
+    'b2b seo services sydney',
+    'b2b seo strategy'
+  ],
+  canonical: 'https://growthexperts.com.au/b2b-seo',
+  ogImage: '/images/team-hero.png',
+  ogType: 'website',
+};
+
+// Hero Section
+const hero = {
+  title: 'B2B SEO Services That Drive Quality Leads & Revenue',
+  subtitle: 'Dominate B2B search with strategic SEO built for complex buying journeys. Our proven B2B SEO strategies help Australian businesses attract decision-makers, build authority, and convert high-value leads.',
+  primaryCTA: {
+    text: 'Free Strategy Session',
+    href: '/contact'
+  },
+};
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Services', href: '/services' },
+  { label: 'B2B SEO', href: '/b2b-seo' },
+];
+
+// Section Visibility (show/hide sections)
+const sections = {
+  showClientLogos: true,
+  showCaseStudies: true,
+  showWhatsIncluded: true,
+  showProcess: true,
+  showFinalCTA: true,
+};
+
+// Final CTA Section
+const finalCTA = {
+  title: 'Ready to Dominate B2B Search in Your Industry?',
+  subtitle: 'Get your free B2B SEO audit and discover the exact strategies we\'ll use to drive quality leads, increase visibility, and establish your brand as the industry authority. No obligations, just actionable insights tailored to your B2B business.',
+  primaryCTA: {
+    text: 'Free Strategy Session',
+    href: '/contact'
+  },
+};
+---
+
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  keywords={seo.keywords}
+  canonical={seo.canonical}
+  ogImage={seo.ogImage}
+  ogType={seo.ogType}
+  schema={{
+    type: 'Service',
+    data: {
+      '@type': 'Service',
+      name: 'B2B SEO Services',
+      description: seo.description,
+      provider: {
+        '@type': 'Organization',
+        name: 'Digital Growth Experts',
+      },
+      areaServed: {
+        '@type': 'Country',
+        name: 'Australia',
+      },
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'B2B SEO Services',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'B2B Keyword Research & Strategy',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'B2B Content Marketing',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Technical SEO for B2B',
+            },
+          },
+        ],
+      },
+    },
+  }}
+>
+  <!-- Add Organization schema for better B2B SEO -->
+  <SchemaOrg
+    slot="head"
+    type="ProfessionalService"
+    data={{
+      name: 'Digital Growth Experts',
+      description: 'Expert B2B SEO and digital marketing services in Sydney, helping B2B companies dominate search results and drive qualified leads',
+      image: `${Astro.site}images/logo.png`,
+    }}
+  />
+
+  <Header />
+
+  <main id="main-content">
+    <!-- Hero Section - Conversion-focused with clear value proposition -->
+    <HeroHome
+      title={hero.title}
+      subtitle={hero.subtitle}
+      primaryCTA={hero.primaryCTA}
+      secondaryCTA={hero.secondaryCTA}
+    />
+
+    <!-- Social Proof - Client Logos -->
+    {sections.showClientLogos && <ClientLogoCarousel />}
+
+    <!-- Proven Results Section - Case Studies with Real Data -->
+    {sections.showCaseStudies && <CaseStudiesSection />}
+
+    <!-- What's Included Section - Service Details -->
+    {sections.showWhatsIncluded && (
+    <section class="section-padding bg-gray-50">
+      <div class="container-custom">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold font-display text-gray-900 mb-4">
+            What's Included in Our B2B SEO Services
+          </h2>
+          <p class="text-lg md:text-xl text-gray-600">
+            Everything your B2B business needs to dominate search and attract high-value decision-makers.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <!-- Service 1 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-primary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Strategic B2B Keyword Research</h3>
+            <p class="text-gray-600 mb-4">
+              Deep keyword research targeting decision-makers at every stage of the B2B buying journey. We identify high-intent keywords that drive quality leads, not just traffic.
+            </p>
+          </div>
+
+          <!-- Service 2 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-secondary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-secondary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Expert B2B Content Marketing</h3>
+            <p class="text-gray-600 mb-4">
+              Create authoritative content that establishes thought leadership and guides prospects through complex buying decisions. Case studies, whitepapers, and guides optimised for search and conversion.
+            </p>
+          </div>
+
+          <!-- Service 3 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-accent-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Technical SEO Excellence</h3>
+            <p class="text-gray-600 mb-4">
+              Comprehensive technical SEO audits and implementation for B2B websites. Optimise site architecture, speed, and crawlability to ensure search engines properly index your content.
+            </p>
+          </div>
+
+          <!-- Service 4 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-primary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Authority Link Building</h3>
+            <p class="text-gray-600 mb-4">
+              Build high-quality backlinks from industry publications, thought leaders, and authoritative sources. Strategic link building that increases domain authority and industry credibility.
+            </p>
+          </div>
+
+          <!-- Service 5 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-secondary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-secondary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Performance Tracking & Analytics</h3>
+            <p class="text-gray-600 mb-4">
+              Advanced analytics tracking keyword rankings, organic traffic, and lead quality. Data-driven insights that measure ROI and inform continuous optimisation of your B2B SEO strategy.
+            </p>
+          </div>
+
+          <!-- Service 6 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-accent-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Conversion Rate Optimisation</h3>
+            <p class="text-gray-600 mb-4">
+              Optimise landing pages and user experience to convert B2B traffic into qualified leads. Strategic CRO that aligns with longer sales cycles and multiple decision-makers.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    )}
+
+    <!-- Long-form Content Section - Educational/Authority Building -->
+    <!-- Main Content Section - SEO-Optimized for B2B SEO -->
+    <section class="section-padding bg-white">
+      <div class="container-custom">
+        <div class="max-w-4xl mx-auto">
+          <!-- H1 Header -->
+          <div class="text-center mb-12">
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold font-display text-gray-900 mb-4">
+              B2B SEO
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 leading-relaxed">
+              Comprehensive B2B SEO services that drive qualified leads, establish industry authority, and deliver measurable ROI for Australian businesses.
+            </p>
+          </div>
+
+          <!-- Introduction with Priority Keywords -->
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              <strong>B2B SEO</strong> demands a fundamentally different approach than traditional consumer marketing. When your <strong>target audience</strong> consists of business decision-makers conducting extensive research, longer sales cycles, and complex buying committees, your <strong>SEO strategies</strong> must reflect these realities. In <strong>2025</strong>, successful <strong>B2B companies</strong> understand that <strong>ranking</strong> for the right <strong>keywords</strong> is just the beginning of driving qualified <strong>organic traffic</strong> that converts into revenue.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Our comprehensive <strong>B2B SEO services</strong> are designed specifically for <strong>B2B businesses</strong> navigating complex markets. From <strong>B2B eCommerce SEO</strong> for wholesale platforms to <strong>B2B SaaS SEO</strong> for software companies, we implement proven <strong>B2B SEO strategies</strong> that address the unique challenges of business-to-business marketing. Unlike <strong>B2C SEO</strong>, which focuses on immediate conversions, our approach prioritises building authority, nurturing relationships, and supporting the extended research process that <strong>B2B buyers</strong> undertake.
+            </p>
+          </div>
+
+          <!-- H2: B2B SEO Strategy That Drives Results -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            B2B SEO Strategy That Delivers Qualified Leads and Revenue Growth
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              A successful <strong>B2B SEO strategy</strong> recognises that <strong>B2B buyers</strong> conduct significantly more research than consumers before making purchasing decisions. Your <strong>B2B website</strong> must serve as a comprehensive resource throughout this journey, providing value at every stage. Our <strong>B2B SEO company</strong> specialises in developing <strong>content strategies</strong> that align with the buyer's journey, from initial problem awareness through solution evaluation to vendor selection.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Effective <strong>keyword research</strong> for <strong>B2B SEO</strong> goes beyond search volume. We identify high-intent <strong>keywords</strong> that decision-makers use when evaluating solutions, focusing on terms that indicate purchase readiness and budget authority. Our <strong>SEO tools</strong> analyse competitor strategies, industry trends, and <strong>search engine</strong> behaviour to build a comprehensive keyword map that captures opportunities across the entire sales funnel. This strategic approach to <strong>keyword rankings</strong> ensures your <strong>visibility</strong> where it matters most.
+            </p>
+          </div>
+
+          <!-- H2: B2B SEO Services vs B2C SEO -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            Understanding B2B SEO vs B2C SEO: Why B2B Companies Need a Different Approach
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              The difference between <strong>B2B SEO</strong> and <strong>B2C SEO</strong> extends far beyond target audience. <strong>B2C SEO</strong> typically focuses on emotional triggers, quick conversions, and individual decision-makers. In contrast, <strong>B2B SEO strategies</strong> must address multiple stakeholders, longer consideration periods, and rational, ROI-focused decision criteria. Your <strong>content marketing</strong> needs to educate, build trust, and demonstrate value to various influencers within the purchasing committee.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              <strong>Technical SEO</strong> requirements also differ significantly. <strong>B2B websites</strong> often feature complex architectures, extensive <strong>product or service</strong> catalogues, and resource centres requiring sophisticated site structures. Our <strong>B2B SEO consultant</strong> team ensures your site architecture supports both <strong>user experience</strong> and search engine crawlability. We implement advanced schema markup, optimise internal linking for topic clusters, and ensure your site performs exceptionally across all devices that business users might employ during their research.
+            </p>
+          </div>
+
+          <!-- H2: B2B Content Marketing & SEO Excellence -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            B2B Content Marketing Strategies That Build Authority and Drive Rankings
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Winning <strong>B2B content</strong> strategies combine thought leadership with strategic SEO optimisation. <strong>Case studies</strong>, whitepapers, industry reports, and comprehensive guides demonstrate your expertise while targeting valuable search queries. Our <strong>content marketing</strong> approach focuses on creating resources that genuinely help <strong>B2B audiences</strong> solve problems, making them naturally link-worthy and shareable within professional networks.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              <strong>Backlinks</strong> from authoritative industry sources carry significant weight in <strong>B2B SEO</strong>. Unlike consumer-focused link building, our strategies target industry publications, trade associations, and thought leaders relevant to your market. These high-quality <strong>backlinks</strong> not only improve <strong>ranking</strong> but also expose your <strong>B2B business</strong> to decision-makers actively researching solutions. Strategic link acquisition through valuable content assets, original research, and industry partnerships forms a cornerstone of our <strong>B2B SEO services Sydney</strong> offering.
+            </p>
+          </div>
+
+          <!-- H2: B2B eCommerce SEO & B2B SaaS SEO -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            Specialised B2B eCommerce SEO and B2B SaaS SEO Solutions
+          </h2>
+
+          <div class="grid md:grid-cols-2 gap-8 mb-12">
+            <div class="bg-gray-50 p-6 rounded-lg">
+              <h3 class="text-xl font-bold font-display text-gray-900 mb-3">B2B eCommerce SEO Excellence</h3>
+              <p class="text-gray-700">
+                <strong>B2B eCommerce SEO</strong> requires optimising complex product catalogues, managing bulk ordering systems, and creating content for procurement professionals. We optimise category structures, implement advanced filtering systems, and develop product descriptions that target both broad category terms and specific technical specifications. Our approach increases <strong>organic traffic</strong> while supporting the unique requirements of wholesale and bulk purchasing.
+              </p>
+            </div>
+            <div class="bg-gray-50 p-6 rounded-lg">
+              <h3 class="text-xl font-bold font-display text-gray-900 mb-3">B2B SaaS SEO Mastery</h3>
+              <p class="text-gray-700">
+                <strong>B2B SaaS SEO</strong> focuses on capturing software buyers at every research stage. We create content targeting problem-awareness searches, solution-comparison queries, and vendor-evaluation terms. Our <strong>digital marketing</strong> strategies for SaaS companies emphasise free trial conversions, demo requests, and educational content that demonstrates platform value. Integration with product-led growth strategies ensures your <strong>SEO efforts</strong> support the entire customer acquisition funnel.
+              </p>
+            </div>
+          </div>
+
+          <!-- H2: Measuring B2B SEO Success -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            Data-Driven B2B SEO Services: Measuring What Matters in 2025
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Effective <strong>B2B SEO</strong> measurement extends beyond vanity metrics like <strong>ranking</strong> positions. Our comprehensive tracking monitors lead quality, revenue attribution, and customer lifetime value generated through <strong>organic search</strong>. We implement advanced analytics that connect <strong>SEO efforts</strong> to business outcomes, demonstrating clear ROI from your investment. Understanding which <strong>keywords</strong> drive qualified leads versus mere traffic allows continuous optimisation toward revenue-generating terms.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Your <strong>B2B SEO consultant</strong> provides transparent reporting on <strong>keyword rankings</strong>, <strong>organic traffic</strong> growth, and conversion metrics that matter to your business. We track assisted conversions, recognising that <strong>B2B sales cycles</strong> often involve multiple touchpoints over extended periods. This nuanced approach to measurement ensures your <strong>marketing strategies</strong> receive proper credit for their role in complex buying journeys, providing the insights needed to refine and improve performance continuously.
+            </p>
+          </div>
+
+          <!-- H3: Essential B2B SEO Best Practices -->
+          <h3 class="text-xl md:text-2xl font-bold font-display text-gray-900 mb-4">
+            Essential B2B SEO Best Practices for Competitive Advantage in 2025
+          </h3>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <ul class="space-y-3 text-gray-700">
+              <li>Develop comprehensive <strong>content strategies</strong> addressing every stage of the B2B buyer journey</li>
+              <li>Implement advanced <strong>technical SEO</strong> optimisation for complex B2B site architectures</li>
+              <li>Create authoritative <strong>case studies</strong> and industry research that naturally attracts <strong>backlinks</strong></li>
+              <li>Optimise for long-tail <strong>keywords</strong> that indicate high purchase intent and budget authority</li>
+              <li>Build topical authority through comprehensive content clusters around core service areas</li>
+              <li>Leverage account-based marketing principles within your <strong>SEO strategy</strong> for targeted industries</li>
+              <li>Prioritise mobile optimisation as business decision-makers increasingly research on mobile devices</li>
+              <li>Integrate <strong>local SEO</strong> for B2B companies with physical locations or regional service areas</li>
+            </ul>
+          </div>
+
+          <!-- FAQ Section -->
+          <div class="mb-12">
+            <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-8">
+              Frequently Asked Questions About B2B SEO Services
+            </h2>
+
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+              <AccordionItem
+                question="What makes B2B SEO different from B2C SEO strategies?"
+                answer="<p class='text-gray-700'><strong>B2B SEO</strong> differs fundamentally from <strong>B2C SEO</strong> in targeting, content approach, and conversion pathways. <strong>B2B companies</strong> face longer sales cycles, multiple decision-makers, and higher transaction values. Your <strong>SEO strategies</strong> must prioritise educational content, thought leadership, and building trust over extended periods. <strong>B2B audiences</strong> conduct extensive research, requiring comprehensive resources like <strong>case studies</strong>, whitepapers, and technical specifications rather than the emotional, quick-conversion content typical of consumer marketing.</p>"
+                id="faq-b2b-seo-1"
+                isFirst={true}
+              />
+              <AccordionItem
+                question="How long does it take to see results from B2B SEO efforts?"
+                answer="<p class='text-gray-700'>A well-executed <strong>B2B SEO strategy</strong> typically shows initial improvements in <strong>organic traffic</strong> and <strong>keyword rankings</strong> within 3-6 months, with significant lead generation and revenue impact becoming evident at 6-12 months. <strong>B2B SEO</strong> timelines are longer than <strong>B2C SEO</strong> due to the competitive nature of business markets and the complexity of ranking for industry-specific terms. However, the long-term value of <strong>successful B2B SEO</strong> far exceeds quick wins, delivering sustained <strong>organic search</strong> visibility and consistent lead flow that compounds over time.</p>"
+                id="faq-b2b-seo-2"
+              />
+              <AccordionItem
+                question="What are the most important elements of a successful B2B SEO strategy?"
+                answer="<p class='text-gray-700'>Effective <strong>B2B SEO strategies</strong> combine strategic <strong>keyword research</strong> targeting decision-makers, comprehensive <strong>technical SEO</strong> optimisation, authoritative <strong>content marketing</strong>, and high-quality <strong>backlinks</strong> from industry sources. Your <strong>B2B website</strong> must demonstrate expertise through detailed resources, <strong>case studies</strong>, and thought leadership content. Advanced <strong>SEO tools</strong> help track <strong>ranking</strong>, <strong>organic traffic</strong>, and conversion metrics, while continuous optimisation based on performance data ensures your <strong>SEO efforts</strong> align with evolving <strong>search engine</strong> algorithms and buyer behaviour patterns in <strong>2025</strong>.</p>"
+                id="faq-b2b-seo-3"
+              />
+              <AccordionItem
+                question="How do B2B SEO services help with longer B2B sales cycles?"
+                answer="<p class='text-gray-700'><strong>B2B SEO services</strong> support extended sales cycles by creating content for every buyer journey stage, from initial problem awareness through detailed solution comparison to vendor selection. Our <strong>content strategies</strong> ensure your <strong>B2B business</strong> maintains <strong>visibility</strong> throughout the research process, providing value at each stage. We implement remarketing integration, lead nurturing content, and progressive information disclosure that respects the deliberate pace of <strong>B2B buyers</strong>. This strategic approach helps your company stay top-of-mind as prospects move through their evaluation process over weeks or months.</p>"
+                id="faq-b2b-seo-4"
+              />
+              <AccordionItem
+                question="Why should I hire a B2B SEO consultant instead of handling SEO in-house?"
+                answer="<p class='text-gray-700'>A specialised <strong>B2B SEO consultant</strong> brings expertise in the unique challenges of business-to-business marketing, understanding the nuances of <strong>B2B SEO vs</strong> consumer strategies. We stay current with algorithm updates, industry <strong>SEO best practices</strong>, and advanced <strong>SEO tools</strong> that drive results. Our experience across multiple <strong>B2B companies</strong> provides insights into what works in your industry, avoiding costly trial-and-error. With <strong>B2B SaaS SEO</strong>, <strong>B2B eCommerce SEO</strong>, and industry-specific expertise, our <strong>B2B SEO services Sydney</strong> team delivers faster results and higher ROI than general agencies or internal teams learning through experimentation.</p>"
+                id="faq-b2b-seo-5"
+                isLast={true}
+              />
+            </div>
+          </div>
+
+          <!-- Conclusion Section -->
+          <div class="prose prose-lg max-w-none">
+            <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+              Partner with Australia's Leading B2B SEO Company
+            </h2>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Don't let competitors dominate <strong>search engine</strong> results while qualified prospects search for solutions you provide. Our expert <strong>B2B SEO services</strong> combine strategic <strong>keyword research</strong>, authoritative <strong>content marketing</strong>, advanced <strong>technical SEO</strong>, and proven link-building tactics to establish your company as the industry leader. Whether you need <strong>B2B eCommerce SEO</strong>, <strong>B2B SaaS SEO</strong>, or industry-specific optimisation, we deliver customised strategies that drive qualified leads and measurable revenue growth.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Our <strong>B2B SEO company</strong> understands the complexities of business-to-business marketing in <strong>2025</strong>. We know that successful <strong>B2B SEO</strong> requires patience, expertise, and a deep understanding of how business buyers research and evaluate solutions. From initial strategy development through ongoing optimisation and reporting, our team becomes an extension of your <strong>marketing strategies</strong>, working tirelessly to improve <strong>organic traffic</strong>, <strong>keyword rankings</strong>, and lead quality that directly impacts your bottom line.
+            </p>
+            <p class="text-gray-700 leading-relaxed">
+              Ready to dominate <strong>organic search</strong> in your industry? Contact our <strong>B2B SEO consultant</strong> team today for a comprehensive audit and customised strategy session. Discover how our <strong>B2B SEO services Sydney</strong> can transform your online <strong>visibility</strong>, establish thought leadership, and drive the high-value leads your business needs to grow. Let's build a winning <strong>B2B SEO strategy</strong> that delivers sustainable results and competitive advantage in your market.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    {sections.showFinalCTA && (
+      <CTASection
+        title={finalCTA.title}
+        subtitle={finalCTA.subtitle}
+        primaryCTA={finalCTA.primaryCTA}
+        secondaryCTA={finalCTA.secondaryCTA}
+      />
+    )}
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .section-padding {
+    padding: 5rem 0;
+  }
+
+  @media (min-width: 768px) {
+    .section-padding {
+      padding: 7rem 0;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .section-padding {
+      padding: 8rem 0;
+    }
+  }
+</style>

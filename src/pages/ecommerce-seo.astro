@@ -2,25 +2,27 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
-import Hero from '../components/sections/Hero.astro';
+import HeroHome from '../components/sections/HeroHome.astro';
 import ClientLogoCarousel from '../components/sections/ClientLogoCarousel.astro';
 import CaseStudiesSection from '../components/sections/CaseStudiesSection.astro';
 import CTASection from '../components/sections/CTASection.astro';
+import AccordionItem from '../components/ui/AccordionItem.astro';
 
 const seo = {
-  title: 'E-commerce SEO Services | Drive More Online Sales',
-  description: 'Specialist e-commerce SEO services that increase product visibility and drive sales. Expert optimization for product pages, category pages, and technical e-commerce challenges.',
+  title: 'Ecommerce SEO Services | E-commerce SEO Agency Australia 2025',
+  description: 'Expert ecommerce SEO services from a leading e-commerce SEO agency. Increase organic traffic, optimize product pages, and drive revenue with our proven SEO strategies for ecommerce sites.',
   keywords: [
+    'ecommerce seo',
+    'e-commerce seo agency',
+    'e commerce seo agency',
+    'e-commerce seo',
+    'seo e-commerce',
+    'e commerce seo',
+    'seo for e-commerce',
     'ecommerce seo services',
-    'ecommerce seo agency',
-    'online store seo',
     'product page optimization',
-    'shopify seo',
-    'woocommerce seo',
-    'ecommerce seo specialist',
-    'product seo',
+    'online store seo',
     'ecommerce seo australia',
-    'online retail seo',
   ],
   canonical: 'https://growthexperts.com.au/ecommerce-seo',
   ogImage: '/images/team-hero.png',
@@ -28,14 +30,12 @@ const seo = {
 };
 
 const hero = {
-  title: 'E-commerce SEO That Drives Revenue, Not Just Traffic',
+  title: 'Ecommerce SEO That Drives Revenue, Not Just Traffic',
   subtitle: 'Specialized SEO strategies for online stores. We optimize product pages, category pages, and technical infrastructure to increase visibility and drive more qualified buyers to your site.',
   primaryCTA: {
     text: 'Free Strategy Session',
-    href: '/contact',
+    href: '/contact'
   },
-  image: '/images/team-hero.png',
-  imageAlt: 'E-commerce SEO services for online stores',
 };
 
 const schema = {
@@ -102,14 +102,12 @@ const schema = {
   <Header />
 
   <main id="main-content">
-    <!-- Hero Section -->
-    <Hero
+    <!-- Hero Section - Conversion-focused with clear value proposition -->
+    <HeroHome
       title={hero.title}
       subtitle={hero.subtitle}
       primaryCTA={hero.primaryCTA}
       secondaryCTA={hero.secondaryCTA}
-      image={hero.image}
-      imageAlt={hero.imageAlt}
     />
 
     <!-- Social Proof - Client Logos -->
@@ -609,6 +607,207 @@ const schema = {
       </div>
     </section>
 
+    <!-- Main Content Section - SEO-Optimized for Ecommerce SEO -->
+    <section class="section-padding bg-white">
+      <div class="container-custom">
+        <div class="max-w-4xl mx-auto">
+          <!-- H1 Header -->
+          <div class="text-center mb-12">
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold font-display text-gray-900 mb-4">
+              Ecommerce SEO: The Complete Guide to Dominating Search Results in 2025
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 leading-relaxed">
+              Transform your online store visibility with proven ecommerce SEO strategies that drive organic traffic and revenue.
+            </p>
+          </div>
+
+          <!-- Introduction with Priority Keywords -->
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              <strong>Ecommerce SEO</strong> is the foundation of sustainable growth for any <strong>online store</strong>. In <strong>2025</strong>, mastering <strong>SEO</strong> for your <strong>ecommerce site</strong> isn't optional, it's essential for survival in competitive digital marketplaces. Whether you're running a Shopify store, WooCommerce platform, or custom <strong>ecommerce website</strong>, effective <strong>SEO strategy</strong> determines whether potential customers find your products in <strong>search results</strong> or your competitors'.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              As a specialised <strong>e-commerce SEO agency</strong>, we understand that <strong>ecommerce SEO is the process</strong> of optimising every aspect of your <strong>online store</strong> to rank higher in <strong>search engine</strong> results. This comprehensive approach includes <strong>technical SEO</strong>, <strong>on-page SEO</strong> for <strong>product pages</strong>, strategic <strong>keyword research</strong>, and addressing unique challenges like <strong>duplicate content</strong> and <strong>site speed</strong> optimisation. Our proven <strong>SEO campaign</strong> strategies have helped countless <strong>ecommerce businesses</strong> increase their <strong>organic traffic</strong> and revenue.
+            </p>
+          </div>
+
+          <!-- H2: Why Ecommerce SEO Matters -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            Why Ecommerce SEO Drives Sustainable Growth for Online Stores
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              The landscape of e-commerce has transformed dramatically. With 68% of online experiences beginning with a <strong>search engine</strong>, your <strong>ecommerce site</strong>'s visibility directly impacts your bottom line. <strong>SEO for ecommerce</strong> delivers long-term value by attracting high-intent shoppers actively searching for products you sell. Unlike paid advertising that stops generating traffic when you stop spending, a well-executed <strong>SEO strategy</strong> builds compound returns over time.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              <strong>Technical SEO</strong> forms the foundation of <strong>best ecommerce</strong> performance. <strong>Search engines</strong> must efficiently crawl and index your <strong>product pages</strong>, understand your site architecture, and deliver fast <strong>user experience</strong>. Common <strong>technical SEO issues</strong> like slow <strong>site speed</strong>, mobile responsiveness problems, and <strong>duplicate content</strong> can severely limit your <strong>ecommerce store</strong>'s ranking potential. Our <strong>audit</strong> process identifies these roadblocks and implements solutions that improve both <strong>search engine results</strong> and customer satisfaction.
+            </p>
+          </div>
+
+          <!-- H2: Ecommerce SEO Strategy Essentials -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            E-commerce SEO Strategy: Essential Elements for Success
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Successful <strong>ecommerce SEO strategies</strong> require understanding the unique challenges of <strong>online stores</strong>. <strong>Product pages</strong> need optimisation that balances commercial intent with informative content. Each <strong>product page</strong> should feature compelling <strong>title tags</strong>, detailed <strong>product descriptions</strong>, and strategic <strong>internal linking</strong> to related products and categories. The <strong>best practices</strong> include incorporating target keywords naturally while maintaining readability and conversion focus.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              <strong>Ecommerce keyword research</strong> differs significantly from traditional <strong>SEO</strong>. You need to identify commercial keywords that indicate buying intent, understand seasonal trends, and map <strong>keywords for your ecommerce</strong> product hierarchy. Our <strong>ecommerce SEO company</strong> uses advanced <strong>SEO tools</strong> to discover high-value opportunities that drive qualified traffic. We analyse competitor strategies, identify content gaps, and prioritise <strong>keywords</strong> based on conversion potential, not just search volume.
+            </p>
+          </div>
+
+          <!-- H2: Technical SEO for Ecommerce Sites -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            Technical SEO for E-commerce: Solving Complex Site Architecture Challenges
+          </h2>
+
+          <div class="grid md:grid-cols-2 gap-8 mb-12">
+            <div class="bg-gray-50 p-6 rounded-lg">
+              <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Site Speed Optimisation</h3>
+              <p class="text-gray-700">
+                <strong>Site speed</strong> directly impacts both <strong>SEO</strong> rankings and conversion rates. Our <strong>technical SEO</strong> <strong>audit</strong> identifies performance bottlenecks on your <strong>ecommerce site</strong>, from unoptimised images to render-blocking resources. We implement caching strategies, image compression, and code optimisation to ensure every <strong>page on your site</strong> loads quickly across all devices.
+              </p>
+            </div>
+            <div class="bg-gray-50 p-6 rounded-lg">
+              <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Duplicate Content Solutions</h3>
+              <p class="text-gray-700">
+                <strong>Duplicate content</strong> plagues <strong>many ecommerce</strong> sites with similar <strong>product descriptions</strong>, filter pages, and category variations. Our <strong>ecommerce SEO agency</strong> implements canonical tags, creates unique <strong>relevant content</strong>, and structures your <strong>ecommerce platform</strong> to minimise duplication while maintaining <strong>user experience</strong>.
+              </p>
+            </div>
+            <div class="bg-gray-50 p-6 rounded-lg">
+              <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Ecommerce Site Architecture</h3>
+              <p class="text-gray-700">
+                Logical <strong>ecommerce site architecture</strong> helps <strong>search engines</strong> understand your product hierarchy and distributes link equity effectively. We design category structures that match search intent, implement breadcrumb navigation, and ensure <strong>every ecommerce</strong> product is discoverable <strong>within your ecommerce</strong> structure through strategic <strong>internal linking</strong>.
+              </p>
+            </div>
+            <div class="bg-gray-50 p-6 rounded-lg">
+              <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Meta Description & Title Tag Optimisation</h3>
+              <p class="text-gray-700">
+                Compelling <strong>title tags</strong> and <strong>meta descriptions</strong> improve click-through rates from <strong>search engine result pages</strong>. We craft unique, keyword-rich metadata for <strong>pages on your ecommerce</strong> site that accurately describe products while incorporating high-intent keywords that drive qualified traffic and improve <strong>SEO performance</strong>.
+              </p>
+            </div>
+          </div>
+
+          <!-- H2: On-Page SEO for Ecommerce -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            On-Page SEO for Ecommerce: Optimising Product Pages That Convert
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              <strong>On-page SEO for ecommerce</strong> extends beyond basic optimisation. <strong>Ecommerce product pages</strong> require unique <strong>product descriptions</strong> that provide value to shoppers while incorporating target keywords naturally. High-quality product images with optimised alt text, customer reviews, and detailed specifications all contribute to <strong>improve SEO</strong> while enhancing <strong>user experience</strong>. The <strong>best ecommerce SEO tools</strong> help identify opportunities to enhance <strong>content on your website</strong> and track <strong>SEO performance</strong> across thousands of product listings.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              <strong>Content marketing</strong> plays a crucial role in <strong>successful ecommerce SEO</strong>. Beyond <strong>product pages</strong>, creating buying guides, comparison articles, and educational <strong>ecommerce content</strong> helps capture searchers earlier in the buying journey. This <strong>relevant content</strong> builds topical authority, attracts <strong>backlinks to your ecommerce</strong> site, and provides value that keeps customers engaged. Our <strong>guide to ecommerce seo</strong> emphasises creating content that serves both <strong>SEO</strong> and conversion objectives.
+            </p>
+          </div>
+
+          <!-- H2: Ecommerce SEO Best Practices -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            SEO Best Practices for E-commerce Success in 2025
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Implementing <strong>SEO best practices</strong> requires understanding what separates <strong>successful SEO</strong> from ineffective tactics. Focus your <strong>SEO efforts</strong> on high-impact activities: comprehensive <strong>keyword research</strong>, creating exceptional <strong>product descriptions</strong>, building authoritative backlinks, and continuously improving <strong>site speed</strong>. Our <strong>ecommerce SEO services</strong> prioritise activities that deliver measurable revenue growth, not vanity metrics.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              <strong>SEO techniques</strong> evolve constantly, but fundamentals remain consistent. <strong>Search engines</strong> reward sites that provide exceptional <strong>user experience</strong>, demonstrate expertise through quality content, and earn trust through authoritative backlinks. Whether implementing <strong>on-page SEO</strong> or <strong>off-page SEO</strong> strategies, focus on creating genuine value. Our <strong>ecommerce seo efforts</strong> combine proven techniques with innovative approaches to <strong>maximize your ecommerce</strong> potential in competitive markets.
+            </p>
+          </div>
+
+          <!-- H3: Essential Ecommerce SEO Tips -->
+          <h3 class="text-xl md:text-2xl font-bold font-display text-gray-900 mb-4">
+            Essential Ecommerce SEO Tips for Immediate Impact
+          </h3>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <ul class="space-y-3 text-gray-700">
+              <li>Conduct thorough <strong>ecommerce keyword research</strong> focusing on commercial intent and long-tail variations</li>
+              <li>Optimise every <strong>product page</strong> with unique titles, descriptions, and schema markup</li>
+              <li>Implement strategic <strong>internal linking</strong> to distribute authority and guide customers through your catalogue</li>
+              <li>Create unique <strong>product descriptions</strong> that avoid manufacturer content and provide genuine value</li>
+              <li>Ensure fast <strong>site speed</strong> across all devices with optimised images and efficient code</li>
+              <li>Build high-quality backlinks through <strong>content marketing</strong>, partnerships, and digital PR</li>
+              <li>Use <strong>ecommerce seo tools</strong> to monitor performance and identify optimisation opportunities</li>
+              <li>Implement comprehensive schema markup for products, reviews, and breadcrumbs</li>
+              <li>Regularly <strong>audit</strong> your <strong>ecommerce website</strong> for <strong>technical SEO issues</strong> and content gaps</li>
+            </ul>
+          </div>
+
+          <!-- H2: Choosing the Right Ecommerce SEO Agency -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            Choosing the Right E-commerce SEO Agency for Your Business
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Selecting an <strong>e-commerce SEO agency</strong> or <strong>ecommerce SEO company</strong> requires evaluating expertise, methodology, and track record. Look for agencies that understand the unique challenges of <strong>ecommerce sites</strong>, from managing large product catalogues to optimising for multiple product variations. The <strong>right ecommerce</strong> partner should demonstrate experience with your <strong>ecommerce platform</strong>, whether Shopify, WooCommerce, or custom solutions.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              <strong>SEO specialists</strong> who focus exclusively on e-commerce bring valuable insights from working across industries and platforms. They understand <strong>common ecommerce seo</strong> challenges, implement proven <strong>seo techniques like</strong> structured data and faceted navigation optimisation, and track metrics that matter. When evaluating <strong>seo packages</strong>, prioritise agencies offering comprehensive services rather than isolated tactics. A <strong>successful seo campaign</strong> requires integrated strategies across technical, on-page, and off-page elements.
+            </p>
+          </div>
+
+          <!-- FAQ Section -->
+          <div class="mb-12">
+            <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-8">
+              Frequently Asked Questions About Ecommerce SEO
+            </h2>
+
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+              <AccordionItem
+                question="What is ecommerce SEO and why is it important for online stores?"
+                answer="<p class='text-gray-700'><strong>Ecommerce SEO is the process</strong> of optimising your <strong>online store</strong> to rank higher in <strong>search engine</strong> results for product-related queries. It's <strong>important for ecommerce</strong> because 68% of online experiences begin with a search engine, and <strong>organic traffic</strong> from <strong>SEO</strong> delivers higher-intent customers at lower acquisition costs than paid advertising. Effective <strong>SEO for ecommerce sites</strong> includes <strong>technical SEO</strong>, <strong>product page</strong> optimisation, <strong>keyword research</strong>, and <strong>content marketing</strong> strategies specifically designed for <strong>ecommerce businesses</strong>.</p>"
+                id="faq-ecommerce-seo-1"
+                isFirst={true}
+              />
+              <AccordionItem
+                question="How long does it take to see results from an ecommerce SEO campaign?"
+                answer="<p class='text-gray-700'>Most <strong>ecommerce sites</strong> begin seeing measurable improvements in <strong>organic traffic</strong> within 3-6 months of implementing a comprehensive <strong>SEO strategy</strong>. However, timeline varies based on your site's current state, competition level, and the scope of <strong>technical SEO issues</strong>. Quick wins like fixing critical <strong>technical SEO</strong> problems and optimising high-priority <strong>product pages</strong> can show results within weeks. Building domain authority through <strong>content marketing</strong> and link building takes longer but provides sustainable growth. <strong>Successful ecommerce seo</strong> requires consistent <strong>SEO efforts</strong> and patience as <strong>search engines</strong> evaluate changes.</p>"
+                id="faq-ecommerce-seo-2"
+              />
+              <AccordionItem
+                question="What are the most common technical SEO issues affecting ecommerce websites?"
+                answer="<p class='text-gray-700'><strong>Common ecommerce seo</strong> technical challenges include <strong>duplicate content</strong> from similar product variations, slow <strong>site speed</strong> from large images and complex functionality, poor mobile <strong>user experience</strong>, inefficient site architecture with orphaned products, faceted navigation creating infinite URL variations, and inadequate <strong>internal linking</strong> structure. Our <strong>technical SEO</strong> <strong>audit</strong> identifies these issues and implements solutions like canonical tags, optimised image compression, logical category structures, and strategic pagination to <strong>help ecommerce</strong> sites perform better in <strong>search results</strong>.</p>"
+                id="faq-ecommerce-seo-3"
+              />
+              <AccordionItem
+                question="How do you approach keyword research for ecommerce sites?"
+                answer="<p class='text-gray-700'><strong>Ecommerce keyword research</strong> focuses on identifying commercial-intent keywords that drive qualified traffic. We analyse <strong>search engine result pages</strong> to understand what content ranks, use <strong>ecommerce seo tools</strong> to discover product-specific long-tail keywords, evaluate competitor strategies to find gaps, and map keywords to your product hierarchy. This includes identifying informational keywords for <strong>content marketing</strong>, transactional keywords for <strong>product pages</strong>, and navigational keywords for category pages. The goal is finding <strong>keywords for your ecommerce</strong> site that balance search volume, competition, and conversion potential.</p>"
+                id="faq-ecommerce-seo-4"
+              />
+              <AccordionItem
+                question="Should I hire an SEO agency or handle ecommerce SEO in-house?"
+                answer="<p class='text-gray-700'>The decision to <strong>hire an seo</strong> agency versus building in-house capability depends on your resources, expertise, and scale. <strong>Ecommerce seo</strong> requires specialised knowledge of <strong>technical SEO</strong>, platform-specific optimisation, and e-commerce <strong>best practices</strong>. An experienced <strong>e-commerce seo agency</strong> brings proven methodologies, advanced <strong>SEO tools</strong>, and cross-industry insights that accelerate results. For <strong>many ecommerce</strong> businesses, partnering with <strong>SEO specialists</strong> delivers better ROI than building internal teams, especially when implementing complex strategies like large-scale <strong>product page</strong> optimisation or <strong>technical SEO</strong> fixes across thousands of <strong>pages on your ecommerce</strong> site.</p>"
+                id="faq-ecommerce-seo-5"
+                isLast={true}
+              />
+            </div>
+          </div>
+
+          <!-- Conclusion Section -->
+          <div class="prose prose-lg max-w-none">
+            <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+              Ready to Transform Your Ecommerce Site Performance?
+            </h2>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Don't let competitors capture the <strong>organic traffic</strong> and sales that should be yours. Our expert <strong>ecommerce SEO services</strong> provide everything needed to <strong>optimize your ecommerce site</strong> for maximum visibility and revenue. From comprehensive <strong>technical SEO</strong> audits to strategic <strong>product page</strong> optimisation and ongoing <strong>content marketing</strong>, we handle every aspect of your <strong>SEO campaign</strong> so you can focus on growing your <strong>ecommerce business</strong>.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              As a specialised <strong>e-commerce SEO agency</strong>, we understand that <strong>successful ecommerce seo</strong> requires more than generic tactics. We implement platform-specific optimisations, solve complex <strong>technical SEO issues</strong>, and create strategies that drive both traffic and conversions. Our proven methodologies have helped <strong>ecommerce brands</strong> across Australia achieve first-page rankings, increase <strong>organic traffic</strong>, and significantly improve revenue from <strong>search engines</strong>.
+            </p>
+            <p class="text-gray-700 leading-relaxed">
+              Take the first step toward dominating <strong>search results</strong> in your industry. Contact our <strong>ecommerce SEO company</strong> today for a free consultation and comprehensive <strong>audit</strong> of your <strong>ecommerce website</strong>. Discover how our tailored <strong>SEO strategy</strong> can transform your <strong>online store</strong> into a revenue-generating machine that outperforms competitors and delivers sustainable growth in <strong>2025</strong> and beyond.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- CTA Section -->
     <CTASection
       title="Ready to Drive More E-commerce Revenue?"
@@ -622,3 +821,21 @@ const schema = {
 
   <Footer />
 </BaseLayout>
+
+<style>
+  .section-padding {
+    padding: 5rem 0;
+  }
+
+  @media (min-width: 768px) {
+    .section-padding {
+      padding: 7rem 0;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .section-padding {
+      padding: 8rem 0;
+    }
+  }
+</style>

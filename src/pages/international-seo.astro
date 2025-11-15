@@ -1,0 +1,526 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import HeroHome from '../components/sections/HeroHome.astro';
+import ClientLogoCarousel from '../components/sections/ClientLogoCarousel.astro';
+import CaseStudiesSection from '../components/sections/CaseStudiesSection.astro';
+import CTASection from '../components/sections/CTASection.astro';
+import SchemaOrg from '../components/seo/SchemaOrg.astro';
+import AccordionItem from '../components/ui/AccordionItem.astro';
+
+// ===================================
+// PAGE FRONTMATTER CONFIGURATION
+// Edit these values to customize the page content
+// ===================================
+
+// SEO Meta Data
+const seo = {
+  title: 'International SEO Services | Expert Global SEO Strategies 2025',
+  description: 'Leading international SEO consultant in Australia. Expert international SEO strategies for multiple countries, hreflang implementation, and global search rankings. Dominate international markets.',
+  keywords: [
+    'international seo',
+    'international seo expert',
+    'international seo consultant',
+    'international seo specialist',
+    'international seo audit',
+    'google international seo',
+    'international seo australia',
+    'international seo marketing',
+    'international seo strategies'
+  ],
+  canonical: 'https://growthexperts.com.au/international-seo',
+  ogImage: '/images/team-hero.png',
+  ogType: 'website',
+};
+
+// Hero Section
+const hero = {
+  title: 'International SEO Services for Global Market Domination',
+  subtitle: 'Expand your business across borders with expert international SEO strategies. We help Australian businesses rank in multiple countries and languages, driving qualified traffic from global audiences.',
+  primaryCTA: {
+    text: 'Free Strategy Session',
+    href: '/contact'
+  },
+};
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Services', href: '/services' },
+  { label: 'International SEO', href: '/international-seo' },
+];
+
+// Section Visibility (show/hide sections)
+const sections = {
+  showClientLogos: true,
+  showCaseStudies: true,
+  showWhatsIncluded: true,
+  showProcess: true,
+  showFinalCTA: true,
+};
+
+// Final CTA Section
+const finalCTA = {
+  title: 'Ready to Dominate International Markets?',
+  subtitle: 'Get your free international SEO audit and discover the exact strategies we\'ll use to help you rank in target countries worldwide. No obligations, just actionable insights for global growth.',
+  primaryCTA: {
+    text: 'Free Strategy Session',
+    href: '/contact'
+  },
+};
+---
+
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  keywords={seo.keywords}
+  canonical={seo.canonical}
+  ogImage={seo.ogImage}
+  ogType={seo.ogType}
+  schema={{
+    type: 'Service',
+    data: {
+      '@type': 'Service',
+      name: 'International SEO Services',
+      description: seo.description,
+      provider: {
+        '@type': 'Organization',
+        name: 'Digital Growth Experts',
+      },
+      areaServed: {
+        '@type': 'Country',
+        name: 'Australia',
+      },
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'International SEO Services',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Hreflang Implementation',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'International Keyword Research',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Global Content Strategy',
+            },
+          },
+        ],
+      },
+    },
+  }}
+>
+  <!-- Add Organization schema for better international SEO -->
+  <SchemaOrg
+    slot="head"
+    type="Organization"
+    data={{
+      name: 'Digital Growth Experts',
+      description: 'Expert international SEO and digital marketing services, helping Australian businesses expand globally',
+      image: `${Astro.site}images/logo.png`,
+    }}
+  />
+
+  <Header />
+
+  <main id="main-content">
+    <!-- Hero Section - Conversion-focused with clear value proposition -->
+    <HeroHome
+      title={hero.title}
+      subtitle={hero.subtitle}
+      primaryCTA={hero.primaryCTA}
+      secondaryCTA={hero.secondaryCTA}
+    />
+
+    <!-- Social Proof - Client Logos -->
+    {sections.showClientLogos && <ClientLogoCarousel />}
+
+    <!-- Proven Results Section - Case Studies with Real Data -->
+    {sections.showCaseStudies && <CaseStudiesSection />}
+
+    <!-- What's Included Section - Service Details -->
+    {sections.showWhatsIncluded && (
+    <section class="section-padding bg-gray-50">
+      <div class="container-custom">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold font-display text-gray-900 mb-4">
+            What's Included in Our International SEO Services
+          </h2>
+          <p class="text-lg md:text-xl text-gray-600">
+            Everything you need to dominate search rankings in multiple countries and languages.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <!-- Service 1 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-primary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Hreflang Tag Implementation</h3>
+            <p class="text-gray-600 mb-4">
+              Strategic hreflang implementation to tell search engines which language and regional versions to serve to users in different countries, preventing duplicate content issues and improving international rankings.
+            </p>
+          </div>
+
+          <!-- Service 2 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-secondary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-secondary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">International Keyword Research</h3>
+            <p class="text-gray-600 mb-4">
+              Comprehensive keyword research for target countries using SEMrush and specialized tools to identify search volume, local market opportunities, and what your international audience actually searches for.
+            </p>
+          </div>
+
+          <!-- Service 3 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-accent-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">URL Structure Optimization</h3>
+            <p class="text-gray-600 mb-4">
+              Strategic URL structure planning including subdomain, subdirectory, or ccTLD recommendations based on your target market and international expansion goals for optimal search engine visibility.
+            </p>
+          </div>
+
+          <!-- Service 4 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-primary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Localized Content Strategy</h3>
+            <p class="text-gray-600 mb-4">
+              Create region-specific content that resonates with global audiences in different regions, ensuring your content strategy aligns with local market preferences, cultural nuances, and search behavior.
+            </p>
+          </div>
+
+          <!-- Service 5 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-secondary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-secondary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">International Link Building</h3>
+            <p class="text-gray-600 mb-4">
+              Strategic backlinks acquisition from high domain authority sites in target countries to build your backlink profile, improve keyword rankings in different markets, and establish regional authority.
+            </p>
+          </div>
+
+          <!-- Service 6 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-accent-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Technical SEO & Analytics</h3>
+            <p class="text-gray-700 mb-4">
+              Implement technical SEO best practices including Google Analytics setup for international tracking, proper canonical tags, and monitoring to help search engines understand your international site structure.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    )}
+
+    <!-- Long-form Content Section - Educational/Authority Building -->
+    <!-- Main Content Section - SEO-Optimized for International SEO -->
+    <section class="section-padding bg-white">
+      <div class="container-custom">
+        <div class="max-w-4xl mx-auto">
+          <!-- H1 Header -->
+          <div class="text-center mb-12">
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold font-display text-gray-900 mb-4">
+              International SEO
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 leading-relaxed">
+              Expert international SEO strategies to dominate search rankings in multiple countries and languages.
+            </p>
+          </div>
+
+          <!-- Introduction with Priority Keywords -->
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              <strong>International SEO</strong> is the critical process of optimizing your website to <strong>ranking</strong> in <strong>different countries</strong> and languages. As businesses expand globally, implementing effective <strong>international SEO strategies</strong> becomes essential for capturing market share across borders. Whether you're targeting customers in the US, Europe, Asia, or <strong>multiple countries</strong> simultaneously, expert <strong>international SEO</strong> ensures your <strong>search engine</strong> visibility matches your global ambitions.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Working with an experienced <strong>international SEO expert</strong> means understanding how Google and other search engines like Bing serve results to your <strong>international audience</strong>. From implementing <strong>hreflang</strong> tags correctly to conducting thorough <strong>keyword</strong> research for each <strong>target market</strong>, our comprehensive approach follows <strong>best practices</strong> that drive real results. We help Australian businesses break into new markets while maintaining strong <strong>local SEO</strong> foundations.
+            </p>
+          </div>
+
+          <!-- H2: International SEO Expert Strategies -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            International SEO Expert Strategies for Global Growth
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              As your <strong>international SEO consultant</strong>, we develop customized <strong>international SEO strategies</strong> that align with your business objectives and <strong>target countries</strong>. Successful <strong>international SEO is the process</strong> of understanding not just translation, but cultural context, local search behavior, and regional competition. Our <strong>international SEO specialist</strong> team uses advanced tools like <strong>SEMrush</strong> to analyze <strong>search volume</strong>, competition levels, and ranking opportunities across <strong>different regions</strong>.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              The foundation of effective <strong>Google international SEO</strong> lies in proper technical implementation. The <strong>hreflang tag</strong> tells <strong>search engines</strong> which language version to show based on user location and language preferences, preventing <strong>duplicate content</strong> issues while ensuring the right content reaches the right audience. Our <strong>international SEO audit</strong> examines your current setup, identifies technical gaps, and provides a roadmap for improving your global presence.
+            </p>
+          </div>
+
+          <!-- H2: International SEO Australia Expertise -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            International SEO Australia: Expanding Beyond Local Markets
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Australian businesses looking to expand internationally face unique challenges. Our <strong>international SEO Australia</strong> services bridge the gap between your <strong>local market</strong> success and <strong>international market</strong> dominance. We understand the nuances of targeting <strong>different language</strong> speakers and adapting your products or services to resonate with diverse global audiences.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Choosing the right <strong>URL structure</strong> is critical for international success. Whether you opt for a <strong>subdomain</strong> approach (uk.yoursite.com), subdirectories (yoursite.com/uk/), or country-specific domains, each option has SEO implications for <strong>domain authority</strong>, <strong>backlinks</strong>, and <strong>ranking</strong> potential. Our <strong>international SEO marketing</strong> approach evaluates your resources, target markets, and long-term goals to recommend the optimal structure.
+            </p>
+          </div>
+
+          <!-- H2: International SEO Audit & Technical Implementation -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            Comprehensive International SEO Audit & Best Practices
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Our detailed <strong>international SEO audit</strong> examines every aspect of your global web presence. We analyze how well you <strong>tell search engines</strong> about your international structure, review your <strong>hreflang</strong> implementation, assess your <strong>backlink profile</strong> across regions, and evaluate how effectively you target <strong>users and search engines</strong> in each market. This comprehensive analysis reveals opportunities to <strong>help search engines</strong> understand and rank your content appropriately.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Following <strong>SEO best practices</strong> for international sites means going beyond basic translation. Your <strong>content strategy</strong> must address local search intent, incorporate region-specific <strong>keyword research</strong>, and demonstrate relevance to the <strong>new market</strong>. We utilize <strong>Google Analytics</strong> to track performance across regions, monitor <strong>keyword rankings</strong>, and identify which markets deliver the strongest return on investment.
+            </p>
+          </div>
+
+          <!-- H2: International SEO Strategies Implementation -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            Implementing Effective International SEO Strategies
+          </h2>
+
+          <div class="grid md:grid-cols-2 gap-8 mb-12">
+            <div class="bg-gray-50 p-6 rounded-lg">
+              <h3 class="text-xl font-bold font-display text-gray-900 mb-3">International Keyword Research Excellence</h3>
+              <p class="text-gray-700">
+                Effective <strong>keyword research</strong> for <strong>different countries and languages</strong> requires understanding local terminology and search behavior. We use specialized keyword research tools to identify high-value opportunities in each <strong>target market</strong>, ensuring your <strong>content strategy</strong> aligns with actual search demand.
+              </p>
+            </div>
+            <div class="bg-gray-50 p-6 rounded-lg">
+              <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Technical SEO Foundation</h3>
+              <p class="text-gray-700">
+                <strong>Technical SEO</strong> forms the backbone of international success. Proper <strong>hreflang</strong> implementation, optimized site architecture, and clear signals to <strong>help search engines</strong> understand your international structure are non-negotiable for achieving strong <strong>ranking</strong> across <strong>multiple countries</strong>.
+              </p>
+            </div>
+            <div class="bg-gray-50 p-6 rounded-lg">
+              <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Building International Authority</h3>
+              <p class="text-gray-700">
+                Developing a strong <strong>backlink profile</strong> requires earning quality <strong>backlinks</strong> from authoritative sites in each <strong>target market</strong>. Our link building strategies focus on building <strong>domain authority</strong> regionally while maintaining global brand consistency across all international versions.
+              </p>
+            </div>
+            <div class="bg-gray-50 p-6 rounded-lg">
+              <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Content Localization Strategy</h3>
+              <p class="text-gray-700">
+                Creating content that resonates with <strong>global audiences</strong> in <strong>different regions</strong> goes beyond translation. We develop localized <strong>content strategy</strong> that addresses cultural nuances, regional preferences, and local search intent for your <strong>international audience</strong>.
+              </p>
+            </div>
+          </div>
+
+          <!-- H2: International SEO Marketing Success -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            International SEO Marketing for Sustainable Global Growth
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Successful <strong>international SEO marketing</strong> integrates seamlessly with your broader global expansion strategy. Our approach ensures consistent brand messaging while adapting to local market requirements. We leverage advanced SEO tools like tools like Google Search Console and <strong>SEMrush</strong> to monitor performance, identify optimization opportunities, and track <strong>keyword rankings in different</strong> markets simultaneously.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              The difference between local and international SEO lies in complexity and scale. While <strong>local SEO</strong> focuses on a specific geographic area, <strong>international SEO is the process</strong> of optimizing for <strong>multiple countries</strong> and often <strong>different language</strong> versions. This requires sophisticated technical implementation, deeper keyword research, and nuanced content creation that respects cultural differences while maintaining brand consistency.
+            </p>
+          </div>
+
+          <!-- H3: International SEO Consultant Recommendations -->
+          <h3 class="text-xl md:text-2xl font-bold font-display text-gray-900 mb-4">
+            Expert International SEO Consultant Best Practices
+          </h3>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <ul class="space-y-3 text-gray-700">
+              <li>Implement <strong>hreflang</strong> tags correctly to prevent duplicate content issues across language versions</li>
+              <li>Conduct thorough <strong>keyword research</strong> for each <strong>target market</strong> using local tools and native speakers</li>
+              <li>Choose your <strong>URL structure</strong> (subdomain, subdirectory, or ccTLD) based on resources and long-term goals</li>
+              <li>Build region-specific <strong>backlinks</strong> to improve <strong>domain authority</strong> in target countries</li>
+              <li>Create localized content that addresses cultural nuances and local search intent</li>
+              <li>Monitor <strong>Google Analytics</strong> data separately for each region to identify optimization opportunities</li>
+              <li>Follow <strong>SEO best practices</strong> for technical implementation including proper canonical tags</li>
+              <li>Regularly audit international performance using comprehensive international SEO tools</li>
+            </ul>
+          </div>
+
+          <!-- FAQ Section -->
+          <div class="mb-12">
+            <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-8">
+              Frequently Asked Questions About International SEO
+            </h2>
+
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+              <AccordionItem
+                question="What is international SEO and how does it differ from local SEO?"
+                answer="<p class='text-gray-700'><strong>International SEO is the process</strong> of optimizing your website to rank in <strong>multiple countries</strong> and languages. Unlike <strong>local SEO</strong> which targets a specific geographic area, <strong>international SEO</strong> requires technical implementation like <strong>hreflang tags</strong>, localized <strong>keyword research</strong>, and content that resonates across <strong>different regions</strong>. It involves understanding how <strong>search engines like</strong> Google serve results to international audiences.</p>"
+                id="faq-international-seo-1"
+                isFirst={true}
+              />
+              <AccordionItem
+                question="How do hreflang tags help international SEO performance?"
+                answer="<p class='text-gray-700'><strong>Hreflang tag</strong> implementation is critical for <strong>international SEO</strong> success. These tags <strong>tell search engines</strong> which language and regional version of a page to show based on user location and language preferences. Proper <strong>hreflang</strong> implementation prevents <strong>duplicate content</strong> issues, ensures the right content reaches your <strong>international audience</strong>, and improves <strong>ranking</strong> in <strong>target countries</strong>.</p>"
+                id="faq-international-seo-2"
+              />
+              <AccordionItem
+                question="What's the best URL structure for international SEO?"
+                answer="<p class='text-gray-700'>Choosing the right <strong>URL structure</strong> depends on your resources and goals. Options include subdirectories (site.com/fr/), <strong>subdomain</strong> (fr.site.com), or country-code top-level domains (site.fr). Subdirectories benefit from your main site's <strong>domain authority</strong>, while ccTLDs provide strongest geographic signals. Your <strong>international SEO specialist</strong> should evaluate your specific situation following <strong>best practices</strong> for your business.</p>"
+                id="faq-international-seo-3"
+              />
+              <AccordionItem
+                question="How long does it take to see results from international SEO efforts?"
+                answer="<p class='text-gray-700'>Most businesses see initial improvements in <strong>international market</strong> <strong>ranking</strong> within 4-6 months of implementing <strong>international SEO strategies</strong>. However, timeline varies based on competition in <strong>target countries</strong>, existing <strong>domain authority</strong>, and the complexity of technical implementation. Building strong <strong>backlinks</strong> and earning trust in a <strong>new market</strong> requires sustained effort, but following <strong>SEO best practices</strong> delivers long-term growth.</p>"
+                id="faq-international-seo-4"
+              />
+              <AccordionItem
+                question="Do I need different content for each country or is translation enough?"
+                answer="<p class='text-gray-700'>Simply translating content rarely works for successful <strong>international SEO</strong>. Effective <strong>content strategy</strong> requires localization that addresses cultural nuances, local search intent, and region-specific <strong>keyword research</strong>. Your content should resonate with <strong>global audiences</strong> in <strong>different regions</strong> while reflecting local terminology and search behavior. This approach following <strong>international SEO best practices</strong> significantly improves engagement and conversions.</p>"
+                id="faq-international-seo-5"
+                isLast={true}
+              />
+            </div>
+          </div>
+
+          <!-- Conclusion Section -->
+          <div class="prose prose-lg max-w-none">
+            <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+              Partner with Leading International SEO Experts
+            </h2>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Expanding into international markets requires more than ambition. It demands expertise in <strong>international SEO strategies</strong>, technical precision, and deep understanding of how <strong>search engines</strong> evaluate and rank content across <strong>different countries</strong>. Our team of <strong>international SEO consultant</strong> specialists brings proven experience helping Australian businesses succeed globally.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              From comprehensive <strong>international SEO audit</strong> services to ongoing optimization and monitoring, we handle every aspect of your global expansion. Our approach combines <strong>technical SEO</strong> excellence, strategic <strong>keyword research</strong> for each <strong>target market</strong>, quality <strong>backlinks</strong> building, and localized <strong>content strategy</strong> that drives real business results. We leverage advanced tools like <strong>SEMrush</strong> and <strong>Google Analytics</strong> to track performance and continuously optimize your <strong>international SEO</strong> campaigns.
+            </p>
+            <p class="text-gray-700 leading-relaxed">
+              Ready to dominate <strong>search engine</strong> rankings in your <strong>target countries</strong>? Contact our <strong>international SEO expert</strong> team today for a free consultation. We'll analyze your current position, identify opportunities in key international markets, and create a customized roadmap for global SEO success. Let's work together to expand your reach, capture international market share, and establish your brand as a global leader.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    {sections.showFinalCTA && (
+      <CTASection
+        title={finalCTA.title}
+        subtitle={finalCTA.subtitle}
+        primaryCTA={finalCTA.primaryCTA}
+        secondaryCTA={finalCTA.secondaryCTA}
+      />
+    )}
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .section-padding {
+    padding: 5rem 0;
+  }
+
+  @media (min-width: 768px) {
+    .section-padding {
+      padding: 7rem 0;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .section-padding {
+      padding: 8rem 0;
+    }
+  }
+</style>
