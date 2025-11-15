@@ -2,6 +2,7 @@
 import { ViewTransitions } from 'astro:transitions';
 import SEO from '../components/seo/SEO.astro';
 import SchemaOrg from '../components/seo/SchemaOrg.astro';
+import GoogleAnalytics from '../components/analytics/GoogleAnalytics.astro';
 
 // Import Fontsource fonts - only necessary weights
 import '@fontsource/inter/400.css';
@@ -72,6 +73,9 @@ const {
     <!-- Additional head content slot -->
     <slot name="head" />
 
+    <!-- Google Analytics -->
+    <GoogleAnalytics />
+
     <!-- Favicons -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -95,11 +99,6 @@ const {
     </a>
 
     <slot />
-
-    <!-- Optional: Add analytics script here -->
-    <!-- <script is:inline>
-      // Analytics code
-    </script> -->
   </body>
 </html>
 

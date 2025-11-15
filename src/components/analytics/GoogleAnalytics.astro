@@ -1,0 +1,34 @@
+---
+const GA_ID = import.meta.env.PUBLIC_GA_ID;
+const isProd = import.meta.env.PROD;
+
+// Only load GA in production and when ID is configured
+const shouldLoadGA = isProd && GA_ID;
+---
+
+{shouldLoadGA && (
+  <>
+    <!-- Google tag (gtag.js) -->
+    <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
+    <script is:inline define:vars={{ GA_ID }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', GA_ID, {
+        page_path: window.location.pathname,
+      });
+    </script>
+
+    <!-- Handle View Transitions navigation -->
+    <script is:inline define:vars={{ GA_ID }}>
+      document.addEventListener('astro:after-swap', () => {
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'page_view', {
+            page_location: window.location.href,
+            page_path: window.location.pathname,
+          });
+        }
+      });
+    </script>
+  </>
+)}
