@@ -10,7 +10,9 @@ import RelatedPosts from '../components/blog/RelatedPosts.astro';
 import BlogCTA from '../components/blog/BlogCTA.astro';
 import CategoryBadge from '../components/blog/CategoryBadge.astro';
 import CTASection from '../components/sections/CTASection.astro';
+import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
+import teamHeroImage from '../assets/images/team-hero.png';
 
 interface Props {
   post: CollectionEntry<'blog'>;
@@ -117,12 +119,29 @@ const ogImage = image ? new URL(image.src, Astro.site).toString() : `${Astro.sit
     <section class="relative py-16 md:py-20 lg:py-24 overflow-hidden">
       <!-- Background Image with Overlay -->
       <div class="absolute inset-0 z-0">
-        <img
-          src={image?.src || '/images/team-hero.png'}
-          alt=""
-          class="w-full h-full object-cover object-center"
-          loading="eager"
-        />
+        {image ? (
+          <Image
+            src={image}
+            alt=""
+            class="w-full h-full object-cover object-center"
+            loading="eager"
+            widths={[800, 1200, 1600, 2000]}
+            sizes="100vw"
+            format="webp"
+            quality={80}
+          />
+        ) : (
+          <Image
+            src={teamHeroImage}
+            alt=""
+            class="w-full h-full object-cover object-center"
+            loading="eager"
+            widths={[800, 1200, 1600, 2000]}
+            sizes="100vw"
+            format="webp"
+            quality={80}
+          />
+        )}
         <!-- Gradient Overlay for Readability and Brand Consistency -->
         <div class="absolute inset-0 bg-gradient-to-br from-primary-900/95 via-primary-800/90 to-secondary-900/95"></div>
       </div>

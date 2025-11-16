@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
 import CategoryBadge from './CategoryBadge.astro';
 
 interface Props {
@@ -36,13 +37,15 @@ const cardClasses = variant === 'featured'
   <a href={`/blog/${post.id}/`} class="block relative overflow-hidden">
     {image ? (
       <div class={variant === 'featured' ? 'aspect-[16/9]' : 'aspect-[4/3]'}>
-        <img
-          src={image.src}
+        <Image
+          src={image}
           alt={imageAlt || title}
-          width={image.width}
-          height={image.height}
+          widths={variant === 'featured' ? [600, 800, 1200] : [400, 600, 800]}
+          sizes={variant === 'featured' ? '(max-width: 768px) 100vw, 800px' : '(max-width: 768px) 100vw, 400px'}
           class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           loading="lazy"
+          format="webp"
+          quality={85}
         />
       </div>
     ) : (

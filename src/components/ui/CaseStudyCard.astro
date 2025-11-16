@@ -1,6 +1,7 @@
 ---
 import IndustryIcon from './IndustryIcon.astro';
 import PlatformLogos from './PlatformLogos.astro';
+import { Image } from 'astro:assets';
 
 export interface Metric {
   label: string;
@@ -10,7 +11,7 @@ export interface Metric {
 }
 
 export interface Props {
-  clientLogo?: string;
+  clientLogo?: string | ImageMetadata;
   clientLogoAlt?: string;
   largeLogo?: boolean;
   industry?: string;
@@ -43,15 +44,32 @@ const {
   verified = true,
   caseStudyUrl,
 } = Astro.props;
+
+// Check if clientLogo is an ImageMetadata object or a string URL
+const isImageMetadata = clientLogo && typeof clientLogo === 'object' && 'src' in clientLogo;
 ---
 
 <article class="case-study-card group relative bg-white rounded-lg border border-gray-200 p-8 transition-all duration-200 hover:border-primary-400 hover:shadow-lg flex flex-col h-full">
 
   <!-- Header with Client Logo or Industry Info -->
-  {clientLogo ? (
+  {clientLogo && isImageMetadata ? (
+    <div class="flex flex-col items-center mb-6">
+      <Image
+        src={clientLogo}
+        alt={clientLogoAlt || 'Client case study'}
+        class={`client-logo h-12 w-auto max-w-[180px] object-contain mb-2 ${largeLogo ? 'large-logo' : ''}`}
+        loading="lazy"
+        format="webp"
+        quality={85}
+      />
+      {industry && (
+        <p class="text-xs uppercase tracking-wider text-gray-500 font-medium">{industry}</p>
+      )}
+    </div>
+  ) : clientLogo && !isImageMetadata ? (
     <div class="flex flex-col items-center mb-6">
       <img
-        src={clientLogo}
+        src={clientLogo as string}
         alt={clientLogoAlt || 'Client case study'}
         class={`client-logo h-12 w-auto max-w-[180px] object-contain mb-2 ${largeLogo ? 'large-logo' : ''}`}
         loading="lazy"

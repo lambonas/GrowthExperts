@@ -28,3 +28,4 @@ LIST_STYLING_GUIDE.md
 /Images(proposal)
 /public/images/proposal
 src/pages/proposal.astro
+/src/assets/images/proposal

@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+
 interface Props {
   author: {
     name: string;
@@ -19,14 +21,19 @@ const { name, role, bio, avatar, social } = author;
 
 const maxBioLength = variant === 'small' ? 120 : 300;
 const truncatedBio = bio.length > maxBioLength ? bio.substring(0, maxBioLength) + '...' : bio;
+
+// Check if avatar is an import (ImageMetadata) or an external URL string
+const isImageMetadata = avatar && typeof avatar === 'object' && 'src' in avatar && typeof avatar.src === 'string' && !avatar.src.startsWith('http');
 ---
 
 <div class={`bg-gray-50 rounded-xl p-6 border border-gray-200 ${variant === 'large' ? 'lg:flex lg:items-start lg:gap-6' : ''}`}>
   <div class={`flex items-start gap-4 ${variant === 'large' ? 'lg:flex-shrink-0' : ''}`}>
     <!-- Avatar -->
     <div class={`flex-shrink-0 rounded-full bg-gradient-to-br from-primary-100 to-secondary-100 flex items-center justify-center overflow-hidden ${variant === 'large' ? 'w-24 h-24' : 'w-16 h-16'}`}>
-      {avatar ? (
-        <img src={avatar.src} alt={name} class="w-full h-full object-cover" />
+      {avatar && isImageMetadata ? (
+        <Image src={avatar} alt={name} class="w-full h-full object-cover" width={variant === 'large' ? 96 : 64} height={variant === 'large' ? 96 : 64} format="webp" quality={85} />
+      ) : avatar ? (
+        <img src={avatar.src} alt={name} class="w-full h-full object-cover" loading="lazy" />
       ) : (
         <svg class={`text-primary-600 ${variant === 'large' ? 'w-12 h-12' : 'w-8 h-8'}`} fill="currentColor" viewBox="0 0 20 20">
           <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
