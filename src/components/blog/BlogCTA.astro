@@ -1,0 +1,73 @@
+---
+interface Props {
+  variant: 'inline' | 'sidebar' | 'hero';
+  title: string;
+  description?: string;
+  ctaText: string;
+  ctaHref: string;
+  icon?: string;
+  benefits?: string[];
+}
+
+const { variant, title, description, ctaText, ctaHref, icon, benefits = [] } = Astro.props;
+
+const containerClasses = {
+  inline: 'my-8 p-6 bg-primary-50 border-l-4 border-primary-500 rounded-r-xl',
+  sidebar: 'p-6 bg-gradient-to-br from-primary-50 to-secondary-50 border border-primary-200 rounded-xl',
+  hero: 'p-8 md:p-10 bg-gradient-to-br from-primary-600 to-secondary-600 rounded-xl text-white',
+};
+---
+
+<div class={containerClasses[variant]}>
+  <!-- Icon (optional) -->
+  {icon && (
+    <div class={`mb-4 ${variant === 'hero' ? 'text-white' : 'text-primary-600'}`}>
+      <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+      </svg>
+    </div>
+  )}
+
+  <!-- Title -->
+  <h3 class={`font-bold font-display mb-3 ${variant === 'sidebar' ? 'text-lg' : variant === 'inline' ? 'text-xl' : 'text-2xl'} ${variant === 'hero' ? 'text-white' : 'text-gray-900'}`}>
+    {title}
+  </h3>
+
+  <!-- Description -->
+  {description && (
+    <p class={`mb-4 ${variant === 'sidebar' ? 'text-sm' : 'text-base'} ${variant === 'hero' ? 'text-white/90' : 'text-gray-700'}`}>
+      {description}
+    </p>
+  )}
+
+  <!-- Benefits List -->
+  {benefits.length > 0 && (
+    <ul class={`space-y-2 mb-6 ${variant === 'sidebar' ? 'text-sm' : 'text-base'}`}>
+      {benefits.map((benefit) => (
+        <li class="flex items-start gap-2">
+          <svg class={`w-5 h-5 flex-shrink-0 mt-0.5 ${variant === 'hero' ? 'text-white' : 'text-secondary-600'}`} fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+          </svg>
+          <span class={variant === 'hero' ? 'text-white' : 'text-gray-700'}>{benefit}</span>
+        </li>
+      ))}
+    </ul>
+  )}
+
+  <!-- CTA Button -->
+  <a
+    href={ctaHref}
+    class={`inline-flex items-center justify-center gap-2 px-6 py-3 font-semibold rounded-lg transition-all ${
+      variant === 'hero'
+        ? 'bg-white text-primary-600 hover:bg-gray-100 shadow-lg hover:shadow-xl'
+        : variant === 'sidebar'
+        ? 'bg-primary-600 text-white hover:bg-primary-700 shadow-md hover:shadow-lg w-full text-center'
+        : 'bg-primary-600 text-white hover:bg-primary-700 shadow-md hover:shadow-lg'
+    }`}
+  >
+    <span>{ctaText}</span>
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
+  </a>
+</div>

@@ -1,0 +1,79 @@
+---
+interface Props {
+  title: string;
+  subtitle: string;
+  showSearch?: boolean;
+  categories?: string[];
+  activeCategory?: string;
+}
+
+const { title, subtitle, showSearch = false, categories = [], activeCategory } = Astro.props;
+---
+
+<section class="bg-gradient-to-br from-primary-50 to-secondary-50 py-16 md:py-20 lg:py-24">
+  <div class="container-custom">
+    <div class="max-w-4xl mx-auto text-center">
+      <!-- Title -->
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold font-display text-gray-900 mb-6">
+        {title}
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="text-lg md:text-xl text-gray-600 leading-relaxed mb-8">
+        {subtitle}
+      </p>
+
+      <!-- Category Filter Pills -->
+      {categories.length > 0 && (
+        <div class="flex flex-wrap justify-center gap-3">
+          <a
+            href="/blog/"
+            class={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${
+              !activeCategory
+                ? 'bg-primary-600 text-white shadow-md'
+                : 'bg-white text-gray-700 hover:bg-primary-100 hover:text-primary-700'
+            }`}
+          >
+            All Articles
+          </a>
+          {categories.map((category) => (
+            <a
+              href={`/blog/category/${category.toLowerCase().replace(/ /g, '-')}/`}
+              class={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${
+                activeCategory === category
+                  ? 'bg-primary-600 text-white shadow-md'
+                  : 'bg-white text-gray-700 hover:bg-primary-100 hover:text-primary-700'
+              }`}
+            >
+              {category}
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  </div>
+</section>
+
+<style>
+  .container-custom {
+    max-width: 80rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .container-custom {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container-custom {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+</style>

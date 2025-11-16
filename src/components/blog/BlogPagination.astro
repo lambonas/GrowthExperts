@@ -1,0 +1,115 @@
+---
+interface Props {
+  currentPage: number;
+  totalPages: number;
+  basePath: string;
+}
+
+const { currentPage, totalPages, basePath } = Astro.props;
+
+// Generate page numbers to display (show 5 pages max with ellipsis)
+const getPageNumbers = () => {
+  const pages: (number | string)[] = [];
+
+  if (totalPages <= 5) {
+    // Show all pages
+    for (let i = 1; i <= totalPages; i++) {
+      pages.push(i);
+    }
+  } else {
+    // Show first, last, current, and surrounding pages
+    if (currentPage <= 3) {
+      pages.push(1, 2, 3, 4, '...', totalPages);
+    } else if (currentPage >= totalPages - 2) {
+      pages.push(1, '...', totalPages - 3, totalPages - 2, totalPages - 1, totalPages);
+    } else {
+      pages.push(1, '...', currentPage - 1, currentPage, currentPage + 1, '...', totalPages);
+    }
+  }
+
+  return pages;
+};
+
+const pageNumbers = getPageNumbers();
+
+const getPageUrl = (page: number) => {
+  return page === 1 ? `${basePath}/` : `${basePath}/${page}/`;
+};
+---
+
+<nav aria-label="Blog pagination" class="flex items-center justify-center gap-2">
+  <!-- Previous Button -->
+  {currentPage > 1 ? (
+    <a
+      href={getPageUrl(currentPage - 1)}
+      class="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-primary-50 hover:border-primary-300 hover:text-primary-700 transition-all"
+      aria-label="Go to previous page"
+    >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      </svg>
+      <span class="hidden sm:inline">Previous</span>
+    </a>
+  ) : (
+    <button
+      disabled
+      class="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 border border-gray-200 text-gray-400 font-semibold rounded-lg cursor-not-allowed"
+      aria-label="Previous page (disabled)"
+    >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      </svg>
+      <span class="hidden sm:inline">Previous</span>
+    </button>
+  )}
+
+  <!-- Page Numbers -->
+  <div class="flex items-center gap-2">
+    {pageNumbers.map((page) => (
+      page === '...' ? (
+        <span class="px-2 text-gray-500">...</span>
+      ) : page === currentPage ? (
+        <span
+          class="inline-flex items-center justify-center w-10 h-10 bg-primary-600 text-white font-bold rounded-lg shadow-md"
+          aria-current="page"
+          aria-label={`Current page, page ${page}`}
+        >
+          {page}
+        </span>
+      ) : (
+        <a
+          href={getPageUrl(page as number)}
+          class="inline-flex items-center justify-center w-10 h-10 bg-white border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-primary-50 hover:border-primary-300 hover:text-primary-700 transition-all"
+          aria-label={`Go to page ${page}`}
+        >
+          {page}
+        </a>
+      )
+    ))}
+  </div>
+
+  <!-- Next Button -->
+  {currentPage < totalPages ? (
+    <a
+      href={getPageUrl(currentPage + 1)}
+      class="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-primary-50 hover:border-primary-300 hover:text-primary-700 transition-all"
+      aria-label="Go to next page"
+    >
+      <span class="hidden sm:inline">Next</span>
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      </svg>
+    </a>
+  ) : (
+    <button
+      disabled
+      class="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 border border-gray-200 text-gray-400 font-semibold rounded-lg cursor-not-allowed"
+      aria-label="Next page (disabled)"
+    >
+      <span class="hidden sm:inline">Next</span>
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      </svg>
+    </button>
+  )}
+</nav>

@@ -24,3 +24,7 @@ pnpm-debug.log*
 .idea/
 /.claude
 nul
+LIST_STYLING_GUIDE.md
+/Images(proposal)
+/public/images/proposal
+src/pages/proposal.astro
