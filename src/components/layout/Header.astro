@@ -45,7 +45,7 @@ const navItems = [
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 bg-white/98 backdrop-blur-md border-b border-gray-200 shadow-sm" transition:persist>
+<header class="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200 shadow-sm" transition:persist>
   <nav class="container-custom py-4">
     <div class="flex items-center justify-between">
       <!-- Logo - Optimized for performance -->
@@ -117,7 +117,7 @@ const currentPath = Astro.url.pathname;
       <!-- Mobile Menu Button -->
       <button
         id="mobile-menu-button"
-        class="lg:hidden p-2 text-gray-700 hover:text-primary-600 transition-colors"
+        class="lg:hidden p-3 text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-lg transition-all min-w-[44px] min-h-[44px] flex items-center justify-center"
         aria-label="Toggle mobile menu"
         aria-expanded="false"
       >
@@ -131,23 +131,23 @@ const currentPath = Astro.url.pathname;
     </div>
 
     <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden lg:hidden mt-6 pb-6 border-t border-gray-200 pt-6">
+    <div id="mobile-menu" class="hidden lg:hidden mt-6 pb-6 border-t border-gray-200 pt-6 bg-white">
       {
         navItems.map((item) => (
           <div class="py-3">
             {item.dropdown ? (
               <div>
-                <div class="flex items-center justify-between">
+                <div class="flex items-center justify-between gap-2">
                   <a
                     href={item.href}
-                    class={`block text-gray-700 hover:text-primary-600 font-medium transition-colors flex-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 rounded ${
+                    class={`block text-gray-700 hover:text-primary-600 font-semibold text-base transition-colors flex-1 py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 rounded ${
                       currentPath === item.href ? 'text-primary-600' : ''
                     }`}
                   >
                     {item.label}
                   </a>
                   <button
-                    class="mobile-dropdown-toggle p-2 text-gray-600 hover:text-primary-600 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
+                    class="mobile-dropdown-toggle p-2 text-gray-600 hover:text-primary-600 hover:bg-gray-100 rounded-lg transition-all min-w-[44px] min-h-[44px] flex items-center justify-center flex-shrink-0"
                     aria-expanded="false"
                     aria-controls={`dropdown-${item.label.toLowerCase()}`}
                     aria-label={`Toggle ${item.label} menu`}
@@ -163,11 +163,11 @@ const currentPath = Astro.url.pathname;
                   style="display: grid; grid-template-rows: 0fr;"
                 >
                   <div class="overflow-hidden">
-                    <div class="ml-4 mt-2 space-y-2 pb-2">
+                    <div class="ml-4 mt-2 space-y-2 pb-2 bg-gray-50 rounded-lg p-3">
                       {item.dropdown.map((subItem) => (
                         <a
                           href={subItem.href}
-                          class="block text-gray-600 hover:text-primary-600 active:bg-primary-100 transition-colors py-2 px-3 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
+                          class="block text-gray-700 hover:text-primary-600 hover:bg-white active:bg-primary-100 transition-colors py-2.5 px-3 rounded-md font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
                         >
                           {subItem.label}
                         </a>
@@ -179,7 +179,7 @@ const currentPath = Astro.url.pathname;
             ) : (
               <a
                 href={item.href}
-                class={`block text-gray-700 hover:text-primary-600 font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 rounded ${
+                class={`block text-gray-700 hover:text-primary-600 font-semibold text-base transition-colors py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 rounded ${
                   currentPath === item.href ? 'text-primary-600' : ''
                 }`}
               >
