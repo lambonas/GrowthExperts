@@ -29,3 +29,8 @@ LIST_STYLING_GUIDE.md
 /public/images/proposal
 src/pages/proposal.astro
 /src/assets/images/proposal
+DIAGNOSIS_AND_FIX.md
+GOOGLE_ANALYTICS_FIX.md
+public/check-analytics.html
+QUICK_FIX_GUIDE.md
+

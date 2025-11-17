@@ -16,17 +16,6 @@ const isProd = import.meta.env.PROD;
 
 // Only load GA in production and when ID is configured
 const shouldLoadGA = isProd && GA_ID;
-
-// Development warning if GA_ID is not configured
-if (!isProd && !GA_ID) {
-  console.warn('[GoogleAnalytics] PUBLIC_GA_ID is not set in environment variables. Analytics will not load in production.');
-}
-
-// Log GA initialization in development
-if (!isProd && GA_ID) {
-  console.log('[GoogleAnalytics] GA_ID is configured:', GA_ID);
-  console.log('[GoogleAnalytics] Analytics will load only in production mode.');
-}
 ---
 
 {shouldLoadGA && (
@@ -92,9 +81,6 @@ if (!isProd && GA_ID) {
           'file_downloads': true           // Track file downloads
         }
       });
-
-      // Log successful initialization (only visible in browser console)
-      console.log('[GoogleAnalytics] Initialized with ID:', GA_ID);
     </script>
 
     <!-- Handle View Transitions Navigation for SPA-like behavior -->
@@ -113,23 +99,7 @@ if (!isProd && GA_ID) {
             'page_title': document.title,
             'send_to': GA_ID
           });
-
-          console.log('[GoogleAnalytics] Page view tracked:', {
-            path: window.location.pathname,
-            title: document.title
-          });
-        } else {
-          // Warn if gtag is not available
-          console.warn('[GoogleAnalytics] gtag is not defined during View Transition');
         }
-      });
-
-      /**
-       * Optional: Track View Transition errors
-       * Helps debug navigation issues
-       */
-      document.addEventListener('astro:page-load', () => {
-        console.log('[GoogleAnalytics] Page loaded successfully');
       });
     </script>
 
@@ -144,12 +114,4 @@ if (!isProd && GA_ID) {
       });
     -->
   </>
-)}
-
-{!shouldLoadGA && !isProd && (
-  <!-- Development Mode: Analytics disabled -->
-  <script is:inline>
-    console.log('[GoogleAnalytics] Running in development mode - Analytics disabled');
-    console.log('[GoogleAnalytics] To enable analytics, set PUBLIC_GA_ID in .env and build for production');
-  </script>
 )}
