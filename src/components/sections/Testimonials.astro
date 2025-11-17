@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+
 const testimonials = [
   {
     quote: "Working with Digital Growth Experts transformed our online presence. We've seen a 250% increase in organic traffic and our leads have tripled.",
@@ -62,9 +64,11 @@ const testimonials = [
 
             <!-- Author -->
             <div class="flex items-center space-x-3">
-              <img
+              <Image
                 src={testimonial.image}
                 alt={testimonial.name}
+                width={48}
+                height={48}
                 class="w-12 h-12 rounded-full object-cover border-2 border-primary-200"
                 loading="lazy"
               />

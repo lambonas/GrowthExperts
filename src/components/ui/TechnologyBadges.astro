@@ -13,6 +13,25 @@
  * - Mobile-optimized: Responsive pyramid adapts to all devices
  */
 
+import { Image } from 'astro:assets';
+
+// Import tech logos from assets
+import googlePartner from '../../assets/tech/google partner.svg';
+import semAgencyPartner from '../../assets/tech/Sem Agency partner.svg';
+import googleAnalytics from '../../assets/tech/analytics.svg';
+import semrushIcon from '../../assets/tech/SEMRush-Icon.svg';
+import google from '../../assets/tech/google.svg';
+import googleSearchConsole from '../../assets/tech/google-search-console.svg';
+import googleMyBusiness from '../../assets/tech/google-my-business-logo.svg';
+import tagManager from '../../assets/tech/tag-manager.svg';
+import wordpress from '../../assets/tech/wordpress.svg';
+import shopify from '../../assets/tech/shopify.svg';
+import woocommerce from '../../assets/tech/woo.svg';
+import webflow from '../../assets/tech/webflow.svg';
+import bing from '../../assets/tech/bing.svg';
+import duckduckgo from '../../assets/tech/duckduckgo-icon.svg';
+import yandex from '../../assets/tech/yandex-light.svg';
+
 export interface Props {
   title?: string;
   subtitle?: string;
@@ -27,13 +46,13 @@ const {
   showTitle = true
 } = Astro.props;
 
-// Technology data organized in pyramid rows for diamond layout
+// Technology data organized in pyramid rows for diamond layout - Imported from assets
 // Row structure: 1 → 3 → 5 → 3 → 3 (diamond shape)
 const technologies = [
   // ROW 1: Featured Partner (1 logo - apex)
   {
     name: 'Google Partner',
-    logo: '/images/tech/google partner.svg',
+    logo: googlePartner,
     description: 'Certified Google Partner',
     row: 1,
     size: 'large'
@@ -42,21 +61,21 @@ const technologies = [
   // ROW 2: Core Certifications (3 logos)
   {
     name: 'SEM Agency Partner',
-    logo: '/images/tech/Sem Agency partner.svg',
+    logo: semAgencyPartner,
     description: 'Certified SEM Partner',
     row: 2,
     size: 'large'
   },
   {
     name: 'Google Analytics',
-    logo: '/images/tech/analytics.svg',
+    logo: googleAnalytics,
     description: 'Analytics & Insights',
     row: 2,
     size: 'medium'
   },
   {
     name: 'SEMrush',
-    logo: '/images/tech/SEMRush-Icon.svg',
+    logo: semrushIcon,
     description: 'SEO Research Platform',
     row: 2,
     size: 'medium'
@@ -65,35 +84,35 @@ const technologies = [
   // ROW 3: Primary Tools (5 logos - widest point)
   {
     name: 'Google',
-    logo: '/images/tech/google.svg',
+    logo: google,
     description: 'Search Engine Leader',
     row: 3,
     size: 'medium'
   },
   {
     name: 'Google Search Console',
-    logo: '/images/tech/google-search-console.svg',
+    logo: googleSearchConsole,
     description: 'Search Performance',
     row: 3,
     size: 'medium'
   },
   {
     name: 'Google My Business',
-    logo: '/images/tech/google-my-business-logo.svg',
+    logo: googleMyBusiness,
     description: 'Local SEO Platform',
     row: 3,
     size: 'medium'
   },
   {
     name: 'Google Tag Manager',
-    logo: '/images/tech/tag-manager.svg',
+    logo: tagManager,
     description: 'Tag Management',
     row: 3,
     size: 'medium'
   },
   {
     name: 'WordPress',
-    logo: '/images/tech/wordpress.svg',
+    logo: wordpress,
     description: 'CMS Platform',
     row: 3,
     size: 'medium'
@@ -102,21 +121,21 @@ const technologies = [
   // ROW 4: E-commerce Platforms (3 logos)
   {
     name: 'Shopify',
-    logo: '/images/tech/shopify.svg',
+    logo: shopify,
     description: 'E-commerce Platform',
     row: 4,
     size: 'medium'
   },
   {
     name: 'WooCommerce',
-    logo: '/images/tech/woo.svg',
+    logo: woocommerce,
     description: 'E-commerce Solution',
     row: 4,
     size: 'medium'
   },
   {
     name: 'Webflow',
-    logo: '/images/tech/webflow.svg',
+    logo: webflow,
     description: 'Website Builder',
     row: 4,
     size: 'medium'
@@ -125,21 +144,21 @@ const technologies = [
   // ROW 5: Additional Search Engines (3 logos - base)
   {
     name: 'Bing',
-    logo: '/images/tech/bing.svg',
+    logo: bing,
     description: 'Search Engine',
     row: 5,
     size: 'small'
   },
   {
     name: 'DuckDuckGo',
-    logo: '/images/tech/duckduckgo-icon.svg',
+    logo: duckduckgo,
     description: 'Privacy-Focused Search',
     row: 5,
     size: 'small'
   },
   {
     name: 'Yandex',
-    logo: '/images/tech/yandex-light.svg',
+    logo: yandex,
     description: 'Global Search Engine',
     row: 5,
     size: 'small'
@@ -182,13 +201,11 @@ const pyramidRows = [1, 2, 3, 4, 5].map(rowNum =>
               >
                 <!-- Logo Container -->
                 <div class="logo-wrapper">
-                  <img
+                  <Image
                     src={tech.logo}
                     alt={`${tech.name} - ${tech.description}`}
                     class="tech-logo"
                     loading="lazy"
-                    width={tech.size === 'large' ? "160" : tech.size === 'medium' ? "120" : "100"}
-                    height={tech.size === 'large' ? "80" : tech.size === 'medium' ? "60" : "50"}
                   />
                 </div>
 

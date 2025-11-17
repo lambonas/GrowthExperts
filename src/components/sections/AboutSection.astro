@@ -12,7 +12,16 @@
  * Positioning: Hero → AboutSection → Client Logos → SEO Truth
  */
 
+import { Image } from 'astro:assets';
 import Button from '../ui/Button.astro';
+
+// Import badge logos from assets
+import googlePartner from '../../assets/badges/google-partner.svg';
+import semrushPartner from '../../assets/badges/semrush-partner.svg';
+import googleAnalytics from '../../assets/badges/google-analytics.svg';
+import googleSearchConsole from '../../assets/badges/google-search-console.svg';
+import googleTagManager from '../../assets/badges/google-tag-manager.svg';
+import wordpress from '../../assets/badges/wordpress.svg';
 
 export interface Props {
   variant?: 'default' | 'split' | 'centered';
@@ -20,41 +29,41 @@ export interface Props {
 
 const { variant = 'default' } = Astro.props;
 
-// Technology Partner Badges - SVG data URIs for performance
+// Technology Partner Badges - Imported from assets for optimization
 const techBadges = [
   {
     name: 'Google Partner',
-    logo: '/images/badges/google-partner.svg',
+    logo: googlePartner,
     alt: 'Certified Google Partner',
     color: 'from-blue-500 to-blue-600'
   },
   {
     name: 'Semrush Agency Partner',
-    logo: '/images/badges/semrush-partner.svg',
+    logo: semrushPartner,
     alt: 'Semrush Agency Partner',
     color: 'from-orange-500 to-red-500'
   },
   {
     name: 'Google Analytics',
-    logo: '/images/badges/google-analytics.svg',
+    logo: googleAnalytics,
     alt: 'Google Analytics Certified',
     color: 'from-yellow-500 to-orange-500'
   },
   {
     name: 'Google Search Console',
-    logo: '/images/badges/google-search-console.svg',
+    logo: googleSearchConsole,
     alt: 'Google Search Console Expert',
     color: 'from-green-500 to-teal-500'
   },
   {
     name: 'Google Tag Manager',
-    logo: '/images/badges/google-tag-manager.svg',
+    logo: googleTagManager,
     alt: 'Google Tag Manager Certified',
     color: 'from-blue-600 to-indigo-600'
   },
   {
     name: 'WordPress',
-    logo: '/images/badges/wordpress.svg',
+    logo: wordpress,
     alt: 'WordPress SEO Experts',
     color: 'from-blue-700 to-blue-800'
   },
@@ -144,7 +153,7 @@ const techBadges = [
                   <!-- Badge Logo -->
                   <div class="absolute inset-0 flex items-center justify-center p-6">
                     <div class="w-full h-full flex items-center justify-center">
-                      <img
+                      <Image
                         src={badge.logo}
                         alt={badge.alt}
                         class="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110"
