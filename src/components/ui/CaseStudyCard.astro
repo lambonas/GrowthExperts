@@ -59,8 +59,10 @@ const isImageMetadata = clientLogo && typeof clientLogo === 'object' && 'src' in
         alt={clientLogoAlt || 'Client case study'}
         class={`client-logo h-12 w-auto max-w-[180px] object-contain mb-2 ${largeLogo ? 'large-logo' : ''}`}
         loading="lazy"
+        widths={[140, 160, 180, 240, 300]}
+        sizes="(max-width: 768px) 140px, (max-width: 1023px) 160px, 180px"
         format="webp"
-        quality={85}
+        quality={90}
       />
       {industry && (
         <p class="text-xs uppercase tracking-wider text-gray-500 font-medium">{industry}</p>
