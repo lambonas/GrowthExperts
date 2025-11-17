@@ -7,6 +7,7 @@ import ClientLogoCarousel from '../components/sections/ClientLogoCarousel.astro'
 import CaseStudiesSection from '../components/sections/CaseStudiesSection.astro';
 import CTASection from '../components/sections/CTASection.astro';
 import AccordionItem from '../components/ui/AccordionItem.astro';
+import { teamHeroImage } from '../assets/images/index';
 
 const seo = {
   title: 'Lawyer SEO Services | Get More Legal Clients Online',
@@ -22,7 +23,7 @@ const seo = {
     'legal practice seo',
     'solicitor seo',
   ],
-  ogImage: '/images/team-hero.png',
+  ogimage: teamHeroImage,
   ogType: 'website',
 };
 
@@ -37,7 +38,7 @@ const hero = {
     text: 'See Our Results',
     href: '#case-studies',
   },
-  image: '/images/team-hero.png',
+  image: teamHeroImage,
   imageAlt: 'SEO services for lawyers and law firms',
 };
 

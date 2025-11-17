@@ -7,6 +7,7 @@ import ClientLogoCarousel from '../components/sections/ClientLogoCarousel.astro'
 import CaseStudiesSection from '../components/sections/CaseStudiesSection.astro';
 import CTASection from '../components/sections/CTASection.astro';
 import AccordionItem from '../components/ui/AccordionItem.astro';
+import { teamHeroImage } from '../assets/images/index';
 
 const seo = {
   title: 'Accountant SEO Services | Get More High-Value Clients',
@@ -22,7 +23,7 @@ const seo = {
     'accounting firm marketing',
     'cpa marketing services',
   ],
-  ogImage: '/images/team-hero.png',
+  ogimage: teamHeroImage,
   ogType: 'website',
 };
 
@@ -33,7 +34,7 @@ const hero = {
     text: 'Free Strategy Session',
     href: '/contact/',
   },
-  image: '/images/team-hero.png',
+  image: teamHeroImage,
   imageAlt: 'SEO services for accountants and accounting firms',
 };
 

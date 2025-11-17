@@ -12,7 +12,7 @@ export default defineConfig({
   trailingSlash: 'always',
   compressHTML: true,
   build: {
-    inlineStylesheets: 'auto',
+    inlineStylesheets: 'always',
     // Code splitting configuration for better caching and performance
     split: true,
     // Separate vendor chunks for better caching

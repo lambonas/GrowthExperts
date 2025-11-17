@@ -53,10 +53,10 @@ const currentPath = Astro.url.pathname;
         <Image
           src={logo}
           alt="Digital Growth Experts"
-          width={231}
-          height={84}
+          widths={[150, 200, 231]}
+          sizes="(max-width: 640px) 150px, 200px"
           format="webp"
-          quality={90}
+          quality={85}
           loading="eager"
           fetchpriority="high"
           class="h-12 w-auto transition-all duration-200 group-hover:opacity-80 group-hover:scale-[1.02]"

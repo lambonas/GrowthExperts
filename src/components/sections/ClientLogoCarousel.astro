@@ -15,16 +15,16 @@ import client10 from '../../assets/images/clients/clientlogo10.png';
 
 // Real client logos from the client logos folder
 const clients = [
-  { name: 'Australian Tech Solutions', logo: client1 },
-  { name: 'Sydney Financial Group', logo: client2 },
-  { name: 'Melbourne Innovations', logo: client3 },
-  { name: 'Brisbane Digital Partners', logo: client4 },
-  { name: 'Perth Business Systems', logo: client5 },
-  { name: 'Adelaide Marketing Co', logo: client6 },
-  { name: 'Gold Coast Enterprises', logo: client7 },
-  { name: 'Canberra Tech Hub', logo: client8 },
-  { name: 'Darwin Solutions Ltd', logo: client9 },
-  { name: 'Hobart Digital Services', logo: client10 },
+  { name: 'SEO client', logo: client1 },
+  { name: 'SEO client', logo: client2 },
+  { name: 'SEO client', logo: client3 },
+  { name: 'SEO client', logo: client4 },
+  { name: 'SEO client', logo: client5 },
+  { name: 'SEO client', logo: client6 },
+  { name: 'SEO client', logo: client7 },
+  { name: 'SEO client', logo: client8 },
+  { name: 'SEO client', logo: client9 },
+  { name: 'SEO client', logo: client10 },
 ];
 
 // Create two different orders for visual variety - triple for truly seamless infinite scrolling
@@ -53,8 +53,8 @@ const row2Clients = [...clients.slice(5), ...clients.slice(0, 5), ...clients.sli
                     alt={`${client.name} - Trusted DGE client`}
                     class="logo-image"
                     loading="lazy"
-                    width={140}
-                    height={70}
+                    widths={[60, 100, 140]}
+                    sizes="(max-width: 768px) 100px, 140px"
                     format="webp"
                     quality={75}
                   />
@@ -77,8 +77,8 @@ const row2Clients = [...clients.slice(5), ...clients.slice(0, 5), ...clients.sli
                     alt={`${client.name} - Trusted DGE client`}
                     class="logo-image"
                     loading="lazy"
-                    width={140}
-                    height={70}
+                    widths={[60, 100, 140]}
+                    sizes="(max-width: 768px) 100px, 140px"
                     format="webp"
                     quality={75}
                   />
