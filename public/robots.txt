@@ -1,9 +1,16 @@
+# Robots.txt for Digital Growth Experts
+# Allow all compliant crawlers to index public pages
+
 User-agent: *
 Allow: /
 
-# Sitemap
+# Explicitly disallow internal/private pages
+Disallow: /proposal/
+
+# Sitemap location
 Sitemap: https://growthexperts.com.au/sitemap-index.xml
 
-# Disallow admin/internal pages (adjust as needed)
-# Disallow: /admin/
-# Disallow: /api/
+# Note: Add additional Disallow rules here as needed for:
+# - Admin areas: Disallow: /admin/
+# - API endpoints: Disallow: /api/
+# - Private resources: Disallow: /private/
