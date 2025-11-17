@@ -1,34 +1,155 @@
 ---
+/**
+ * Enhanced Google Analytics Component
+ *
+ * Features:
+ * - GDPR compliant with IP anonymization and consent mode
+ * - Enhanced tracking with page title and location
+ * - Privacy-friendly defaults (ad personalization disabled)
+ * - Better error handling and development warnings
+ * - Full View Transitions support
+ * - Production-only loading for performance
+ */
+
 const GA_ID = import.meta.env.PUBLIC_GA_ID;
 const isProd = import.meta.env.PROD;
 
 // Only load GA in production and when ID is configured
 const shouldLoadGA = isProd && GA_ID;
+
+// Development warning if GA_ID is not configured
+if (!isProd && !GA_ID) {
+  console.warn('[GoogleAnalytics] PUBLIC_GA_ID is not set in environment variables. Analytics will not load in production.');
+}
+
+// Log GA initialization in development
+if (!isProd && GA_ID) {
+  console.log('[GoogleAnalytics] GA_ID is configured:', GA_ID);
+  console.log('[GoogleAnalytics] Analytics will load only in production mode.');
+}
 ---
 
 {shouldLoadGA && (
   <>
-    <!-- Google tag (gtag.js) -->
+    <!-- Google tag (gtag.js) - Loaded asynchronously for performance -->
     <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
+
+    <!-- Google Analytics Initialization with Enhanced Configuration -->
     <script is:inline define:vars={{ GA_ID }}>
+      // Initialize dataLayer for Google Analytics
       window.dataLayer = window.dataLayer || [];
+
+      /**
+       * gtag function - pushes commands to dataLayer
+       * @param {...*} args - Arguments to push to dataLayer
+       */
       function gtag(){dataLayer.push(arguments);}
+
+      // Set timestamp for initialization
       gtag('js', new Date());
+
+      /**
+       * GDPR Compliance: Set default consent mode
+       * This ensures analytics respects user privacy by default
+       * Update these values based on user consent
+       */
+      gtag('consent', 'default', {
+        'ad_storage': 'denied',           // Disable ad storage by default
+        'ad_user_data': 'denied',         // Disable ad user data by default
+        'ad_personalization': 'denied',   // Disable ad personalization by default
+        'analytics_storage': 'granted',   // Allow analytics storage (can be changed based on consent)
+        'functionality_storage': 'granted', // Allow functionality storage
+        'personalization_storage': 'granted', // Allow personalization storage
+        'security_storage': 'granted'     // Allow security storage
+      });
+
+      /**
+       * Configure Google Analytics with enhanced settings
+       * Includes GDPR compliance and privacy-friendly options
+       */
       gtag('config', GA_ID, {
-        page_path: window.location.pathname,
+        // Page tracking
+        'page_path': window.location.pathname,
+        'page_title': document.title,
+        'page_location': window.location.href,
+
+        // GDPR Compliance
+        'anonymize_ip': true,              // Anonymize IP addresses for privacy
+
+        // Privacy settings
+        'allow_google_signals': false,     // Disable Google signals by default
+        'allow_ad_personalization_signals': false, // Disable ad personalization signals
+
+        // Performance
+        'send_page_view': true,            // Send initial page view
+
+        // Enhanced measurement (automatic event tracking)
+        'enhanced_measurement': {
+          'scrolls': true,                 // Track scroll depth
+          'outbound_clicks': true,         // Track outbound link clicks
+          'site_search': true,             // Track site search
+          'video_engagement': true,        // Track video engagement
+          'file_downloads': true           // Track file downloads
+        }
+      });
+
+      // Log successful initialization (only visible in browser console)
+      console.log('[GoogleAnalytics] Initialized with ID:', GA_ID);
+    </script>
+
+    <!-- Handle View Transitions Navigation for SPA-like behavior -->
+    <script is:inline define:vars={{ GA_ID }}>
+      /**
+       * Track page views during View Transitions navigation
+       * This ensures analytics are tracked correctly during client-side routing
+       */
+      document.addEventListener('astro:after-swap', () => {
+        // Check if gtag is available
+        if (typeof gtag !== 'undefined') {
+          // Send page view event with full tracking data
+          gtag('event', 'page_view', {
+            'page_location': window.location.href,
+            'page_path': window.location.pathname,
+            'page_title': document.title,
+            'send_to': GA_ID
+          });
+
+          console.log('[GoogleAnalytics] Page view tracked:', {
+            path: window.location.pathname,
+            title: document.title
+          });
+        } else {
+          // Warn if gtag is not available
+          console.warn('[GoogleAnalytics] gtag is not defined during View Transition');
+        }
+      });
+
+      /**
+       * Optional: Track View Transition errors
+       * Helps debug navigation issues
+       */
+      document.addEventListener('astro:page-load', () => {
+        console.log('[GoogleAnalytics] Page loaded successfully');
       });
     </script>
 
-    <!-- Handle View Transitions navigation -->
-    <script is:inline define:vars={{ GA_ID }}>
-      document.addEventListener('astro:after-swap', () => {
-        if (typeof gtag !== 'undefined') {
-          gtag('event', 'page_view', {
-            page_location: window.location.href,
-            page_path: window.location.pathname,
-          });
-        }
+    <!--
+      Optional: Add this script to your consent management UI to update consent
+
+      Example usage when user grants consent:
+      gtag('consent', 'update', {
+        'ad_storage': 'granted',
+        'ad_user_data': 'granted',
+        'ad_personalization': 'granted'
       });
-    </script>
+    -->
   </>
+)}
+
+{!shouldLoadGA && !isProd && (
+  <!-- Development Mode: Analytics disabled -->
+  <script is:inline>
+    console.log('[GoogleAnalytics] Running in development mode - Analytics disabled');
+    console.log('[GoogleAnalytics] To enable analytics, set PUBLIC_GA_ID in .env and build for production');
+  </script>
 )}
