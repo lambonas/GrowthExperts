@@ -1,0 +1,563 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import HeroHome from '../components/sections/HeroHome.astro';
+import ClientLogoCarousel from '../components/sections/ClientLogoCarousel.astro';
+import CaseStudiesSection from '../components/sections/CaseStudiesSection.astro';
+import CTASection from '../components/sections/CTASection.astro';
+import SchemaOrg from '../components/seo/SchemaOrg.astro';
+import AccordionItem from '../components/ui/AccordionItem.astro';
+
+// ===================================
+// PAGE FRONTMATTER CONFIGURATION
+// Edit these values to customize the page content
+// ===================================
+
+// SEO Meta Data
+const seo = {
+  title: 'SEO for Charities & Non-Profits | Boost Donations Through Search',
+  description: 'Specialised SEO services for charities and non-profits. Increase donations, reach donors, and maximise your Google Ad Grants. Expert non-profit SEO strategies that deliver results.',
+  keywords: [
+    'seo for charities',
+    'seo services for charities',
+    'seo audit for charities',
+    'seo training for charities',
+    'seo non profit',
+    'non profit seo',
+    'non profit local seo service',
+    'non-profit local seo management',
+    'non-profit seo audit'
+  ],
+  ogImage: '/images/team-hero.png',
+  ogType: 'website',
+};
+
+// Hero Section
+const hero = {
+  title: 'SEO for Charities',
+  subtitle: 'Help more people find your cause and increase donations through strategic search engine optimisation. Our specialised SEO services for charities help Australian non-profits reach donors, volunteers, and beneficiaries who are searching for organisations like yours.',
+  primaryCTA: {
+    text: 'Free Strategy Session',
+    href: '/contact/'
+  },
+};
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Industries', href: '/industries/' },
+  { label: 'SEO for Charities', href: '/seo-for-charities/' },
+];
+
+// Section Visibility (show/hide sections)
+const sections = {
+  showClientLogos: true,
+  showCaseStudies: true,
+  showWhatsIncluded: true,
+  showProcess: true,
+  showFinalCTA: true,
+};
+
+// Final CTA Section
+const finalCTA = {
+  title: 'Ready to Amplify Your Charity\'s Impact?',
+  subtitle: 'Get your free non-profit SEO audit and discover how to reach more donors, volunteers, and beneficiaries through organic search. No obligations, just actionable insights tailored for charities.',
+  primaryCTA: {
+    text: 'Free Strategy Session',
+    href: '/contact/'
+  },
+};
+---
+
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  keywords={seo.keywords}
+  ogImage={seo.ogImage}
+  ogType={seo.ogType}
+  schema={{
+    type: 'Service',
+    data: {
+      '@type': 'Service',
+      name: 'SEO Services for Charities',
+      description: seo.description,
+      provider: {
+        '@type': 'Organization',
+        name: 'Digital Growth Experts',
+      },
+      areaServed: {
+        '@type': 'Country',
+        name: 'Australia',
+      },
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Charity SEO Services',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Non-Profit SEO Audit',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Google Ad Grants Management',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'SEO Training for Charities',
+            },
+          },
+        ],
+      },
+    },
+  }}
+>
+  <!-- Add NonProfit schema for better charity SEO -->
+  <SchemaOrg
+    slot="head"
+    type="Organization"
+    data={{
+      name: 'Digital Growth Experts',
+      description: 'Specialised SEO services for charities and non-profits, helping organisations increase donations and reach more supporters',
+      image: `${Astro.site}images/logo.png`,
+    }}
+  />
+
+  <Header />
+
+  <main id="main-content">
+    <!-- Hero Section - Conversion-focused with clear value proposition -->
+    <HeroHome
+      title={hero.title}
+      subtitle={hero.subtitle}
+      primaryCTA={hero.primaryCTA}
+      secondaryCTA={hero.secondaryCTA}
+    />
+
+    <!-- Social Proof - Client Logos -->
+    {sections.showClientLogos && <ClientLogoCarousel />}
+
+    <!-- Proven Results Section - Case Studies with Real Data -->
+    {sections.showCaseStudies && <CaseStudiesSection />}
+
+    <!-- What's Included Section - Service Details -->
+    {sections.showWhatsIncluded && (
+    <section class="section-padding bg-gray-50">
+      <div class="container-custom">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold font-display text-gray-900 mb-4">
+            SEO Services for Charities That Drive Real Impact
+          </h2>
+          <p class="text-lg md:text-xl text-gray-600">
+            Everything your non-profit needs to reach more donors and amplify your mission.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <!-- Service 1 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-primary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Non-Profit SEO Audit</h3>
+            <p class="text-gray-600 mb-4">
+              Comprehensive SEO audit for charities identifying opportunities to improve search visibility, reach potential donors, and optimise your online presence for fundraising success.
+            </p>
+          </div>
+
+          <!-- Service 2 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-secondary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-secondary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Google Ad Grants Management</h3>
+            <p class="text-gray-600 mb-4">
+              Maximise your $10,000 monthly Google Ads budget with expert Ad Grants optimisation. Strategic keyword research and campaign management to drive traffic to your website.
+            </p>
+          </div>
+
+          <!-- Service 3 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-accent-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">SEO Training for Charities</h3>
+            <p class="text-gray-600 mb-4">
+              Empower your team with practical SEO training tailored for non-profits. Learn best practices for content creation, keyword research, and managing your SEO on an ongoing basis.
+            </p>
+          </div>
+
+          <!-- Service 4 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-primary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Non-Profit Local SEO Service</h3>
+            <p class="text-gray-600 mb-4">
+              Specialised non-profit local SEO management to help community charities get found in local searches. Optimise your Google My Business and build local citations for maximum visibility.
+            </p>
+          </div>
+
+          <!-- Service 5 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-secondary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-secondary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Content Strategy for Fundraising</h3>
+            <p class="text-gray-600 mb-4">
+              Create compelling website content that ranks in search engines and converts visitors into donors. Strategic keyword research targeting donor search intent.
+            </p>
+          </div>
+
+          <!-- Service 6 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-accent-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Link Building for Non-Profits</h3>
+            <p class="text-gray-600 mb-4">
+              Earn high-quality backlinks from news outlets, community organisations, and industry bodies to boost your search engine rankings and online authority.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    )}
+
+    <!-- Long-form Content Section - Educational/Authority Building -->
+    <!-- Main Content Section - SEO-Optimized for Charity SEO -->
+    <section class="section-padding bg-white">
+      <div class="container-custom">
+        <div class="max-w-4xl mx-auto">
+          <!-- H1 Header -->
+          <div class="text-center mb-12">
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold font-display text-gray-900 mb-4">
+              SEO for Charities
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 leading-relaxed">
+              Amplify your mission and reach more supporters through strategic search engine optimisation designed for non-profits.
+            </p>
+          </div>
+
+          <!-- Introduction with Priority Keywords -->
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              <strong>SEO for charities</strong> is one of the most cost-effective ways to increase your <strong>organisation's visibility</strong>, reach potential <strong>donors</strong>, and amplify your mission. When someone searches for causes like yours, your <strong>charity</strong> needs to appear in <strong>search results</strong>. With limited budgets and resources, <strong>non-profit</strong> organisations need <a href="/services/" class="text-primary-600 hover:text-primary-700 font-semibold">marketing strategies</a> that deliver maximum impact without ongoing costs. That's where <strong>search engine optimisation</strong> comes in.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              At <a href="/" class="text-primary-600 hover:text-primary-700 font-semibold">Digital Growth Experts</a>, our specialised <strong>SEO services for charities</strong> help Australian <strong>nonprofits</strong> build sustainable <strong>organic traffic</strong> that brings in <strong>donations</strong>, volunteers, and beneficiaries. Unlike paid advertising that stops working when the budget runs out, effective <strong>SEO</strong> generates <strong>organic traffic without ongoing</strong> advertising spend. A well-executed <strong>SEO strategy</strong> for your <strong>charity</strong> means more people find your cause when searching on <strong>Google</strong>, leading to increased <strong>fundraising</strong> success and greater community impact.
+            </p>
+          </div>
+
+          <!-- H2: Why SEO for Nonprofits Matters -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            Why SEO for Nonprofits Is Essential in 2025
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              <strong>SEO for nonprofits</strong> is about connecting your mission with people actively searching for ways to make a difference. When someone types "charity supporting homeless youth" or "donate to cancer research" into <strong>Google search</strong>, they have clear intent. They want to <strong>help charities</strong> like yours. The question is: will they <strong>find your organisation</strong> first, or your competitors?
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              The <strong>importance of SEO</strong> for charities goes beyond just <strong>ranking</strong> higher. It's about building trust and credibility. When your <strong>charity</strong> appears at the <strong>top of the search</strong> results, it signals to <strong>potential donors</strong> that you're an established, legitimate organisation. <strong>Good SEO</strong> also ensures your <strong>donation</strong> page and key information about your cause are easy to find, improving <strong>user experience</strong> and conversion rates. Every click from <strong>organic search</strong> represents someone genuinely interested in your mission, not someone who accidentally stumbled across a random ad.
+            </p>
+          </div>
+
+          <!-- H2: SEO Strategy for Charities -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            Building an Effective SEO Strategy for Your Charity
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              A comprehensive <strong>SEO strategy</strong> for charities starts with understanding <strong>search intent</strong>. What are <strong>potential donors</strong> searching for? What questions do beneficiaries have? Our <strong>keyword research</strong> using <strong>tools like Google Keyword Planner</strong> identifies the exact terms your audience uses, from broad searches like "<strong>seo non profit</strong>" to specific queries like "how to donate to <a href="/healthcare-seo/" class="text-primary-600 hover:text-primary-700 font-semibold">healthcare charities</a> Melbourne."
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              <strong>On-page SEO</strong> is crucial for charities. This means <strong>optimising</strong> every <strong>page on your website</strong> with relevant <strong>keywords</strong>, compelling <strong>meta descriptions</strong>, and proper <strong>image alt</strong> text. Your <strong>donation page</strong> should be optimised not just for conversions, but also for <strong>search engines</strong> to understand its purpose. Using <strong>tools like</strong> <strong>Google Search Console</strong> helps monitor how <strong>Google</strong> sees your site and identifies technical issues that might prevent you from <strong>ranking on search</strong> results pages.
+            </p>
+          </div>
+
+          <!-- H2: Non Profit Local SEO Service -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            Non Profit Local SEO Service for Community Organisations
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              For community-based charities, <strong>non profit local SEO service</strong> is absolutely essential. <strong>Local searches</strong> like "food bank near me" or "homeless shelter Sydney" represent people who need your services right now. Implementing <a href="/local-seo/" class="text-primary-600 hover:text-primary-700 font-semibold">non-profit local SEO management</a> ensures your organisation appears in <strong>local search</strong> results and on <strong>Google My Business</strong> listings when people search in your area.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              <strong>Local SEO</strong> for charities involves optimising your <strong>Google My Business</strong> profile, building local citations, and encouraging supporters to <strong>leave reviews</strong>. These reviews not only improve your <strong>ranking</strong> but also build trust with <strong>potential donors</strong> and beneficiaries. We also ensure your location information is consistent across the web, helping <strong>search engines understand</strong> where you operate and who you serve.
+            </p>
+          </div>
+
+          <!-- H2: Google Ad Grants and SEO -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            Maximising Google Ad Grants with Strong SEO Foundations
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              <strong>Google Ads</strong> through the Google Ad Grants program gives eligible charities $10,000 per month in free advertising. However, many nonprofits struggle to use their full grant because they lack strong SEO foundations. <strong>Google Ad Grants</strong> work best when combined with effective <strong>SEO</strong> because both strategies require <strong>keyword research</strong>, understanding <strong>search intent</strong>, and creating <strong>high-quality</strong> landing pages.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Our approach combines Ad Grants management with <strong>SEO</strong> optimisation. We identify <strong>keywords</strong> that work for both paid and <strong>organic traffic</strong>, ensuring you're not just getting clicks but attracting people who genuinely <strong>resonate with your audience</strong>. The landing pages we optimise for your Ad Grants campaigns are also optimised for <strong>organic search</strong>, creating a sustainable <strong>traffic to your website</strong> strategy that doesn't disappear when ad budgets run low. Just as we help <a href="/small-business-seo/" class="text-primary-600 hover:text-primary-700 font-semibold">small businesses</a> maximise their marketing budgets, we ensure charities get maximum value from every dollar spent.
+            </p>
+          </div>
+
+          <!-- H2: Technical SEO and Website Content -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            Technical SEO and Website Content Best Practices for Charities
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Many charities have <strong>website content</strong> that tells their story beautifully but fails to <strong>rank higher</strong> in <strong>search engine results pages</strong> (SERPs) because of technical issues. <strong>Website speed</strong>, mobile responsiveness, and proper site structure all influence how <strong>search engines like Google</strong> evaluate and <strong>rank</strong> your site. Our <strong>non-profit seo audit</strong> identifies these technical barriers and provides a clear roadmap to fix them.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Creating <strong>SEO content</strong> that resonates with your audience requires understanding <strong>ranking factors</strong> while maintaining authentic storytelling. We help charities create <a href="/content-marketing/" class="text-primary-600 hover:text-primary-700 font-semibold">content</a> that addresses donor questions, explains their impact, and naturally incorporates relevant <strong>keywords</strong>. This includes optimising existing pages and creating new content targeting specific <strong>keyword</strong> opportunities identified through our research using <strong>SEO tools</strong> and analytics platforms, just as we do for <a href="/real-estate-seo/" class="text-primary-600 hover:text-primary-700 font-semibold">real estate agencies</a> and <a href="/dental-seo/" class="text-primary-600 hover:text-primary-700 font-semibold">dental practices</a>.
+            </p>
+          </div>
+
+          <!-- H2: Link Building and Backlinks -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            Building Authority Through Backlinks and Link Building
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              <strong>Backlinks</strong> from authoritative <strong>websites</strong> act as votes of confidence in your <strong>charity</strong>. When reputable <strong>news outlets</strong>, government bodies, or established organisations <strong>link back</strong> to your site, it signals to <strong>search engines</strong> that your content is valuable and trustworthy. For charities, earning <strong>backlinks</strong> often comes naturally through media coverage, partnerships, and community involvement, similar to how we build authority for <a href="/lawyer-seo/" class="text-primary-600 hover:text-primary-700 font-semibold">legal practices</a> and <a href="/accountant-seo/" class="text-primary-600 hover:text-primary-700 font-semibold">accounting firms</a>.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Our <a href="/link-building/" class="text-primary-600 hover:text-primary-700 font-semibold">link building</a> strategy for nonprofits focuses on ethical, sustainable approaches. We identify opportunities for media coverage, help you create shareable resources that other <strong>websites link</strong> to naturally, and build relationships with organisations that support your cause. This is one of the <strong>top factors that influence SEO for nonprofits</strong> because quality <strong>backlinks</strong> significantly improve <strong>search engine rankings</strong> and <strong>online visibility</strong>.
+            </p>
+          </div>
+
+          <!-- H2: SEO Training for Charities -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            SEO Training for Charities: Empowering Your Team
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              While professional <strong>SEO services for charities</strong> deliver results, we also believe in empowering nonprofit teams to <strong>manage your SEO</strong> independently. Our <strong>SEO training for charities</strong> program teaches your staff <strong>everything you need to know</strong> about maintaining and improving your <strong>search engine visibility</strong>. From basic <strong>keyword research</strong> to understanding <strong>SEO stands for "search engine</strong> optimisation", we cover the fundamentals and advanced techniques.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              The training includes practical guidance on <strong>best practices</strong> for creating content, using <strong>tools like Google</strong> Analytics and Search Console, optimising images with <strong>alt text</strong>, and understanding why <strong>SEO is important</strong> for long-term sustainability. We provide an <strong>SEO guide</strong> tailored specifically for nonprofits, ensuring your team can confidently <strong>make your website</strong> more discoverable without constant external support.
+            </p>
+          </div>
+
+          <!-- H2: SEO Audit for Charities -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            Comprehensive SEO Audit for Charities
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Our <strong>SEO audit for charities</strong> and <strong>non-profit seo audit</strong> process examines every aspect of your <strong>online presence</strong>. We analyse your current <strong>ranking</strong> positions, identify technical issues preventing you from being <strong>found in Google</strong>, and assess how well your content targets relevant <strong>search</strong> queries. The audit reveals quick wins and long-term opportunities to <strong>improve your visibility</strong>.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              We examine <strong>ranking factors</strong> specific to your sector, assess competitor performance, and identify gaps where your <strong>charity</strong> can gain visibility. The audit covers technical SEO, <strong>on-page</strong> optimisation, content quality, <strong>backlinks</strong> profile, <strong>local SEO</strong> performance, and mobile usability. You'll receive a detailed report with prioritised recommendations and clear next steps to <strong>rank higher</strong> and attract more <strong>organic traffic</strong>.
+            </p>
+          </div>
+
+          <!-- H3: SEO Tips for Charities -->
+          <h3 class="text-xl md:text-2xl font-bold font-display text-gray-900 mb-4">
+            Essential SEO Tips for Charities and Nonprofits
+          </h3>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <ul class="space-y-3 text-gray-700">
+              <li><strong>Use tools like Google Keyword Planner</strong> to find terms <strong>potential donors</strong> actually search for</li>
+              <li>Optimise your <strong>donation page</strong> for both <strong>search engines</strong> and conversions</li>
+              <li>Create <strong>SEO content</strong> that tells your story while targeting relevant <strong>keywords</strong></li>
+              <li>Ensure <strong>image alt</strong> text describes images clearly for accessibility and <strong>SEO</strong></li>
+              <li>Build <strong>backlinks</strong> through media coverage and community partnerships</li>
+              <li>Claim and optimise your <strong>Google My Business</strong> listing for <strong>local searches</strong></li>
+              <li>Improve <strong>website speed</strong> and mobile responsiveness for better <strong>user experience</strong></li>
+              <li>Monitor performance using <strong>Google Search Console</strong> and analytics</li>
+              <li><strong>Invest in SEO</strong> training to build internal capability</li>
+              <li>Focus on creating <strong>high-quality</strong> content that <strong>resonates with your audience</strong></li>
+              <li>Remember that <strong>effective SEO</strong> generates <strong>traffic from Google</strong> without constant spending</li>
+              <li>Understand that <strong>SEO helps</strong> you reach people actively searching for causes like yours</li>
+            </ul>
+          </div>
+
+          <!-- FAQ Section -->
+          <div class="mb-12">
+            <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-8">
+              Frequently Asked Questions About SEO for Charities
+            </h2>
+
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+              <AccordionItem
+                question="Why is SEO important for charities and non-profits?"
+                answer="<p class='text-gray-700'><strong>SEO is important</strong> for charities because it helps you reach <strong>potential donors</strong>, volunteers, and beneficiaries who are actively searching for organisations like yours. Unlike paid advertising, <strong>SEO</strong> generates <strong>organic traffic without ongoing</strong> costs, making it incredibly cost-effective for nonprofits with limited budgets. <strong>Good SEO</strong> ensures people can <strong>find your organisation</strong> when searching on <strong>Google</strong>, increasing <strong>donations</strong>, volunteer sign-ups, and overall impact.</p>"
+                id="faq-charity-seo-1"
+                isFirst={true}
+              />
+              <AccordionItem
+                question="How can charities use Google Ad Grants effectively?"
+                answer="<p class='text-gray-700'><strong>Google Ad Grants</strong> provide eligible nonprofits with $10,000 monthly in free <strong>Google Ads</strong>. To use them effectively, you need strong <strong>SEO</strong> foundations including <strong>keyword research</strong>, optimised landing pages, and compelling content. We recommend combining Ad Grants with <strong>SEO</strong> efforts to create sustainable <strong>traffic to your website</strong>. The <strong>keywords</strong> that work for paid ads often work for <strong>organic search</strong> too, so a coordinated strategy maximises results from both channels.</p>"
+                id="faq-charity-seo-2"
+              />
+              <AccordionItem
+                question="What makes SEO for nonprofits different from regular SEO?"
+                answer="<p class='text-gray-700'><strong>SEO for nonprofits</strong> focuses on different conversion goals than commercial businesses. Instead of product sales, charities need to optimise for <strong>donations</strong>, volunteer sign-ups, and beneficiary engagement. <strong>Non profit SEO</strong> also leverages unique opportunities like <strong>Google Ad Grants</strong>, community partnerships for <strong>link building</strong>, and mission-driven storytelling. The <strong>search intent</strong> of people looking for charities differs from commercial searches, requiring a specialised approach to <strong>keyword research</strong> and content creation.</p>"
+                id="faq-charity-seo-3"
+              />
+              <AccordionItem
+                question="How long does it take to see results from charity SEO efforts?"
+                answer="<p class='text-gray-700'><strong>SEO</strong> is a long-term investment, with most charities seeing significant improvements within 3-6 months. However, some quick wins like optimising your <strong>Google My Business</strong> listing or fixing critical technical issues can show results within weeks. The key is consistency. <strong>Investing in SEO</strong> builds cumulative benefits over time, and unlike paid advertising, the <strong>organic traffic</strong> you earn continues flowing even if you pause active optimisation work. That's why <strong>SEO helps</strong> charities build sustainable <strong>online visibility</strong>.</p>"
+                id="faq-charity-seo-4"
+              />
+              <AccordionItem
+                question="Can our charity team manage SEO internally with training?"
+                answer="<p class='text-gray-700'>Absolutely! Our <strong>SEO training for charities</strong> program is designed to empower nonprofit teams to <strong>manage your SEO</strong> independently. We teach <strong>everything you need to know</strong> from <strong>keyword research</strong> using <strong>tools like Google Keyword Planner</strong> to creating <strong>SEO content</strong> and monitoring performance with <strong>Google Search Console</strong>. Many charities successfully <strong>manage their SEO</strong> in-house after our training, though some prefer ongoing support for advanced strategies or technical work. We tailor our approach to your team's capacity and goals.</p>"
+                id="faq-charity-seo-5"
+                isLast={true}
+              />
+            </div>
+          </div>
+
+          <!-- Hub Navigation -->
+          <p class="text-gray-700 leading-relaxed mb-6 text-center">
+            <a href="/services/" class="text-primary-600 hover:text-primary-700 font-semibold text-lg">Explore all our <strong>SEO services</strong> →</a>
+          </p>
+
+          <!-- Conclusion Section -->
+          <div class="prose prose-lg max-w-none">
+            <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+              Ready to Amplify Your Charity's Impact Through SEO?
+            </h2>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Don't let your important mission go undiscovered. Our specialised <strong>SEO services for charities</strong> help Australian nonprofits reach more <strong>donors</strong>, volunteers, and beneficiaries through strategic <strong>search engine optimisation</strong>. Whether you need a comprehensive <strong>non-profit seo audit</strong>, ongoing <strong>non-profit local SEO management</strong>, or <strong>SEO training for charities</strong> to build internal capability, <a href="/contact/" class="text-primary-600 hover:text-primary-700 font-semibold">we're here to help</a>.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              We understand the unique challenges charities face. Limited budgets, small teams, and the need to demonstrate impact mean every marketing dollar must work hard. That's why <strong>SEO for nonprofits</strong> is so powerful. It's cost-effective, sustainable, and generates <strong>organic traffic</strong> that continues flowing long after the initial <strong>investment in SEO</strong>. Combined with tools like <strong>Google Ad Grants</strong>, a strong <strong>SEO strategy</strong> can transform your <strong>online presence</strong> and <strong>fundraising</strong> results.
+            </p>
+            <p class="text-gray-700 leading-relaxed">
+              Take the first step towards greater impact. <a href="/contact/" class="text-primary-600 hover:text-primary-700 font-semibold">Contact us today</a> for a free <strong>SEO audit for charities</strong> and discover how we can <strong>help charities</strong> like yours reach more people, increase <strong>donations</strong>, and amplify your mission through strategic <strong>search engine optimisation</strong>. Let's work together to ensure your cause gets the <strong>visibility</strong> it deserves.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    {sections.showFinalCTA && (
+      <CTASection
+        title={finalCTA.title}
+        subtitle={finalCTA.subtitle}
+        primaryCTA={finalCTA.primaryCTA}
+        secondaryCTA={finalCTA.secondaryCTA}
+      />
+    )}
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .section-padding {
+    padding: 5rem 0;
+  }
+
+  @media (min-width: 768px) {
+    .section-padding {
+      padding: 7rem 0;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .section-padding {
+      padding: 8rem 0;
+    }
+  }
+</style>
