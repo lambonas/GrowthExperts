@@ -1,0 +1,548 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import HeroHome from '../components/sections/HeroHome.astro';
+import ClientLogoCarousel from '../components/sections/ClientLogoCarousel.astro';
+import CaseStudiesSection from '../components/sections/CaseStudiesSection.astro';
+import CTASection from '../components/sections/CTASection.astro';
+import SchemaOrg from '../components/seo/SchemaOrg.astro';
+import AccordionItem from '../components/ui/AccordionItem.astro';
+
+// ===================================
+// PAGE FRONTMATTER CONFIGURATION
+// Edit these values to customize the page content
+// ===================================
+
+// SEO Meta Data
+const seo = {
+  title: 'SEO Canberra | Expert SEO Services & Agency | Digital Growth Experts',
+  description: 'Leading SEO agency in Canberra delivering proven SEO services and strategies. Dominate local search rankings with expert SEO campaigns tailored for Canberra businesses.',
+  keywords: [
+    'seo canberra',
+    'seo agency canberra',
+    'seo company canberra',
+    'seo services canberra',
+    'canberra seo',
+    'local seo canberra',
+    'seo expert canberra',
+    'canberra seo agency',
+    'seo company in canberra',
+    'best seo agency canberra',
+    'digital marketing canberra',
+  ],
+  ogImage: '/images/team-hero.png',
+  ogType: 'website',
+};
+
+// Hero Section
+const hero = {
+  title: 'SEO Canberra: Drive Real Growth with Expert SEO Services',
+  subtitle: 'Partner with Canberra\'s leading SEO agency to dominate search rankings, attract qualified traffic, and grow your business. Proven SEO strategies that deliver measurable results for businesses in Canberra and beyond.',
+  primaryCTA: {
+    text: 'Free Strategy Session',
+    href: '/contact/'
+  },
+};
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'SEO Canberra', href: '/seo-canberra/' },
+];
+
+// Section Visibility (show/hide sections)
+const sections = {
+  showClientLogos: true,
+  showCaseStudies: true,
+  showWhatsIncluded: true,
+  showProcess: true,
+  showFinalCTA: true,
+};
+
+// Final CTA Section
+const finalCTA = {
+  title: 'Ready to Dominate Search Rankings in Canberra?',
+  subtitle: 'Get your free SEO audit and discover the exact strategies we\'ll use to boost your rankings, drive targeted traffic, and grow your Canberra business. No obligations, just actionable insights.',
+  primaryCTA: {
+    text: 'Free Strategy Session',
+    href: '/contact/'
+  },
+};
+---
+
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  keywords={seo.keywords}
+  ogImage={seo.ogImage}
+  ogType={seo.ogType}
+  schema={{
+    type: 'Service',
+    data: {
+      '@type': 'Service',
+      name: 'SEO Services Canberra',
+      description: seo.description,
+      provider: {
+        '@type': 'Organization',
+        name: 'Digital Growth Experts',
+      },
+      areaServed: {
+        '@type': 'City',
+        name: 'Canberra',
+      },
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'SEO Services Canberra',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Local SEO Canberra',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Technical SEO Audits',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Content Marketing',
+            },
+          },
+        ],
+      },
+    },
+  }}
+>
+  <!-- Add LocalBusiness schema for better local SEO -->
+  <SchemaOrg
+    slot="head"
+    type="LocalBusiness"
+    data={{
+      name: 'Digital Growth Experts',
+      description: 'Expert SEO and digital marketing services in Canberra, helping businesses dominate search rankings',
+      image: `${Astro.site}images/logo.png`,
+    }}
+  />
+
+  <Header />
+
+  <main id="main-content">
+    <!-- Hero Section - Conversion-focused with clear value proposition -->
+    <HeroHome
+      title={hero.title}
+      subtitle={hero.subtitle}
+      primaryCTA={hero.primaryCTA}
+      secondaryCTA={hero.secondaryCTA}
+    />
+
+    <!-- Social Proof - Client Logos -->
+    {sections.showClientLogos && <ClientLogoCarousel />}
+
+    <!-- Proven Results Section - Case Studies with Real Data -->
+    {sections.showCaseStudies && <CaseStudiesSection />}
+
+    <!-- What's Included Section - Service Details -->
+    {sections.showWhatsIncluded && (
+    <section class="section-padding bg-gray-50">
+      <div class="container-custom">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold font-display text-gray-900 mb-4">
+            Comprehensive SEO Services Canberra Businesses Trust
+          </h2>
+          <p class="text-lg md:text-xl text-gray-600">
+            Everything your business needs to dominate search rankings and attract qualified customers.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <!-- Service 1 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-primary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Local SEO Canberra</h3>
+            <p class="text-gray-600 mb-4">
+              Dominate local search results in Canberra with optimised Google Business Profile, strategic citation building, and targeted local SEO campaigns designed specifically for the Canberra market.
+            </p>
+          </div>
+
+          <!-- Service 2 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-secondary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-secondary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Technical SEO Audits</h3>
+            <p class="text-gray-600 mb-4">
+              Comprehensive technical SEO analysis to identify and fix critical issues affecting your search engine rankings, site speed, mobile responsiveness, and overall site health.
+            </p>
+          </div>
+
+          <!-- Service 3 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-accent-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Keyword Research & Strategy</h3>
+            <p class="text-gray-600 mb-4">
+              Data-driven keyword research targeting high-intent search terms relevant to your Canberra business, ensuring your SEO strategy aligns with customer search behaviour.
+            </p>
+          </div>
+
+          <!-- Service 4 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-primary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Content Marketing & SEO</h3>
+            <p class="text-gray-600 mb-4">
+              Strategic content marketing that drives organic traffic and establishes your authority. Entity-optimised content that search engines love and customers trust.
+            </p>
+          </div>
+
+          <!-- Service 5 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-secondary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-secondary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">On-Page & Off-Page SEO</h3>
+            <p class="text-gray-600 mb-4">
+              Complete on-page optimisation including meta tags, headers, and content structure, plus strategic off-page SEO through quality link building and digital PR.
+            </p>
+          </div>
+
+          <!-- Service 6 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-accent-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">SEO Campaign Management</h3>
+            <p class="text-gray-600 mb-4">
+              Full-service SEO campaign oversight with transparent reporting, ongoing optimisation, and strategic adjustments to maximise your SEO results.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    )}
+
+    <!-- Long-form Content Section - Educational/Authority Building -->
+    <!-- Main Content Section - SEO-Optimized for SEO Canberra -->
+    <section class="section-padding bg-white">
+      <div class="container-custom">
+        <div class="max-w-4xl mx-auto">
+          <!-- H1 Header -->
+          <div class="text-center mb-12">
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold font-display text-gray-900 mb-4">
+              SEO Canberra
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 leading-relaxed">
+              Expert SEO services that help Canberra businesses dominate search rankings and drive sustainable growth.
+            </p>
+          </div>
+
+          <!-- Introduction with Priority Keywords -->
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              When it comes to <strong>SEO Canberra</strong>, your business deserves more than cookie-cutter strategies and empty promises. At <a href="/" class="text-primary-600 hover:text-primary-700 font-semibold">Digital Growth Experts</a>, we deliver proven <strong>SEO services</strong> that drive real results. Whether you're a small <strong>Canberra business</strong> looking to crack the local market or an established brand seeking to strengthen your <strong>online presence</strong>, our tailored <strong>SEO strategies</strong> will get you noticed on the <strong>search engine results page</strong>.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              The <strong>Canberra</strong> market is unique. With a sophisticated mix of government, education, and commercial sectors, businesses need <strong>SEO companies</strong> that understand local nuances. Our <strong>SEO agency in Canberra</strong> specialises in helping <strong>businesses in Canberra</strong> dominate <strong>search engine</strong> rankings through comprehensive <strong>keyword research</strong>, strategic <a href="/content-marketing/" class="text-primary-600 hover:text-primary-700 font-semibold">content marketing</a>, and <a href="/technical-seo/" class="text-primary-600 hover:text-primary-700 font-semibold">technical SEO</a> excellence. We're not just another <strong>digital marketing agency</strong> making big claims. We're an <strong>SEO company Canberra</strong> enterprises rely on for measurable <strong>SEO results</strong>.
+            </p>
+          </div>
+
+          <!-- H2: Why Choose Our SEO Agency Canberra -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            Why Choose Our SEO Agency Canberra for Your Digital Success
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Finding the <strong>best SEO</strong> partner isn't about who talks the loudest. It's about finding an <strong>SEO company in Canberra</strong> that backs their words with action. Our <strong>Canberra SEO agency</strong> has built a reputation on delivering <strong>effective SEO strategies</strong> that move the needle. From comprehensive <a href="/seo-audit/" class="text-primary-600 hover:text-primary-700 font-semibold">SEO audits</a> that uncover hidden opportunities to custom <strong>SEO campaigns</strong> designed around your business goals, we provide a <strong>marketing strategy</strong> that actually works.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              What sets our <strong>SEO service</strong> apart? We understand that <strong>search engine optimisation</strong> isn't a set-and-forget tactic. It's an ongoing commitment to excellence. Our <strong>SEO team</strong> stays ahead of algorithm updates, monitors your competitors, and continually refines your strategy to maintain your competitive edge in <strong>search engine results</strong>. Whether you need <a href="/local-seo/" class="text-primary-600 hover:text-primary-700 font-semibold">local SEO Canberra</a> expertise or broader organic visibility, our <strong>approach to SEO</strong> delivers sustainable growth.
+            </p>
+          </div>
+
+          <!-- H2: Local SEO Canberra Services -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            Local SEO Canberra: Dominate Your Local Market
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              For businesses serving the Canberra region, <strong>local SEO</strong> isn't optional. It's essential. Our <strong>local SEO Canberra</strong> services ensure your <strong>local business</strong> appears prominently when potential customers search for your services. We <strong>optimise your website</strong> for local search queries, build strategic citations, and leverage Google Business Profile to maximise your visibility in local search results.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              The <strong>Canberra market</strong> demands precision. Our <strong>SEO experts</strong> analyse local search patterns, understand the competitive landscape, and develop targeted strategies that help your business stand out. From <strong>on-page SEO</strong> optimisation to building authoritative <strong>local business</strong> listings, we handle every aspect of your local search presence. Whether you're targeting Civic, Belconnen, Tuggeranong, or Gungahlin, our <strong>local SEO services</strong> connect you with customers actively searching for what you offer.
+            </p>
+          </div>
+
+          <!-- H2: SEO Company Canberra Expertise -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            SEO Company Canberra: Technical Excellence Meets Strategic Thinking
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              As a leading <strong>SEO company Canberra</strong> businesses recommend, we combine <strong>technical SEO</strong> mastery with creative <strong>marketing strategy</strong>. Our comprehensive <strong>SEO audit</strong> process identifies critical issues holding your rankings back, from slow page speeds to broken links and mobile usability problems. We then implement <strong>effective SEO</strong> solutions that address these issues systematically, ensuring your website meets modern <strong>search engine</strong> standards.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              But <strong>technical SEO</strong> is just the foundation. Our <strong>Canberra SEO services</strong> extend to strategic <strong>keyword research</strong>, competitor analysis, and content gap identification. We discover the exact terms your target customers are searching for and build <a href="/content-marketing/" class="text-primary-600 hover:text-primary-700 font-semibold">content marketing strategies</a> that capture that traffic. Unlike <strong>SEO agencies</strong> that rely on outdated tactics, we employ <strong>white hat SEO</strong> techniques and <strong>best SEO</strong> practices that deliver long-term, sustainable results.
+            </p>
+          </div>
+
+          <!-- H2: SEO Services Canberra Offerings -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            Comprehensive SEO Services Canberra Businesses Need to Succeed
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Our <strong>SEO services Canberra</strong> portfolio covers every aspect of modern <strong>search engine optimisation</strong>. From <a href="/ecommerce-seo/" class="text-primary-600 hover:text-primary-700 font-semibold">ecommerce SEO</a> for online retailers to <strong>professional SEO</strong> for service providers, we tailor our <strong>SEO plan</strong> to your specific industry and objectives. We're not just another <strong>marketing agency</strong> offering generic solutions. We're <strong>SEO specialists</strong> who understand that every business has unique challenges and opportunities.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Our <strong>SEO approach</strong> integrates seamlessly with your broader <strong>digital marketing strategy</strong>. Whether you need <strong>off-page SEO</strong> through <a href="/link-building/" class="text-primary-600 hover:text-primary-700 font-semibold">strategic link building</a>, <strong>on-page SEO</strong> optimisation, or a complete <strong>customised SEO</strong> solution, our <strong>team of SEO</strong> professionals has you covered. We provide <strong>award-winning SEO</strong> work that's backed by transparent reporting and measurable outcomes. When you partner with our <strong>digital marketing agency</strong>, you're not just getting <strong>SEO work</strong>, you're investing in sustainable business growth.
+            </p>
+          </div>
+
+          <!-- H2: Our SEO Expert Canberra Process -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            Our SEO Expert Canberra Approach: Data-Driven Results
+          </h2>
+
+          <div class="grid md:grid-cols-2 gap-8 mb-12">
+            <div class="bg-gray-50 p-6 rounded-lg">
+              <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Discovery & SEO Audit</h3>
+              <p class="text-gray-700">
+                Every successful <strong>SEO campaign</strong> starts with understanding your current position. Our <strong>SEO expert</strong> team conducts comprehensive <strong>technical SEO audits</strong> to identify issues affecting your <strong>ranking</strong>, analyse your competitors, and uncover opportunities. This foundation ensures our <strong>SEO strategies</strong> deliver maximum impact.
+              </p>
+            </div>
+            <div class="bg-gray-50 p-6 rounded-lg">
+              <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Strategy & Planning</h3>
+              <p class="text-gray-700">
+                We develop a <strong>tailored SEO</strong> roadmap based on your business goals and <strong>Canberra market</strong> dynamics. Our <strong>SEO team</strong> creates a <strong>marketing strategy</strong> that addresses quick wins and long-term growth, ensuring we <strong>get SEO results</strong> that matter to your bottom line.
+              </p>
+            </div>
+            <div class="bg-gray-50 p-6 rounded-lg">
+              <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Implementation & Optimisation</h3>
+              <p class="text-gray-700">
+                Our <strong>SEO professionals</strong> execute the strategy with precision. From <strong>optimise your website</strong> structure to implementing <strong>white hat SEO techniques</strong>, we handle every detail. We continuously monitor performance and adjust tactics to maintain your competitive advantage in <strong>search engine results</strong>.
+              </p>
+            </div>
+            <div class="bg-gray-50 p-6 rounded-lg">
+              <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Reporting & Refinement</h3>
+              <p class="text-gray-700">
+                Transparency drives our client relationships. We provide detailed reporting on your <strong>SEO performance</strong>, showing exactly how our <strong>SEO services can help</strong> your business grow. Our <strong>experienced SEO</strong> team uses these insights to refine strategies, ensuring <strong>SEO is a long-term strategy</strong> that delivers compounding returns.
+              </p>
+            </div>
+          </div>
+
+          <!-- H3: What Makes Effective SEO -->
+          <h3 class="text-xl md:text-2xl font-bold font-display text-gray-900 mb-4">
+            What Makes Effective SEO Strategies Work in Canberra
+          </h3>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Understanding what drives <strong>effective SEO</strong> is crucial. It's not about gaming the system or finding shortcuts. <strong>SEO is no longer</strong> about keyword stuffing or buying links. Modern <strong>search engine optimisation</strong> requires a holistic approach that prioritises user experience, content quality, and genuine authority. Our <strong>best SEO agency</strong> methods focus on sustainable tactics that build lasting value.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              The <strong>effectiveness of your SEO strategy</strong> depends on alignment with search intent and technical excellence. We <strong>optimise</strong> every element of your digital presence, from site architecture to content structure. Our <strong>SEO techniques</strong> combine <strong>organic SEO</strong> best practices with innovative approaches tailored to your industry. Whether you're competing for <a href="/seo-melbourne/" class="text-primary-600 hover:text-primary-700 font-semibold">Melbourne SEO</a> level visibility or focusing purely on <strong>Canberra SEO</strong>, our methods adapt to your goals.
+            </p>
+          </div>
+
+          <!-- H3: Industries We Serve -->
+          <h3 class="text-xl md:text-2xl font-bold font-display text-gray-900 mb-4">
+            SEO Solutions for Every Canberra Industry
+          </h3>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Our <strong>SEO agency Canberra</strong> experience spans diverse sectors. From <a href="/lawyer-seo/" class="text-primary-600 hover:text-primary-700 font-semibold">legal practices</a> and <a href="/healthcare-seo/" class="text-primary-600 hover:text-primary-700 font-semibold">healthcare providers</a> to retail and hospitality businesses, we understand the unique challenges facing <strong>businesses in Canberra</strong>. Whether you're a boutique consultancy or a growing e-commerce brand, our <strong>customised SEO</strong> solutions address your specific needs. We don't believe in one-size-fits-all approaches. Every <strong>SEO plan</strong> is crafted around your industry dynamics, competitive landscape, and business objectives.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              From <strong>local SEO</strong> for service-area businesses to <a href="/international-seo/" class="text-primary-600 hover:text-primary-700 font-semibold">international SEO</a> for brands with global ambitions, our <strong>SEO specialists</strong> have proven track records. We've helped <strong>Canberra companies</strong> achieve first-page rankings, increased organic traffic by triple digits, and delivered sustainable ROI through strategic <strong>SEO and digital marketing</strong>. Our <strong>leading SEO agency</strong> credentials are built on results, not rhetoric.
+            </p>
+          </div>
+
+          <!-- FAQ Section -->
+          <div class="mb-12">
+            <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-8">
+              Frequently Asked Questions About SEO Canberra
+            </h2>
+
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+              <AccordionItem
+                question="How long does it take to see results from SEO in Canberra?"
+                answer="<p class='text-gray-700'><strong>SEO is a long-term strategy</strong> that typically shows initial improvements within 3-6 months. However, <strong>SEO results</strong> depend on factors like competition, your current website state, and industry dynamics. Our <strong>Canberra SEO agency</strong> focuses on delivering <strong>solid SEO</strong> foundations early, with measurable traffic and ranking improvements building over time. Unlike <strong>basic SEO</strong> approaches, our <strong>effective SEO strategies</strong> are designed for sustainable, compounding growth rather than quick fixes.</p>"
+                id="faq-seo-canberra-1"
+                isFirst={true}
+              />
+              <AccordionItem
+                question="What makes your SEO agency in Canberra different from others?"
+                answer="<p class='text-gray-700'>Our <strong>SEO agency in Canberra</strong> stands out through transparent reporting, proven results, and genuine expertise. Unlike other <strong>SEO agencies</strong> that rely on outdated tactics, we employ <strong>white hat SEO techniques</strong> and <strong>SEO best practices</strong> aligned with search engine guidelines. Our <strong>team of SEO</strong> professionals brings experience from working with diverse <strong>Canberra businesses</strong>, delivering <strong>high-quality SEO</strong> that prioritises your long-term success. We're not just a <strong>SEO firm</strong> making promises. We're a partner committed to your growth.</p>"
+                id="faq-seo-canberra-2"
+              />
+              <AccordionItem
+                question="Do you offer local SEO services for Canberra businesses?"
+                answer="<p class='text-gray-700'>Absolutely. <strong>Local SEO Canberra</strong> is one of our core specialties. We help <strong>local businesses</strong> dominate local search through Google Business Profile optimisation, strategic citation building, and location-specific content creation. Our <strong>local SEO services</strong> ensure your business appears prominently when <strong>Canberra</strong> customers search for your services. We understand the <strong>Canberra market</strong> dynamics and tailor our <strong>SEO approach</strong> to help you capture local search traffic that converts.</p>"
+                id="faq-seo-canberra-3"
+              />
+              <AccordionItem
+                question="What's included in your SEO services Canberra packages?"
+                answer="<p class='text-gray-700'>Our <strong>SEO services Canberra</strong> packages include comprehensive <strong>SEO audits</strong>, <strong>keyword research</strong>, <strong>on-page SEO</strong> optimisation, <strong>technical SEO</strong> improvements, <strong>content marketing</strong>, link building, and ongoing performance monitoring. We provide <strong>customised SEO</strong> solutions based on your specific needs, whether that's <strong>ecommerce SEO</strong>, <strong>professional SEO</strong>, or <strong>local SEO</strong>. Every <strong>SEO plan</strong> includes transparent reporting so you can track exactly how our <strong>SEO services can help</strong> your business grow.</p>"
+                id="faq-seo-canberra-4"
+              />
+              <AccordionItem
+                question="How do you measure SEO performance and ROI?"
+                answer="<p class='text-gray-700'>We track <strong>SEO performance</strong> through comprehensive metrics including organic traffic growth, <strong>ranking</strong> improvements for target keywords, conversion rates, and revenue attribution. Our <strong>SEO team</strong> provides detailed monthly reports showing the <strong>effectiveness of your SEO strategy</strong>. We measure what matters to your business, whether that's leads, sales, or brand visibility. Our <strong>experienced SEO</strong> approach focuses on delivering measurable ROI, not vanity metrics. We help you understand exactly how your <strong>SEO traffic</strong> contributes to business growth.</p>"
+                id="faq-seo-canberra-5"
+                isLast={true}
+              />
+            </div>
+          </div>
+
+          <!-- Hub Navigation -->
+            <p class="text-gray-700 leading-relaxed mb-6 text-center">
+              <a href="/services/" class="text-primary-600 hover:text-primary-700 font-semibold text-lg">Explore all our <strong>digital marketing services</strong> →</a>
+            </p>
+
+          <!-- Related Services Links -->
+          <p class="text-gray-700 leading-relaxed mb-6 text-center">
+            Also serving: <a href="/seo-sydney/" class="text-primary-600 hover:text-primary-700 font-semibold">SEO Sydney</a> |
+            <a href="/seo-melbourne/" class="text-primary-600 hover:text-primary-700 font-semibold">SEO Melbourne</a> |
+            <a href="/seo-brisbane/" class="text-primary-600 hover:text-primary-700 font-semibold">SEO Brisbane</a> |
+            <a href="/seo-perth/" class="text-primary-600 hover:text-primary-700 font-semibold">SEO Perth</a>
+          </p>
+
+            <!-- Conclusion Section -->
+          <div class="prose prose-lg max-w-none">
+            <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+              Partner with Canberra's Best SEO Agency for Sustainable Growth
+            </h2>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Choosing the <strong>right SEO</strong> partner is one of the most important decisions for your business growth. Our <strong>SEO company Canberra</strong> reputation is built on delivering results that matter. We don't just improve rankings; we drive qualified traffic that converts into customers. Our <strong>strong SEO strategy</strong> approach combines technical excellence, creative <strong>content marketing</strong>, and strategic thinking to help your business thrive in competitive search landscapes.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Whether you're looking to dominate <strong>local search</strong> in Canberra or compete nationally, our <strong>SEO specialists</strong> have the expertise and tools to make it happen. We stay ahead of algorithm changes, monitor your <strong>current SEO</strong> performance, and continuously refine our tactics to maintain your competitive edge. Our <strong>SEO involves optimising</strong> every aspect of your online presence, from technical foundations to content strategy, ensuring <strong>SEO helps</strong> drive sustainable business growth.
+            </p>
+            <p class="text-gray-700 leading-relaxed">
+              Ready to see what <strong>professional SEO</strong> can do for your Canberra business? Contact our <strong>Canberra SEO team</strong> today for a free strategy session. We'll analyse your <strong>online presence</strong>, identify opportunities, and show you exactly how our <strong>award-winning SEO</strong> services can transform your digital performance. Let's work together to dominate <strong>search engine results</strong> and drive the growth your business deserves.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    {sections.showFinalCTA && (
+      <CTASection
+        title={finalCTA.title}
+        subtitle={finalCTA.subtitle}
+        primaryCTA={finalCTA.primaryCTA}
+        secondaryCTA={finalCTA.secondaryCTA}
+      />
+    )}
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .section-padding {
+    padding: 5rem 0;
+  }
+
+  @media (min-width: 768px) {
+    .section-padding {
+      padding: 7rem 0;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .section-padding {
+      padding: 8rem 0;
+    }
+  }
+</style>

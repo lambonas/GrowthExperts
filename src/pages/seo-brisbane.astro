@@ -1,0 +1,554 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import HeroHome from '../components/sections/HeroHome.astro';
+import ClientLogoCarousel from '../components/sections/ClientLogoCarousel.astro';
+import CaseStudiesSection from '../components/sections/CaseStudiesSection.astro';
+import CTASection from '../components/sections/CTASection.astro';
+import SchemaOrg from '../components/seo/SchemaOrg.astro';
+import AccordionItem from '../components/ui/AccordionItem.astro';
+
+// ===================================
+// PAGE FRONTMATTER CONFIGURATION
+// Edit these values to customize the page content
+// ===================================
+
+// SEO Meta Data
+const seo = {
+  title: 'SEO Brisbane | Expert SEO Agency Brisbane | Grow Your Business',
+  description: 'Leading SEO agency Brisbane helping businesses dominate search results. Expert SEO services, proven strategies, and real results. Get your free SEO audit today.',
+  keywords: [
+    'seo brisbane',
+    'seo agency brisbane',
+    'seo agency in brisbane',
+    'seo expert brisbane',
+    'seo firm brisbane',
+    'brisbane seo expert',
+    'affordable seo services brisbane',
+    'seo service brisbane',
+    'brisbane seo agency',
+    'seo specialist',
+    'digital marketing brisbane',
+    'local seo brisbane',
+    'technical seo',
+    'seo audit',
+    'on-page seo',
+    'off-page seo'
+  ],
+  ogImage: '/images/team-hero.png',
+  ogType: 'website',
+};
+
+// Hero Section
+const hero = {
+  title: 'Brisbane\'s Premier SEO Agency for Business Growth',
+  subtitle: 'Transform your Brisbane business with proven SEO strategies that deliver real results. Our expert team helps you dominate search rankings and attract quality customers ready to buy.',
+  primaryCTA: {
+    text: 'Free Strategy Session',
+    href: '/contact/'
+  },
+};
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Services', href: '/services/' },
+  { label: 'SEO Brisbane', href: '/seo-brisbane/' },
+];
+
+// Section Visibility (show/hide sections)
+const sections = {
+  showClientLogos: true,
+  showCaseStudies: true,
+  showWhatsIncluded: true,
+  showProcess: true,
+  showFinalCTA: true,
+};
+
+// Final CTA Section
+const finalCTA = {
+  title: 'Ready to Dominate Brisbane Search Results?',
+  subtitle: 'Get your free SEO audit and discover exactly how we\'ll help your Brisbane business rank higher, attract more customers, and grow revenue. No obligations, just actionable insights.',
+  primaryCTA: {
+    text: 'Free Strategy Session',
+    href: '/contact/'
+  },
+};
+---
+
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  keywords={seo.keywords}
+  ogImage={seo.ogImage}
+  ogType={seo.ogType}
+  schema={{
+    type: 'Service',
+    data: {
+      '@type': 'Service',
+      name: 'SEO Services Brisbane',
+      description: seo.description,
+      provider: {
+        '@type': 'Organization',
+        name: 'Digital Growth Experts',
+      },
+      areaServed: {
+        '@type': 'City',
+        name: 'Brisbane',
+        containedInPlace: {
+          '@type': 'State',
+          name: 'Queensland',
+          containedInPlace: {
+            '@type': 'Country',
+            name: 'Australia',
+          }
+        }
+      },
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'SEO Services Brisbane',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Technical SEO Audit',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'On-Page SEO Optimisation',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Local SEO Brisbane',
+            },
+          },
+        ],
+      },
+    },
+  }}
+>
+  <!-- Add LocalBusiness schema for better local SEO -->
+  <SchemaOrg
+    slot="head"
+    type="LocalBusiness"
+    data={{
+      name: 'Digital Growth Experts Brisbane',
+      description: 'Expert SEO agency in Brisbane helping businesses dominate search results with proven strategies',
+      image: `${Astro.site}images/logo.png`,
+    }}
+  />
+
+  <Header />
+
+  <main id="main-content">
+    <!-- Hero Section - Conversion-focused with clear value proposition -->
+    <HeroHome
+      title={hero.title}
+      subtitle={hero.subtitle}
+      primaryCTA={hero.primaryCTA}
+      secondaryCTA={hero.secondaryCTA}
+    />
+
+    <!-- Social Proof - Client Logos -->
+    {sections.showClientLogos && <ClientLogoCarousel />}
+
+    <!-- Proven Results Section - Case Studies with Real Data -->
+    {sections.showCaseStudies && <CaseStudiesSection />}
+
+    <!-- What's Included Section - Service Details -->
+    {sections.showWhatsIncluded && (
+    <section class="section-padding bg-gray-50">
+      <div class="container-custom">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold font-display text-gray-900 mb-4">
+            What's Included in Our Brisbane SEO Services
+          </h2>
+          <p class="text-lg md:text-xl text-gray-600">
+            Comprehensive SEO solutions tailored for Brisbane businesses to dominate their market.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <!-- Service 1 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-primary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Technical SEO Excellence</h3>
+            <p class="text-gray-600 mb-4">
+              Complete technical SEO audit and implementation to ensure your website meets Google's standards for speed, mobile-friendliness, crawlability, and indexability.
+            </p>
+          </div>
+
+          <!-- Service 2 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-secondary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-secondary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Strategic Link Building</h3>
+            <p class="text-gray-600 mb-4">
+              Build high-quality backlinks from authoritative Australian websites to boost your domain authority and improve search rankings across all keywords.
+            </p>
+          </div>
+
+          <!-- Service 3 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-accent-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Content Marketing Strategy</h3>
+            <p class="text-gray-600 mb-4">
+              Create compelling, SEO-optimised content that resonates with your Brisbane audience and establishes your business as an industry authority.
+            </p>
+          </div>
+
+          <!-- Service 4 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-primary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Local SEO Dominance</h3>
+            <p class="text-gray-600 mb-4">
+              Optimise your presence for Brisbane-specific searches, Google My Business, and local directories to capture customers in your area.
+            </p>
+          </div>
+
+          <!-- Service 5 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-secondary-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-secondary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Conversion Rate Optimisation</h3>
+            <p class="text-gray-600 mb-4">
+              Turn your increased traffic into actual customers with strategic CRO that improves user experience and maximises your ROI.
+            </p>
+          </div>
+
+          <!-- Service 6 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                class="w-7 h-7 text-accent-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Monthly Reporting & Analysis</h3>
+            <p class="text-gray-600 mb-4">
+              Transparent monthly reports showing your rankings, traffic growth, and ROI with actionable insights for continued improvement.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    )}
+
+    <!-- Main Content Section - SEO-Optimized for Brisbane SEO -->
+    <section class="section-padding bg-white">
+      <div class="container-custom">
+        <div class="max-w-4xl mx-auto">
+          <!-- H1 Header -->
+          <div class="text-center mb-12">
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold font-display text-gray-900 mb-4">
+              SEO Brisbane: Transform Your Business with Expert SEO Services
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 leading-relaxed">
+              Partner with Brisbane's leading SEO agency to dominate search results and grow your business exponentially.
+            </p>
+          </div>
+
+          <!-- Introduction with Priority Keywords -->
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Looking for proven <strong>SEO Brisbane</strong> solutions that deliver real results? At <a href="/" class="text-primary-600 hover:text-primary-700 font-semibold">Digital Growth Experts</a>, we specialise in helping Queensland companies dominate search rankings and attract quality customers. Whether you're a local startup or established enterprise, our comprehensive <strong>SEO services</strong> transform your online presence into a powerful revenue-generating machine.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              The <strong>Brisbane</strong> market presents unique opportunities and challenges for businesses competing online. With over 2.5 million people in Greater Brisbane and thousands of businesses vying for attention, standing out requires more than basic <strong>digital marketing</strong>. You need strategic <strong>SEO strategies</strong> tailored to the local market, implemented by a <strong>Brisbane SEO agency</strong> that understands what works. Our <strong>SEO specialist</strong> team combines <a href="/technical-seo/" class="text-primary-600 hover:text-primary-700 font-semibold">technical SEO</a> expertise with deep understanding of Brisbane's business landscape to deliver measurable growth for our clients.
+            </p>
+          </div>
+
+          <!-- H2: Why Brisbane Businesses Need Expert SEO Services -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            Why SEO Agency Brisbane Services Are Essential for Growth
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Brisbane's competitive digital landscape demands sophisticated <strong>SEO campaigns</strong> that go beyond basic optimisation. As an experienced <strong>SEO expert Brisbane</strong> team, we've witnessed firsthand how the right <strong>on-page SEO</strong> and <strong>off-page SEO</strong> strategies can transform struggling businesses into market leaders. Our data shows that <strong>Brisbane businesses</strong> investing in professional <strong>SEO work</strong> see average traffic increases of 150% within the first year.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              The key to success lies in understanding that effective <strong>SEO Brisbane</strong> services require a multifaceted approach. From comprehensive <a href="/seo-audit/" class="text-primary-600 hover:text-primary-700 font-semibold">SEO audits</a> that identify technical issues to strategic <a href="/local-seo/" class="text-primary-600 hover:text-primary-700 font-semibold">local SEO</a> implementation that captures nearby customers, every element must work in harmony. Our <strong>best SEO</strong> practices ensure your website not only ranks higher but also converts visitors into paying customers, maximising your return on investment.
+            </p>
+          </div>
+
+          <!-- H2: Our Proven SEO Strategies for Brisbane Success -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            SEO Expert Brisbane: Our Proven Strategies That Deliver Results
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              As a results-driven <strong>SEO firm Brisbane</strong> trusts, we've developed proven methodologies that consistently outperform traditional approaches. Our <strong>SEO agencies</strong> team starts with comprehensive research to understand your market, competitors, and opportunities. This foundation allows us to craft <strong>tailored SEO</strong> strategies that align with your business goals while targeting the specific search behaviours of Brisbane customers.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Our <strong>SEO solutions</strong> encompass everything from <strong>white hat SEO</strong> techniques that ensure long-term success to advanced <a href="/content-marketing/" class="text-primary-600 hover:text-primary-700 font-semibold">content marketing</a> strategies that establish your authority. We leverage <strong>SEO tools</strong> and analytics to continuously refine your <strong>SEO campaign</strong>, ensuring you stay ahead of algorithm changes and competitor movements. Unlike many <strong>SEO companies</strong>, we focus on sustainable growth through <strong>SEO best practices</strong> rather than risky shortcuts that could harm your rankings.
+            </p>
+          </div>
+
+          <!-- H2: Comprehensive SEO Services for Every Brisbane Business -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            Affordable SEO Services Brisbane: Solutions for Every Business
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Finding <strong>affordable SEO services Brisbane</strong> businesses can rely on shouldn't mean compromising on quality. Our <strong>SEO service Brisbane</strong> offerings are designed to provide exceptional value, with transparent pricing and clear deliverables. Whether you need <a href="/enterprise-seo/" class="text-primary-600 hover:text-primary-700 font-semibold">enterprise SEO</a> for large-scale operations or <a href="/ecommerce-seo/" class="text-primary-600 hover:text-primary-700 font-semibold">ecommerce SEO</a> to boost online sales, our <strong>team of SEO experts</strong> has the experience and resources to deliver.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              We understand that the <strong>cost of SEO services</strong> is a significant consideration for Brisbane businesses. That's why we offer flexible <strong>SEO packages</strong> that scale with your needs and budget. From startups needing basic <strong>local SEO strategies</strong> to established companies requiring comprehensive <strong>digital marketing strategy</strong> integration, our <strong>Brisbane SEO specialists</strong> create custom solutions that maximise your ROI while minimising unnecessary expenses.
+            </p>
+          </div>
+
+          <!-- H2: Technical Excellence and Innovation -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            Brisbane SEO Expert: Technical Excellence That Sets Us Apart
+          </h2>
+
+          <div class="grid md:grid-cols-2 gap-8 mb-12">
+            <div class="bg-gray-50 p-6 rounded-lg">
+              <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Advanced Technical SEO</h3>
+              <p class="text-gray-700">
+                Our <strong>technical SEO</strong> expertise ensures your website meets Google's evolving standards. From site architecture and crawlability to Core Web Vitals optimisation, we handle the complex technical aspects that many <strong>SEO agencies</strong> overlook. This foundation is crucial for <strong>successful SEO</strong> campaigns.
+              </p>
+            </div>
+            <div class="bg-gray-50 p-6 rounded-lg">
+              <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Strategic Content Development</h3>
+              <p class="text-gray-700">
+                Great <strong>SEO content</strong> goes beyond keyword placement. Our <strong>content marketing</strong> approach creates valuable resources that attract links, engage users, and establish your authority. This <strong>approach to SEO</strong> builds lasting value for your <strong>Brisbane business</strong>.
+              </p>
+            </div>
+            <div class="bg-gray-50 p-6 rounded-lg">
+              <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Data-Driven Optimisation</h3>
+              <p class="text-gray-700">
+                Every <strong>SEO campaign</strong> we manage is backed by comprehensive data analysis. We track <strong>SEO results</strong> meticulously, using advanced analytics to identify opportunities and refine strategies. This ensures your <strong>SEO efforts</strong> deliver maximum impact.
+              </p>
+            </div>
+            <div class="bg-gray-50 p-6 rounded-lg">
+              <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Local Market Expertise</h3>
+              <p class="text-gray-700">
+                Understanding the <strong>Brisbane market</strong> is crucial for local success. Our <strong>Brisbane SEO team</strong> knows the city's business landscape, consumer behaviour, and competitive dynamics, allowing us to create <strong>SEO for Brisbane businesses</strong> that truly resonates.
+              </p>
+            </div>
+          </div>
+
+          <!-- H2: The SEO Process That Drives Results -->
+          <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+            SEO Firm Brisbane: Our Proven Process for Success
+          </h2>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Our <strong>SEO process</strong> begins with understanding your business, goals, and target audience. This discovery phase allows our <strong>Brisbane-based SEO</strong> team to develop strategies perfectly aligned with your objectives. We conduct thorough competitor analysis, keyword research, and technical audits to identify opportunities where we can make the biggest impact on your <strong>SEO Brisbane services</strong> results.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Implementation involves coordinated <strong>SEO tasks</strong> across multiple fronts. Our <strong>team of SEO</strong> specialists handle everything from technical fixes and content creation to <a href="/link-building/" class="text-primary-600 hover:text-primary-700 font-semibold">link building</a> and local optimisation. We believe <strong>investing in SEO</strong> should deliver clear, measurable results, which is why we provide detailed monthly reporting showing exactly how your <strong>SEO work</strong> translates into business growth. This transparency is what makes us a <strong>trusted SEO</strong> partner for Brisbane businesses.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Unlike <strong>many SEO agencies</strong> that rely on outdated tactics or <strong>black hat SEO</strong> shortcuts, we focus exclusively on sustainable <strong>white hat SEO techniques</strong>. Our <strong>solid SEO strategy</strong> builds genuine authority and relevance, ensuring your rankings withstand algorithm updates. When you <strong>work with an agency</strong> committed to <strong>real SEO</strong> excellence, you're investing in long-term success rather than temporary gains.
+            </p>
+          </div>
+
+          <!-- H3: Why Choose Our Brisbane SEO Services -->
+          <h3 class="text-xl md:text-2xl font-bold font-display text-gray-900 mb-4">
+            Why Choose Our SEO Agency in Brisbane?
+          </h3>
+
+          <div class="prose prose-lg max-w-none mb-12">
+            <ul class="space-y-3 text-gray-700">
+              <li>Proven track record with <strong>businesses in Brisbane</strong> across diverse industries including <a href="/dental-seo/" class="text-primary-600 hover:text-primary-700 font-semibold">dental practices</a>, <a href="/real-estate-seo/" class="text-primary-600 hover:text-primary-700 font-semibold">real estate</a>, and <a href="/accountant-seo/" class="text-primary-600 hover:text-primary-700 font-semibold">accounting firms</a></li>
+              <li>Transparent <strong>cost of SEO</strong> with no hidden fees or lock-in contracts</li>
+              <li>Comprehensive <strong>SEO services for Brisbane businesses</strong> of all sizes</li>
+              <li>Expert knowledge of <strong>local Brisbane SEO</strong> and market dynamics</li>
+              <li>Focus on <strong>quality SEO</strong> that delivers sustainable results</li>
+              <li>Regular updates on your <strong>SEO Brisbane</strong> campaign progress</li>
+              <li>Integration with broader <strong>digital marketing strategy</strong> for maximum impact</li>
+              <li>Commitment to <strong>SEO best practices</strong> and ethical optimisation</li>
+            </ul>
+          </div>
+
+          <!-- FAQ Section -->
+          <div class="mb-12">
+            <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-8">
+              Frequently Asked Questions About SEO Services Brisbane
+            </h2>
+
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+              <AccordionItem
+                question="How much do SEO services cost in Brisbane?"
+                answer="<p class='text-gray-700'>The <strong>cost of SEO services</strong> in Brisbane varies based on your business size, competition level, and goals. Our <strong>affordable SEO services Brisbane</strong> packages start from $1,500 per month for small businesses, with enterprise solutions for larger organisations. We offer transparent pricing with clear deliverables, ensuring you understand exactly what your investment delivers. Every <strong>SEO campaign</strong> is customised to provide maximum ROI for your specific situation.</p>"
+                id="faq-brisbane-seo-1"
+                isFirst={true}
+              />
+              <AccordionItem
+                question="How long before I see results from SEO efforts?"
+                answer="<p class='text-gray-700'><strong>SEO results</strong> typically begin showing within 3-6 months, with significant improvements often visible by month 6-12. The timeline depends on your current position, competition, and the comprehensiveness of your <strong>SEO campaign</strong>. Quick wins from <strong>technical SEO</strong> fixes can appear within weeks, while competitive keywords may take longer. Our <strong>Brisbane SEO agency</strong> provides monthly reports so you can track progress throughout your journey.</p>"
+                id="faq-brisbane-seo-2"
+              />
+              <AccordionItem
+                question="What makes your Brisbane SEO services different?"
+                answer="<p class='text-gray-700'>As a leading <strong>SEO agency Brisbane</strong> businesses trust, we combine local market expertise with proven <strong>SEO strategies</strong>. Our <strong>team of SEO experts</strong> exclusively uses <strong>white hat SEO</strong> techniques, ensuring sustainable results. We provide complete transparency, detailed reporting, and personalised service. Unlike many <strong>SEO companies</strong>, we focus on your business goals, not just rankings, ensuring our <strong>SEO work</strong> directly contributes to your bottom line.</p>"
+                id="faq-brisbane-seo-3"
+              />
+              <AccordionItem
+                question="Do you offer specific industry SEO solutions?"
+                answer="<p class='text-gray-700'>Yes, we provide specialised <strong>SEO solutions</strong> for various industries including <strong>ecommerce SEO</strong>, <strong>SaaS SEO</strong>, and <strong>enterprise SEO</strong>. Our <strong>Brisbane SEO specialists</strong> have experience across healthcare, legal, trades, professional services, and retail sectors. We understand that <strong>successful SEO campaigns</strong> require industry-specific knowledge, which is why we tailor our <strong>approach to SEO</strong> based on your sector's unique challenges and opportunities.</p>"
+                id="faq-brisbane-seo-4"
+              />
+              <AccordionItem
+                question="How do you ensure SEO success for Brisbane businesses?"
+                answer="<p class='text-gray-700'>Our <strong>SEO process</strong> combines comprehensive audits, strategic planning, and continuous optimisation to <strong>ensure your SEO</strong> success. We start with understanding your <strong>Brisbane business</strong> goals, then develop <strong>tailored SEO</strong> strategies using proven <strong>SEO techniques</strong>. Regular monitoring with professional <strong>SEO tools</strong> allows us to adapt quickly to changes. Our focus on <strong>great SEO</strong> practices and commitment to <strong>results-driven SEO</strong> ensures consistent improvement in rankings and traffic.</p>"
+                id="faq-brisbane-seo-5"
+                isLast={true}
+              />
+            </div>
+          </div>
+
+          <!-- Hub Navigation -->
+          <p class="text-gray-700 leading-relaxed mb-6 text-center">
+            <a href="/services/" class="text-primary-600 hover:text-primary-700 font-semibold text-lg">Explore all our SEO services →</a>
+          </p>
+
+          <!-- Related Services Links -->
+          <p class="text-gray-700 leading-relaxed mb-6 text-center">
+            Also serving: <a href="/seo-sydney/" class="text-primary-600 hover:text-primary-700 font-semibold">SEO Sydney</a> |
+            <a href="/seo-melbourne/" class="text-primary-600 hover:text-primary-700 font-semibold">SEO Melbourne</a> |
+            <a href="/seo-perth/" class="text-primary-600 hover:text-primary-700 font-semibold">SEO Perth</a> |
+            <a href="/seo-adelaide/" class="text-primary-600 hover:text-primary-700 font-semibold">SEO Adelaide</a>
+          </p>
+
+          <!-- Conclusion Section -->
+          <div class="prose prose-lg max-w-none">
+            <h2 class="text-2xl md:text-3xl font-bold font-display text-gray-900 mb-6">
+              Ready to Transform Your Brisbane Business with Expert SEO?
+            </h2>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Stop losing potential customers to competitors who rank higher in search results. Our <strong>award-winning SEO agency</strong> has helped hundreds of <strong>Brisbane businesses</strong> achieve remarkable growth through strategic <strong>SEO services</strong>. Whether you need comprehensive <strong>digital PR</strong>, advanced <strong>SEO techniques</strong>, or complete <strong>digital marketing</strong> transformation, our <strong>Brisbane SEO team</strong> has the expertise to deliver.
+            </p>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              The difference between struggling online and dominating your market often comes down to choosing the right <strong>SEO specialist</strong>. Our <strong>leading SEO agency</strong> combines technical expertise, creative strategy, and deep Brisbane market knowledge to deliver <strong>SEO services</strong> that actually work. We don't just promise rankings; we deliver measurable business growth through <strong>expert SEO services</strong> tailored to your unique needs.
+            </p>
+            <p class="text-gray-700 leading-relaxed">
+              Take the first step towards search engine dominance today. Contact our <strong>Brisbane SEO experts</strong> for your <strong>free SEO</strong> audit and discover exactly how we can <strong>help Brisbane</strong> businesses like yours achieve extraordinary online success. Let's <strong>create SEO</strong> strategies that transform your digital presence and drive real business growth. Your journey to becoming Brisbane's next SEO success story starts here.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    {sections.showFinalCTA && (
+      <CTASection
+        title={finalCTA.title}
+        subtitle={finalCTA.subtitle}
+        primaryCTA={finalCTA.primaryCTA}
+        secondaryCTA={finalCTA.secondaryCTA}
+      />
+    )}
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .section-padding {
+    padding: 5rem 0;
+  }
+
+  @media (min-width: 768px) {
+    .section-padding {
+      padding: 7rem 0;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .section-padding {
+      padding: 8rem 0;
+    }
+  }
+</style>
