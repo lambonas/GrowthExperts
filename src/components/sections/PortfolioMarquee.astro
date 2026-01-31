@@ -1,0 +1,497 @@
+---
+import { Image } from 'astro:assets';
+import PortfolioLightbox from '../ui/PortfolioLightbox.astro';
+
+export interface PortfolioItem {
+  title: string;
+  industry: string;
+  description: string;
+  thumbnailImage: ImageMetadata | string;
+  liveUrl?: string;
+  metrics?: {
+    loadTime?: string;
+    mobileScore?: number;
+    conversionRate?: string;
+  };
+  techStack?: string[];
+  featured?: boolean;
+}
+
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  portfolioItems: PortfolioItem[];
+  trustText?: string;
+}
+
+const {
+  title = 'Our Work in Motion',
+  subtitle = 'Browse through our portfolio of conversion-focused websites built for Australian businesses.',
+  portfolioItems,
+  trustText = 'Every website is custom-designed and hand-coded for speed, SEO, and conversions.',
+} = Astro.props;
+
+// Helper to check if image is ImageMetadata
+const isImageMetadata = (img: ImageMetadata | string): img is ImageMetadata => {
+  return typeof img === 'object' && 'src' in img;
+};
+
+// Helper to get image src for data attributes
+const getImageSrc = (img: ImageMetadata | string): string => {
+  return isImageMetadata(img) ? img.src : img;
+};
+
+// Create two rows with different orders, tripled for seamless infinite scrolling
+const row1Items = [...portfolioItems, ...portfolioItems, ...portfolioItems];
+const shuffledItems = [...portfolioItems.slice(6), ...portfolioItems.slice(0, 6)];
+const row2Items = [...shuffledItems, ...shuffledItems, ...shuffledItems];
+---
+
+<section class="portfolio-marquee-section py-16 md:py-20 lg:py-24 overflow-hidden relative">
+  {/* Section Header */}
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-10 md:mb-14 relative z-10">
+    <p class="text-sm uppercase tracking-wider text-primary-600 font-medium mb-3">Portfolio</p>
+    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold font-display text-gray-900 mb-4">
+      <slot name="title">{title}</slot>
+    </h2>
+    <p class="text-lg text-gray-600 leading-relaxed">
+      {subtitle}
+    </p>
+  </div>
+
+  {/* Marquee Container */}
+  <div class="portfolio-marquee-wrapper relative">
+    {/* Gradient Overlays for fade effect */}
+    <div class="pointer-events-none absolute left-0 top-0 bottom-0 w-16 md:w-32 z-10 fade-overlay-left"></div>
+    <div class="pointer-events-none absolute right-0 top-0 bottom-0 w-16 md:w-32 z-10 fade-overlay-right"></div>
+
+    {/* Row 1 - Scrolling Left */}
+    <div class="marquee-container mb-4 md:mb-6">
+      <div class="marquee-track marquee-track-1">
+        {row1Items.map((item, index) => (
+          <div
+            class="marquee-card group"
+            data-portfolio-card
+            data-title={item.title}
+            data-industry={item.industry}
+            data-description={item.description}
+            data-image={getImageSrc(item.thumbnailImage)}
+            data-live-url={item.liveUrl || ''}
+            data-load-time={item.metrics?.loadTime || ''}
+            data-mobile-score={item.metrics?.mobileScore?.toString() || ''}
+            data-conversion-rate={item.metrics?.conversionRate || ''}
+            data-tech-stack={item.techStack?.join(',') || ''}
+            tabindex="0"
+            role="button"
+            aria-label={`View ${item.title} project details`}
+          >
+            <div class="card-inner">
+              {/* Image Container */}
+              <div class="card-image-wrapper">
+                {isImageMetadata(item.thumbnailImage) ? (
+                  <Image
+                    src={item.thumbnailImage}
+                    alt={`${item.title} - ${item.industry} website design`}
+                    class="card-image"
+                    loading="lazy"
+                    decoding="async"
+                    width={380}
+                    height={285}
+                    format="webp"
+                    quality={80}
+                  />
+                ) : (
+                  <img
+                    src={item.thumbnailImage}
+                    alt={`${item.title} - ${item.industry} website design`}
+                    class="card-image"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                )}
+                {/* Hover Overlay */}
+                <div class="card-overlay">
+                  <div class="overlay-content">
+                    <span class="view-label">View Project</span>
+                    <svg class="view-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              {/* Industry Badge */}
+              <span class="industry-badge">{item.industry}</span>
+              {/* Title on Hover */}
+              <div class="card-title-bar">
+                <span class="card-title">{item.title}</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    {/* Row 2 - Scrolling Right (opposite direction) */}
+    <div class="marquee-container">
+      <div class="marquee-track marquee-track-2">
+        {row2Items.map((item, index) => (
+          <div
+            class="marquee-card group"
+            data-portfolio-card
+            data-title={item.title}
+            data-industry={item.industry}
+            data-description={item.description}
+            data-image={getImageSrc(item.thumbnailImage)}
+            data-live-url={item.liveUrl || ''}
+            data-load-time={item.metrics?.loadTime || ''}
+            data-mobile-score={item.metrics?.mobileScore?.toString() || ''}
+            data-conversion-rate={item.metrics?.conversionRate || ''}
+            data-tech-stack={item.techStack?.join(',') || ''}
+            tabindex="0"
+            role="button"
+            aria-label={`View ${item.title} project details`}
+          >
+            <div class="card-inner">
+              {/* Image Container */}
+              <div class="card-image-wrapper">
+                {isImageMetadata(item.thumbnailImage) ? (
+                  <Image
+                    src={item.thumbnailImage}
+                    alt={`${item.title} - ${item.industry} website design`}
+                    class="card-image"
+                    loading="lazy"
+                    decoding="async"
+                    width={380}
+                    height={285}
+                    format="webp"
+                    quality={80}
+                  />
+                ) : (
+                  <img
+                    src={item.thumbnailImage}
+                    alt={`${item.title} - ${item.industry} website design`}
+                    class="card-image"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                )}
+                {/* Hover Overlay */}
+                <div class="card-overlay">
+                  <div class="overlay-content">
+                    <span class="view-label">View Project</span>
+                    <svg class="view-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              {/* Industry Badge */}
+              <span class="industry-badge">{item.industry}</span>
+              {/* Title on Hover */}
+              <div class="card-title-bar">
+                <span class="card-title">{item.title}</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  {/* Trust Text */}
+  <div class="text-center mt-10 md:mt-14 px-4 relative z-10">
+    <p class="text-gray-600 text-sm max-w-2xl mx-auto [&>strong]:text-gray-800 [&>strong]:font-semibold" set:html={trustText}>
+    </p>
+  </div>
+
+  {/* Lightbox Component */}
+  <PortfolioLightbox />
+</section>
+
+<style>
+  /* Section background - white fading to soft blue */
+  .portfolio-marquee-section {
+    background: linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #ffffff 35%,
+      #E8F2FA 60%,
+      #D1E6F5 85%,
+      #D1E6F5 100%
+    );
+  }
+
+  /* Fade overlays that match the mid-section background */
+  .fade-overlay-left {
+    background: linear-gradient(to right, rgba(209, 230, 245, 0.9), transparent);
+  }
+
+  .fade-overlay-right {
+    background: linear-gradient(to left, rgba(209, 230, 245, 0.9), transparent);
+  }
+
+  .portfolio-marquee-wrapper {
+    position: relative;
+  }
+
+  .marquee-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .marquee-track {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    width: max-content;
+    position: relative;
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+
+  /* Row 1: Scrolls left (content moves left) */
+  .marquee-track-1 {
+    animation: marquee-scroll-left 50s linear infinite;
+  }
+
+  /* Row 2: Scrolls right (content moves right) */
+  .marquee-track-2 {
+    animation: marquee-scroll-right 50s linear infinite;
+  }
+
+  /* Pause on hover for accessibility */
+  .marquee-container:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  .marquee-card {
+    flex-shrink: 0;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+  }
+
+  .marquee-card:focus-visible .card-inner {
+    outline: 2px solid #3C8BDA;
+    outline-offset: 4px;
+  }
+
+  .card-inner {
+    position: relative;
+    width: 280px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: white;
+    border: 1px solid rgba(60, 139, 218, 0.15);
+    box-shadow:
+      0 4px 6px -1px rgba(60, 139, 218, 0.1),
+      0 2px 4px -2px rgba(0, 0, 0, 0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+
+  .marquee-card:hover .card-inner {
+    transform: translateY(-6px) scale(1.02);
+    border-color: rgba(60, 139, 218, 0.3);
+    box-shadow:
+      0 20px 25px -5px rgba(60, 139, 218, 0.15),
+      0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-image-wrapper {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+  }
+
+  .card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    transition: transform 0.4s ease;
+  }
+
+  .marquee-card:hover .card-image {
+    transform: scale(1.05);
+  }
+
+  .card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(10, 30, 54, 0.85) 0%,
+      rgba(10, 30, 54, 0.4) 50%,
+      transparent 100%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .marquee-card:hover .card-overlay {
+    opacity: 1;
+  }
+
+  .overlay-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    transform: translateY(10px);
+    transition: transform 0.3s ease;
+  }
+
+  .marquee-card:hover .overlay-content {
+    transform: translateY(0);
+  }
+
+  .view-label {
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .view-icon {
+    width: 2rem;
+    height: 2rem;
+    color: white;
+  }
+
+  .industry-badge {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    background: linear-gradient(135deg, #3C8BDA 0%, #2D6BB0 100%);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 9999px;
+    box-shadow: 0 2px 4px rgba(60, 139, 218, 0.3);
+    z-index: 5;
+  }
+
+  .card-title-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0.75rem 1rem;
+    background: linear-gradient(to top, rgba(10, 30, 54, 0.95), transparent);
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+  }
+
+  .marquee-card:hover .card-title-bar {
+    transform: translateY(0);
+  }
+
+  .card-title {
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 600;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Keyframe animations */
+  @keyframes marquee-scroll-left {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-33.33%);
+    }
+  }
+
+  @keyframes marquee-scroll-right {
+    0% {
+      transform: translateX(-33.33%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 640px) {
+    .marquee-track {
+      gap: 1rem;
+    }
+
+    .card-inner {
+      width: 240px;
+    }
+
+    .marquee-track-1,
+    .marquee-track-2 {
+      animation-duration: 40s;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .marquee-track {
+      gap: 1.5rem;
+    }
+
+    .card-inner {
+      width: 320px;
+      border-radius: 14px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .marquee-track {
+      gap: 2rem;
+    }
+
+    .card-inner {
+      width: 350px;
+      border-radius: 16px;
+    }
+
+    .marquee-track-1,
+    .marquee-track-2 {
+      animation-duration: 55s;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .card-inner {
+      width: 380px;
+    }
+  }
+
+  /* Accessibility: Respect user's motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track-1,
+    .marquee-track-2 {
+      animation: none;
+    }
+
+    .card-inner,
+    .card-image,
+    .card-overlay,
+    .overlay-content,
+    .card-title-bar {
+      transition: none;
+    }
+
+    /* Show title bar by default when animations are disabled */
+    .card-title-bar {
+      transform: translateY(0);
+    }
+
+    .card-overlay {
+      opacity: 0.6;
+    }
+  }
+</style>

@@ -38,6 +38,7 @@ const navItems = [
       { label: 'SEO for Charities', href: '/seo-for-charities/' },
     ],
   },
+  { label: 'Website Design', href: '/website-design/' },
   { label: 'About', href: '/about/' },
   { label: 'FAQ', href: '/faq/' },
   { label: 'Contact', href: '/contact/' },
@@ -71,6 +72,7 @@ const currentPath = Astro.url.pathname;
             <div class="relative group">
               <a
                 href={item.href}
+                data-nav-link
                 class={`flex items-center gap-1 text-gray-700 hover:text-primary-600 font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded ${
                   currentPath === item.href ? 'text-primary-600' : ''
                 }`}
@@ -141,6 +143,7 @@ const currentPath = Astro.url.pathname;
                 <div class="flex items-center justify-between gap-2">
                   <a
                     href={item.href}
+                    data-nav-link
                     class={`block text-gray-700 hover:text-primary-600 font-semibold text-base transition-colors flex-1 py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 rounded ${
                       currentPath === item.href ? 'text-primary-600' : ''
                     }`}
@@ -180,6 +183,7 @@ const currentPath = Astro.url.pathname;
             ) : (
               <a
                 href={item.href}
+                data-nav-link
                 class={`block text-gray-700 hover:text-primary-600 font-semibold text-base transition-colors py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 rounded ${
                   currentPath === item.href ? 'text-primary-600' : ''
                 }`}
@@ -315,14 +319,36 @@ const currentPath = Astro.url.pathname;
     });
   }
 
+  // Update active navigation state based on current URL
+  function updateActiveNavState() {
+    const currentPath = window.location.pathname;
+
+    // Select all nav links in both desktop and mobile menus
+    const navLinks = document.querySelectorAll('header nav a[data-nav-link]');
+
+    navLinks.forEach((link) => {
+      const href = link.getAttribute('href');
+
+      // Remove active state
+      link.classList.remove('text-primary-600');
+
+      // Add active state if path matches
+      if (href === currentPath) {
+        link.classList.add('text-primary-600');
+      }
+    });
+  }
+
   // Initialize on page load
   setupMobileMenu();
   setupMobileDropdowns();
+  updateActiveNavState();
 
   // Reinitialize after View Transitions
   document.addEventListener('astro:after-swap', () => {
     setupMobileMenu();
     setupMobileDropdowns();
+    updateActiveNavState();
   });
 
   // Close menu and reset dropdowns before transition starts

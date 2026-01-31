@@ -1,0 +1,156 @@
+---
+import PortfolioCard from '../ui/PortfolioCard.astro';
+import PortfolioLightbox from '../ui/PortfolioLightbox.astro';
+import type { PortfolioMetrics } from '../ui/PortfolioCard.astro';
+
+export interface PortfolioItem {
+  title: string;
+  industry: string;
+  description: string;
+  thumbnailImage: ImageMetadata | string;
+  liveUrl?: string;
+  metrics?: PortfolioMetrics;
+  techStack?: string[];
+  featured?: boolean;
+}
+
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  portfolioItems: PortfolioItem[];
+  maxItems?: number;
+  showViewAll?: boolean;
+  viewAllUrl?: string;
+  viewAllText?: string;
+}
+
+const {
+  title = 'Our Portfolio',
+  subtitle = 'Websites we have designed that drive real results for our clients.',
+  portfolioItems,
+  maxItems = 6,
+  showViewAll = false,
+  viewAllUrl = '/portfolio/',
+  viewAllText = 'View All Projects',
+} = Astro.props;
+
+// Sort featured items first, then limit to maxItems
+const sortedItems = [...portfolioItems]
+  .sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0))
+  .slice(0, maxItems);
+---
+
+<section id="portfolio" class="py-20 md:py-28 lg:py-32 bg-gray-50 relative">
+  {/* Section Header - Constrained Width */}
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-12 md:mb-16">
+    <p class="text-sm uppercase tracking-wider text-gray-500 font-medium mb-3">Portfolio</p>
+    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold font-display text-gray-900 mb-4">
+      {title}
+    </h2>
+    <p class="text-lg text-gray-600 leading-relaxed">
+      {subtitle}
+    </p>
+  </div>
+
+  {/* Portfolio Grid - Edge to Edge */}
+  <div class="px-4 sm:px-6 lg:px-8">
+    <div class="portfolio-grid grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-5 lg:gap-6 max-w-[1600px] mx-auto">
+      {sortedItems.map((item, index) => (
+        <PortfolioCard {...item} index={index} />
+      ))}
+    </div>
+  </div>
+
+  {/* View All CTA */}
+  {showViewAll && (
+    <div class="text-center mt-12 px-4">
+      <a
+        href={viewAllUrl}
+        class="inline-flex items-center px-6 py-3 bg-white text-gray-900 font-semibold rounded-lg border-2 border-gray-200 hover:border-primary-500 hover:text-primary-600 transition-all shadow-sm hover:shadow-md"
+      >
+        {viewAllText}
+        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </a>
+    </div>
+  )}
+
+  {/* Bottom Trust Text */}
+  <div class="text-center mt-12 pt-8 px-4 max-w-3xl mx-auto">
+    <p class="text-gray-500 text-sm">
+      Every website is custom-designed and hand-coded for speed, SEO, and conversions. No templates. No page builders.
+    </p>
+  </div>
+
+  {/* Lightbox Component */}
+  <PortfolioLightbox />
+</section>
+
+<style>
+  /* Subtle animation for professional appearance */
+  @media (prefers-reduced-motion: no-preference) {
+    .portfolio-grid > :global(*) {
+      animation: fadeIn 0.5s ease-out backwards;
+    }
+
+    .portfolio-grid > :global(*:nth-child(1)) {
+      animation-delay: 0.1s;
+    }
+
+    .portfolio-grid > :global(*:nth-child(2)) {
+      animation-delay: 0.15s;
+    }
+
+    .portfolio-grid > :global(*:nth-child(3)) {
+      animation-delay: 0.2s;
+    }
+
+    .portfolio-grid > :global(*:nth-child(4)) {
+      animation-delay: 0.25s;
+    }
+
+    .portfolio-grid > :global(*:nth-child(5)) {
+      animation-delay: 0.3s;
+    }
+
+    .portfolio-grid > :global(*:nth-child(6)) {
+      animation-delay: 0.35s;
+    }
+
+    .portfolio-grid > :global(*:nth-child(7)) {
+      animation-delay: 0.4s;
+    }
+
+    .portfolio-grid > :global(*:nth-child(8)) {
+      animation-delay: 0.45s;
+    }
+
+    .portfolio-grid > :global(*:nth-child(9)) {
+      animation-delay: 0.5s;
+    }
+
+    .portfolio-grid > :global(*:nth-child(10)) {
+      animation-delay: 0.55s;
+    }
+
+    .portfolio-grid > :global(*:nth-child(11)) {
+      animation-delay: 0.6s;
+    }
+
+    .portfolio-grid > :global(*:nth-child(12)) {
+      animation-delay: 0.65s;
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

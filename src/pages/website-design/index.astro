@@ -1,0 +1,606 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Hero from '../../components/sections/Hero.astro';
+import HighlightText from '../../components/ui/HighlightText.astro';
+import ClientLogoCarousel from '../../components/sections/ClientLogoCarousel.astro';
+import PortfolioMarquee from '../../components/sections/PortfolioMarquee.astro';
+import CTASection from '../../components/sections/CTASection.astro';
+import AccordionItem from '../../components/ui/AccordionItem.astro';
+import SchemaOrg from '../../components/seo/SchemaOrg.astro';
+import {
+  teamHeroImage,
+  portfolioCabinetMaker1,
+  portfolioCabinetMaker2,
+  portfolioEcommerce,
+  portfolioElectrician,
+  portfolioFactoryDirectWardrobes,
+  portfolioFinanceBroker,
+  portfolioGlassReplacementSydney,
+  portfolioGreenhillsChildcare,
+  portfolioLawyer,
+  portfolioLawyerWebsiteDesign,
+  portfolioPodiatrist,
+  portfolioWindscreenRepairSydney,
+} from '../../assets/images/index';
+
+const seo = {
+  title: 'Website Design Australia | Conversion-Focused Web Design | Digital Growth Experts',
+  description: 'Professional website design services that convert visitors into customers. Custom, mobile-first websites built for speed, SEO, and results. Get a free strategy session.',
+  keywords: [
+    'web design',
+    'web design sydney',
+    'web design agency',
+    'web design company',
+    'web design services',
+    'web designer',
+    'agency for web design',
+    'website design',
+    'custom website design',
+    'professional web design',
+  ],
+  ogImage: teamHeroImage,
+  ogType: 'website' as const,
+};
+
+const hero = {
+  title: 'Website Design That Converts Visitors Into Paying Customers',
+  subtitle: 'Your website should be your best salesperson, working around the clock. We build fast, mobile-first websites that earn trust and generate leads while you focus on running your business.',
+  primaryCTA: {
+    text: 'Free Strategy Session',
+    href: '/contact/',
+  },
+  secondaryCTA: {
+    text: 'View Our Work',
+    href: '#portfolio',
+  },
+  image: teamHeroImage,
+  imageAlt: 'Professional website design services',
+};
+
+const schema = {
+  type: 'Service' as const,
+  data: {
+    '@type': 'Service',
+    name: 'Website Design Services',
+    description: 'Professional website design services focused on conversions, mobile-first development, and search engine optimization.',
+    provider: {
+      '@type': 'Organization',
+      name: 'Digital Growth Experts',
+    },
+    areaServed: {
+      '@type': 'Country',
+      name: 'Australia',
+    },
+    serviceType: 'WebDesign',
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Website Design Services',
+      itemListElement: [
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Custom Website Design',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Mobile-First Development',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Conversion Optimisation',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'SEO Foundation',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Lightning-Fast Loading',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Ongoing Support',
+          },
+        },
+      ],
+    },
+  },
+};
+
+// Portfolio items showcasing our completed website projects
+const portfolioItems = [
+  {
+    title: 'Factory Direct Wardrobes',
+    industry: 'Home Improvement',
+    description: 'Custom wardrobe manufacturer website featuring product galleries, quote request forms, and location-based SEO for Sydney customers.',
+    thumbnailImage: portfolioFactoryDirectWardrobes,
+    metrics: { loadTime: '1.1s', mobileScore: 96, conversionRate: '+52%' },
+    techStack: ['Astro', 'Tailwind CSS'],
+    featured: true,
+  },
+  {
+    title: 'Green Hills Childcare',
+    industry: 'Childcare',
+    description: 'Warm, inviting childcare centre website with enrolment forms, program information, and trust-building parent testimonials.',
+    thumbnailImage: portfolioGreenhillsChildcare,
+    metrics: { loadTime: '1.0s', mobileScore: 97, conversionRate: '+54%' },
+    techStack: ['Astro', 'Tailwind CSS'],
+    featured: true,
+  },
+  {
+    title: 'Sydney Podiatrist',
+    industry: 'Healthcare',
+    description: 'Medical practice website with online booking integration, patient education resources, and local SEO optimisation.',
+    thumbnailImage: portfolioPodiatrist,
+    metrics: { loadTime: '1.1s', mobileScore: 97, conversionRate: '+45%' },
+    techStack: ['Astro', 'Tailwind CSS'],
+    featured: true,
+  },
+  {
+    title: 'Windscreen Repair Sydney',
+    industry: 'Auto Services',
+    description: 'Mobile windscreen repair service website with emergency call tracking, service areas, and instant quote forms.',
+    thumbnailImage: portfolioWindscreenRepairSydney,
+    metrics: { loadTime: '0.9s', mobileScore: 98, conversionRate: '+71%' },
+    techStack: ['Astro', 'Tailwind CSS'],
+    featured: true,
+  },
+  {
+    title: 'Law Firm Website',
+    industry: 'Legal',
+    description: 'Professional law firm website showcasing practice areas, attorney profiles, and client testimonials with conversion-focused design.',
+    thumbnailImage: portfolioLawyerWebsiteDesign,
+    metrics: { loadTime: '1.0s', mobileScore: 95, conversionRate: '+41%' },
+    techStack: ['Astro', 'React', 'Tailwind CSS'],
+  },
+  {
+    title: 'Ecommerce Store',
+    industry: 'Retail',
+    description: 'High-converting ecommerce website with optimised product pages, streamlined checkout, and mobile-first shopping experience.',
+    thumbnailImage: portfolioEcommerce,
+    metrics: { loadTime: '1.2s', mobileScore: 94, conversionRate: '+58%' },
+    techStack: ['Astro', 'TypeScript', 'Tailwind CSS'],
+  },
+  {
+    title: 'Sydney Electrician',
+    industry: 'Trades',
+    description: 'Emergency electrician website with 24/7 call tracking, service area pages, and trust signals to generate qualified leads.',
+    thumbnailImage: portfolioElectrician,
+    metrics: { loadTime: '0.9s', mobileScore: 98, conversionRate: '+67%' },
+    techStack: ['Astro', 'Tailwind CSS'],
+  },
+  {
+    title: 'Legal Services',
+    industry: 'Legal',
+    description: 'Clean, professional legal website designed to build trust and convert visitors into consultation bookings.',
+    thumbnailImage: portfolioLawyer,
+    metrics: { loadTime: '0.8s', mobileScore: 99, conversionRate: '+38%' },
+    techStack: ['Astro', 'Tailwind CSS'],
+  },
+  {
+    title: 'Custom Cabinet Maker',
+    industry: 'Trades',
+    description: 'Bespoke cabinetry website featuring stunning project galleries, craftsmanship highlights, and quote request functionality.',
+    thumbnailImage: portfolioCabinetMaker1,
+    metrics: { loadTime: '1.0s', mobileScore: 96, conversionRate: '+49%' },
+    techStack: ['Astro', 'Tailwind CSS'],
+  },
+  {
+    title: 'Kitchen Cabinetry',
+    industry: 'Home Improvement',
+    description: 'Premium kitchen cabinet manufacturer website with before/after galleries and design consultation booking.',
+    thumbnailImage: portfolioCabinetMaker2,
+    metrics: { loadTime: '1.1s', mobileScore: 95, conversionRate: '+53%' },
+    techStack: ['Astro', 'Tailwind CSS'],
+  },
+  {
+    title: 'Finance Broker',
+    industry: 'Finance',
+    description: 'Professional mortgage broker website with loan calculators, application forms, and trust-building client testimonials.',
+    thumbnailImage: portfolioFinanceBroker,
+    metrics: { loadTime: '1.0s', mobileScore: 96, conversionRate: '+44%' },
+    techStack: ['Astro', 'React', 'Tailwind CSS'],
+  },
+  {
+    title: 'Glass Replacement Sydney',
+    industry: 'Trades',
+    description: 'Auto glass replacement website targeting Sydney customers with emergency services, online quotes, and mobile-first design.',
+    thumbnailImage: portfolioGlassReplacementSydney,
+    metrics: { loadTime: '0.9s', mobileScore: 97, conversionRate: '+63%' },
+    techStack: ['Astro', 'Tailwind CSS'],
+  },
+];
+---
+
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  ogImage={seo.ogImage}
+  ogType={seo.ogType}
+  keywords={seo.keywords}
+  schema={schema}
+>
+  <!-- Add LocalBusiness schema for better local SEO -->
+  <SchemaOrg
+    slot="head"
+    type="LocalBusiness"
+    data={{
+      name: 'Digital Growth Experts',
+      description: 'Professional website design services in Sydney. We create custom, conversion-focused websites that help Australian businesses grow online.',
+      image: `${Astro.site}images/logo.png`,
+    }}
+  />
+
+  <Header />
+
+  <main id="main-content">
+    <Hero
+      title={hero.title}
+      subtitle={hero.subtitle}
+      primaryCTA={hero.primaryCTA}
+      secondaryCTA={hero.secondaryCTA}
+      image={hero.image}
+      imageAlt={hero.imageAlt}
+    >
+      <Fragment slot="title">
+        Website Design That Converts Visitors Into <HighlightText color="primary" style="bold">Paying Customers</HighlightText>
+      </Fragment>
+    </Hero>
+
+    <!-- Social Proof - Client Logos -->
+    <ClientLogoCarousel />
+
+    <!-- Portfolio Marquee -->
+    <PortfolioMarquee
+      title="Websites Built to Deliver Results"
+      subtitle="Every website we create has one purpose: turning visitors into customers. Click any project to view the full case study."
+      portfolioItems={portfolioItems}
+      trustText="Every website is <strong>custom-designed</strong> and <strong>hand-coded</strong> for speed, <strong>SEO</strong>, and conversions. <strong>No templates</strong>. No page builders."
+    >
+      <Fragment slot="title">
+        Websites Built to <HighlightText color="primary" style="bold">Deliver Results</HighlightText>
+      </Fragment>
+    </PortfolioMarquee>
+
+    <!-- Why Website Design Matters -->
+    <section class="relative py-24 lg:py-32 bg-gray-950 overflow-hidden">
+      <!-- Decorative gradient orbs -->
+      <div class="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+      <div class="absolute bottom-0 left-0 w-80 h-80 bg-primary-500/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+
+      <div class="container mx-auto px-4 max-w-7xl relative z-10">
+        <div class="max-w-3xl mx-auto text-center mb-16 lg:mb-20">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold font-display mb-6 text-white">
+            Why Your Website Design Matters More Than Ever
+          </h2>
+          <p class="text-lg md:text-xl text-gray-400 leading-relaxed">
+            94% of first impressions come down to design. With attention spans shrinking, your website has just 3 seconds to convince visitors to stay and explore.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+          <!-- Card 1 -->
+          <div class="group relative bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] rounded-2xl p-8 transition-all duration-500 ease-out hover:bg-white/[0.06] hover:border-white/[0.15] hover:shadow-2xl hover:shadow-blue-500/10">
+            <div class="w-14 h-14 flex items-center justify-center rounded-xl bg-gradient-to-br from-blue-500/20 to-blue-600/10 border border-blue-500/30 mb-6 group-hover:from-blue-500/30 group-hover:to-blue-600/20 group-hover:border-blue-400/50 transition-all duration-300">
+              <svg class="w-7 h-7 text-blue-400 group-hover:text-blue-300 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+            </div>
+            <h3 class="text-xl lg:text-2xl font-bold font-display text-white mb-3 group-hover:text-blue-200 transition-colors duration-300">First Impressions Count</h3>
+            <p class="text-gray-400 text-base leading-relaxed group-hover:text-gray-300 transition-colors duration-300">
+              Visitors form an opinion about your website in just 0.05 seconds. Professional design builds instant credibility and trust from the moment they land on your page.
+            </p>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="group relative bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] rounded-2xl p-8 transition-all duration-500 ease-out hover:bg-white/[0.06] hover:border-white/[0.15] hover:shadow-2xl hover:shadow-blue-500/10">
+            <div class="w-14 h-14 flex items-center justify-center rounded-xl bg-gradient-to-br from-blue-500/20 to-blue-600/10 border border-blue-500/30 mb-6 group-hover:from-blue-500/30 group-hover:to-blue-600/20 group-hover:border-blue-400/50 transition-all duration-300">
+              <svg class="w-7 h-7 text-blue-400 group-hover:text-blue-300 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+              </svg>
+            </div>
+            <h3 class="text-xl lg:text-2xl font-bold font-display text-white mb-3 group-hover:text-blue-200 transition-colors duration-300">Built for Conversions</h3>
+            <p class="text-gray-400 text-base leading-relaxed group-hover:text-gray-300 transition-colors duration-300">
+              Strategic design decisions can boost conversion rates by up to 400%. Every element on your site is placed with purpose to guide visitors toward taking action.
+            </p>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="group relative bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] rounded-2xl p-8 transition-all duration-500 ease-out hover:bg-white/[0.06] hover:border-white/[0.15] hover:shadow-2xl hover:shadow-blue-500/10">
+            <div class="w-14 h-14 flex items-center justify-center rounded-xl bg-gradient-to-br from-blue-500/20 to-blue-600/10 border border-blue-500/30 mb-6 group-hover:from-blue-500/30 group-hover:to-blue-600/20 group-hover:border-blue-400/50 transition-all duration-300">
+              <svg class="w-7 h-7 text-blue-400 group-hover:text-blue-300 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <h3 class="text-xl lg:text-2xl font-bold font-display text-white mb-3 group-hover:text-blue-200 transition-colors duration-300">Mobile-First Approach</h3>
+            <p class="text-gray-400 text-base leading-relaxed group-hover:text-gray-300 transition-colors duration-300">
+              More than 60% of web traffic now comes from mobile devices. We design for mobile first to guarantee perfect experiences across every screen size.
+            </p>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="group relative bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] rounded-2xl p-8 transition-all duration-500 ease-out hover:bg-white/[0.06] hover:border-white/[0.15] hover:shadow-2xl hover:shadow-blue-500/10">
+            <div class="w-14 h-14 flex items-center justify-center rounded-xl bg-gradient-to-br from-blue-500/20 to-blue-600/10 border border-blue-500/30 mb-6 group-hover:from-blue-500/30 group-hover:to-blue-600/20 group-hover:border-blue-400/50 transition-all duration-300">
+              <svg class="w-7 h-7 text-blue-400 group-hover:text-blue-300 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <h3 class="text-xl lg:text-2xl font-bold font-display text-white mb-3 group-hover:text-blue-200 transition-colors duration-300">Speed Drives Results</h3>
+            <p class="text-gray-400 text-base leading-relaxed group-hover:text-gray-300 transition-colors duration-300">
+              Every 1-second delay in page load time can cut conversions by 7%. Our websites load fast to keep visitors engaged and ready to convert.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What's Included -->
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4 max-w-7xl">
+        <div class="max-w-3xl mx-auto text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold font-display mb-6 text-gray-900">
+            What You Get With Our Website Design Services
+          </h2>
+          <p class="text-xl text-gray-700">
+            Everything you need to launch a website that works as hard as you do. From initial strategy through to ongoing support, we have you covered.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="bg-white p-8 rounded-xl shadow-sm">
+            <div class="w-12 h-12 bg-primary-100 text-primary-600 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold font-display mb-3 text-gray-900">Fully Custom Design</h3>
+            <p class="text-gray-700">
+              No cookie-cutter templates. Every website we build is custom-designed to reflect your brand, connect with your audience, and set you apart from competitors.
+            </p>
+          </div>
+
+          <div class="bg-white p-8 rounded-xl shadow-sm">
+            <div class="w-12 h-12 bg-primary-100 text-primary-600 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold font-display mb-3 text-gray-900">Mobile-First Development</h3>
+            <p class="text-gray-700">
+              We build mobile-first from day one. Your website will look stunning and perform flawlessly on phones, tablets, and desktops.
+            </p>
+          </div>
+
+          <div class="bg-white p-8 rounded-xl shadow-sm">
+            <div class="w-12 h-12 bg-primary-100 text-primary-600 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold font-display mb-3 text-gray-900">Conversion Optimisation</h3>
+            <p class="text-gray-700">
+              Strategic CTAs, trust signals, and user flows designed to turn browsers into buyers. Every element on your site serves a clear purpose.
+            </p>
+          </div>
+
+          <div class="bg-white p-8 rounded-xl shadow-sm">
+            <div class="w-12 h-12 bg-primary-100 text-primary-600 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold font-display mb-3 text-gray-900"><a href="/technical-seo/" class="text-primary-600 hover:text-primary-700">SEO Foundation</a></h3>
+            <p class="text-gray-700">
+              Technical SEO is built in from the ground up. Fast loading speeds, clean code, proper structure, and schema markup all help you rank higher in search results.
+            </p>
+          </div>
+
+          <div class="bg-white p-8 rounded-xl shadow-sm">
+            <div class="w-12 h-12 bg-primary-100 text-primary-600 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold font-display mb-3 text-gray-900">Lightning-Fast Loading</h3>
+            <p class="text-gray-700">
+              Optimised images, efficient code, and modern hosting mean your website loads in under 2 seconds. This keeps visitors engaged and impresses Google.
+            </p>
+          </div>
+
+          <div class="bg-white p-8 rounded-xl shadow-sm">
+            <div class="w-12 h-12 bg-primary-100 text-primary-600 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold font-display mb-3 text-gray-900">Ongoing Support</h3>
+            <p class="text-gray-700">
+              We stick around after launch. Ongoing maintenance, updates, and support keep your website secure and performing at its best for years to come.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Long-Form SEO Content Section -->
+    <section class="py-16 lg:py-24 bg-white">
+      <div class="container mx-auto px-4 max-w-4xl">
+        <div class="prose prose-lg max-w-none">
+          <h2 class="text-3xl md:text-4xl font-bold font-display text-gray-900 mb-6">Web Design Sydney: Your Local Partner for Digital Success</h2>
+
+          <p class="text-gray-700 leading-relaxed mb-4">In today's digital world, your website is often the first interaction potential customers have with your business. A beautiful website that captures attention is just the beginning. What truly matters is creating a bespoke website that drives results, builds trust, and establishes a powerful online presence for your brand. As a Sydney based agency, we understand the unique needs of Australian businesses and the local market dynamics that influence digital success.</p>
+
+          <p class="text-gray-700 leading-relaxed mb-4">Your website needs to do more than simply exist. It needs to work hard for your business every single day. That means combining stunning visual appeal with strategic functionality, ensuring your website serves as a complete digital solution that attracts, engages, and converts visitors into customers. Whether you are a startup looking to establish your first online presence or an established company ready to refresh your digital strategy, partnering with a local team offers distinct advantages.</p>
+
+          <p class="text-gray-700 leading-relaxed mb-4">We take pride in being easy to deal with throughout every project. Our collaborative approach means you are never left wondering about progress or next steps. From initial consultation to launch day and beyond, we provide the tools you need to succeed in the competitive Sydney market and grow your business sustainably.</p>
+
+          <h2 class="text-3xl md:text-4xl font-bold font-display text-gray-900 mt-12 mb-6">Why Choose a Professional Web Design Agency</h2>
+
+          <p class="text-gray-700 leading-relaxed mb-4">The difference between amateur and professional web design is immediately apparent to visitors. Professional web design agencies bring together experienced designers, developers, and strategists who understand what makes a website truly effective. While free website builders and drag and drop tools might seem appealing for their simplicity, they rarely deliver the customised, high-performing web design that competitive businesses require.</p>
+
+          <p class="text-gray-700 leading-relaxed mb-4">Working with design experts means gaining access to years of collective experience across hundreds of web design projects. This expertise translates into websites that load faster, rank higher in search engine results, and convert more visitors into paying customers. Our team follows best practices to ensure every website we create meets the highest standards for performance, accessibility, and user experience.</p>
+
+          <p class="text-gray-700 leading-relaxed mb-4">A great website is not just about aesthetics. It requires deep understanding of user behaviour, conversion psychology, and technical optimisation. Web design agencies invest in ongoing training and stay current with the latest trends and technologies, ensuring clients receive solutions that remain effective for years to come. This commitment to excellence is what separates professional outcomes from DIY attempts.</p>
+
+          <h3 class="text-2xl font-bold font-display text-gray-900 mt-10 mb-4">What Sets a Great Web Design Company Apart</h3>
+
+          <p class="text-gray-700 leading-relaxed mb-4">Not all web design companies are created equal. The best website outcomes come from teams that balance creativity with strategy, and design principles with technical excellence. When evaluating potential partners, look for a company that takes time to understand your business goals before proposing solutions. A template approach rarely delivers the custom designs that help businesses stand out in crowded markets.</p>
+
+          <p class="text-gray-700 leading-relaxed mb-4">The design process matters enormously. Leading companies follow structured methodologies that include discovery, wireframing, design, development, testing, and optimisation phases. This systematic approach ensures nothing is overlooked and every website delivers on its intended purpose. Rushing through these stages inevitably leads to problems down the track.</p>
+
+          <p class="text-gray-700 leading-relaxed mb-4">Consider whether website builders suit your needs or if professional coding will better serve your long term goals. While website builders offer convenience, they often impose limitations on design elements, functionality, and performance that become frustrating as your business grows. Custom development provides flexibility to create exactly what your business requires, with clean code that search engines love.</p>
+
+          <h2 class="text-3xl md:text-4xl font-bold font-display text-gray-900 mt-12 mb-6">Our Web Design Services: From Concept to Launch</h2>
+
+          <p class="text-gray-700 leading-relaxed mb-4">Our comprehensive web design services cover every aspect of creating an effective online presence. We begin by understanding your brand, your audience, and your objectives. This foundation informs every decision throughout the project, from visual design choices to technical architecture. The result is a website that not only looks stunning but performs exceptionally across all devices.</p>
+
+          <p class="text-gray-700 leading-relaxed mb-4">Responsive design is non-negotiable in modern website development. Your visitors browse across different devices and screen sizes, from desktop monitors to tablets and smartphones. We build every website using responsive design principles, ensuring seamless user experience regardless of how visitors access your site. This approach also supports better search engine rankings, as Google prioritises mobile-friendly websites.</p>
+
+          <p class="text-gray-700 leading-relaxed mb-4">User experience sits at the heart of effective web design. We apply user experience design methodologies to create intuitive navigation, clear calls to action, and logical content organisation. Combined with thoughtful ui design and interaction design, we craft digital experiences that guide visitors naturally toward conversion points. Every design element serves a purpose in creating engagement and driving results.</p>
+
+          <p class="text-gray-700 leading-relaxed mb-4">Our services extend beyond design into <a href="/technical-seo/" class="text-primary-600 hover:text-primary-700 underline">technical SEO</a> implementation, ensuring your new web presence is discoverable from day one. We also integrate with your broader digital marketing efforts, including <a href="/content-marketing/" class="text-primary-600 hover:text-primary-700 underline">content marketing</a> strategies and email marketing systems, to create cohesive digital solutions.</p>
+
+          <h3 class="text-2xl font-bold font-display text-gray-900 mt-10 mb-4">The Role of an Experienced Web Designer</h3>
+
+          <p class="text-gray-700 leading-relaxed mb-4">Behind every great website is a talented web designer who understands how to balance creativity with functionality. Website designers do far more than make things look pretty. They craft visual hierarchy that guides the eye, select font combinations that enhance readability, and create layout structures that support content and functionality in equal measure.</p>
+
+          <p class="text-gray-700 leading-relaxed mb-4">An experienced designer ensures every element of your website stays on-brand and reinforces your company identity. This consistency builds trust with visitors and creates memorable experiences that encourage return visits. From colour palettes to imagery selection to spacing and typography, skilled designers make countless decisions that collectively determine how your brand is perceived online.</p>
+
+          <p class="text-gray-700 leading-relaxed mb-4">Visual design extends beyond surface aesthetics into strategic communication. Designers use visual hierarchy principles to emphasise important information, guide user attention, and create engaging experiences that hold interest. These skills come from years of practice and study, which is why professional website designers deliver results that DIY tools simply cannot match.</p>
+
+          <p class="text-gray-700 leading-relaxed mb-4">Modern website designers also understand product design thinking, user interface design principles, and the importance of accessibility. They design websites that work for all users, regardless of ability or device preference. This inclusive approach expands your potential audience while demonstrating corporate responsibility.</p>
+
+          <h2 class="text-3xl md:text-4xl font-bold font-display text-gray-900 mt-12 mb-6">Finding the Right Agency for Web Design</h2>
+
+          <p class="text-gray-700 leading-relaxed mb-4">Choosing an agency for web design is one of the most important decisions you will make for your digital presence. The right partner will become an extension of your team, understanding your business deeply and advocating for your success. Look for agencies that ask thoughtful questions, demonstrate genuine interest in your goals, and communicate clearly throughout the relationship.</p>
+
+          <p class="text-gray-700 leading-relaxed mb-4">Consider how each agency approaches the challenge of helping you connect with your audience. Do they take time to understand who your customers are and what motivates them? The best agencies conduct thorough research before start designing, ensuring every website we create resonates with its intended users and drives meaningful business outcomes.</p>
+
+          <p class="text-gray-700 leading-relaxed mb-4">Every website project is unique, requiring tailored solutions rather than cookie cutter approaches. When discussing your website needs with potential partners, pay attention to whether they listen more than they talk. Agencies that jump straight to solutions without understanding problems rarely deliver optimal results. Patient, thorough discovery leads to websites that truly serve business objectives.</p>
+
+          <p class="text-gray-700 leading-relaxed mb-4">At Digital Growth Experts, we believe in building long term partnerships. Our clients return to us year after year because we consistently deliver value, remain responsive to their evolving needs, and genuinely care about their success. We are not just here to build a website and disappear. We are here to help you grow your business through sustained digital excellence.</p>
+
+          <h3 class="text-2xl font-bold font-display text-gray-900 mt-10 mb-4">Web Design and Development: A Complete Approach</h3>
+
+          <p class="text-gray-700 leading-relaxed mb-4">Effective digital solutions require both creative and technical expertise working in harmony. Our web design and development approach brings together talented designers and skilled web developers who collaborate throughout every project. This integrated methodology ensures design visions become fully functional realities without compromise.</p>
+
+          <p class="text-gray-700 leading-relaxed mb-4">Website development encompasses far more than coding beautiful designs into existence. Our web developers implement robust content management system solutions that make updating your website simple and intuitive. Whether you need basic page editing capabilities or complex ecommerce functionality, we build systems that are easy to use while remaining powerful enough for sophisticated business requirements.</p>
+
+          <p class="text-gray-700 leading-relaxed mb-4">We integrate essential tools like analytics tracking, SEO optimisation, and marketing automation from the ground up. This means your website launches ready to perform, with clear visibility into visitor behaviour and the ability to refine your approach based on real data. Our <a href="/seo-audit/" class="text-primary-600 hover:text-primary-700 underline">SEO audit</a> services can identify additional opportunities once your site is live, while our <a href="/local-seo/" class="text-primary-600 hover:text-primary-700 underline">local SEO</a> expertise helps Sydney businesses dominate regional search results.</p>
+
+          <p class="text-gray-700 leading-relaxed mb-4">As technology evolves, we continuously evaluate new design tools, ai-powered solutions, and development frameworks that might benefit our clients. However, we never adopt technology for its own sake. Every tool must prove its value in delivering better outcomes for the businesses we serve. This pragmatic approach ensures you receive solutions built on proven foundations with selective innovation where it genuinely adds value.</p>
+
+          <p class="text-gray-700 leading-relaxed mb-6">From simple brochure sites to complex websites with sophisticated functionality, our team has the skills and experience to deliver professional website design that exceeds expectations. We handle projects of all sizes with the same commitment to quality, ensuring your website creates the powerful first impression your business deserves. Ready to create your own website that drives real results? Let us show you what thoughtful, strategic web design can achieve for your business.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4 max-w-4xl">
+        <div class="max-w-3xl mx-auto text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold font-display mb-6 text-gray-900">
+            Your Website Design Questions Answered
+          </h2>
+          <p class="text-xl text-gray-700">
+            Common questions we hear from businesses considering a new website. If yours is not here, get in touch.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-xl border-2 border-gray-100 shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
+          <AccordionItem
+            id="web-design-faq-1"
+            question="How long does it take to design and build a website?"
+            answer="Most websites take 4 to 8 weeks from start to finish, depending on complexity. A simple brochure site might be ready in 4 weeks, while a larger site with custom features could take 8 to 12 weeks. During our discovery call, we will give you a realistic timeline based on your specific requirements. We focus on doing it right rather than rushing, because a poorly built website costs more to fix than it does to build properly the first time."
+            isFirst={true}
+          />
+
+          <AccordionItem
+            id="web-design-faq-2"
+            question="How much does a professional website cost?"
+            answer="Website pricing typically ranges from <strong>$1,000 to $5,000</strong>, depending on your specific requirements. The final cost is determined by factors like the <strong>number of pages</strong>, <strong>custom features</strong>, <strong>booking or quote systems</strong>, <strong>e-commerce functionality</strong>, and the <strong>complexity of your design</strong>. A simple 5-page business site sits at the lower end, while a larger site with custom integrations will be closer to the higher end. We provide transparent, itemised quotes after a free discovery call so you know exactly what you are paying for. No hidden fees, no surprises."
+          />
+
+          <AccordionItem
+            id="web-design-faq-3"
+            question="Will I be able to update the website myself?"
+            answer="Absolutely. We build websites with user-friendly content management systems (CMS) that let you easily update text, images, and add new pages without any technical knowledge. We also provide training and documentation so you feel confident making changes. For clients who prefer hands-off management, we offer ongoing maintenance packages where we handle all updates for you."
+          />
+
+          <AccordionItem
+            id="web-design-faq-4"
+            question="Will my website work well on mobile devices?"
+            answer="Yes, without question. Every website we build is mobile-first, meaning we design for mobile devices first and then scale up to tablets and desktops. With over 60% of web traffic coming from mobile devices, this approach ensures your site looks and works perfectly on every screen size. We test on multiple devices and browsers before launch to guarantee a seamless experience for all visitors."
+          />
+
+          <AccordionItem
+            id="web-design-faq-5"
+            question="Do you provide ongoing support after launch?"
+            answer="Yes, we do not disappear after your site goes live. We offer flexible support packages that include regular updates, security monitoring, performance optimisation, and technical assistance. Whether you need occasional help or comprehensive ongoing management, we have a plan that fits. Many clients find that ongoing support gives them peace of mind and keeps their website performing at its best."
+            isLast={true}
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Services -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-4 max-w-4xl">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold font-display text-gray-900 mb-4">
+            Build Your Complete Digital Growth Strategy
+          </h2>
+          <p class="text-lg text-gray-600">
+            Your website performs best when supported by ongoing marketing. Explore our related services to maximise your results.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <a href="/technical-seo/" class="group bg-gray-50 rounded-xl p-6 hover:bg-primary-50 hover:border-primary-500 border-2 border-transparent transition-all">
+            <h3 class="text-lg font-bold text-gray-900 group-hover:text-primary-600 mb-2">Technical SEO</h3>
+            <p class="text-sm text-gray-600">Ensure your new site is fully optimised for search engines from day one.</p>
+          </a>
+          <a href="/content-marketing/" class="group bg-gray-50 rounded-xl p-6 hover:bg-primary-50 hover:border-primary-500 border-2 border-transparent transition-all">
+            <h3 class="text-lg font-bold text-gray-900 group-hover:text-primary-600 mb-2">Content Marketing</h3>
+            <p class="text-sm text-gray-600">Attract and engage your audience with strategic content that converts.</p>
+          </a>
+          <a href="/local-seo/" class="group bg-gray-50 rounded-xl p-6 hover:bg-primary-50 hover:border-primary-500 border-2 border-transparent transition-all">
+            <h3 class="text-lg font-bold text-gray-900 group-hover:text-primary-600 mb-2">Local SEO</h3>
+            <p class="text-sm text-gray-600">Dominate local search results and attract customers in your area.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <CTASection
+      title="Ready for a Website That Actually Generates Leads?"
+      description="Stop losing visitors to slow, outdated, or confusing websites. Book a free strategy session and see how a conversion-focused website can transform your business."
+      primaryCTA={{
+        text: 'Book Free Strategy Session',
+        href: '/contact/',
+      }}
+    />
+  </main>
+
+  <Footer />
+</BaseLayout>

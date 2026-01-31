@@ -36,7 +36,7 @@ const {
       <div class={`${image ? 'text-center lg:text-left' : 'text-center max-w-4xl mx-auto'} animate-fade-in`}>
         <!-- Main Headline -->
         <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold font-display text-gray-900 mb-6 leading-tight">
-          {title}
+          <slot name="title">{title}</slot>
         </h1>
 
         <!-- Subtitle -->

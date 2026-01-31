@@ -1,0 +1,450 @@
+---
+/**
+ * Portfolio Lightbox Component
+ * A modal overlay for viewing portfolio items in detail.
+ * Uses vanilla JavaScript for state management.
+ */
+---
+
+<!-- Lightbox Modal -->
+<div
+  id="portfolio-lightbox"
+  class="lightbox fixed inset-0 z-50 hidden"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="lightbox-title"
+  aria-describedby="lightbox-description"
+>
+  <!-- Backdrop -->
+  <div class="lightbox-backdrop absolute inset-0 bg-black/90 backdrop-blur-sm" data-lightbox-close></div>
+
+  <!-- Modal Container -->
+  <div class="lightbox-container relative z-10 flex items-center justify-center min-h-screen p-4 md:p-8">
+    <div class="lightbox-content relative bg-white rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden">
+
+      <!-- Close Button -->
+      <button
+        type="button"
+        class="absolute top-4 right-4 z-20 w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-900 transition-colors"
+        aria-label="Close portfolio viewer"
+        data-lightbox-close
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      <!-- Image Container -->
+      <div class="lightbox-image-container relative bg-gray-100 aspect-[4/3] md:aspect-[16/10]">
+        <img
+          id="lightbox-image"
+          src=""
+          alt=""
+          class="w-full h-full object-contain"
+        />
+
+        <!-- Navigation Arrows (Desktop) -->
+        <button
+          type="button"
+          class="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 items-center justify-center rounded-full bg-white/90 hover:bg-white text-gray-700 shadow-lg transition-all hover:scale-110"
+          aria-label="View previous project"
+          data-lightbox-prev
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+
+        <button
+          type="button"
+          class="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 items-center justify-center rounded-full bg-white/90 hover:bg-white text-gray-700 shadow-lg transition-all hover:scale-110"
+          aria-label="View next project"
+          data-lightbox-next
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Content Section -->
+      <div class="lightbox-info p-6 md:p-8">
+        <!-- Header -->
+        <div class="flex items-start justify-between mb-4">
+          <div>
+            <h2 id="lightbox-title" class="text-2xl md:text-3xl font-bold font-display text-gray-900"></h2>
+            <span id="lightbox-industry" class="inline-block mt-2 px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-600"></span>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <p id="lightbox-description" class="text-gray-600 leading-relaxed mb-6"></p>
+
+        <!-- Metrics Grid -->
+        <div id="lightbox-metrics" class="grid grid-cols-3 gap-4 mb-6">
+          <div id="lightbox-metric-speed" class="hidden text-center p-4 bg-green-50 rounded-xl">
+            <div class="flex items-center justify-center mb-2">
+              <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <div id="lightbox-speed-value" class="text-xl font-bold text-green-700"></div>
+            <div class="text-xs text-green-600">Load Time</div>
+          </div>
+
+          <div id="lightbox-metric-mobile" class="hidden text-center p-4 bg-blue-50 rounded-xl">
+            <div class="flex items-center justify-center mb-2">
+              <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <div id="lightbox-mobile-value" class="text-xl font-bold text-blue-700"></div>
+            <div class="text-xs text-blue-600">Mobile Score</div>
+          </div>
+
+          <div id="lightbox-metric-conversion" class="hidden text-center p-4 bg-purple-50 rounded-xl">
+            <div class="flex items-center justify-center mb-2">
+              <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+              </svg>
+            </div>
+            <div id="lightbox-conversion-value" class="text-xl font-bold text-purple-700"></div>
+            <div class="text-xs text-purple-600">Conversions</div>
+          </div>
+        </div>
+
+        <!-- Tech Stack -->
+        <div id="lightbox-tech-container" class="hidden mb-6">
+          <p class="text-sm text-gray-500 mb-2">Built with:</p>
+          <div id="lightbox-tech-stack" class="flex flex-wrap gap-2"></div>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a
+            id="lightbox-cta"
+            href="/contact/"
+            class="inline-flex items-center justify-center px-6 py-3 bg-primary-600 text-white font-semibold rounded-lg hover:bg-primary-700 transition-colors"
+          >
+            Get a Website Like This
+            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </a>
+          <a
+            id="lightbox-visit"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hidden inline-flex items-center justify-center px-6 py-3 bg-gray-100 text-gray-700 font-semibold rounded-lg hover:bg-gray-200 transition-colors"
+          >
+            Visit Live Site
+            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <div class="flex items-center justify-between mt-6 pt-6 border-t border-gray-100 md:hidden">
+          <button
+            type="button"
+            class="inline-flex items-center px-4 py-2 text-gray-600 font-medium"
+            data-lightbox-prev
+          >
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+            Previous
+          </button>
+          <button
+            type="button"
+            class="inline-flex items-center px-4 py-2 text-gray-600 font-medium"
+            data-lightbox-next
+          >
+            Next
+            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .lightbox {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 300ms ease-out, visibility 300ms ease-out;
+  }
+
+  .lightbox.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .lightbox.is-open .lightbox-content {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  .lightbox-content {
+    transform: scale(0.95);
+    opacity: 0;
+    transition: transform 300ms ease-out, opacity 300ms ease-out;
+  }
+
+  /* Scroll lock when lightbox is open */
+  :global(body.lightbox-open) {
+    overflow: hidden;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lightbox,
+    .lightbox-content {
+      transition: none;
+    }
+  }
+
+  /* Mobile: full-screen lightbox */
+  @media (max-width: 768px) {
+    .lightbox-content {
+      max-height: 100vh;
+      border-radius: 0;
+      margin: 0;
+    }
+
+    .lightbox-container {
+      padding: 0;
+      align-items: stretch;
+    }
+
+    .lightbox-info {
+      max-height: 50vh;
+      overflow-y: auto;
+    }
+  }
+</style>
+
+<script>
+  // Portfolio Lightbox Controller
+  class PortfolioLightbox {
+    private lightbox: HTMLElement;
+    private cards: HTMLElement[];
+    private currentIndex: number = 0;
+    private previouslyFocusedElement: HTMLElement | null = null;
+
+    constructor() {
+      this.lightbox = document.getElementById('portfolio-lightbox')!;
+      this.cards = Array.from(document.querySelectorAll('[data-portfolio-card]'));
+
+      this.init();
+    }
+
+    private init() {
+      // Card click handlers
+      this.cards.forEach((card, index) => {
+        card.addEventListener('click', (e) => {
+          const target = e.target as HTMLElement;
+          // Don't open lightbox if clicking on external link
+          if (target.closest('a[target="_blank"]')) return;
+          this.open(index);
+        });
+
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            this.open(index);
+          }
+        });
+
+        // Enlarge button
+        const enlargeBtn = card.querySelector('[data-enlarge-btn]');
+        if (enlargeBtn) {
+          enlargeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.open(index);
+          });
+        }
+      });
+
+      // Close handlers
+      this.lightbox.querySelectorAll('[data-lightbox-close]').forEach((btn) => {
+        btn.addEventListener('click', () => this.close());
+      });
+
+      // Navigation handlers
+      this.lightbox.querySelectorAll('[data-lightbox-prev]').forEach((btn) => {
+        btn.addEventListener('click', () => this.prev());
+      });
+
+      this.lightbox.querySelectorAll('[data-lightbox-next]').forEach((btn) => {
+        btn.addEventListener('click', () => this.next());
+      });
+
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (!this.isOpen()) return;
+
+        switch (e.key) {
+          case 'Escape':
+            this.close();
+            break;
+          case 'ArrowLeft':
+            this.prev();
+            break;
+          case 'ArrowRight':
+            this.next();
+            break;
+        }
+      });
+
+      // Touch swipe support
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      this.lightbox.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      this.lightbox.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        const diff = touchStartX - touchEndX;
+
+        if (Math.abs(diff) > 50) {
+          if (diff > 0) {
+            this.next();
+          } else {
+            this.prev();
+          }
+        }
+      }, { passive: true });
+    }
+
+    private isOpen(): boolean {
+      return this.lightbox.classList.contains('is-open');
+    }
+
+    private open(index: number) {
+      this.currentIndex = index;
+      this.previouslyFocusedElement = document.activeElement as HTMLElement;
+
+      this.updateContent();
+
+      this.lightbox.classList.remove('hidden');
+      // Force reflow
+      this.lightbox.offsetHeight;
+      this.lightbox.classList.add('is-open');
+      document.body.classList.add('lightbox-open');
+
+      // Focus close button
+      const closeBtn = this.lightbox.querySelector('[data-lightbox-close]') as HTMLElement;
+      closeBtn?.focus();
+    }
+
+    private close() {
+      this.lightbox.classList.remove('is-open');
+      document.body.classList.remove('lightbox-open');
+
+      setTimeout(() => {
+        this.lightbox.classList.add('hidden');
+      }, 300);
+
+      // Return focus
+      this.previouslyFocusedElement?.focus();
+    }
+
+    private prev() {
+      this.currentIndex = this.currentIndex === 0 ? this.cards.length - 1 : this.currentIndex - 1;
+      this.updateContent();
+    }
+
+    private next() {
+      this.currentIndex = this.currentIndex === this.cards.length - 1 ? 0 : this.currentIndex + 1;
+      this.updateContent();
+    }
+
+    private updateContent() {
+      const card = this.cards[this.currentIndex];
+      if (!card) return;
+
+      const title = card.dataset.title || '';
+      const industry = card.dataset.industry || '';
+      const description = card.dataset.description || '';
+      const image = card.dataset.image || '';
+      const liveUrl = card.dataset.liveUrl || '';
+      const loadTime = card.dataset.loadTime || '';
+      const mobileScore = card.dataset.mobileScore || '';
+      const conversionRate = card.dataset.conversionRate || '';
+      const techStack = card.dataset.techStack || '';
+
+      // Update elements
+      (document.getElementById('lightbox-image') as HTMLImageElement).src = image;
+      (document.getElementById('lightbox-image') as HTMLImageElement).alt = `${title} website screenshot`;
+      document.getElementById('lightbox-title')!.textContent = title;
+      document.getElementById('lightbox-industry')!.textContent = industry;
+      document.getElementById('lightbox-description')!.textContent = description;
+
+      // Metrics
+      const speedMetric = document.getElementById('lightbox-metric-speed')!;
+      const mobileMetric = document.getElementById('lightbox-metric-mobile')!;
+      const conversionMetric = document.getElementById('lightbox-metric-conversion')!;
+
+      if (loadTime) {
+        speedMetric.classList.remove('hidden');
+        document.getElementById('lightbox-speed-value')!.textContent = loadTime;
+      } else {
+        speedMetric.classList.add('hidden');
+      }
+
+      if (mobileScore) {
+        mobileMetric.classList.remove('hidden');
+        document.getElementById('lightbox-mobile-value')!.textContent = `${mobileScore}/100`;
+      } else {
+        mobileMetric.classList.add('hidden');
+      }
+
+      if (conversionRate) {
+        conversionMetric.classList.remove('hidden');
+        document.getElementById('lightbox-conversion-value')!.textContent = conversionRate;
+      } else {
+        conversionMetric.classList.add('hidden');
+      }
+
+      // Tech stack
+      const techContainer = document.getElementById('lightbox-tech-container')!;
+      const techStackEl = document.getElementById('lightbox-tech-stack')!;
+
+      if (techStack) {
+        techContainer.classList.remove('hidden');
+        techStackEl.innerHTML = techStack
+          .split(',')
+          .filter(Boolean)
+          .map((tech) => `<span class="px-3 py-1 bg-gray-100 text-gray-600 text-sm rounded-full">${tech.trim()}</span>`)
+          .join('');
+      } else {
+        techContainer.classList.add('hidden');
+      }
+
+      // Live site link
+      const visitBtn = document.getElementById('lightbox-visit') as HTMLAnchorElement;
+      if (liveUrl && liveUrl !== '#') {
+        visitBtn.classList.remove('hidden');
+        visitBtn.href = liveUrl;
+      } else {
+        visitBtn.classList.add('hidden');
+      }
+    }
+  }
+
+  // Initialize
+  function initLightbox() {
+    new PortfolioLightbox();
+  }
+
+  // Run on page load and after View Transitions
+  initLightbox();
+  document.addEventListener('astro:after-swap', initLightbox);
+</script>
