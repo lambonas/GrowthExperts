@@ -212,10 +212,14 @@ const currentPath = Astro.url.pathname;
 <script>
   // Mobile menu state management with View Transitions support
   function setupMobileMenu() {
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const originalButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
 
-    if (!mobileMenuButton || !mobileMenu) return;
+    if (!originalButton || !mobileMenu) return;
+
+    // Clone button to remove any existing event listeners (needed for transition:persist)
+    const mobileMenuButton = originalButton.cloneNode(true) as HTMLElement;
+    originalButton.parentNode?.replaceChild(mobileMenuButton, originalButton);
 
     // Toggle menu
     const toggleMenu = () => {
