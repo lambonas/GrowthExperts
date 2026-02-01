@@ -444,7 +444,6 @@
     new PortfolioLightbox();
   }
 
-  // Run on page load and after View Transitions
-  initLightbox();
-  document.addEventListener('astro:after-swap', initLightbox);
+  // Initialize on both page load and view transitions
+  document.addEventListener('astro:page-load', initLightbox);
 </script>

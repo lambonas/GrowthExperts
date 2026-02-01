@@ -339,13 +339,8 @@ const currentPath = Astro.url.pathname;
     });
   }
 
-  // Initialize on page load
-  setupMobileMenu();
-  setupMobileDropdowns();
-  updateActiveNavState();
-
-  // Reinitialize after View Transitions
-  document.addEventListener('astro:after-swap', () => {
+  // Initialize on both page load and view transitions
+  document.addEventListener('astro:page-load', () => {
     setupMobileMenu();
     setupMobileDropdowns();
     updateActiveNavState();
