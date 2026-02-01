@@ -444,6 +444,13 @@
     new PortfolioLightbox();
   }
 
-  // Initialize on both page load and view transitions
+  // Initialize on view transitions
   document.addEventListener('astro:page-load', initLightbox);
+
+  // Fallback: Initialize immediately if DOM is already ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLightbox);
+  } else {
+    initLightbox();
+  }
 </script>

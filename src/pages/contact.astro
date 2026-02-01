@@ -375,10 +375,11 @@ const pageDescription =
 </BaseLayout>
 
 <script>
-  // Smooth scroll to form when "Send Us a Message" is clicked
-  document.addEventListener('DOMContentLoaded', () => {
+  // Contact form initialization
+  function initContactForm() {
     const ctaButton = document.querySelector('[href="#contact-form-enhanced"]');
-    if (ctaButton) {
+    if (ctaButton && !(ctaButton as any)._initialized) {
+      (ctaButton as any)._initialized = true;
       ctaButton.addEventListener('click', (e) => {
         e.preventDefault();
         const form = document.getElementById('contact-form-enhanced');
@@ -556,5 +557,15 @@ const pageDescription =
         }
       });
     }
-  });
+  }
+
+  // Initialize on view transitions
+  document.addEventListener('astro:page-load', initContactForm);
+
+  // Fallback: Initialize immediately if DOM is already ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initContactForm);
+  } else {
+    initContactForm();
+  }
 </script>

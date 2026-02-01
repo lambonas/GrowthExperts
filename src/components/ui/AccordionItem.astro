@@ -254,11 +254,11 @@ const { question, answer, id, isFirst = false, isLast = false } = Astro.props;
     lastTrigger?.focus();
   }
 
-  // Initialize on both page load and view transitions
-  document.addEventListener('astro:page-load', initAccordion);
+  // Combined initialization function
+  function initAll() {
+    initAccordion();
 
-  // Auto-open from URL hash with improved focus management
-  document.addEventListener('astro:page-load', () => {
+    // Auto-open from URL hash with improved focus management
     const hash = window.location.hash;
     if (hash) {
       const targetId = hash.substring(1);
@@ -296,5 +296,15 @@ const { question, answer, id, isFirst = false, isLast = false } = Astro.props;
         }
       }
     }
-  });
+  }
+
+  // Initialize on view transitions
+  document.addEventListener('astro:page-load', initAll);
+
+  // Fallback: Initialize immediately if DOM is already ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAll);
+  } else {
+    initAll();
+  }
 </script>

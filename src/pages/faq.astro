@@ -431,21 +431,41 @@ const faqCategories = [
 
 <script>
   // Smooth scroll with offset for fixed header
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener('click', function (e) {
-      const href = this.getAttribute('href');
-      if (href && href !== '#') {
-        e.preventDefault();
-        const target = document.querySelector(href);
-        if (target) {
-          const offset = 100; // Adjust based on your header height
-          const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
-          window.scrollTo({
-            top: targetPosition,
-            behavior: 'smooth',
-          });
-        }
+  function initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      // Remove existing handler if any to prevent duplicates
+      if ((anchor as any)._scrollHandler) {
+        anchor.removeEventListener('click', (anchor as any)._scrollHandler);
       }
+
+      const handler = function (this: HTMLAnchorElement, e: Event) {
+        const href = this.getAttribute('href');
+        if (href && href !== '#') {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            const offset = 100; // Adjust based on your header height
+            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+            window.scrollTo({
+              top: targetPosition,
+              behavior: 'smooth',
+            });
+          }
+        }
+      };
+
+      (anchor as any)._scrollHandler = handler;
+      anchor.addEventListener('click', handler);
     });
-  });
+  }
+
+  // Initialize on view transitions
+  document.addEventListener('astro:page-load', initSmoothScroll);
+
+  // Fallback: Initialize immediately if DOM is already ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSmoothScroll);
+  } else {
+    initSmoothScroll();
+  }
 </script>
