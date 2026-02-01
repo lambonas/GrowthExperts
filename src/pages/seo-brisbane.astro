@@ -136,9 +136,17 @@ const finalCTA = {
     slot="head"
     type="LocalBusiness"
     data={{
-      name: 'Digital Growth Experts Brisbane',
+      name: 'Digital Growth Experts',
       description: 'Expert SEO agency in Brisbane helping businesses dominate search results with proven strategies',
       image: `${Astro.site}images/logo.png`,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Level 1 Suite 1/443 Chapel Rd',
+        addressLocality: 'Bankstown',
+        addressRegion: 'NSW',
+        postalCode: '2200',
+        addressCountry: 'AU',
+      },
     }}
   />
 

@@ -19,16 +19,19 @@ const pageDescription =
       '@type': 'LocalBusiness',
       name: 'Digital Growth Experts',
       description: pageDescription,
-      url: 'https://youragency.com/contact',
-      telephone: '+61-2-8112-8010',
+      url: 'https://growthexperts.com.au/contact/',
+      telephone: '+61281128010',
+      email: 'Info@growthexperts.com.au',
       address: {
         '@type': 'PostalAddress',
-        streetAddress: 'Your Street Address',
-        addressLocality: 'Sydney',
+        streetAddress: 'Level 1 Suite 1/443 Chapel Rd',
+        addressLocality: 'Bankstown',
         addressRegion: 'NSW',
-        postalCode: 'XXXX',
+        postalCode: '2200',
         addressCountry: 'AU',
       },
+      areaServed: 'Australia',
+      priceRange: '$$',
     },
   }}
 >
@@ -439,12 +442,15 @@ const pageDescription =
       }
     }
 
-    // Add change listeners to service radios
+    // Add change listeners to service radios (with initialization guard)
     serviceRadios.forEach((radio) => {
-      radio.addEventListener('change', (e) => {
-        const target = e.target as HTMLInputElement;
-        updateConditionalFields(target.value);
-      });
+      if (!(radio as any)._initialized) {
+        (radio as any)._initialized = true;
+        radio.addEventListener('change', (e) => {
+          const target = e.target as HTMLInputElement;
+          updateConditionalFields(target.value);
+        });
+      }
     });
 
     // Enhanced form handling with Formspree
@@ -559,13 +565,10 @@ const pageDescription =
     }
   }
 
-  // Initialize on view transitions
+  // Initialize on view transitions (for subsequent navigations)
   document.addEventListener('astro:page-load', initContactForm);
 
-  // Fallback: Initialize immediately if DOM is already ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initContactForm);
-  } else {
-    initContactForm();
-  }
+  // Also initialize immediately for the initial page load
+  // The _initialized checks in initContactForm prevent double-initialization
+  initContactForm();
 </script>
