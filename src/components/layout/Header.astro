@@ -47,7 +47,7 @@ const navItems = [
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200 shadow-sm" transition:persist>
+<header class="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200 shadow-sm">
   <nav class="container-custom py-4">
     <div class="flex items-center justify-between">
       <!-- Logo - Optimized for performance -->
@@ -212,16 +212,12 @@ const currentPath = Astro.url.pathname;
 <script>
   // Mobile menu state management with View Transitions support
   function setupMobileMenu() {
-    const originalButton = document.getElementById('mobile-menu-button');
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
 
-    if (!originalButton || !mobileMenu) return;
+    if (!mobileMenuButton || !mobileMenu) return;
 
-    // Clone button to remove any existing event listeners (needed for transition:persist)
-    const mobileMenuButton = originalButton.cloneNode(true) as HTMLElement;
-    originalButton.parentNode?.replaceChild(mobileMenuButton, originalButton);
-
-    // Toggle menu
+    // Toggle menu - direct event listener (no cloning needed without transition:persist)
     const toggleMenu = () => {
       const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
       mobileMenuButton.setAttribute('aria-expanded', String(!isExpanded));
@@ -260,11 +256,7 @@ const currentPath = Astro.url.pathname;
     const dropdownToggles = document.querySelectorAll('.mobile-dropdown-toggle');
 
     dropdownToggles.forEach((toggle) => {
-      // Remove any existing listeners by cloning
-      const newToggle = toggle.cloneNode(true) as HTMLElement;
-      toggle.parentNode?.replaceChild(newToggle, toggle);
-
-      newToggle.addEventListener('click', (e) => {
+      toggle.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
 
@@ -348,26 +340,5 @@ const currentPath = Astro.url.pathname;
     setupMobileMenu();
     setupMobileDropdowns();
     updateActiveNavState();
-  });
-
-  // Close menu and reset dropdowns before transition starts
-  document.addEventListener('astro:before-preparation', () => {
-    const mobileMenu = document.getElementById('mobile-menu');
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
-    mobileMenu?.classList.add('hidden');
-    mobileMenuButton?.setAttribute('aria-expanded', 'false');
-
-    // Reset all dropdowns
-    document.querySelectorAll('.mobile-dropdown-toggle').forEach((toggle) => {
-      const dropdownId = toggle.getAttribute('aria-controls');
-      const dropdown = dropdownId ? document.getElementById(dropdownId) : null;
-      const chevron = toggle.querySelector('svg');
-
-      if (dropdown) {
-        dropdown.style.gridTemplateRows = '0fr';
-        toggle.setAttribute('aria-expanded', 'false');
-        chevron?.classList.remove('rotate-180');
-      }
-    });
   });
 </script>

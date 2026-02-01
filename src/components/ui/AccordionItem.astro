@@ -118,13 +118,17 @@ const { question, answer, id, isFirst = false, isLast = false } = Astro.props;
 <script>
   // Client-side accordion behavior with enhanced accessibility
   function initAccordion() {
-    const items = document.querySelectorAll('[data-accordion-item]');
+    // Only select items that haven't been initialized yet
+    const items = document.querySelectorAll('[data-accordion-item]:not([data-initialized])');
 
     items.forEach((item, index) => {
       const trigger = item.querySelector('.accordion-trigger') as HTMLButtonElement;
       const content = item.querySelector('.accordion-content') as HTMLElement;
 
       if (!trigger || !content) return;
+
+      // Mark as initialized to prevent duplicate event listeners
+      item.setAttribute('data-initialized', 'true');
 
       // Handle click events
       trigger.addEventListener('click', () => {
