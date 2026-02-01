@@ -577,8 +577,14 @@ const pageDescription =
     }
   }
 
-  // Initialize on both initial load and view transition navigations
-  // With is:inline, this script runs immediately (not deferred), ensuring
-  // the event listener is registered before astro:page-load fires
+  // Initialize on view transitions navigation
   document.addEventListener('astro:page-load', initContactForm);
+
+  // Fallback: Initialize immediately if DOM is already ready (for direct page loads)
+  // astro:page-load only fires during View Transitions, not on initial page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initContactForm);
+  } else {
+    initContactForm();
+  }
 </script>

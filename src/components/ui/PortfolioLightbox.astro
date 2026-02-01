@@ -457,6 +457,13 @@
     }, { passive: true });
   }
 
-  // Initialize on both initial load and view transition navigations
+  // Initialize on view transitions
   document.addEventListener('astro:page-load', initPortfolioLightbox);
+
+  // Fallback: Initialize immediately if DOM is already ready (handles initial page loads)
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPortfolioLightbox);
+  } else {
+    initPortfolioLightbox();
+  }
 </script>
