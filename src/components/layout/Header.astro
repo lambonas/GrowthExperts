@@ -211,13 +211,17 @@ const currentPath = Astro.url.pathname;
 
 <script>
   // Mobile menu state management with View Transitions support
+  // Track document-level handlers for cleanup
+  let documentClickHandler = null;
+  let documentKeydownHandler = null;
+
   function setupMobileMenu() {
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
 
     if (!mobileMenuButton || !mobileMenu) return;
 
-    // Toggle menu - direct event listener (no cloning needed without transition:persist)
+    // Toggle menu
     const toggleMenu = () => {
       const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
       mobileMenuButton.setAttribute('aria-expanded', String(!isExpanded));
@@ -234,19 +238,31 @@ const currentPath = Astro.url.pathname;
       mobileMenuButton.querySelector('.menu-close-icon')?.classList.add('hidden');
     };
 
-    // Event listeners
+    // Remove previous button listener if exists, then add new one
+    if (mobileMenuButton._toggleHandler) {
+      mobileMenuButton.removeEventListener('click', mobileMenuButton._toggleHandler);
+    }
+    mobileMenuButton._toggleHandler = toggleMenu;
     mobileMenuButton.addEventListener('click', toggleMenu);
 
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', (e) => {
-      const target = e.target as HTMLElement;
+    // Remove old document click handler and add new one
+    if (documentClickHandler) {
+      document.removeEventListener('click', documentClickHandler);
+    }
+    documentClickHandler = (e) => {
+      const target = e.target;
       if (!target.closest('#mobile-menu-button') && !target.closest('#mobile-menu')) {
         closeMenu();
       }
-    });
+    };
+    document.addEventListener('click', documentClickHandler);
 
-    // Ensure menu is closed on navigation
+    // Ensure menu is closed on navigation - remove old listeners first
     mobileMenu.querySelectorAll('a').forEach((link) => {
+      if (link._closeHandler) {
+        link.removeEventListener('click', link._closeHandler);
+      }
+      link._closeHandler = closeMenu;
       link.addEventListener('click', closeMenu);
     });
   }
@@ -256,11 +272,16 @@ const currentPath = Astro.url.pathname;
     const dropdownToggles = document.querySelectorAll('.mobile-dropdown-toggle');
 
     dropdownToggles.forEach((toggle) => {
-      toggle.addEventListener('click', (e) => {
+      // Remove old listener if exists
+      if (toggle._clickHandler) {
+        toggle.removeEventListener('click', toggle._clickHandler);
+      }
+
+      const clickHandler = (e) => {
         e.preventDefault();
         e.stopPropagation();
 
-        const button = e.currentTarget as HTMLButtonElement;
+        const button = e.currentTarget;
         const dropdownId = button.getAttribute('aria-controls');
         const dropdown = dropdownId ? document.getElementById(dropdownId) : null;
         const chevron = button.querySelector('svg');
@@ -294,11 +315,17 @@ const currentPath = Astro.url.pathname;
           button.setAttribute('aria-expanded', 'true');
           chevron?.classList.add('rotate-180');
         }
-      });
+      };
+
+      toggle._clickHandler = clickHandler;
+      toggle.addEventListener('click', clickHandler);
     });
 
-    // Close all dropdowns on Escape key
-    document.addEventListener('keydown', (e) => {
+    // Remove old keydown handler and add new one
+    if (documentKeydownHandler) {
+      document.removeEventListener('keydown', documentKeydownHandler);
+    }
+    documentKeydownHandler = (e) => {
       if (e.key === 'Escape') {
         document.querySelectorAll('.mobile-dropdown-toggle').forEach((toggle) => {
           const dropdownId = toggle.getAttribute('aria-controls');
@@ -312,7 +339,8 @@ const currentPath = Astro.url.pathname;
           }
         });
       }
-    });
+    };
+    document.addEventListener('keydown', documentKeydownHandler);
   }
 
   // Update active navigation state based on current URL
@@ -335,10 +363,20 @@ const currentPath = Astro.url.pathname;
     });
   }
 
-  // Initialize on both page load and view transitions
-  document.addEventListener('astro:page-load', () => {
+  function initializeMenu() {
     setupMobileMenu();
     setupMobileDropdowns();
     updateActiveNavState();
-  });
+  }
+
+  // Initialize on view transitions
+  document.addEventListener('astro:page-load', initializeMenu);
+
+  // Fallback: Initialize immediately if DOM is already ready
+  // This ensures mobile devices get initialized on first page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeMenu);
+  } else {
+    initializeMenu();
+  }
 </script>
