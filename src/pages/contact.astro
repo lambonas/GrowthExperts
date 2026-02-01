@@ -377,20 +377,20 @@ const pageDescription =
   <Footer />
 </BaseLayout>
 
-<script>
+<script is:inline>
   // Contact form initialization
   function initContactForm() {
     const ctaButton = document.querySelector('[href="#contact-form-enhanced"]');
-    if (ctaButton && !(ctaButton as any)._initialized) {
-      (ctaButton as any)._initialized = true;
-      ctaButton.addEventListener('click', (e) => {
+    if (ctaButton && !ctaButton._initialized) {
+      ctaButton._initialized = true;
+      ctaButton.addEventListener('click', function(e) {
         e.preventDefault();
         const form = document.getElementById('contact-form-enhanced');
         if (form) {
           form.scrollIntoView({ behavior: 'smooth', block: 'center' });
           // Focus on first radio button
-          const firstRadio = form.querySelector('input[name="service"]') as HTMLInputElement;
-          setTimeout(() => firstRadio?.focus(), 500);
+          const firstRadio = form.querySelector('input[name="service"]');
+          setTimeout(function() { if (firstRadio) firstRadio.focus(); }, 500);
         }
       });
     }
@@ -399,23 +399,27 @@ const pageDescription =
     const serviceRadios = document.querySelectorAll('input[name="service"]');
     const seoFields = document.getElementById('seo-fields');
     const designFields = document.getElementById('design-fields');
-    const websiteInput = document.getElementById('website') as HTMLInputElement;
-    const businessTypeInput = document.getElementById('business_type') as HTMLInputElement;
-    const subjectInput = document.getElementById('form-subject') as HTMLInputElement;
-    const submitButton = document.getElementById('submit-button') as HTMLButtonElement;
+    const websiteInput = document.getElementById('website');
+    const businessTypeInput = document.getElementById('business_type');
+    const subjectInput = document.getElementById('form-subject');
+    const submitButton = document.getElementById('submit-button');
 
     // Track selected service for success message
     let selectedService = '';
 
-    function updateConditionalFields(service: string) {
+    function updateConditionalFields(service) {
       selectedService = service;
 
       if (service === 'SEO') {
         // Show SEO fields, hide design fields
-        seoFields?.classList.remove('hidden');
-        seoFields?.setAttribute('aria-hidden', 'false');
-        designFields?.classList.add('hidden');
-        designFields?.setAttribute('aria-hidden', 'true');
+        if (seoFields) {
+          seoFields.classList.remove('hidden');
+          seoFields.setAttribute('aria-hidden', 'false');
+        }
+        if (designFields) {
+          designFields.classList.add('hidden');
+          designFields.setAttribute('aria-hidden', 'true');
+        }
 
         // Toggle required attributes
         if (websiteInput) websiteInput.required = true;
@@ -427,10 +431,14 @@ const pageDescription =
 
       } else if (service === 'Website Design') {
         // Show design fields, hide SEO fields
-        designFields?.classList.remove('hidden');
-        designFields?.setAttribute('aria-hidden', 'false');
-        seoFields?.classList.add('hidden');
-        seoFields?.setAttribute('aria-hidden', 'true');
+        if (designFields) {
+          designFields.classList.remove('hidden');
+          designFields.setAttribute('aria-hidden', 'false');
+        }
+        if (seoFields) {
+          seoFields.classList.add('hidden');
+          seoFields.setAttribute('aria-hidden', 'true');
+        }
 
         // Toggle required attributes
         if (websiteInput) websiteInput.required = false;
@@ -443,25 +451,25 @@ const pageDescription =
     }
 
     // Add change listeners to service radios (with initialization guard)
-    serviceRadios.forEach((radio) => {
-      if (!(radio as any)._initialized) {
-        (radio as any)._initialized = true;
-        radio.addEventListener('change', (e) => {
-          const target = e.target as HTMLInputElement;
-          updateConditionalFields(target.value);
+    serviceRadios.forEach(function(radio) {
+      if (!radio._initialized) {
+        radio._initialized = true;
+        radio.addEventListener('change', function(e) {
+          updateConditionalFields(e.target.value);
         });
       }
     });
 
     // Enhanced form handling with Formspree
-    const contactForm = document.getElementById('contact-form-enhanced') as HTMLFormElement;
+    const contactForm = document.getElementById('contact-form-enhanced');
     const feedbackDiv = document.getElementById('form-feedback');
 
-    if (contactForm && feedbackDiv) {
-      contactForm.addEventListener('submit', async (e) => {
+    if (contactForm && feedbackDiv && !contactForm._initialized) {
+      contactForm._initialized = true;
+      contactForm.addEventListener('submit', async function(e) {
         e.preventDefault();
 
-        const originalButtonText = submitButton?.textContent || 'Get My Free Strategy Call →';
+        const originalButtonText = submitButton ? submitButton.textContent : 'Get My Free Strategy Call →';
 
         // Show loading state
         if (submitButton) {
@@ -476,7 +484,7 @@ const pageDescription =
           const formData = new FormData(contactForm);
 
           // Normalize website URL - add https:// if no protocol is present
-          let websiteValue = formData.get('website') as string;
+          let websiteValue = formData.get('website');
           if (websiteValue && !websiteValue.match(/^https?:\/\//i)) {
             websiteValue = 'https://' + websiteValue;
             formData.set('website', websiteValue);
@@ -484,7 +492,7 @@ const pageDescription =
 
           // Remove empty conditional fields from submission
           if (!websiteValue) formData.delete('website');
-          const businessType = formData.get('business_type') as string;
+          const businessType = formData.get('business_type');
           if (!businessType) formData.delete('business_type');
 
           const response = await fetch('https://formspree.io/f/mdkyevdb', {
@@ -517,10 +525,14 @@ const pageDescription =
 
             // Reset form and conditional fields
             contactForm.reset();
-            seoFields?.classList.add('hidden');
-            seoFields?.setAttribute('aria-hidden', 'true');
-            designFields?.classList.add('hidden');
-            designFields?.setAttribute('aria-hidden', 'true');
+            if (seoFields) {
+              seoFields.classList.add('hidden');
+              seoFields.setAttribute('aria-hidden', 'true');
+            }
+            if (designFields) {
+              designFields.classList.add('hidden');
+              designFields.setAttribute('aria-hidden', 'true');
+            }
             if (websiteInput) websiteInput.required = false;
             if (businessTypeInput) businessTypeInput.required = false;
             if (submitButton) submitButton.textContent = 'Get My Free Strategy Call →';
@@ -530,7 +542,7 @@ const pageDescription =
             feedbackDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
             // Auto-hide success message after 10 seconds
-            setTimeout(() => {
+            setTimeout(function() {
               feedbackDiv.classList.add('hidden');
             }, 10000);
           } else {
@@ -565,10 +577,8 @@ const pageDescription =
     }
   }
 
-  // Initialize on view transitions (for subsequent navigations)
+  // Initialize on both initial load and view transition navigations
+  // With is:inline, this script runs immediately (not deferred), ensuring
+  // the event listener is registered before astro:page-load fires
   document.addEventListener('astro:page-load', initContactForm);
-
-  // Also initialize immediately for the initial page load
-  // The _initialized checks in initContactForm prevent double-initialization
-  initContactForm();
 </script>

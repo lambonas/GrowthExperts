@@ -228,229 +228,235 @@
   }
 </style>
 
-<script>
+<script is:inline>
   // Portfolio Lightbox Controller
-  class PortfolioLightbox {
-    private lightbox: HTMLElement;
-    private cards: HTMLElement[];
-    private currentIndex: number = 0;
-    private previouslyFocusedElement: HTMLElement | null = null;
+  function initPortfolioLightbox() {
+    var lightbox = document.getElementById('portfolio-lightbox');
+    if (!lightbox || lightbox._initialized) return;
+    lightbox._initialized = true;
 
-    constructor() {
-      this.lightbox = document.getElementById('portfolio-lightbox')!;
-      this.cards = Array.from(document.querySelectorAll('[data-portfolio-card]'));
+    var cards = Array.from(document.querySelectorAll('[data-portfolio-card]'));
+    var currentIndex = 0;
+    var previouslyFocusedElement = null;
 
-      this.init();
+    function isOpen() {
+      return lightbox.classList.contains('is-open');
     }
 
-    private init() {
-      // Card click handlers
-      this.cards.forEach((card, index) => {
-        card.addEventListener('click', (e) => {
-          const target = e.target as HTMLElement;
-          // Don't open lightbox if clicking on external link
-          if (target.closest('a[target="_blank"]')) return;
-          this.open(index);
-        });
-
-        card.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            this.open(index);
-          }
-        });
-
-        // Enlarge button
-        const enlargeBtn = card.querySelector('[data-enlarge-btn]');
-        if (enlargeBtn) {
-          enlargeBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            this.open(index);
-          });
-        }
-      });
-
-      // Close handlers
-      this.lightbox.querySelectorAll('[data-lightbox-close]').forEach((btn) => {
-        btn.addEventListener('click', () => this.close());
-      });
-
-      // Navigation handlers
-      this.lightbox.querySelectorAll('[data-lightbox-prev]').forEach((btn) => {
-        btn.addEventListener('click', () => this.prev());
-      });
-
-      this.lightbox.querySelectorAll('[data-lightbox-next]').forEach((btn) => {
-        btn.addEventListener('click', () => this.next());
-      });
-
-      // Keyboard navigation
-      document.addEventListener('keydown', (e) => {
-        if (!this.isOpen()) return;
-
-        switch (e.key) {
-          case 'Escape':
-            this.close();
-            break;
-          case 'ArrowLeft':
-            this.prev();
-            break;
-          case 'ArrowRight':
-            this.next();
-            break;
-        }
-      });
-
-      // Touch swipe support
-      let touchStartX = 0;
-      let touchEndX = 0;
-
-      this.lightbox.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-      }, { passive: true });
-
-      this.lightbox.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].screenX;
-        const diff = touchStartX - touchEndX;
-
-        if (Math.abs(diff) > 50) {
-          if (diff > 0) {
-            this.next();
-          } else {
-            this.prev();
-          }
-        }
-      }, { passive: true });
-    }
-
-    private isOpen(): boolean {
-      return this.lightbox.classList.contains('is-open');
-    }
-
-    private open(index: number) {
-      this.currentIndex = index;
-      this.previouslyFocusedElement = document.activeElement as HTMLElement;
-
-      this.updateContent();
-
-      this.lightbox.classList.remove('hidden');
-      // Force reflow
-      this.lightbox.offsetHeight;
-      this.lightbox.classList.add('is-open');
-      document.body.classList.add('lightbox-open');
-
-      // Focus close button
-      const closeBtn = this.lightbox.querySelector('[data-lightbox-close]') as HTMLElement;
-      closeBtn?.focus();
-    }
-
-    private close() {
-      this.lightbox.classList.remove('is-open');
-      document.body.classList.remove('lightbox-open');
-
-      setTimeout(() => {
-        this.lightbox.classList.add('hidden');
-      }, 300);
-
-      // Return focus
-      this.previouslyFocusedElement?.focus();
-    }
-
-    private prev() {
-      this.currentIndex = this.currentIndex === 0 ? this.cards.length - 1 : this.currentIndex - 1;
-      this.updateContent();
-    }
-
-    private next() {
-      this.currentIndex = this.currentIndex === this.cards.length - 1 ? 0 : this.currentIndex + 1;
-      this.updateContent();
-    }
-
-    private updateContent() {
-      const card = this.cards[this.currentIndex];
+    function updateContent() {
+      var card = cards[currentIndex];
       if (!card) return;
 
-      const title = card.dataset.title || '';
-      const industry = card.dataset.industry || '';
-      const description = card.dataset.description || '';
-      const image = card.dataset.image || '';
-      const liveUrl = card.dataset.liveUrl || '';
-      const loadTime = card.dataset.loadTime || '';
-      const mobileScore = card.dataset.mobileScore || '';
-      const conversionRate = card.dataset.conversionRate || '';
-      const techStack = card.dataset.techStack || '';
+      var title = card.dataset.title || '';
+      var industry = card.dataset.industry || '';
+      var description = card.dataset.description || '';
+      var image = card.dataset.image || '';
+      var liveUrl = card.dataset.liveUrl || '';
+      var loadTime = card.dataset.loadTime || '';
+      var mobileScore = card.dataset.mobileScore || '';
+      var conversionRate = card.dataset.conversionRate || '';
+      var techStack = card.dataset.techStack || '';
 
       // Update elements
-      (document.getElementById('lightbox-image') as HTMLImageElement).src = image;
-      (document.getElementById('lightbox-image') as HTMLImageElement).alt = `${title} website screenshot`;
-      document.getElementById('lightbox-title')!.textContent = title;
-      document.getElementById('lightbox-industry')!.textContent = industry;
-      document.getElementById('lightbox-description')!.textContent = description;
+      var imgEl = document.getElementById('lightbox-image');
+      if (imgEl) {
+        imgEl.src = image;
+        imgEl.alt = title + ' website screenshot';
+      }
+
+      var titleEl = document.getElementById('lightbox-title');
+      if (titleEl) titleEl.textContent = title;
+
+      var industryEl = document.getElementById('lightbox-industry');
+      if (industryEl) industryEl.textContent = industry;
+
+      var descEl = document.getElementById('lightbox-description');
+      if (descEl) descEl.textContent = description;
 
       // Metrics
-      const speedMetric = document.getElementById('lightbox-metric-speed')!;
-      const mobileMetric = document.getElementById('lightbox-metric-mobile')!;
-      const conversionMetric = document.getElementById('lightbox-metric-conversion')!;
+      var speedMetric = document.getElementById('lightbox-metric-speed');
+      var mobileMetric = document.getElementById('lightbox-metric-mobile');
+      var conversionMetric = document.getElementById('lightbox-metric-conversion');
 
-      if (loadTime) {
-        speedMetric.classList.remove('hidden');
-        document.getElementById('lightbox-speed-value')!.textContent = loadTime;
-      } else {
-        speedMetric.classList.add('hidden');
+      if (speedMetric) {
+        if (loadTime) {
+          speedMetric.classList.remove('hidden');
+          var speedValue = document.getElementById('lightbox-speed-value');
+          if (speedValue) speedValue.textContent = loadTime;
+        } else {
+          speedMetric.classList.add('hidden');
+        }
       }
 
-      if (mobileScore) {
-        mobileMetric.classList.remove('hidden');
-        document.getElementById('lightbox-mobile-value')!.textContent = `${mobileScore}/100`;
-      } else {
-        mobileMetric.classList.add('hidden');
+      if (mobileMetric) {
+        if (mobileScore) {
+          mobileMetric.classList.remove('hidden');
+          var mobileValue = document.getElementById('lightbox-mobile-value');
+          if (mobileValue) mobileValue.textContent = mobileScore + '/100';
+        } else {
+          mobileMetric.classList.add('hidden');
+        }
       }
 
-      if (conversionRate) {
-        conversionMetric.classList.remove('hidden');
-        document.getElementById('lightbox-conversion-value')!.textContent = conversionRate;
-      } else {
-        conversionMetric.classList.add('hidden');
+      if (conversionMetric) {
+        if (conversionRate) {
+          conversionMetric.classList.remove('hidden');
+          var conversionValue = document.getElementById('lightbox-conversion-value');
+          if (conversionValue) conversionValue.textContent = conversionRate;
+        } else {
+          conversionMetric.classList.add('hidden');
+        }
       }
 
       // Tech stack
-      const techContainer = document.getElementById('lightbox-tech-container')!;
-      const techStackEl = document.getElementById('lightbox-tech-stack')!;
+      var techContainer = document.getElementById('lightbox-tech-container');
+      var techStackEl = document.getElementById('lightbox-tech-stack');
 
-      if (techStack) {
-        techContainer.classList.remove('hidden');
-        techStackEl.innerHTML = techStack
-          .split(',')
-          .filter(Boolean)
-          .map((tech) => `<span class="px-3 py-1 bg-gray-100 text-gray-600 text-sm rounded-full">${tech.trim()}</span>`)
-          .join('');
-      } else {
-        techContainer.classList.add('hidden');
+      if (techContainer && techStackEl) {
+        if (techStack) {
+          techContainer.classList.remove('hidden');
+          techStackEl.innerHTML = techStack
+            .split(',')
+            .filter(Boolean)
+            .map(function(tech) { return '<span class="px-3 py-1 bg-gray-100 text-gray-600 text-sm rounded-full">' + tech.trim() + '</span>'; })
+            .join('');
+        } else {
+          techContainer.classList.add('hidden');
+        }
       }
 
       // Live site link
-      const visitBtn = document.getElementById('lightbox-visit') as HTMLAnchorElement;
-      if (liveUrl && liveUrl !== '#') {
-        visitBtn.classList.remove('hidden');
-        visitBtn.href = liveUrl;
-      } else {
-        visitBtn.classList.add('hidden');
+      var visitBtn = document.getElementById('lightbox-visit');
+      if (visitBtn) {
+        if (liveUrl && liveUrl !== '#') {
+          visitBtn.classList.remove('hidden');
+          visitBtn.href = liveUrl;
+        } else {
+          visitBtn.classList.add('hidden');
+        }
       }
     }
+
+    function open(index) {
+      currentIndex = index;
+      previouslyFocusedElement = document.activeElement;
+
+      updateContent();
+
+      lightbox.classList.remove('hidden');
+      // Force reflow
+      lightbox.offsetHeight;
+      lightbox.classList.add('is-open');
+      document.body.classList.add('lightbox-open');
+
+      // Focus close button
+      var closeBtn = lightbox.querySelector('[data-lightbox-close]');
+      if (closeBtn) closeBtn.focus();
+    }
+
+    function close() {
+      lightbox.classList.remove('is-open');
+      document.body.classList.remove('lightbox-open');
+
+      setTimeout(function() {
+        lightbox.classList.add('hidden');
+      }, 300);
+
+      // Return focus
+      if (previouslyFocusedElement) previouslyFocusedElement.focus();
+    }
+
+    function prev() {
+      currentIndex = currentIndex === 0 ? cards.length - 1 : currentIndex - 1;
+      updateContent();
+    }
+
+    function next() {
+      currentIndex = currentIndex === cards.length - 1 ? 0 : currentIndex + 1;
+      updateContent();
+    }
+
+    // Card click handlers
+    cards.forEach(function(card, index) {
+      if (card._lightboxInitialized) return;
+      card._lightboxInitialized = true;
+
+      card.addEventListener('click', function(e) {
+        // Don't open lightbox if clicking on external link
+        if (e.target.closest && e.target.closest('a[target="_blank"]')) return;
+        open(index);
+      });
+
+      card.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          open(index);
+        }
+      });
+
+      // Enlarge button
+      var enlargeBtn = card.querySelector('[data-enlarge-btn]');
+      if (enlargeBtn) {
+        enlargeBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          open(index);
+        });
+      }
+    });
+
+    // Close handlers
+    lightbox.querySelectorAll('[data-lightbox-close]').forEach(function(btn) {
+      btn.addEventListener('click', function() { close(); });
+    });
+
+    // Navigation handlers
+    lightbox.querySelectorAll('[data-lightbox-prev]').forEach(function(btn) {
+      btn.addEventListener('click', function() { prev(); });
+    });
+
+    lightbox.querySelectorAll('[data-lightbox-next]').forEach(function(btn) {
+      btn.addEventListener('click', function() { next(); });
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+      if (!isOpen()) return;
+
+      switch (e.key) {
+        case 'Escape':
+          close();
+          break;
+        case 'ArrowLeft':
+          prev();
+          break;
+        case 'ArrowRight':
+          next();
+          break;
+      }
+    });
+
+    // Touch swipe support
+    var touchStartX = 0;
+    var touchEndX = 0;
+
+    lightbox.addEventListener('touchstart', function(e) {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    lightbox.addEventListener('touchend', function(e) {
+      touchEndX = e.changedTouches[0].screenX;
+      var diff = touchStartX - touchEndX;
+
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) {
+          next();
+        } else {
+          prev();
+        }
+      }
+    }, { passive: true });
   }
 
-  // Initialize
-  function initLightbox() {
-    new PortfolioLightbox();
-  }
-
-  // Initialize on view transitions
-  document.addEventListener('astro:page-load', initLightbox);
-
-  // Fallback: Initialize immediately if DOM is already ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initLightbox);
-  } else {
-    initLightbox();
-  }
+  // Initialize on both initial load and view transition navigations
+  document.addEventListener('astro:page-load', initPortfolioLightbox);
 </script>
