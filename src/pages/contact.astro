@@ -378,213 +378,184 @@ const pageDescription =
 </BaseLayout>
 
 <script is:inline>
-  // Contact form initialization
-  function initContactForm() {
-    const ctaButton = document.querySelector('[href="#contact-form-enhanced"]');
-    if (ctaButton && !ctaButton._initialized) {
-      ctaButton._initialized = true;
-      ctaButton.addEventListener('click', function(e) {
-        e.preventDefault();
-        const form = document.getElementById('contact-form-enhanced');
-        if (form) {
-          form.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          // Focus on first radio button
-          const firstRadio = form.querySelector('input[name="service"]');
-          setTimeout(function() { if (firstRadio) firstRadio.focus(); }, 500);
+  // Contact Form Controller
+  // Wrapped in IIFE for proper scope management with View Transitions
+  (function() {
+    function initContactForm() {
+      const form = document.getElementById('contact-form-enhanced');
+      if (!form) return;
+
+      const serviceRadios = document.querySelectorAll('input[name="service"]');
+
+      // Guard: Exit if no service radios found (wrong page or DOM issue)
+      if (serviceRadios.length === 0) return;
+
+      // Prevent double initialization on this form instance
+      if (form._initialized) return;
+      form._initialized = true;
+
+      const seoFields = document.getElementById('seo-fields');
+      const designFields = document.getElementById('design-fields');
+      const websiteInput = document.getElementById('website');
+      const businessTypeInput = document.getElementById('business_type');
+      const subjectInput = document.getElementById('form-subject');
+      const submitButton = document.getElementById('submit-button');
+      const feedbackDiv = document.getElementById('form-feedback');
+
+      // Track selected service for success message
+      let selectedService = '';
+
+      function updateConditionalFields(service) {
+        selectedService = service;
+
+        if (service === 'SEO') {
+          if (seoFields) {
+            seoFields.classList.remove('hidden');
+            seoFields.setAttribute('aria-hidden', 'false');
+          }
+          if (designFields) {
+            designFields.classList.add('hidden');
+            designFields.setAttribute('aria-hidden', 'true');
+          }
+          if (websiteInput) websiteInput.required = true;
+          if (businessTypeInput) businessTypeInput.required = false;
+          if (subjectInput) subjectInput.value = 'New SEO Audit Request';
+          if (submitButton) submitButton.textContent = 'Get My Free SEO Audit →';
+        } else if (service === 'Website Design') {
+          if (designFields) {
+            designFields.classList.remove('hidden');
+            designFields.setAttribute('aria-hidden', 'false');
+          }
+          if (seoFields) {
+            seoFields.classList.add('hidden');
+            seoFields.setAttribute('aria-hidden', 'true');
+          }
+          if (websiteInput) websiteInput.required = false;
+          if (businessTypeInput) businessTypeInput.required = true;
+          if (subjectInput) subjectInput.value = 'New Website Design Inquiry';
+          if (submitButton) submitButton.textContent = 'Get My Free Quote →';
         }
-      });
-    }
-
-    // Service selector logic
-    const serviceRadios = document.querySelectorAll('input[name="service"]');
-    const seoFields = document.getElementById('seo-fields');
-    const designFields = document.getElementById('design-fields');
-    const websiteInput = document.getElementById('website');
-    const businessTypeInput = document.getElementById('business_type');
-    const subjectInput = document.getElementById('form-subject');
-    const submitButton = document.getElementById('submit-button');
-
-    // Track selected service for success message
-    let selectedService = '';
-
-    function updateConditionalFields(service) {
-      selectedService = service;
-
-      if (service === 'SEO') {
-        // Show SEO fields, hide design fields
-        if (seoFields) {
-          seoFields.classList.remove('hidden');
-          seoFields.setAttribute('aria-hidden', 'false');
-        }
-        if (designFields) {
-          designFields.classList.add('hidden');
-          designFields.setAttribute('aria-hidden', 'true');
-        }
-
-        // Toggle required attributes
-        if (websiteInput) websiteInput.required = true;
-        if (businessTypeInput) businessTypeInput.required = false;
-
-        // Update subject and button
-        if (subjectInput) subjectInput.value = 'New SEO Audit Request';
-        if (submitButton) submitButton.textContent = 'Get My Free SEO Audit →';
-
-      } else if (service === 'Website Design') {
-        // Show design fields, hide SEO fields
-        if (designFields) {
-          designFields.classList.remove('hidden');
-          designFields.setAttribute('aria-hidden', 'false');
-        }
-        if (seoFields) {
-          seoFields.classList.add('hidden');
-          seoFields.setAttribute('aria-hidden', 'true');
-        }
-
-        // Toggle required attributes
-        if (websiteInput) websiteInput.required = false;
-        if (businessTypeInput) businessTypeInput.required = true;
-
-        // Update subject and button
-        if (subjectInput) subjectInput.value = 'New Website Design Inquiry';
-        if (submitButton) submitButton.textContent = 'Get My Free Quote →';
       }
-    }
 
-    // Add change listeners to service radios (with initialization guard)
-    serviceRadios.forEach(function(radio) {
-      if (!radio._initialized) {
-        radio._initialized = true;
+      // Service radio change handlers
+      serviceRadios.forEach(function(radio) {
         radio.addEventListener('change', function(e) {
           updateConditionalFields(e.target.value);
         });
+      });
+
+      // CTA button scroll handler
+      const ctaButton = document.querySelector('[href="#contact-form-enhanced"]');
+      if (ctaButton) {
+        ctaButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          const firstRadio = form.querySelector('input[name="service"]');
+          setTimeout(function() { if (firstRadio) firstRadio.focus(); }, 500);
+        });
       }
-    });
 
-    // Enhanced form handling with Formspree
-    const contactForm = document.getElementById('contact-form-enhanced');
-    const feedbackDiv = document.getElementById('form-feedback');
+      // Form submission handler
+      if (feedbackDiv) {
+        form.addEventListener('submit', async function(e) {
+          e.preventDefault();
 
-    if (contactForm && feedbackDiv && !contactForm._initialized) {
-      contactForm._initialized = true;
-      contactForm.addEventListener('submit', async function(e) {
-        e.preventDefault();
+          const originalButtonText = submitButton ? submitButton.textContent : 'Get My Free Strategy Call →';
 
-        const originalButtonText = submitButton ? submitButton.textContent : 'Get My Free Strategy Call →';
-
-        // Show loading state
-        if (submitButton) {
-          submitButton.disabled = true;
-          submitButton.textContent = 'Sending...';
-        }
-
-        // Hide any previous feedback
-        feedbackDiv.classList.add('hidden');
-
-        try {
-          const formData = new FormData(contactForm);
-
-          // Normalize website URL - add https:// if no protocol is present
-          let websiteValue = formData.get('website');
-          if (websiteValue && !websiteValue.match(/^https?:\/\//i)) {
-            websiteValue = 'https://' + websiteValue;
-            formData.set('website', websiteValue);
+          if (submitButton) {
+            submitButton.disabled = true;
+            submitButton.textContent = 'Sending...';
           }
 
-          // Remove empty conditional fields from submission
-          if (!websiteValue) formData.delete('website');
-          const businessType = formData.get('business_type');
-          if (!businessType) formData.delete('business_type');
+          feedbackDiv.classList.add('hidden');
 
-          const response = await fetch('https://formspree.io/f/mdkyevdb', {
-            method: 'POST',
-            body: formData,
-            headers: {
-              'Accept': 'application/json'
+          try {
+            const formData = new FormData(form);
+
+            let websiteValue = formData.get('website');
+            if (websiteValue && !websiteValue.match(/^https?:\/\//i)) {
+              websiteValue = 'https://' + websiteValue;
+              formData.set('website', websiteValue);
             }
-          });
 
-          if (response.ok) {
-            // Success - show service-specific success message
-            const successMessage = selectedService === 'SEO'
-              ? "We'll get back to you within 24 hours with your free SEO audit."
-              : "We'll contact you within 24 hours to discuss your website design project.";
+            if (!websiteValue) formData.delete('website');
+            const businessType = formData.get('business_type');
+            if (!businessType) formData.delete('business_type');
 
-            feedbackDiv.className = 'mt-4 p-4 rounded-lg bg-green-50 border-2 border-green-200';
+            const response = await fetch('https://formspree.io/f/mdkyevdb', {
+              method: 'POST',
+              body: formData,
+              headers: { 'Accept': 'application/json' }
+            });
+
+            if (response.ok) {
+              const successMessage = selectedService === 'SEO'
+                ? "We'll get back to you within 24 hours with your free SEO audit."
+                : "We'll contact you within 24 hours to discuss your website design project.";
+
+              feedbackDiv.className = 'mt-4 p-4 rounded-lg bg-green-50 border-2 border-green-200';
+              feedbackDiv.innerHTML = `
+                <div class="flex items-start">
+                  <svg class="w-5 h-5 text-green-600 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                  </svg>
+                  <div>
+                    <p class="font-semibold text-green-800">Thank you for your message!</p>
+                    <p class="text-sm text-green-700 mt-1">${successMessage}</p>
+                  </div>
+                </div>
+              `;
+              feedbackDiv.classList.remove('hidden');
+
+              form.reset();
+              if (seoFields) {
+                seoFields.classList.add('hidden');
+                seoFields.setAttribute('aria-hidden', 'true');
+              }
+              if (designFields) {
+                designFields.classList.add('hidden');
+                designFields.setAttribute('aria-hidden', 'true');
+              }
+              if (websiteInput) websiteInput.required = false;
+              if (businessTypeInput) businessTypeInput.required = false;
+              if (submitButton) submitButton.textContent = 'Get My Free Strategy Call →';
+              selectedService = '';
+
+              feedbackDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+              setTimeout(function() {
+                feedbackDiv.classList.add('hidden');
+              }, 10000);
+            } else {
+              const errorData = await response.json();
+              throw new Error(errorData.error || 'Form submission failed');
+            }
+          } catch (error) {
+            feedbackDiv.className = 'mt-4 p-4 rounded-lg bg-red-50 border-2 border-red-200';
             feedbackDiv.innerHTML = `
               <div class="flex items-start">
-                <svg class="w-5 h-5 text-green-600 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                <svg class="w-5 h-5 text-red-600 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
                 </svg>
                 <div>
-                  <p class="font-semibold text-green-800">Thank you for your message!</p>
-                  <p class="text-sm text-green-700 mt-1">${successMessage}</p>
+                  <p class="font-semibold text-red-800">Oops! Something went wrong.</p>
+                  <p class="text-sm text-red-700 mt-1">Please try again or call us directly at <a href="tel:+61281128010" class="underline font-medium">(02) 8112 8010</a></p>
                 </div>
               </div>
             `;
             feedbackDiv.classList.remove('hidden');
-
-            // Reset form and conditional fields
-            contactForm.reset();
-            if (seoFields) {
-              seoFields.classList.add('hidden');
-              seoFields.setAttribute('aria-hidden', 'true');
+            console.error('Form submission error:', error);
+          } finally {
+            if (submitButton) {
+              submitButton.disabled = false;
+              submitButton.textContent = originalButtonText;
             }
-            if (designFields) {
-              designFields.classList.add('hidden');
-              designFields.setAttribute('aria-hidden', 'true');
-            }
-            if (websiteInput) websiteInput.required = false;
-            if (businessTypeInput) businessTypeInput.required = false;
-            if (submitButton) submitButton.textContent = 'Get My Free Strategy Call →';
-            selectedService = '';
-
-            // Scroll feedback into view
-            feedbackDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-
-            // Auto-hide success message after 10 seconds
-            setTimeout(function() {
-              feedbackDiv.classList.add('hidden');
-            }, 10000);
-          } else {
-            // Error response from Formspree
-            const errorData = await response.json();
-            throw new Error(errorData.error || 'Form submission failed');
           }
-        } catch (error) {
-          // Show error message
-          feedbackDiv.className = 'mt-4 p-4 rounded-lg bg-red-50 border-2 border-red-200';
-          feedbackDiv.innerHTML = `
-            <div class="flex items-start">
-              <svg class="w-5 h-5 text-red-600 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
-              </svg>
-              <div>
-                <p class="font-semibold text-red-800">Oops! Something went wrong.</p>
-                <p class="text-sm text-red-700 mt-1">Please try again or call us directly at <a href="tel:+61281128010" class="underline font-medium">(02) 8112 8010</a></p>
-              </div>
-            </div>
-          `;
-          feedbackDiv.classList.remove('hidden');
-          console.error('Form submission error:', error);
-        } finally {
-          // Reset button state
-          if (submitButton) {
-            submitButton.disabled = false;
-            submitButton.textContent = originalButtonText;
-          }
-        }
-      });
+        });
+      }
     }
-  }
 
-  // Initialize on view transitions navigation
-  document.addEventListener('astro:page-load', initContactForm);
-
-  // Fallback: Initialize immediately if DOM is already ready (for direct page loads)
-  // astro:page-load only fires during View Transitions, not on initial page load
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initContactForm);
-  } else {
-    initContactForm();
-  }
+    // Single initialization point - handles both initial load AND view transitions
+    document.addEventListener('astro:page-load', initContactForm);
+  })();
 </script>

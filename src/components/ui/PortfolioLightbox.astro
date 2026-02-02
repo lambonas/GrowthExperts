@@ -230,240 +230,260 @@
 
 <script is:inline>
   // Portfolio Lightbox Controller
-  function initPortfolioLightbox() {
-    var lightbox = document.getElementById('portfolio-lightbox');
-    if (!lightbox || lightbox._initialized) return;
-    lightbox._initialized = true;
+  // Wrapped in IIFE for proper scope management with View Transitions
+  (function() {
+    var keyboardHandler = null;
 
-    var cards = Array.from(document.querySelectorAll('[data-portfolio-card]'));
-    var currentIndex = 0;
-    var previouslyFocusedElement = null;
-
-    function isOpen() {
-      return lightbox.classList.contains('is-open');
-    }
-
-    function updateContent() {
-      var card = cards[currentIndex];
-      if (!card) return;
-
-      var title = card.dataset.title || '';
-      var industry = card.dataset.industry || '';
-      var description = card.dataset.description || '';
-      var image = card.dataset.image || '';
-      var liveUrl = card.dataset.liveUrl || '';
-      var loadTime = card.dataset.loadTime || '';
-      var mobileScore = card.dataset.mobileScore || '';
-      var conversionRate = card.dataset.conversionRate || '';
-      var techStack = card.dataset.techStack || '';
-
-      // Update elements
-      var imgEl = document.getElementById('lightbox-image');
-      if (imgEl) {
-        imgEl.src = image;
-        imgEl.alt = title + ' website screenshot';
+    // Cleanup before DOM swap (View Transitions)
+    function cleanupLightbox() {
+      // Remove keyboard handler to prevent duplicate listeners
+      if (keyboardHandler) {
+        document.removeEventListener('keydown', keyboardHandler);
+        keyboardHandler = null;
       }
-
-      var titleEl = document.getElementById('lightbox-title');
-      if (titleEl) titleEl.textContent = title;
-
-      var industryEl = document.getElementById('lightbox-industry');
-      if (industryEl) industryEl.textContent = industry;
-
-      var descEl = document.getElementById('lightbox-description');
-      if (descEl) descEl.textContent = description;
-
-      // Metrics
-      var speedMetric = document.getElementById('lightbox-metric-speed');
-      var mobileMetric = document.getElementById('lightbox-metric-mobile');
-      var conversionMetric = document.getElementById('lightbox-metric-conversion');
-
-      if (speedMetric) {
-        if (loadTime) {
-          speedMetric.classList.remove('hidden');
-          var speedValue = document.getElementById('lightbox-speed-value');
-          if (speedValue) speedValue.textContent = loadTime;
-        } else {
-          speedMetric.classList.add('hidden');
-        }
-      }
-
-      if (mobileMetric) {
-        if (mobileScore) {
-          mobileMetric.classList.remove('hidden');
-          var mobileValue = document.getElementById('lightbox-mobile-value');
-          if (mobileValue) mobileValue.textContent = mobileScore + '/100';
-        } else {
-          mobileMetric.classList.add('hidden');
-        }
-      }
-
-      if (conversionMetric) {
-        if (conversionRate) {
-          conversionMetric.classList.remove('hidden');
-          var conversionValue = document.getElementById('lightbox-conversion-value');
-          if (conversionValue) conversionValue.textContent = conversionRate;
-        } else {
-          conversionMetric.classList.add('hidden');
-        }
-      }
-
-      // Tech stack
-      var techContainer = document.getElementById('lightbox-tech-container');
-      var techStackEl = document.getElementById('lightbox-tech-stack');
-
-      if (techContainer && techStackEl) {
-        if (techStack) {
-          techContainer.classList.remove('hidden');
-          techStackEl.innerHTML = techStack
-            .split(',')
-            .filter(Boolean)
-            .map(function(tech) { return '<span class="px-3 py-1 bg-gray-100 text-gray-600 text-sm rounded-full">' + tech.trim() + '</span>'; })
-            .join('');
-        } else {
-          techContainer.classList.add('hidden');
-        }
-      }
-
-      // Live site link
-      var visitBtn = document.getElementById('lightbox-visit');
-      if (visitBtn) {
-        if (liveUrl && liveUrl !== '#') {
-          visitBtn.classList.remove('hidden');
-          visitBtn.href = liveUrl;
-        } else {
-          visitBtn.classList.add('hidden');
-        }
+      // Clean up body class if lightbox was open during navigation
+      var lightbox = document.getElementById('portfolio-lightbox');
+      if (lightbox && lightbox.classList.contains('is-open')) {
+        document.body.classList.remove('lightbox-open');
       }
     }
 
-    function open(index) {
-      currentIndex = index;
-      previouslyFocusedElement = document.activeElement;
+    function initPortfolioLightbox() {
+      var lightbox = document.getElementById('portfolio-lightbox');
+      if (!lightbox) return;
 
-      updateContent();
+      var cards = Array.from(document.querySelectorAll('[data-portfolio-card]'));
 
-      lightbox.classList.remove('hidden');
-      // Force reflow
-      lightbox.offsetHeight;
-      lightbox.classList.add('is-open');
-      document.body.classList.add('lightbox-open');
+      // Guard: Exit if no cards found (wrong page or DOM not ready)
+      if (cards.length === 0) return;
 
-      // Focus close button
-      var closeBtn = lightbox.querySelector('[data-lightbox-close]');
-      if (closeBtn) closeBtn.focus();
-    }
+      // Prevent double initialization on this element instance
+      if (lightbox._initialized) return;
+      lightbox._initialized = true;
 
-    function close() {
-      lightbox.classList.remove('is-open');
-      document.body.classList.remove('lightbox-open');
+      var currentIndex = 0;
+      var previouslyFocusedElement = null;
 
-      setTimeout(function() {
-        lightbox.classList.add('hidden');
-      }, 300);
+      function isOpen() {
+        return lightbox.classList.contains('is-open');
+      }
 
-      // Return focus
-      if (previouslyFocusedElement) previouslyFocusedElement.focus();
-    }
+      function updateContent() {
+        var card = cards[currentIndex];
+        if (!card) return;
 
-    function prev() {
-      currentIndex = currentIndex === 0 ? cards.length - 1 : currentIndex - 1;
-      updateContent();
-    }
+        var title = card.dataset.title || '';
+        var industry = card.dataset.industry || '';
+        var description = card.dataset.description || '';
+        var image = card.dataset.image || '';
+        var liveUrl = card.dataset.liveUrl || '';
+        var loadTime = card.dataset.loadTime || '';
+        var mobileScore = card.dataset.mobileScore || '';
+        var conversionRate = card.dataset.conversionRate || '';
+        var techStack = card.dataset.techStack || '';
 
-    function next() {
-      currentIndex = currentIndex === cards.length - 1 ? 0 : currentIndex + 1;
-      updateContent();
-    }
-
-    // Card click handlers
-    cards.forEach(function(card, index) {
-      if (card._lightboxInitialized) return;
-      card._lightboxInitialized = true;
-
-      card.addEventListener('click', function(e) {
-        // Don't open lightbox if clicking on external link
-        if (e.target.closest && e.target.closest('a[target="_blank"]')) return;
-        open(index);
-      });
-
-      card.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          open(index);
+        // Update elements
+        var imgEl = document.getElementById('lightbox-image');
+        if (imgEl) {
+          imgEl.src = image;
+          imgEl.alt = title + ' website screenshot';
         }
-      });
 
-      // Enlarge button
-      var enlargeBtn = card.querySelector('[data-enlarge-btn]');
-      if (enlargeBtn) {
-        enlargeBtn.addEventListener('click', function(e) {
-          e.stopPropagation();
+        var titleEl = document.getElementById('lightbox-title');
+        if (titleEl) titleEl.textContent = title;
+
+        var industryEl = document.getElementById('lightbox-industry');
+        if (industryEl) industryEl.textContent = industry;
+
+        var descEl = document.getElementById('lightbox-description');
+        if (descEl) descEl.textContent = description;
+
+        // Metrics
+        var speedMetric = document.getElementById('lightbox-metric-speed');
+        var mobileMetric = document.getElementById('lightbox-metric-mobile');
+        var conversionMetric = document.getElementById('lightbox-metric-conversion');
+
+        if (speedMetric) {
+          if (loadTime) {
+            speedMetric.classList.remove('hidden');
+            var speedValue = document.getElementById('lightbox-speed-value');
+            if (speedValue) speedValue.textContent = loadTime;
+          } else {
+            speedMetric.classList.add('hidden');
+          }
+        }
+
+        if (mobileMetric) {
+          if (mobileScore) {
+            mobileMetric.classList.remove('hidden');
+            var mobileValue = document.getElementById('lightbox-mobile-value');
+            if (mobileValue) mobileValue.textContent = mobileScore + '/100';
+          } else {
+            mobileMetric.classList.add('hidden');
+          }
+        }
+
+        if (conversionMetric) {
+          if (conversionRate) {
+            conversionMetric.classList.remove('hidden');
+            var conversionValue = document.getElementById('lightbox-conversion-value');
+            if (conversionValue) conversionValue.textContent = conversionRate;
+          } else {
+            conversionMetric.classList.add('hidden');
+          }
+        }
+
+        // Tech stack
+        var techContainer = document.getElementById('lightbox-tech-container');
+        var techStackEl = document.getElementById('lightbox-tech-stack');
+
+        if (techContainer && techStackEl) {
+          if (techStack) {
+            techContainer.classList.remove('hidden');
+            techStackEl.innerHTML = techStack
+              .split(',')
+              .filter(Boolean)
+              .map(function(tech) { return '<span class="px-3 py-1 bg-gray-100 text-gray-600 text-sm rounded-full">' + tech.trim() + '</span>'; })
+              .join('');
+          } else {
+            techContainer.classList.add('hidden');
+          }
+        }
+
+        // Live site link
+        var visitBtn = document.getElementById('lightbox-visit');
+        if (visitBtn) {
+          if (liveUrl && liveUrl !== '#') {
+            visitBtn.classList.remove('hidden');
+            visitBtn.href = liveUrl;
+          } else {
+            visitBtn.classList.add('hidden');
+          }
+        }
+      }
+
+      function open(index) {
+        currentIndex = index;
+        previouslyFocusedElement = document.activeElement;
+
+        updateContent();
+
+        lightbox.classList.remove('hidden');
+        // Force reflow
+        lightbox.offsetHeight;
+        lightbox.classList.add('is-open');
+        document.body.classList.add('lightbox-open');
+
+        // Focus close button
+        var closeBtn = lightbox.querySelector('[data-lightbox-close]');
+        if (closeBtn) closeBtn.focus();
+      }
+
+      function close() {
+        lightbox.classList.remove('is-open');
+        document.body.classList.remove('lightbox-open');
+
+        setTimeout(function() {
+          lightbox.classList.add('hidden');
+        }, 300);
+
+        // Return focus
+        if (previouslyFocusedElement) previouslyFocusedElement.focus();
+      }
+
+      function prev() {
+        currentIndex = currentIndex === 0 ? cards.length - 1 : currentIndex - 1;
+        updateContent();
+      }
+
+      function next() {
+        currentIndex = currentIndex === cards.length - 1 ? 0 : currentIndex + 1;
+        updateContent();
+      }
+
+      // Card click handlers
+      cards.forEach(function(card, index) {
+        card.addEventListener('click', function(e) {
+          // Don't open lightbox if clicking on external link
+          if (e.target.closest && e.target.closest('a[target="_blank"]')) return;
           open(index);
         });
-      }
-    });
 
-    // Close handlers
-    lightbox.querySelectorAll('[data-lightbox-close]').forEach(function(btn) {
-      btn.addEventListener('click', function() { close(); });
-    });
+        card.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            open(index);
+          }
+        });
 
-    // Navigation handlers
-    lightbox.querySelectorAll('[data-lightbox-prev]').forEach(function(btn) {
-      btn.addEventListener('click', function() { prev(); });
-    });
-
-    lightbox.querySelectorAll('[data-lightbox-next]').forEach(function(btn) {
-      btn.addEventListener('click', function() { next(); });
-    });
-
-    // Keyboard navigation
-    document.addEventListener('keydown', function(e) {
-      if (!isOpen()) return;
-
-      switch (e.key) {
-        case 'Escape':
-          close();
-          break;
-        case 'ArrowLeft':
-          prev();
-          break;
-        case 'ArrowRight':
-          next();
-          break;
-      }
-    });
-
-    // Touch swipe support
-    var touchStartX = 0;
-    var touchEndX = 0;
-
-    lightbox.addEventListener('touchstart', function(e) {
-      touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-
-    lightbox.addEventListener('touchend', function(e) {
-      touchEndX = e.changedTouches[0].screenX;
-      var diff = touchStartX - touchEndX;
-
-      if (Math.abs(diff) > 50) {
-        if (diff > 0) {
-          next();
-        } else {
-          prev();
+        // Enlarge button
+        var enlargeBtn = card.querySelector('[data-enlarge-btn]');
+        if (enlargeBtn) {
+          enlargeBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            open(index);
+          });
         }
-      }
-    }, { passive: true });
-  }
+      });
 
-  // Initialize on view transitions
-  document.addEventListener('astro:page-load', initPortfolioLightbox);
+      // Close handlers
+      lightbox.querySelectorAll('[data-lightbox-close]').forEach(function(btn) {
+        btn.addEventListener('click', function() { close(); });
+      });
 
-  // Fallback: Initialize immediately if DOM is already ready (handles initial page loads)
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initPortfolioLightbox);
-  } else {
-    initPortfolioLightbox();
-  }
+      // Navigation handlers
+      lightbox.querySelectorAll('[data-lightbox-prev]').forEach(function(btn) {
+        btn.addEventListener('click', function() { prev(); });
+      });
+
+      lightbox.querySelectorAll('[data-lightbox-next]').forEach(function(btn) {
+        btn.addEventListener('click', function() { next(); });
+      });
+
+      // Keyboard navigation - store reference for cleanup
+      keyboardHandler = function(e) {
+        if (!isOpen()) return;
+
+        switch (e.key) {
+          case 'Escape':
+            close();
+            break;
+          case 'ArrowLeft':
+            prev();
+            break;
+          case 'ArrowRight':
+            next();
+            break;
+        }
+      };
+      document.addEventListener('keydown', keyboardHandler);
+
+      // Touch swipe support
+      var touchStartX = 0;
+      var touchEndX = 0;
+
+      lightbox.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      lightbox.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        var diff = touchStartX - touchEndX;
+
+        if (Math.abs(diff) > 50) {
+          if (diff > 0) {
+            next();
+          } else {
+            prev();
+          }
+        }
+      }, { passive: true });
+    }
+
+    // Cleanup before DOM swap (View Transitions)
+    document.addEventListener('astro:before-swap', cleanupLightbox);
+
+    // Single initialization point - handles both initial load AND view transitions
+    document.addEventListener('astro:page-load', initPortfolioLightbox);
+  })();
 </script>
