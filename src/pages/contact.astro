@@ -387,25 +387,15 @@ const pageDescription =
       window._contactFormHandlers = { radioHandlers: [], submitHandler: null, ctaHandler: null };
     }
 
-    // Cleanup existing handlers before reinitializing
-    function cleanupFormHandlers() {
-      // Radio handlers are on specific elements, they'll be replaced with new DOM
-      window._contactFormHandlers.radioHandlers = [];
-      window._contactFormHandlers.submitHandler = null;
-      window._contactFormHandlers.ctaHandler = null;
-    }
-
     function initContactForm() {
       const form = document.getElementById('contact-form-enhanced');
-      if (!form) return;
+      if (!form || form.dataset.initialized === 'true') return;
+      form.dataset.initialized = 'true';
 
       const serviceRadios = document.querySelectorAll('input[name="service"]');
 
       // Guard: Exit if no service radios found (wrong page or DOM issue)
       if (serviceRadios.length === 0) return;
-
-      // Clean up before reinitializing
-      cleanupFormHandlers();
 
       const seoFields = document.getElementById('seo-fields');
       const designFields = document.getElementById('design-fields');
@@ -575,8 +565,20 @@ const pageDescription =
       }
     }
 
-    // With data-astro-rerun, this script runs on every page load/transition
-    // So we just need to initialize directly
-    initContactForm();
+    // Astro-native initialization: bind on page load events
+    // This ensures DOM is ready before we try to find form elements
+    document.addEventListener('astro:page-load', initContactForm);
+
+    // Also handle View Transitions swap
+    document.addEventListener('astro:after-swap', function() {
+      requestAnimationFrame(initContactForm);
+    });
+
+    // Initialize immediately if DOM is already ready (fallback)
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initContactForm, { once: true });
+    } else {
+      initContactForm();
+    }
   })();
 </script>

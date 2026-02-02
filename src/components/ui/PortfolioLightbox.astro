@@ -237,7 +237,7 @@
   (function() {
     // Store handlers on window to track across re-runs
     if (!window._lightboxHandlers) {
-      window._lightboxHandlers = { keyboard: null, cardClick: null };
+      window._lightboxHandlers = { keyboard: null, cardClick: null, cardKeydown: null };
     }
 
     // Cleanup any existing handlers before setting up new ones
@@ -245,6 +245,10 @@
       if (window._lightboxHandlers.keyboard) {
         document.removeEventListener('keydown', window._lightboxHandlers.keyboard);
         window._lightboxHandlers.keyboard = null;
+      }
+      if (window._lightboxHandlers.cardKeydown) {
+        document.removeEventListener('keydown', window._lightboxHandlers.cardKeydown);
+        window._lightboxHandlers.cardKeydown = null;
       }
       if (window._lightboxHandlers.cardClick) {
         // Remove both click and pointerdown listeners for thorough cleanup
@@ -450,14 +454,19 @@
       document.addEventListener('click', window._lightboxHandlers.cardClick);
 
       // Keyboard handlers for cards (accessibility)
-      cards.forEach(function(card, index) {
-        card.addEventListener('keydown', function(e) {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            open(index);
-          }
-        });
-      });
+      window._lightboxHandlers.cardKeydown = function(e) {
+        if (e.key !== 'Enter' && e.key !== ' ') return;
+        if (e.target && e.target.closest && e.target.closest('a')) return;
+
+        var card = e.target && e.target.closest ? e.target.closest('[data-portfolio-card]') : null;
+        if (card) {
+          e.preventDefault();
+          var currentCards = getCards();
+          var index = currentCards.indexOf(card);
+          if (index !== -1) open(index);
+        }
+      };
+      document.addEventListener('keydown', window._lightboxHandlers.cardKeydown);
 
       // Close handlers
       lightbox.querySelectorAll('[data-lightbox-close]').forEach(function(btn) {
@@ -521,10 +530,13 @@
     document.addEventListener('astro:after-swap', function() {
       // Clean up old handlers before reinitializing
       cleanupLightbox();
+      requestAnimationFrame(initPortfolioLightbox);
     });
 
-    // Initialize immediately if page is already loaded (fallback)
-    if (document.readyState === 'complete') {
+    // Initialize immediately if DOM is ready (fallback)
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initPortfolioLightbox, { once: true });
+    } else {
       initPortfolioLightbox();
     }
   })();

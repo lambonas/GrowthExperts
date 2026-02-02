@@ -118,11 +118,6 @@ const { question, answer, id, isFirst = false, isLast = false } = Astro.props;
 <script>
   // Client-side accordion behavior with enhanced accessibility
   function initAccordion() {
-    // Select all accordion items - clear initialized flag first for View Transitions
-    document.querySelectorAll('[data-accordion-item][data-initialized]').forEach(el => {
-      el.removeAttribute('data-initialized');
-    });
-
     const items = document.querySelectorAll('[data-accordion-item]:not([data-initialized])');
 
     items.forEach((item, index) => {
@@ -304,10 +299,13 @@ const { question, answer, id, isFirst = false, isLast = false } = Astro.props;
 
   // Initialize on view transitions
   document.addEventListener('astro:page-load', initAll);
+  document.addEventListener('astro:after-swap', () => {
+    requestAnimationFrame(initAll);
+  });
 
   // Fallback: Initialize immediately if DOM is already ready
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initAll);
+    document.addEventListener('DOMContentLoaded', initAll, { once: true });
   } else {
     initAll();
   }
