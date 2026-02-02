@@ -118,7 +118,11 @@ const { question, answer, id, isFirst = false, isLast = false } = Astro.props;
 <script>
   // Client-side accordion behavior with enhanced accessibility
   function initAccordion() {
-    // Only select items that haven't been initialized yet
+    // Select all accordion items - clear initialized flag first for View Transitions
+    document.querySelectorAll('[data-accordion-item][data-initialized]').forEach(el => {
+      el.removeAttribute('data-initialized');
+    });
+
     const items = document.querySelectorAll('[data-accordion-item]:not([data-initialized])');
 
     items.forEach((item, index) => {
