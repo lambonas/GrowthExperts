@@ -513,8 +513,19 @@
       }, { passive: true });
     }
 
-    // With data-astro-rerun, this script runs on every page load/transition
-    // So we just need to initialize directly
-    initPortfolioLightbox();
+    // Astro-native initialization: bind on page load events
+    // This ensures DOM is ready before we try to find portfolio cards
+    document.addEventListener('astro:page-load', initPortfolioLightbox);
+
+    // Also handle View Transitions swap
+    document.addEventListener('astro:after-swap', function() {
+      // Clean up old handlers before reinitializing
+      cleanupLightbox();
+    });
+
+    // Initialize immediately if page is already loaded (fallback)
+    if (document.readyState === 'complete') {
+      initPortfolioLightbox();
+    }
   })();
 </script>
