@@ -1,7 +1,7 @@
 # Code Review - GrowthExperts
 
 **Date:** 2026-02-02
-**Last Updated:** 2026-02-02 (data-astro-rerun refactor)
+**Last Updated:** 2026-02-02 (pointerdown + animation pause fix)
 **Reviewer:** Claude (Astro/Frontend Code Reviewer)
 
 **Files Reviewed:**
@@ -19,6 +19,81 @@ Overall, both files demonstrate solid Astro patterns with good accessibility fou
 ---
 
 ## Latest Changes Review (2026-02-02)
+
+### PortfolioLightbox.astro & PortfolioMarquee.astro - Pointerdown + Animation Pause Fix
+
+**Change:** Enhanced mobile touch handling by switching to `pointerdown` event and pausing marquee animation on touch
+
+#### What Changed
+
+**PortfolioMarquee.astro:**
+| Line(s) | Change |
+|---------|--------|
+| 268-273 | Added `@media (hover: none)` with `:has(.marquee-card:active)` to pause animation on touch |
+| 343 | Added `pointer-events: none` to `.card-overlay` when invisible |
+| 348 | Added `pointer-events: auto` to `.card-overlay` on hover (visible state) |
+
+**PortfolioLightbox.astro:**
+| Line(s) | Change |
+|---------|--------|
+| 248-250 | Added cleanup for both `click` and `pointerdown` listeners |
+| 421-422 | Updated comments explaining pointerdown advantage |
+| 434-438 | Added marquee pause on enlarge button click |
+| 449-453 | Added marquee pause on card click |
+| 459-460 | Switched from `click` to `pointerdown` event |
+
+#### Review: APPROVED
+
+These changes address the root cause of mobile touch unreliability on animated content:
+
+1. **`pointerdown` instead of `click`** (lines 459-460): `pointerdown` fires immediately when the user touches the screen, without the 300ms delay that browsers impose on `click` events for double-tap detection. This provides instant response on mobile.
+
+2. **Animation Pause on Touch** (CSS lines 268-273, JS lines 434-438, 449-453): Pausing the marquee animation when a card is touched/clicked ensures the visual position matches the DOM element's actual position. Without this, the animation may have moved the visual representation but the hit target remains at the original position.
+
+3. **`pointer-events: none/auto` Toggle** (lines 343, 348): The invisible overlay was intercepting touch events, preventing clicks from reaching the underlying card. By disabling pointer events when opacity is 0 and enabling them when visible, touches correctly pass through to the clickable elements.
+
+4. **CSS `:active` + `:has()` Pattern** (lines 268-273): Using `@media (hover: none)` targets touch devices specifically, and `:has(.marquee-card:active)` pauses the animation when any card is being touched. This is a pure CSS fallback that works even before JavaScript loads.
+
+#### Technical Notes
+- `pointerdown` is part of the Pointer Events API, which unifies mouse, touch, and pen input
+- The `:has()` selector has excellent browser support as of 2023+
+- `@media (hover: none)` correctly targets touch-only devices
+- Both CSS and JS solutions work together for maximum reliability
+
+**No concerns** - This is a thorough fix for mobile touch handling within CSS animations.
+
+---
+
+### contact.astro - Mobile Touch Fix for Service Options
+
+**Change:** Added inline touch handling styles to service option radio button labels
+
+#### What Changed
+| Line(s) | Change |
+|---------|--------|
+| 78 | Added `style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;"` to first service label |
+| 95 | Added same style to second service label |
+
+#### Review: APPROVED
+
+This applies the same mobile touch fix pattern to the contact form service selection:
+
+1. **`touch-action: manipulation`**: Disables double-tap-to-zoom, ensuring taps on radio button labels register immediately without the 300ms delay.
+
+2. **`-webkit-tap-highlight-color: transparent`**: Removes the default blue/grey tap highlight on iOS Safari for cleaner visual feedback.
+
+#### Minor Suggestion
+Consider moving these inline styles to the CSS file under `.service-option` for cleaner markup:
+```css
+.service-option {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+```
+
+**No concerns** - This is a correct fix for mobile touch reliability on form controls.
+
+---
 
 ### contact.astro - View Transitions Fix
 

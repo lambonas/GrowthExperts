@@ -245,7 +245,9 @@
         window._lightboxHandlers.keyboard = null;
       }
       if (window._lightboxHandlers.cardClick) {
+        // Remove both click and pointerdown listeners for thorough cleanup
         document.removeEventListener('click', window._lightboxHandlers.cardClick);
+        document.removeEventListener('pointerdown', window._lightboxHandlers.cardClick);
         window._lightboxHandlers.cardClick = null;
       }
       // Clean up body class if lightbox was open during navigation
@@ -396,6 +398,11 @@
         lightbox.classList.remove('is-open');
         document.body.classList.remove('lightbox-open');
 
+        // Resume marquee animations that were paused for touch
+        document.querySelectorAll('.marquee-track').forEach(function(track) {
+          track.style.animationPlayState = '';
+        });
+
         setTimeout(function() {
           lightbox.classList.add('hidden');
         }, 300);
@@ -416,7 +423,8 @@
         updateContent();
       }
 
-      // Event delegation for card clicks - more reliable with CSS animations on mobile
+      // Event delegation for card clicks - using pointerdown for better mobile support
+      // pointerdown fires immediately without 300ms delay and works for both mouse and touch
       // This handles clicks on cards even when they're inside animated containers
       window._lightboxHandlers.cardClick = function(e) {
         // Don't open lightbox if clicking on external link
@@ -428,6 +436,11 @@
           var card = enlargeBtn.closest('[data-portfolio-card]');
           if (card) {
             e.stopPropagation();
+            // Pause the marquee animation to sync visual/DOM positions
+            var track = card.closest('.marquee-track');
+            if (track) {
+              track.style.animationPlayState = 'paused';
+            }
             var currentCards = getCards();
             var index = currentCards.indexOf(card);
             if (index !== -1) open(index);
@@ -438,12 +451,18 @@
         // Check for card click
         var card = e.target.closest('[data-portfolio-card]');
         if (card) {
+          // Pause the marquee animation to sync visual/DOM positions
+          var track = card.closest('.marquee-track');
+          if (track) {
+            track.style.animationPlayState = 'paused';
+          }
           var currentCards = getCards();
           var index = currentCards.indexOf(card);
           if (index !== -1) open(index);
         }
       };
-      document.addEventListener('click', window._lightboxHandlers.cardClick);
+      // Use pointerdown instead of click for immediate response on mobile
+      document.addEventListener('pointerdown', window._lightboxHandlers.cardClick);
 
       // Keyboard handlers for cards (accessibility)
       cards.forEach(function(card, index) {

@@ -265,6 +265,13 @@ const row2Items = [...shuffledItems, ...shuffledItems, ...shuffledItems];
     animation-play-state: paused;
   }
 
+  /* Pause animation on touch for mobile - ensures touch coordinates match visual position */
+  @media (hover: none) {
+    .marquee-track:has(.marquee-card:active) {
+      animation-play-state: paused;
+    }
+  }
+
   .marquee-card {
     flex-shrink: 0;
     position: relative;
@@ -333,10 +340,12 @@ const row2Items = [...shuffledItems, ...shuffledItems, ...shuffledItems];
     display: flex;
     align-items: center;
     justify-content: center;
+    pointer-events: none; /* Prevent touch interception when invisible */
   }
 
   .marquee-card:hover .card-overlay {
     opacity: 1;
+    pointer-events: auto; /* Allow clicks when visible */
   }
 
   .overlay-content {
