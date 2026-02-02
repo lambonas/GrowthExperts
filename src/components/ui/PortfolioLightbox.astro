@@ -233,6 +233,7 @@
   // Wrapped in IIFE for proper scope management with View Transitions
   (function() {
     var keyboardHandler = null;
+    var cardClickHandler = null;
 
     // Cleanup before DOM swap (View Transitions)
     function cleanupLightbox() {
@@ -241,6 +242,11 @@
         document.removeEventListener('keydown', keyboardHandler);
         keyboardHandler = null;
       }
+      // Remove card click handler (event delegation)
+      if (cardClickHandler) {
+        document.removeEventListener('click', cardClickHandler);
+        cardClickHandler = null;
+      }
       // Clean up body class if lightbox was open during navigation
       var lightbox = document.getElementById('portfolio-lightbox');
       if (lightbox && lightbox.classList.contains('is-open')) {
@@ -248,11 +254,22 @@
       }
     }
 
+    // Reset initialization flag after DOM swap (before page-load)
+    function resetLightboxInit() {
+      var lightbox = document.getElementById('portfolio-lightbox');
+      if (lightbox) lightbox._initialized = false;
+    }
+
     function initPortfolioLightbox() {
       var lightbox = document.getElementById('portfolio-lightbox');
       if (!lightbox) return;
 
-      var cards = Array.from(document.querySelectorAll('[data-portfolio-card]'));
+      // Get cards fresh - don't cache for navigation functions
+      function getCards() {
+        return Array.from(document.querySelectorAll('[data-portfolio-card]'));
+      }
+
+      var cards = getCards();
 
       // Guard: Exit if no cards found (wrong page or DOM not ready)
       if (cards.length === 0) return;
@@ -269,7 +286,9 @@
       }
 
       function updateContent() {
-        var card = cards[currentIndex];
+        // Query cards fresh to handle any DOM updates
+        var currentCards = getCards();
+        var card = currentCards[currentIndex];
         if (!card) return;
 
         var title = card.dataset.title || '';
@@ -392,38 +411,54 @@
       }
 
       function prev() {
-        currentIndex = currentIndex === 0 ? cards.length - 1 : currentIndex - 1;
+        var currentCards = getCards();
+        currentIndex = currentIndex === 0 ? currentCards.length - 1 : currentIndex - 1;
         updateContent();
       }
 
       function next() {
-        currentIndex = currentIndex === cards.length - 1 ? 0 : currentIndex + 1;
+        var currentCards = getCards();
+        currentIndex = currentIndex === currentCards.length - 1 ? 0 : currentIndex + 1;
         updateContent();
       }
 
-      // Card click handlers
-      cards.forEach(function(card, index) {
-        card.addEventListener('click', function(e) {
-          // Don't open lightbox if clicking on external link
-          if (e.target.closest && e.target.closest('a[target="_blank"]')) return;
-          open(index);
-        });
+      // Event delegation for card clicks - more reliable with CSS animations on mobile
+      // This handles clicks on cards even when they're inside animated containers
+      cardClickHandler = function(e) {
+        // Don't open lightbox if clicking on external link
+        if (e.target.closest && e.target.closest('a[target="_blank"]')) return;
 
+        // Check for enlarge button click
+        var enlargeBtn = e.target.closest('[data-enlarge-btn]');
+        if (enlargeBtn) {
+          var card = enlargeBtn.closest('[data-portfolio-card]');
+          if (card) {
+            e.stopPropagation();
+            var currentCards = getCards();
+            var index = currentCards.indexOf(card);
+            if (index !== -1) open(index);
+          }
+          return;
+        }
+
+        // Check for card click
+        var card = e.target.closest('[data-portfolio-card]');
+        if (card) {
+          var currentCards = getCards();
+          var index = currentCards.indexOf(card);
+          if (index !== -1) open(index);
+        }
+      };
+      document.addEventListener('click', cardClickHandler);
+
+      // Keyboard handlers for cards (accessibility)
+      cards.forEach(function(card, index) {
         card.addEventListener('keydown', function(e) {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
             open(index);
           }
         });
-
-        // Enlarge button
-        var enlargeBtn = card.querySelector('[data-enlarge-btn]');
-        if (enlargeBtn) {
-          enlargeBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            open(index);
-          });
-        }
       });
 
       // Close handlers
@@ -482,6 +517,10 @@
 
     // Cleanup before DOM swap (View Transitions)
     document.addEventListener('astro:before-swap', cleanupLightbox);
+
+    // Reset initialization flag after DOM swap (before page-load fires)
+    // This ensures the lightbox can be reinitialized on the new DOM
+    document.addEventListener('astro:after-swap', resetLightboxInit);
 
     // Single initialization point - handles both initial load AND view transitions
     document.addEventListener('astro:page-load', initPortfolioLightbox);

@@ -4,32 +4,33 @@
 SEO/Digital Marketing agency website built with Astro.
 
 ## Current Status
-Fixed contact form service selector View Transitions bug.
+Fixed text visibility issue on Services and Industries pages.
 
 ## Modified Files (from git status)
-- `src/components/ui/PortfolioLightbox.astro` - staged changes (previous fix)
-- `src/pages/contact.astro` - **UPDATED** - fixed View Transitions bug
+- `src/styles/global.css` - **UPDATED** - fixed text-highlight overflow issue
 
 ---
 
 ## Current File Being Edited
-`src/pages/contact.astro`
+`src/styles/global.css`
 
 ## Changes Made
 | Component/Route | Change | Date |
 |-----------------|--------|------|
-| `src/pages/contact.astro` | Fixed service selector not working on mobile initial load with View Transitions | 2026-02-02 |
+| `src/styles/global.css` | Fixed `.text-highlight` causing text to get cut off on narrow viewports | 2026-02-02 |
 
 ## Decisions
 | Decision | Rationale |
 |----------|-----------|
-| Use IIFE wrapper for contact form script | Proper scope management with View Transitions |
-| Use only `astro:page-load` event | Single initialization point handles both initial load AND view transitions (per Astro docs) |
-| Remove `DOMContentLoaded` and immediate fallback | Redundant - caused race conditions with View Transitions |
-| Remove `_initialized` flags on individual radio/CTA elements | Unreliable when View Transitions swap DOM - only keep flag on form element |
+| Changed `inline-block whitespace-nowrap` to `inline` for `.text-highlight` | Allows highlighted text to wrap naturally on small screens while preserving the highlight effect |
+
+## Problem Solved
+- **Issue:** On narrow viewports (320px), text with highlight effects was getting cut off (e.g., "Real Business Growth" became "Real Business G")
+- **Root Cause:** `whitespace-nowrap` on `.text-highlight` class prevented text wrapping, combined with `overflow-hidden` on hero section caused text clipping
+- **Solution:** Removed `whitespace-nowrap` and changed `inline-block` to `inline`, allowing text to wrap naturally
 
 ## Questions / Blockers
-- None yet
+- None
 
 ---
 

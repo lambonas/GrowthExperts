@@ -1,12 +1,13 @@
 # Code Review - GrowthExperts
 
 **Date:** 2026-02-02
-**Last Updated:** 2026-02-02 (contact.astro View Transitions fix)
+**Last Updated:** 2026-02-02 (contact.astro View Transitions enhancement)
 **Reviewer:** Claude (Astro/Frontend Code Reviewer)
 
 **Files Reviewed:**
 - `src/components/ui/PortfolioLightbox.astro`
 - `src/pages/contact.astro` **(Updated - View Transitions fix)**
+- `src/styles/global.css` **(Updated - text-highlight fix)**
 
 ---
 
@@ -47,6 +48,104 @@ The changes correctly follow Astro View Transitions best practices:
 - XSS pattern with `innerHTML` still exists (lines 497-507, 535-546) - safe with current static strings
 - Missing `autocomplete` attributes on form inputs
 - Large inline script (~180 lines) - acceptable for View Transitions compatibility
+
+---
+
+### global.css - Text Highlight Fix
+
+**Change:** Fixed `.text-highlight` class causing text cutoff on narrow viewports
+
+#### Problem
+On narrow viewports (320px), text with highlight effects was getting cut off. For example, "Real Business Growth" became "Real Business G" on mobile.
+
+**Root Cause:** `whitespace-nowrap` on `.text-highlight` class prevented text wrapping, and combined with `overflow-hidden` on hero sections, this caused text clipping.
+
+#### What Changed
+| Line(s) | Change |
+|---------|--------|
+| 254 | Changed from `inline-block whitespace-nowrap` to `inline` |
+
+#### Review: APPROVED
+
+This is a CSS-only styling fix that correctly addresses a mobile responsiveness bug:
+
+1. **`inline-block` → `inline`** (line 254): Allows the highlight pseudo-element to flow naturally with text instead of treating it as a block. This is more appropriate for marker-style highlights that span partial lines.
+
+2. **Removed `whitespace-nowrap`**: Previously prevented text from wrapping, which caused text clipping when combined with container overflow constraints. Removing it allows natural line breaks.
+
+**Impact:** The text highlight effect will now wrap correctly at line breaks instead of forcing content onto a single line. This fixes the mobile cutoff issue while preserving the visual highlight effect.
+
+**No concerns** - This is a correct fix for the mobile responsiveness issue.
+
+---
+
+### PortfolioLightbox.astro - Event Delegation Refactor
+
+**Change:** Refactored card click handling to use event delegation for better mobile reliability
+
+#### What Changed
+| Line(s) | Change |
+|---------|--------|
+| 236 | Added `cardClickHandler` variable for cleanup tracking |
+| 244-249 | Added cleanup for card click handler during View Transitions |
+| 256-259 | Added `resetLightboxInit()` function for DOM swap handling |
+| 264-266 | Added `getCards()` helper for fresh DOM queries |
+| 288-291 | `updateContent()` now queries cards fresh |
+| 413-419 | `prev()` and `next()` now query cards fresh |
+| 421-452 | Replaced per-card click handlers with event delegation |
+
+#### Review: APPROVED
+
+This is a well-structured refactor that addresses mobile reliability issues:
+
+1. **Event Delegation** (lines 421-452): Using document-level event delegation for card clicks is more reliable than attaching handlers to individual cards. This is especially beneficial when:
+   - Cards have CSS animations/transitions
+   - DOM elements are replaced during View Transitions
+   - Cards are dynamically added/removed
+
+2. **Fresh DOM Queries** (line 264-266): The `getCards()` helper ensures we always work with the current DOM state, preventing stale reference issues after View Transitions.
+
+3. **Proper Cleanup** (lines 244-249): The card click handler is now properly tracked and removed during View Transitions cleanup, preventing memory leaks and duplicate handlers.
+
+4. **Reset Function** (lines 256-259): `resetLightboxInit()` correctly resets the initialization flag after DOM swap but before page-load, ensuring proper re-initialization.
+
+#### Technical Notes
+- Event delegation pattern: `document.addEventListener('click', handler)` with `e.target.closest('[data-portfolio-card]')` is the recommended approach for dynamic content
+- The `stopPropagation()` on enlarge button prevents double-firing
+- Keyboard handlers remain on individual cards (correct - keyboard events don't bubble the same way)
+
+**No concerns** - This is a correct and well-implemented fix.
+
+---
+
+### contact.astro - View Transitions Enhancement
+
+**Change:** Added proper initialization reset and form state restoration for View Transitions
+
+#### What Changed
+| Line(s) | Change |
+|---------|--------|
+| 384-388 | Added `resetFormInit()` function to reset initialization flag |
+| 453-457 | Added check for pre-checked radios on reinitialization |
+| 571-573 | Added `astro:after-swap` event listener to call `resetFormInit()` |
+
+#### Review: APPROVED
+
+This is a correct enhancement for View Transitions:
+
+1. **Reset Before Page-Load** (lines 384-388, 571-573): Using `astro:after-swap` to reset the initialization flag is correct. This event fires after the DOM is swapped but before `astro:page-load`, ensuring the form can be properly reinitialized on the new DOM.
+
+2. **Form State Restoration** (lines 453-457): Checking for already-checked radios handles two scenarios:
+   - **Browser History**: Back/forward navigation may restore form values
+   - **View Transitions**: State might persist in certain edge cases
+   This ensures conditional fields are correctly shown based on the current form state.
+
+#### Event Sequence
+```
+View Transition → astro:after-swap (reset flag) → astro:page-load (reinit)
+```
+
+**No concerns** - This completes the View Transitions pattern correctly.
 
 ---
 

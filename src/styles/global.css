@@ -252,7 +252,7 @@
 
   /* Base highlight text - Creates marker-style highlight behind text */
   .text-highlight {
-    @apply relative inline-block whitespace-nowrap bg-transparent;
+    @apply relative inline bg-transparent;
   }
 
   /* The highlight shape using ::before pseudo-element */

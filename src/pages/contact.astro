@@ -381,6 +381,12 @@ const pageDescription =
   // Contact Form Controller
   // Wrapped in IIFE for proper scope management with View Transitions
   (function() {
+    // Reset initialization flag after DOM swap (before page-load fires)
+    function resetFormInit() {
+      var form = document.getElementById('contact-form-enhanced');
+      if (form) form._initialized = false;
+    }
+
     function initContactForm() {
       const form = document.getElementById('contact-form-enhanced');
       if (!form) return;
@@ -443,6 +449,13 @@ const pageDescription =
           updateConditionalFields(e.target.value);
         });
       });
+
+      // Check if any radio is already checked (e.g., after View Transition or browser restore)
+      // This ensures the conditional fields are shown correctly on reinitialization
+      const checkedRadio = document.querySelector('input[name="service"]:checked');
+      if (checkedRadio) {
+        updateConditionalFields(checkedRadio.value);
+      }
 
       // CTA button scroll handler
       const ctaButton = document.querySelector('[href="#contact-form-enhanced"]');
@@ -554,6 +567,10 @@ const pageDescription =
         });
       }
     }
+
+    // Reset initialization flag after DOM swap (before page-load fires)
+    // This ensures the form can be reinitialized on the new DOM
+    document.addEventListener('astro:after-swap', resetFormInit);
 
     // Single initialization point - handles both initial load AND view transitions
     document.addEventListener('astro:page-load', initContactForm);
