@@ -228,36 +228,31 @@
   }
 </style>
 
-<script is:inline>
+<script is:inline data-astro-rerun>
   // Portfolio Lightbox Controller
-  // Wrapped in IIFE for proper scope management with View Transitions
+  // Uses data-astro-rerun to force re-execution after View Transitions
+  // This ensures click handlers work on mobile after navigation
   (function() {
-    var keyboardHandler = null;
-    var cardClickHandler = null;
+    // Store handlers on window to track across re-runs
+    if (!window._lightboxHandlers) {
+      window._lightboxHandlers = { keyboard: null, cardClick: null };
+    }
 
-    // Cleanup before DOM swap (View Transitions)
+    // Cleanup any existing handlers before setting up new ones
     function cleanupLightbox() {
-      // Remove keyboard handler to prevent duplicate listeners
-      if (keyboardHandler) {
-        document.removeEventListener('keydown', keyboardHandler);
-        keyboardHandler = null;
+      if (window._lightboxHandlers.keyboard) {
+        document.removeEventListener('keydown', window._lightboxHandlers.keyboard);
+        window._lightboxHandlers.keyboard = null;
       }
-      // Remove card click handler (event delegation)
-      if (cardClickHandler) {
-        document.removeEventListener('click', cardClickHandler);
-        cardClickHandler = null;
+      if (window._lightboxHandlers.cardClick) {
+        document.removeEventListener('click', window._lightboxHandlers.cardClick);
+        window._lightboxHandlers.cardClick = null;
       }
       // Clean up body class if lightbox was open during navigation
       var lightbox = document.getElementById('portfolio-lightbox');
       if (lightbox && lightbox.classList.contains('is-open')) {
         document.body.classList.remove('lightbox-open');
       }
-    }
-
-    // Reset initialization flag after DOM swap (before page-load)
-    function resetLightboxInit() {
-      var lightbox = document.getElementById('portfolio-lightbox');
-      if (lightbox) lightbox._initialized = false;
     }
 
     function initPortfolioLightbox() {
@@ -274,9 +269,8 @@
       // Guard: Exit if no cards found (wrong page or DOM not ready)
       if (cards.length === 0) return;
 
-      // Prevent double initialization on this element instance
-      if (lightbox._initialized) return;
-      lightbox._initialized = true;
+      // Clean up existing handlers before reinitializing
+      cleanupLightbox();
 
       var currentIndex = 0;
       var previouslyFocusedElement = null;
@@ -424,7 +418,7 @@
 
       // Event delegation for card clicks - more reliable with CSS animations on mobile
       // This handles clicks on cards even when they're inside animated containers
-      cardClickHandler = function(e) {
+      window._lightboxHandlers.cardClick = function(e) {
         // Don't open lightbox if clicking on external link
         if (e.target.closest && e.target.closest('a[target="_blank"]')) return;
 
@@ -449,7 +443,7 @@
           if (index !== -1) open(index);
         }
       };
-      document.addEventListener('click', cardClickHandler);
+      document.addEventListener('click', window._lightboxHandlers.cardClick);
 
       // Keyboard handlers for cards (accessibility)
       cards.forEach(function(card, index) {
@@ -476,7 +470,7 @@
       });
 
       // Keyboard navigation - store reference for cleanup
-      keyboardHandler = function(e) {
+      window._lightboxHandlers.keyboard = function(e) {
         if (!isOpen()) return;
 
         switch (e.key) {
@@ -491,7 +485,7 @@
             break;
         }
       };
-      document.addEventListener('keydown', keyboardHandler);
+      document.addEventListener('keydown', window._lightboxHandlers.keyboard);
 
       // Touch swipe support
       var touchStartX = 0;
@@ -515,14 +509,8 @@
       }, { passive: true });
     }
 
-    // Cleanup before DOM swap (View Transitions)
-    document.addEventListener('astro:before-swap', cleanupLightbox);
-
-    // Reset initialization flag after DOM swap (before page-load fires)
-    // This ensures the lightbox can be reinitialized on the new DOM
-    document.addEventListener('astro:after-swap', resetLightboxInit);
-
-    // Single initialization point - handles both initial load AND view transitions
-    document.addEventListener('astro:page-load', initPortfolioLightbox);
+    // With data-astro-rerun, this script runs on every page load/transition
+    // So we just need to initialize directly
+    initPortfolioLightbox();
   })();
 </script>

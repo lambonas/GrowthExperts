@@ -270,6 +270,9 @@ const row2Items = [...shuffledItems, ...shuffledItems, ...shuffledItems];
     position: relative;
     cursor: pointer;
     outline: none;
+    /* Critical for mobile touch events within CSS animations */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
   }
 
   .marquee-card:focus-visible .card-inner {

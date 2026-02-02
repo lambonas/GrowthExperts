@@ -1,13 +1,14 @@
 # Code Review - GrowthExperts
 
 **Date:** 2026-02-02
-**Last Updated:** 2026-02-02 (contact.astro View Transitions enhancement)
+**Last Updated:** 2026-02-02 (data-astro-rerun refactor)
 **Reviewer:** Claude (Astro/Frontend Code Reviewer)
 
 **Files Reviewed:**
 - `src/components/ui/PortfolioLightbox.astro`
 - `src/pages/contact.astro` **(Updated - View Transitions fix)**
 - `src/styles/global.css` **(Updated - text-highlight fix)**
+- `src/components/sections/PortfolioMarquee.astro` **(Updated - mobile touch fix)**
 
 ---
 
@@ -146,6 +147,72 @@ View Transition → astro:after-swap (reset flag) → astro:page-load (reinit)
 ```
 
 **No concerns** - This completes the View Transitions pattern correctly.
+
+---
+
+### PortfolioMarquee.astro - Mobile Touch Fix
+
+**Change:** Added CSS properties to improve mobile touch handling within CSS animations
+
+#### What Changed
+| Line(s) | Change |
+|---------|--------|
+| 273-275 | Added `touch-action: manipulation` and `-webkit-tap-highlight-color: transparent` |
+
+#### Review: APPROVED
+
+This is a CSS-only fix for mobile touch reliability:
+
+1. **`touch-action: manipulation`** (line 273): Enables panning and zooming but disables double-tap-to-zoom. This is critical for reliable tap/click handling within CSS animations where the browser might otherwise delay touch events waiting for potential double-taps.
+
+2. **`-webkit-tap-highlight-color: transparent`** (line 274): Removes the default blue/grey tap highlight on iOS Safari, providing cleaner visual feedback when tapping cards.
+
+**Impact:** Fixes mobile touch/click issues on marquee cards where CSS animations can interfere with touch event detection.
+
+**No concerns** - This is a correct fix for mobile touch handling.
+
+---
+
+### PortfolioLightbox.astro & contact.astro - data-astro-rerun Refactor
+
+**Change:** Switched from `astro:page-load` event pattern to `data-astro-rerun` attribute
+
+#### What Changed (Both Files)
+| Change | Description |
+|--------|-------------|
+| Added `data-astro-rerun` | Script tag now uses `<script is:inline data-astro-rerun>` |
+| Removed event listeners | Removed `astro:page-load`, `astro:after-swap`, `astro:before-swap` listeners |
+| Handler storage | Handlers now stored on `window` object for cleanup across re-runs |
+| Direct initialization | Init functions called directly instead of via event |
+
+#### Review: APPROVED
+
+This is a cleaner pattern for View Transitions:
+
+1. **`data-astro-rerun`**: This Astro attribute forces the script to re-execute after every View Transition, eliminating the need for manual event listener management. This is the recommended approach for inline scripts that need to run after navigation.
+
+2. **Window-scoped handler storage**: By storing handlers on `window._lightboxHandlers` and `window._contactFormHandlers`, the code can properly clean up previous handlers before reinitializing, preventing duplicate event listeners.
+
+3. **Simplified flow**: Instead of:
+   ```
+   astro:before-swap → cleanup
+   astro:after-swap → reset flag
+   astro:page-load → init
+   ```
+   Now just:
+   ```
+   data-astro-rerun → cleanup + init
+   ```
+
+4. **Removed `_initialized` flags**: No longer needed since the script re-runs completely and handles cleanup internally.
+
+**Benefits:**
+- Simpler, more maintainable code
+- Guaranteed script execution after View Transitions
+- Proper handler cleanup prevents memory leaks
+- Follows Astro best practices for View Transitions
+
+**No concerns** - This is a correct and improved pattern for View Transitions.
 
 ---
 

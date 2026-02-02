@@ -377,14 +377,22 @@ const pageDescription =
   <Footer />
 </BaseLayout>
 
-<script is:inline>
+<script is:inline data-astro-rerun>
   // Contact Form Controller
-  // Wrapped in IIFE for proper scope management with View Transitions
+  // Uses data-astro-rerun to force re-execution after View Transitions
+  // This ensures radio buttons work properly on mobile after navigation
   (function() {
-    // Reset initialization flag after DOM swap (before page-load fires)
-    function resetFormInit() {
-      var form = document.getElementById('contact-form-enhanced');
-      if (form) form._initialized = false;
+    // Store handler references on window to clean up on re-runs
+    if (!window._contactFormHandlers) {
+      window._contactFormHandlers = { radioHandlers: [], submitHandler: null, ctaHandler: null };
+    }
+
+    // Cleanup existing handlers before reinitializing
+    function cleanupFormHandlers() {
+      // Radio handlers are on specific elements, they'll be replaced with new DOM
+      window._contactFormHandlers.radioHandlers = [];
+      window._contactFormHandlers.submitHandler = null;
+      window._contactFormHandlers.ctaHandler = null;
     }
 
     function initContactForm() {
@@ -396,9 +404,8 @@ const pageDescription =
       // Guard: Exit if no service radios found (wrong page or DOM issue)
       if (serviceRadios.length === 0) return;
 
-      // Prevent double initialization on this form instance
-      if (form._initialized) return;
-      form._initialized = true;
+      // Clean up before reinitializing
+      cleanupFormHandlers();
 
       const seoFields = document.getElementById('seo-fields');
       const designFields = document.getElementById('design-fields');
@@ -568,11 +575,8 @@ const pageDescription =
       }
     }
 
-    // Reset initialization flag after DOM swap (before page-load fires)
-    // This ensures the form can be reinitialized on the new DOM
-    document.addEventListener('astro:after-swap', resetFormInit);
-
-    // Single initialization point - handles both initial load AND view transitions
-    document.addEventListener('astro:page-load', initContactForm);
+    // With data-astro-rerun, this script runs on every page load/transition
+    // So we just need to initialize directly
+    initContactForm();
   })();
 </script>
