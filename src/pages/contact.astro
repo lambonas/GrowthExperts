@@ -389,13 +389,13 @@ const pageDescription =
 
     function initContactForm() {
       const form = document.getElementById('contact-form-enhanced');
-      if (!form || form.dataset.initialized === 'true') return;
+      if (!form || form.dataset.initialized === 'true') return false;
       form.dataset.initialized = 'true';
 
       const serviceRadios = document.querySelectorAll('input[name="service"]');
 
       // Guard: Exit if no service radios found (wrong page or DOM issue)
-      if (serviceRadios.length === 0) return;
+      if (serviceRadios.length === 0) return false;
 
       const seoFields = document.getElementById('seo-fields');
       const designFields = document.getElementById('design-fields');
@@ -563,22 +563,37 @@ const pageDescription =
           }
         });
       }
+
+      return true;
+    }
+
+    let initScheduled = false;
+
+    function scheduleInit() {
+      if (initScheduled) return;
+      initScheduled = true;
+
+      requestAnimationFrame(() => {
+        initScheduled = false;
+
+        const didInit = initContactForm();
+        if (!didInit) {
+          // Retry once after the DOM swap settles
+          requestAnimationFrame(initContactForm);
+        }
+      });
     }
 
     // Astro-native initialization: bind on page load events
     // This ensures DOM is ready before we try to find form elements
-    document.addEventListener('astro:page-load', initContactForm);
+    document.addEventListener('astro:page-load', scheduleInit);
 
     // Also handle View Transitions swap
     document.addEventListener('astro:after-swap', function() {
-      requestAnimationFrame(initContactForm);
+      scheduleInit();
     });
 
-    // Initialize immediately if DOM is already ready (fallback)
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initContactForm, { once: true });
-    } else {
-      initContactForm();
-    }
+    // Initialize immediately as a fallback
+    scheduleInit();
   })();
 </script>

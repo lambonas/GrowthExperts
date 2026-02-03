@@ -265,7 +265,7 @@
 
     function initPortfolioLightbox() {
       var lightbox = document.getElementById('portfolio-lightbox');
-      if (!lightbox) return;
+      if (!lightbox) return false;
 
       // Get cards fresh - don't cache for navigation functions
       function getCards() {
@@ -275,7 +275,7 @@
       var cards = getCards();
 
       // Guard: Exit if no cards found (wrong page or DOM not ready)
-      if (cards.length === 0) return;
+      if (cards.length === 0) return false;
 
       // Clean up existing handlers before reinitializing
       cleanupLightbox();
@@ -520,24 +520,39 @@
           }
         }
       }, { passive: true });
+
+      return true;
+    }
+
+    var initScheduled = false;
+
+    function scheduleInit() {
+      if (initScheduled) return;
+      initScheduled = true;
+
+      requestAnimationFrame(function() {
+        initScheduled = false;
+
+        var didInit = initPortfolioLightbox();
+        if (!didInit) {
+          // Retry once after the DOM swap settles
+          requestAnimationFrame(initPortfolioLightbox);
+        }
+      });
     }
 
     // Astro-native initialization: bind on page load events
     // This ensures DOM is ready before we try to find portfolio cards
-    document.addEventListener('astro:page-load', initPortfolioLightbox);
+    document.addEventListener('astro:page-load', scheduleInit);
 
     // Also handle View Transitions swap
     document.addEventListener('astro:after-swap', function() {
       // Clean up old handlers before reinitializing
       cleanupLightbox();
-      requestAnimationFrame(initPortfolioLightbox);
+      scheduleInit();
     });
 
-    // Initialize immediately if DOM is ready (fallback)
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initPortfolioLightbox, { once: true });
-    } else {
-      initPortfolioLightbox();
-    }
+    // Initialize immediately as a fallback
+    scheduleInit();
   })();
 </script>
