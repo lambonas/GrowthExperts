@@ -2,7 +2,9 @@
 import { ClientRouter } from 'astro:transitions';
 import SEO from '../components/seo/SEO.astro';
 import SchemaOrg from '../components/seo/SchemaOrg.astro';
+import DublinCore from '../components/seo/DublinCore.astro';
 import GoogleAnalytics from '../components/analytics/GoogleAnalytics.astro';
+import clientInitUrl from '../scripts/client-init.js?url';
 
 // Import Fontsource fonts - only necessary weights
 import '@fontsource/inter/400.css';
@@ -27,6 +29,11 @@ export interface Props {
     type: 'Organization' | 'Service' | 'LocalBusiness' | 'Article' | 'FAQPage' | 'BreadcrumbList';
     data: Record<string, any>;
   };
+  dcType?: 'Text' | 'Service' | 'Article' | 'WebPage';
+  dcDate?: Date;
+  dcDateModified?: Date;
+  dcCoverage?: string;
+  dcAuthor?: string;
 }
 
 const {
@@ -39,6 +46,11 @@ const {
   nofollow = false,
   keywords = [],
   schema,
+  dcType,
+  dcDate,
+  dcDateModified,
+  dcCoverage,
+  dcAuthor,
 } = Astro.props;
 ---
 
@@ -70,6 +82,19 @@ const {
     <!-- Always include Organization schema -->
     {!schema && <SchemaOrg type="Organization" data={{}} />}
 
+    <!-- Dublin Core Metadata -->
+    <DublinCore
+      title={title}
+      description={description}
+      canonical={canonical}
+      keywords={keywords}
+      dcType={dcType}
+      dcDate={dcDate}
+      dcDateModified={dcDateModified}
+      dcCoverage={dcCoverage}
+      dcAuthor={dcAuthor}
+    />
+
     <!-- Additional head content slot -->
     <slot name="head" />
 
@@ -99,6 +124,7 @@ const {
     </a>
 
     <slot />
+    <script type="module" src={clientInitUrl}></script>
   </body>
 </html>
 

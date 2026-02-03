@@ -68,6 +68,11 @@ const ogImage = image ? new URL(image.src, Astro.site).toString() : `${Astro.sit
   canonical={fullUrl}
   ogImage={ogImage}
   ogType="article"
+  keywords={tags}
+  dcType="Article"
+  dcDate={publishDate}
+  dcDateModified={updatedDate || publishDate}
+  dcAuthor={author}
   schema={{
     type: 'Article',
     data: {

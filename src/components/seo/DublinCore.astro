@@ -1,0 +1,49 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  keywords?: string[];
+  dcType?: 'Text' | 'Service' | 'Article' | 'WebPage';
+  dcDate?: Date;
+  dcDateModified?: Date;
+  dcCoverage?: string;
+  dcAuthor?: string;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  keywords = [],
+  dcType = 'Text',
+  dcDate,
+  dcDateModified,
+  dcCoverage,
+  dcAuthor = 'Digital Growth Experts',
+} = Astro.props;
+
+// Compute identifier
+const identifier = canonical || new URL(Astro.url.pathname, Astro.site!).href;
+
+// Format dates (ISO 8601 date only)
+const formatDate = (date?: Date) => date?.toISOString().split('T')[0] || null;
+const dcDateStr = formatDate(dcDate);
+const dcModifiedStr = formatDate(dcDateModified);
+const dcSubject = keywords.length > 0 ? keywords.join(', ') : null;
+---
+
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" />
+<meta name="DC.title" content={title} />
+<meta name="DC.description" content={description} />
+<meta name="DC.creator" content={dcAuthor} />
+<meta name="DC.publisher" content="Digital Growth Experts" />
+<meta name="DC.type" content={dcType} />
+<meta name="DC.format" content="text/html" />
+<meta name="DC.identifier" content={identifier} />
+<meta name="DC.language" content="en-AU" />
+<meta name="DC.rights" content="Copyright Digital Growth Experts. All rights reserved." />
+{dcDateStr && <meta name="DC.date" content={dcDateStr} />}
+{dcModifiedStr && <meta name="DC.date.modified" content={dcModifiedStr} />}
+{dcSubject && <meta name="DC.subject" content={dcSubject} />}
+{dcCoverage && <meta name="DC.coverage" content={dcCoverage} />}
